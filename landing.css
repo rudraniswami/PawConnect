@@ -246,24 +246,36 @@ html, body{
    HERO
 ========================= */
 .hero{
-    min-height:0vh;
+    min-height:650px;
     display:flex;
     justify-content:space-between;
     align-items:center;
     gap:30px;
-    padding:150px 70px;
-    background:linear-gradient(rgba(255,253,247,0.3), rgba(255,253,247,0.3)), url("dchome.jpeg");
+    padding:100px 70px;
+
+    background:
+        linear-gradient(rgba(255,253,247,0.3), rgba(255,253,247,0.3)),
+        url("dchome.jpeg");
+
     background-size:cover;
     background-position:center;
+
     opacity:0;
     transform:translateY(30px);
-    animation:heroIn 1s ease forwards;
-    animation-delay:0s;
+
+    animation:heroIn 1s ease-out 4.2s forwards;
 }
 
 @keyframes heroIn{
-    from{opacity:0; transform:translateY(30px);}
-    to{opacity:1; transform:translateY(0);}
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
 .hero-text{
@@ -501,20 +513,20 @@ html, body{
 /* =========================
    FEATURES
 ========================= */
-
 .features{
     width:100%;
-    margin:120px auto 0;
+    margin:0 auto;
     padding:110px 42px 55px;
+
     background:
         radial-gradient(circle at top left, rgba(198,161,91,.10), transparent 35%),
         radial-gradient(circle at bottom right, rgba(18,60,42,.08), transparent 40%),
         #F8F3E8;
+
     border:1px solid #E7DCC4;
-    /* position:relative; */
-    position: absolute;
-    top:1360px;
-    
+
+    position:relative;
+
     box-shadow:0 22px 45px rgba(0,0,0,.08);
     overflow:visible;
 }
@@ -683,10 +695,10 @@ html, body{
 ========================= */
 .adoption-process{
     width:100%;
-    padding:10px 70px;
+    padding:70px 70px;
     background:#FFFDF7;
     position:relative;
-    margin-top:80px;
+    margin-top:0;
 }
 
 .process-heading{
