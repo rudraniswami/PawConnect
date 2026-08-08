@@ -1,0 +1,1177 @@
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+    font-family:'Times New Roman',serif;
+}
+
+
+body{
+    background:#FFFDF7;
+    color:#333;
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.nav{
+
+    width:100%;
+    min-height:80px;
+
+    position:sticky;
+    top:0;
+
+    z-index:999;
+
+    background:#123C2A;
+
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 40px;
+
+    gap:20px;
+
+    box-shadow:
+    0 4px 15px rgba(0,0,0,.12);
+}
+
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    flex-shrink:0;
+}
+
+
+.logo img{
+
+    width:65px;
+    height:65px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+}
+
+
+.logo h2{
+
+    color:#FFFDF7;
+
+    font-size:28px;
+
+    letter-spacing:1px;
+}
+
+
+.menu{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:26px;
+}
+
+
+.menu a{
+
+    text-decoration:none;
+
+    color:#FFFDF7;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    transition:.3s;
+}
+
+
+.menu > a:hover{
+
+    color:#C6A15B;
+}
+
+
+.login-btn{
+
+    text-decoration:none;
+
+    color:#FFFDF7;
+
+    background:#C6A15B;
+
+    padding:10px 22px;
+
+    border-radius:30px;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+    flex-shrink:0;
+}
+
+
+.login-btn:hover{
+
+    background:#a88344;
+
+    transform:translateY(-2px);
+}
+
+
+/* =====================================================
+   DROPDOWN
+===================================================== */
+
+.dropdown{
+
+    position:relative;
+}
+
+
+.dropdown > a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    padding:10px 14px;
+
+    border-radius:25px;
+}
+
+
+.dropdown-content{
+
+    position:absolute;
+
+    top:52px;
+    left:50%;
+
+    transform:
+    translateX(-50%)
+    translateY(10px);
+
+    width:620px;
+
+    padding:22px;
+
+    background:#FFFDF7;
+
+    border-radius:16px;
+
+    box-shadow:
+    0 12px 28px rgba(0,0,0,.18);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.3s;
+}
+
+
+.dropdown:hover .dropdown-content{
+
+    opacity:1;
+
+    visibility:visible;
+
+    transform:
+    translateX(-50%)
+    translateY(0);
+}
+
+
+.column{
+
+    width:30%;
+
+    display:flex;
+
+    flex-direction:column;
+}
+
+
+.column h3{
+
+    color:#123C2A;
+
+    font-size:18px;
+
+    margin-bottom:12px;
+
+    padding-bottom:8px;
+
+    border-bottom:
+    2px solid #C6A15B;
+}
+
+
+.column a{
+
+    color:#444;
+
+    text-decoration:none;
+
+    margin:7px 0;
+
+    font-size:15px;
+
+    font-weight:normal;
+
+    transition:.3s;
+}
+
+
+.column a:hover{
+
+    color:#C6A15B;
+
+    padding-left:4px;
+}
+
+
+/* =====================================================
+   PASSPORT SECTION
+===================================================== */
+
+.passport-section{
+
+    padding:80px 7% 90px;
+
+    background:#FFFDF7;
+}
+
+
+.passport-heading{
+
+    text-align:center;
+
+    margin-bottom:45px;
+}
+
+
+.passport-heading p{
+
+    color:#C6A15B;
+
+    letter-spacing:3px;
+
+    font-size:14px;
+
+    font-weight:bold;
+}
+
+
+.passport-heading h1{
+
+    color:#123C2A;
+
+    font-size:48px;
+
+    margin:12px 0;
+}
+
+
+.passport-heading span{
+
+    color:#777;
+
+    font-size:18px;
+}
+
+
+/* =====================================================
+   PASSPORT CARD
+===================================================== */
+
+.passport{
+
+    width:100%;
+
+    max-width:1100px;
+
+    margin:auto;
+
+    background:white;
+
+    border-radius:30px;
+
+    overflow:hidden;
+
+    display:grid;
+
+    grid-template-columns:380px 1fr;
+
+    border:
+    1px solid #e8e3d7;
+
+    box-shadow:
+    0 18px 45px rgba(18,60,42,.12);
+}
+
+
+/* =====================================================
+   PASSPORT LEFT
+===================================================== */
+
+.passport-left{
+
+    background:#123C2A;
+
+    padding:30px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+}
+
+
+.passport-photo{
+
+    height:410px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:24px;
+}
+
+
+.passport-photo img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+}
+
+
+.passport-photo span{
+
+    position:absolute;
+
+    top:18px;
+    left:18px;
+
+    background:#C6A15B;
+
+    color:white;
+
+    padding:8px 15px;
+
+    border-radius:22px;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+}
+
+
+.passport-photo span i{
+
+    margin-right:6px;
+}
+
+
+.pet-id{
+
+    margin-top:22px;
+}
+
+
+.pet-id small{
+
+    display:block;
+
+    color:#C6A15B;
+
+    font-size:11px;
+
+    letter-spacing:2px;
+
+    margin-bottom:5px;
+}
+
+
+.pet-id strong{
+
+    color:#FFFDF7;
+
+    font-size:18px;
+
+    letter-spacing:1px;
+}
+
+
+/* =====================================================
+   PASSPORT RIGHT
+===================================================== */
+
+.passport-right{
+
+    padding:45px 50px;
+}
+
+
+.passport-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    padding-bottom:25px;
+
+    border-bottom:
+    1px solid #e7e3d9;
+}
+
+
+.passport-top p{
+
+    color:#C6A15B;
+
+    font-size:12px;
+
+    letter-spacing:2px;
+
+    font-weight:bold;
+}
+
+
+.passport-top h2{
+
+    color:#123C2A;
+
+    font-size:58px;
+
+    margin:5px 0;
+}
+
+
+.passport-top h3{
+
+    color:#777;
+
+    font-size:20px;
+
+    font-weight:normal;
+}
+
+
+.paw-symbol{
+
+    width:65px;
+    height:65px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#EEF2E8;
+
+    color:#123C2A;
+
+    font-size:27px;
+}
+
+
+/* =====================================================
+   PASSPORT DETAILS
+===================================================== */
+
+.passport-details{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    margin-top:25px;
+}
+
+
+.detail{
+
+    padding:18px 10px;
+
+    border-bottom:
+    1px solid #eee9df;
+}
+
+
+.detail small{
+
+    display:block;
+
+    color:#999;
+
+    font-size:11px;
+
+    letter-spacing:1.5px;
+
+    margin-bottom:6px;
+}
+
+
+.detail strong{
+
+    color:#123C2A;
+
+    font-size:17px;
+}
+
+
+/* =====================================================
+   PERSONALITY
+===================================================== */
+
+.passport-personality{
+
+    padding:25px 0;
+}
+
+
+.passport-personality > p{
+
+    color:#C6A15B;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+    margin-bottom:12px;
+}
+
+
+.tags{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:9px;
+}
+
+
+.tags span{
+
+    background:#EEF2E8;
+
+    color:#58705C;
+
+    padding:8px 14px;
+
+    border-radius:20px;
+
+    font-size:14px;
+}
+
+
+/* =====================================================
+   PASSPORT BOTTOM
+===================================================== */
+
+.passport-bottom{
+
+    padding-top:20px;
+
+    border-top:
+    1px solid #e7e3d9;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+
+.passport-bottom small{
+
+    display:block;
+
+    color:#999;
+
+    font-size:11px;
+
+    letter-spacing:1px;
+
+    margin-bottom:5px;
+}
+
+
+.passport-bottom strong{
+
+    color:#123C2A;
+
+    font-size:15px;
+}
+
+
+.verified{
+
+    color:#58705C;
+
+    font-size:13px;
+
+    font-weight:bold;
+}
+
+
+.verified i{
+
+    color:#C6A15B;
+
+    margin-right:5px;
+}
+
+
+/* =====================================================
+   ABOUT BELLA
+===================================================== */
+
+.about-section{
+
+    padding:80px 10%;
+
+    background:white;
+}
+
+
+.about-heading{
+
+    text-align:center;
+
+    margin-bottom:35px;
+}
+
+
+.about-heading p{
+
+    color:#C6A15B;
+
+    letter-spacing:3px;
+
+    font-size:13px;
+
+    font-weight:bold;
+}
+
+
+.about-heading h2{
+
+    color:#123C2A;
+
+    font-size:40px;
+
+    margin-top:10px;
+}
+
+
+.about-content{
+
+    max-width:850px;
+
+    margin:auto;
+
+    text-align:center;
+}
+
+
+.about-content > p{
+
+    color:#666;
+
+    font-size:18px;
+
+    line-height:1.8;
+
+    margin-bottom:30px;
+}
+
+
+.care-info{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+}
+
+
+.care-info div{
+
+    background:#FFFDF7;
+
+    color:#58705C;
+
+    padding:14px 20px;
+
+    border-radius:25px;
+
+    box-shadow:
+    0 7px 20px rgba(18,60,42,.06);
+}
+
+
+.care-info i{
+
+    color:#C6A15B;
+
+    margin-right:7px;
+}
+
+
+/* =====================================================
+   ADOPTION CTA
+===================================================== */
+
+.adoption-cta{
+
+    width:86%;
+
+    max-width:1100px;
+
+    margin:75px auto;
+
+    padding:42px 50px;
+
+    background:#123C2A;
+
+    border-radius:30px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:30px;
+}
+
+
+.adoption-cta p{
+
+    color:#C6A15B;
+
+    letter-spacing:3px;
+
+    font-size:12px;
+
+    font-weight:bold;
+}
+
+
+.adoption-cta h2{
+
+    color:#FFFDF7;
+
+    font-size:31px;
+
+    font-weight:normal;
+
+    margin-top:8px;
+}
+
+
+.adoption-cta a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    background:#C6A15B;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:14px 27px;
+
+    border-radius:30px;
+
+    font-weight:bold;
+
+    white-space:nowrap;
+
+    transition:.3s;
+}
+
+
+.adoption-cta a:hover{
+
+    background:#a88344;
+
+    transform:translateY(-2px);
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer{
+    background:#123C2A;
+    color:white;
+    padding:45px 70px 15px;
+}
+
+
+/* FOOTER TOP */
+
+.footer-top{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1.3fr;
+    gap:40px;
+    padding-bottom:25px;
+    border-bottom:1px solid rgba(255,255,255,.15);
+}
+
+
+/* LOGO */
+
+.footer-logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:15px;
+}
+
+
+.footer-logo img{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+
+.footer-logo h2{
+    color:#C6A15B;
+    font-size:30px;
+}
+
+
+/* ABOUT */
+
+.footer-about p{
+    color:#E8E8E8;
+    line-height:1.6;
+    margin-bottom:16px;
+    max-width:350px;
+}
+
+
+/* SOCIAL ICONS */
+
+.social-icons{
+    display:flex;
+    gap:10px;
+}
+
+
+.social-icons a{
+    width:40px;
+    height:40px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.08);
+
+    color:white;
+
+    text-decoration:none;
+
+    transition:.3s;
+}
+
+
+.social-icons a:hover{
+    background:#C6A15B;
+    color:#123C2A;
+    transform:translateY(-3px);
+}
+
+
+/* FOOTER LINKS */
+
+.footer-links h3,
+.footer-contact h3{
+    color:#C6A15B;
+    margin-bottom:16px;
+}
+
+
+.footer-links a{
+    display:block;
+
+    color:#E8E8E8;
+
+    text-decoration:none;
+
+    margin-bottom:9px;
+
+    transition:.3s;
+}
+
+
+.footer-links a:hover{
+    color:#C6A15B;
+    padding-left:5px;
+}
+
+
+/* CONTACT */
+
+.footer-contact p{
+    margin-bottom:10px;
+    color:#E8E8E8;
+}
+
+
+.footer-contact i{
+    color:#C6A15B;
+    margin-right:8px;
+}
+
+
+/* FOOTER BOTTOM */
+
+.footer-bottom{
+    text-align:center;
+
+    padding-top:18px;
+
+    color:#ddd;
+
+    font-size:14px;
+}
+       
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:1050px){
+
+    .menu{
+        gap:15px;
+    }
+
+
+    .passport{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .passport-left{
+
+        padding:25px;
+
+    }
+
+
+    .passport-photo{
+
+        height:450px;
+
+    }
+
+
+    .footer-top{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+}
+
+
+@media(max-width:700px){
+
+    .nav{
+
+        padding:10px 20px;
+
+    }
+
+
+    .menu{
+
+        display:none;
+
+    }
+
+
+    .passport-section{
+
+        padding:55px 5%;
+
+    }
+
+
+    .passport-heading h1{
+
+        font-size:36px;
+
+    }
+
+
+    .passport-right{
+
+        padding:30px 25px;
+
+    }
+
+
+    .passport-top h2{
+
+        font-size:45px;
+
+    }
+
+
+    .passport-details{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .passport-bottom{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:15px;
+
+    }
+
+
+    .about-section{
+
+        padding:60px 7%;
+
+    }
+
+
+    .about-heading h2{
+
+        font-size:34px;
+
+    }
+
+
+    .adoption-cta{
+
+        width:90%;
+
+        padding:35px 25px;
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+
+    .adoption-cta h2{
+
+        font-size:26px;
+
+    }
+
+
+    .footer{
+
+        padding:50px 25px 20px;
+
+    }
+
+
+    .footer-top{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .footer-logo{
+
+        justify-content:center;
+
+    }
+
+
+    .footer-about{
+
+        text-align:center;
+
+    }
+
+
+    .social-icons{
+
+        justify-content:center;
+
+    }
+
+}

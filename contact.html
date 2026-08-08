@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<title>Contact | PawConnect</title>
+<style>
+    *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Times New Roman', Times, serif;
+}
+
+body{
+    background-image:url(bgcontact.jpeg);
+    background-size: cover;
+}
+
+/* ================= NAVBAR ================= */
+
+.nav{
+    width:100%;
+    min-height:80px;
+    position:sticky;
+    top:0;
+    z-index:999;
+    background:#123C2A;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 40px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.12);
+    opacity:0;
+    transform:translateY(-100%);
+    animation:navIn 1s ease forwards;
+    animation-delay:0s;
+    gap:20px;
+}
+
+@keyframes navIn{
+    from{opacity:0; 
+        transform:translateY(-100%);
+    }
+    to{opacity:1;
+         transform:translateY(0);
+        }
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    flex-shrink:0;
+}
+
+.logo img{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.logo h2{
+    color:#FFFDF7;
+    font-size:28px;
+    letter-spacing:1px;
+}
+
+.menu{
+    display:flex;
+    align-items:center;
+    gap:26px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#FFFDF7;
+    font-size:16px;
+    font-weight:bold;
+    transition:0.3s ease;
+}
+
+.menu > a:hover{
+    color:#C6A15B;
+}
+
+.login-btn{
+    text-decoration:none;
+    color:#FFFDF7;
+    background:#C6A15B;
+    padding:10px 22px;
+    border-radius:30px;
+    font-weight:bold;
+    transition:0.3s ease;
+    flex-shrink:0;
+}
+
+.login-btn:hover{
+    background:#a88344;
+    transform:translateY(-2px);
+}
+
+/* EXPLORE DROPDOWN */
+.dropdown{
+    position:relative;
+}
+
+.dropdown > a{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:10px 14px;
+    border-radius:25px;
+    transition:0.3s ease;
+}
+
+.dropdown > a:hover{
+    background:rgba(255,255,255,0.08);
+}
+
+.dropdown-content{
+    position:absolute;
+    top:52px;
+    left:50%;
+    transform:translateX(-50%) translateY(10px);
+    width:620px;
+    padding:22px;
+    background:#FFFDF7;
+    border-radius:16px;
+    box-shadow:0 12px 28px rgba(0,0,0,.18);
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    opacity:0;
+    visibility:hidden;
+    transition:0.3s ease;
+}
+
+.dropdown:hover .dropdown-content{
+    opacity:1;
+    visibility:visible;
+    transform:translateX(-50%) translateY(0);
+}
+
+.column{
+    width:30%;
+    display:flex;
+    flex-direction:column;
+}
+
+.column h3{
+    color:#123C2A;
+    font-size:18px;
+    margin-bottom:12px;
+    padding-bottom:8px;
+    border-bottom:2px solid #C6A15B;
+}
+
+.column a{
+    text-decoration:none;
+    color:#444;
+    margin:7px 0;
+    font-size:15px;
+    font-weight:normal;
+    transition:0.3s;
+}
+
+.column a:hover{
+    color:#C6A15B;
+    padding-left:4px;
+}
+
+
+/* ================= CONTACT ================= */
+
+.contact-hero{
+    width:90%;
+    margin:60px auto;
+    display:flex;
+    justify-content:space-between;
+    gap:60px;
+     position:relative;
+    overflow:hidden;
+}
+
+/* Left Leaves */
+
+.left-leaves{
+    position:absolute;
+    left:-20px;
+    bottom:0;
+    width:170px;
+    opacity:0.9;
+    z-index:1;
+}
+
+/* Dog & Cat */
+
+.pet-image{
+    position:absolute;
+    right:20px;
+    bottom:0;
+    width:260px;
+    z-index:2;
+    pointer-events:none;
+}
+.left{
+    width:45%;
+}
+
+.small-title{
+    color:#C6A15B;
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+.left h1{
+    margin-top:20px;
+    font-size:60px;
+    color:#123C2A;
+    line-height:75px;
+}
+
+.left h1 span{
+    color:#C6A15B;
+}
+
+.left p{
+    margin-top:25px;
+    color:#555;
+    line-height:30px;
+    font-size:19px;
+}
+
+/* ================= INFO BOX ================= */
+
+.info-box{
+    margin-top:40px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.box{
+    background:white;
+    border-radius:18px;
+    padding:25px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.box:hover{
+    transform:translateY(-8px);
+}
+
+.box i{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background:#123C2A;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:24px;
+}
+
+.box h3{
+    color:#123C2A;
+    margin-bottom:8px;
+}
+
+.box p{
+    margin:0;
+    font-size:15px;
+    line-height:24px;
+}
+
+/* ================= FORM ================= */
+
+.right{
+    width:55%;
+}
+
+.form-card{
+    background:white;
+    border-radius:25px;
+    padding:40px;
+    box-shadow:0 10px 30px rgba(0,0,0,.1);
+}
+
+.form-card h2{
+    color:#123C2A;
+    margin-bottom:30px;
+}
+
+.row{
+    display:flex;
+    gap:20px;
+}
+
+input,
+textarea{
+    width:100%;
+    margin-top:20px;
+    padding:16px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    font-size:16px;
+    outline:none;
+}
+
+input:focus,
+textarea:focus{
+    border:2px solid #C6A15B;
+}
+
+textarea{
+    height:170px;
+    resize:none;
+}
+
+button{
+    margin-top:25px;
+    width:100%;
+    padding:16px;
+    background:#123C2A;
+    color:white;
+    border:none;
+    border-radius:12px;
+    font-size:18px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    background:#1b5a3d;
+}
+
+button i{
+    margin-right:10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<div class="nav">
+    <div class="logo">
+        <img src="logo.jpeg" alt="PawConnect Logo">
+        <h2>PawConnect</h2>
+    </div>
+
+    <div class="menu">
+        <a href="home.html">HOME</a>
+        <a href="animals.html">ANIMALS</a>
+
+        <div class="dropdown">
+            <a href="#">EXPLORE <i class="fa-solid fa-chevron-down"></i></a>
+            <div class="dropdown-content">
+                <div class="column">
+                    <h3>About</h3>
+                    <a href="about.html">About Us</a>
+                    <a href="mission.html">Mission</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+
+                <div class="column">
+                    <h3>Adoption</h3>
+                    <a href="animals.html">Available Animals</a>
+                    <a href="match.html">Smart Match</a>
+                    <a href="process.html">Adoption Process</a>
+                </div>
+
+                <div class="column">
+                    <h3>NGO</h3>
+                    <a href="ngo.html">NGO Login</a>
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="addanimal.html">Add Animal</a>
+                </div>
+            </div>
+        </div>
+
+        <a href="adopt.html">ADOPT</a>
+        <a href="contact.html">CONTACT</a>
+    </div>
+
+    <a href="login.html" class="login-btn">LOGIN</a>
+</div>
+
+<!-- ================= HERO ================= -->
+
+<section class="contact-hero">
+
+<div class="left">
+
+<span class="small-title">
+🐾 GET IN TOUCH
+</span>
+
+<h1>
+We'd Love <br>
+to Hear From <span>You!</span>
+</h1>
+
+<p>
+
+Have a question, suggestion or want to adopt a rescued pet?
+Our team is always ready to help you.
+
+</p>
+
+<div class="info-box">
+
+<div class="box">
+
+<i class="fa-solid fa-phone"></i>
+
+<div>
+
+<h3>Call Us</h3>
+
+<p>+91 9876543210</p>
+
+</div>
+
+</div>
+
+<div class="box">
+
+<i class="fa-solid fa-envelope"></i>
+
+<div>
+
+<h3>Email</h3>
+
+<p>support@pawconnect.com</p>
+
+</div>
+
+</div>
+
+<div class="box">
+
+<i class="fa-solid fa-location-dot"></i>
+
+<div>
+
+<h3>Visit Us</h3>
+
+<p>Pune, Maharashtra</p>
+
+</div>
+
+</div>
+
+<div class="box">
+
+<i class="fa-solid fa-clock"></i>
+
+<div>
+
+<h3>Working Hours</h3>
+
+<p>Mon - Sat | 9 AM - 7 PM</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================= RIGHT SIDE ================= -->
+
+<div class="right">
+
+<div class="form-card">
+
+<h2>
+<i class="fa-regular fa-message"></i>
+Send Us A Message
+</h2>
+
+<form>
+
+<div class="row">
+
+<input type="text" placeholder="Your Name">
+
+<input type="email" placeholder="Your Email">
+
+</div>
+
+<input type="text" placeholder="Phone Number">
+
+<input type="text" placeholder="Subject">
+
+<textarea placeholder="Write Your Message"></textarea>
+
+<button>
+SEND MESSAGE
+</button>
+</form>
+</div>
+</div>
+</section>
+</body>
+</html>
