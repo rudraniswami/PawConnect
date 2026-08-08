@@ -251,7 +251,7 @@ html, body{
     justify-content:space-between;
     align-items:center;
     gap:30px;
-    padding:60px 70px;
+    padding:150px 70px;
     background:linear-gradient(rgba(255,253,247,0.3), rgba(255,253,247,0.3)), url("dchome.jpeg");
     background-size:cover;
     background-position:center;
