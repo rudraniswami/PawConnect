@@ -347,7 +347,6 @@ html, body{
     width:48%;
     min-height:520px;
 }
-
 /* =========================
    FEATURED PETS
 ========================= */
@@ -490,6 +489,18 @@ html, body{
     color:#fff;
 }
 
+
+/* =========================
+   PET LINKS
+========================= */
+
+.pet-card a{
+    text-decoration:none;
+}
+
+.pet-card a button{
+    display:block;
+}
 /* =========================
    FEATURES
 ========================= */
