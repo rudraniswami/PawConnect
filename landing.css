@@ -245,9 +245,8 @@ html, body{
 /* =========================
    HERO
 ========================= */
-
 .hero{
-    min-height:90vh;
+    min-height:0vh;
     display:flex;
     justify-content:space-between;
     align-items:center;
@@ -259,7 +258,7 @@ html, body{
     opacity:0;
     transform:translateY(30px);
     animation:heroIn 1s ease forwards;
-    animation-delay:5s;
+    animation-delay:0s;
 }
 
 @keyframes heroIn{
@@ -353,13 +352,11 @@ html, body{
 
 .featured-pets{
     width:100%;
-    margin:100px auto 0;
+    margin:0 auto;
     padding:60px;
     border:1px solid #E7DCC4;
     box-shadow:0 18px 40px rgba(0,0,0,.08);
-    /* position:relative; */
-    position: absolute;
-    top:650px;
+    position:relative;
     background:#FFFDF7;
 }
 
@@ -684,17 +681,12 @@ html, body{
 /* =========================
    ADOPTION PROCESS
 ========================= */
-
 .adoption-process{
     width:100%;
-    padding:60px 70px;
+    padding:10px 70px;
     background:#FFFDF7;
-    /* position: relative; */
-    position: absolute;
-    top:1840px;
-
+    position:relative;
     margin-top:80px;
-
 }
 
 .process-heading{
@@ -782,14 +774,11 @@ html, body{
 /* =========================
    SUCCESS STORIES
 ========================= */
-
 .success-stories{
     width:100%;
-    padding:90px 70px;
+    padding:50px 70px;
     background:#F8F3E8;
-    /* position: relative; */
-    position: absolute;
-    top:2400px;
+    position:relative;
     margin-top:80px;
 }
 
@@ -883,14 +872,11 @@ html, body{
 /* =========================
    PET CARE SECTION
 ========================= */
-
 .pet-care{
     width:100%;
-    padding:60px 70px;
+    padding:20px 70px;
     background:#FFFDF7;
-    /* position: relative; */
-    position: absolute;
-    top:3200px;
+    position:relative;
     margin-top:80px;
 }
 
@@ -993,15 +979,12 @@ html, body{
 /* =========================
    COMMUNITY CTA
 ========================= */
-
 .community{
     width:100%;
     padding:80px 70px;
     background:linear-gradient(135deg,#123C2A,#1E5A42);
     text-align:center;
-    /* position:relative; */
-    position: absolute;
-    top:3800px;
+    position:relative;
     margin-top:80px;
     overflow:hidden;
 }
