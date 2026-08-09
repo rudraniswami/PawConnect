@@ -79,6 +79,8 @@ html, body{
     font-weight:bold;
     transition:0.3s ease;
     flex-shrink:0;
+    pointer-events: auto;
+    cursor: pointer;
 }
 
 .login-btn:hover{
