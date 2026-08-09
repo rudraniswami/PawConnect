@@ -1,3 +1,48 @@
+<?php
+
+session_start();
+
+include("db.php");
+
+if(isset($_POST['login']))
+{
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $sql = "SELECT * FROM users WHERE email='$email'";
+
+    $result = mysqli_query($conn, $sql);
+
+    if(!$result)
+    {
+        die("Query Error: " . mysqli_error($conn));
+    }
+
+    if(mysqli_num_rows($result) == 1)
+    {
+        $user = mysqli_fetch_assoc($result);
+
+        if(password_verify($password, $user['password']))
+        {
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_name'] = $user['name'];
+            $_SESSION['user_email'] = $user['email'];
+
+            header("Location: dashboard.php");
+            exit();
+        }
+        else
+        {
+            echo "Invalid Password";
+        }
+    }
+    else
+    {
+        echo "Invalid Email";
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -78,27 +123,32 @@
             adopt, and make a difference.
         </p>
 
+        <!-- form -->
+         <form action="login.php" method="POST">
+
         <label>Email Address</label>
 
         <div class="input-box">
             <i class="fa-regular fa-envelope"></i>
-            <input type="email" placeholder="Enter your email">
+            <input type="email" name="email" placeholder="Enter your email">
         </div>
 
         <label>Password</label>
 
         <div class="input-box">
             <i class="fa-solid fa-lock"></i>
-            <input type="password" placeholder="Enter your password">
+            <input type="password" name="password" placeholder="Enter your password">
             <i class="fa-regular fa-eye-slash"></i>
         </div>
 
         <a href="#" class="forgot">Forgot Password?</a>
 
-        <button class="login-button">
+        <button type="submit" name="login" class="login-button">
             <i class="fa-solid fa-paw"></i>
             Login
         </button>
+
+</form>
 
         <div class="or">
             <span></span>
@@ -106,11 +156,15 @@
             <span></span>
         </div>
 
-        <button class="create-btn">
-            <i class="fa-regular fa-user"></i>
-            Create New Account
-        </button>
+      <button 
+    class="create-btn"
+    type="button"
+    onclick="window.location.href='register.php'">
 
+    <i class="fa-regular fa-user"></i>
+    Create New Account
+
+</button>
         <div class="note">
 
             <div class="circle">

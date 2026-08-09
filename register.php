@@ -1,509 +1,257 @@
 <?php
 
-include "db.php";
+include("db.php");
 
-$message = "";
-$message_type = "";
+if(isset($_POST['register']))
+{
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $password = password_hash($password, PASSWORD_DEFAULT);
 
-    $name = trim($_POST["name"]);
-    $email = trim($_POST["email"]);
-    $password = $_POST["password"];
-    $confirm_password = $_POST["confirm_password"];
+    $sql = "INSERT INTO users(name, email, password)
+            VALUES('$name', '$email', '$password')";
 
-
-    if ($password !== $confirm_password) {
-
-        $message = "Passwords do not match.";
-        $message_type = "error";
-
-    } else {
-
-        // Check whether email already exists
-
-        $check = mysqli_prepare(
-            $conn,
-            "SELECT id FROM users WHERE email = ?"
-        );
-
-        mysqli_stmt_bind_param(
-            $check,
-            "s",
-            $email
-        );
-
-        mysqli_stmt_execute($check);
-
-        mysqli_stmt_store_result($check);
-
-
-        if (mysqli_stmt_num_rows($check) > 0) {
-
-            $message = "An account with this email already exists.";
-            $message_type = "error";
-
-        } else {
-
-            // Secure password
-
-            $hashed_password = password_hash(
-                $password,
-                PASSWORD_DEFAULT
-            );
-
-
-            // Insert user
-
-            $insert = mysqli_prepare(
-                $conn,
-                "INSERT INTO users (name, email, password)
-                 VALUES (?, ?, ?)"
-            );
-
-            mysqli_stmt_bind_param(
-                $insert,
-                "sss",
-                $name,
-                $email,
-                $hashed_password
-            );
-
-
-            if (mysqli_stmt_execute($insert)) {
-
-                $message = "Account created successfully!";
-                $message_type = "success";
-
-            } else {
-
-                $message = "Something went wrong. Please try again.";
-                $message_type = "error";
-
-            }
-
-            mysqli_stmt_close($insert);
-        }
-
-        mysqli_stmt_close($check);
+    if(mysqli_query($conn, $sql))
+    {
+        header("location: login.php");
+        exit();
+    }
+    else
+    {
+        echo "Account Not Created";
     }
 }
 
 ?>
 
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Create Account - PawConnect</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <style>
+    <title>PawConnect Register</title>
 
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-        }
-
-        body{
-
-            font-family:'Times New Roman', Times, serif;
-
-            background:#f7f3eb;
-
-            min-height:100vh;
-
-            display:flex;
-
-            justify-content:center;
-
-            align-items:center;
-
-            padding:30px 20px;
-        }
-
-        .register-container{
-
-            width:100%;
-
-            max-width:550px;
-
-            background:white;
-
-            padding:50px;
-
-            border-radius:25px;
-
-            box-shadow:0 15px 40px rgba(0,0,0,.12);
-        }
-
-        h1{
-
-            color:#0F5A39;
-
-            font-family:Georgia,serif;
-
-            font-size:42px;
-
-            margin-bottom:10px;
-
-            text-align:center;
-        }
-
-        .subtitle{
-
-            text-align:center;
-
-            color:#666;
-
-            font-size:18px;
-
-            line-height:1.6;
-
-            margin-bottom:30px;
-        }
-
-        .heading-line{
-
-            width:70px;
-
-            height:4px;
-
-            background:#C89B3C;
-
-            border-radius:5px;
-
-            margin:0 auto 30px;
-        }
-
-        label{
-
-            display:block;
-
-            font-size:18px;
-
-            font-weight:600;
-
-            color:#222;
-
-            margin-bottom:9px;
-        }
-
-        .input-box{
-
-            width:100%;
-
-            height:60px;
-
-            border:2px solid #e2e2e2;
-
-            border-radius:14px;
-
-            display:flex;
-
-            align-items:center;
-
-            padding:0 18px;
-
-            margin-bottom:22px;
-        }
-
-        .input-box:focus-within{
-
-            border-color:#0F5A39;
-        }
-
-        .input-box i{
-
-            color:#777;
-
-            font-size:20px;
-        }
-
-        .input-box input{
-
-            width:100%;
-
-            border:none;
-
-            outline:none;
-
-            margin-left:13px;
-
-            font-family:'Times New Roman', Times, serif;
-
-            font-size:17px;
-        }
-
-        .register-button{
-
-            width:100%;
-
-            height:60px;
-
-            border:none;
-
-            border-radius:14px;
-
-            background:#0F5A39;
-
-            color:white;
-
-            font-family:'Times New Roman', Times, serif;
-
-            font-size:21px;
-
-            cursor:pointer;
-
-            margin-top:5px;
-
-            transition:.3s;
-        }
-
-        .register-button:hover{
-
-            background:#0b472d;
-
-            transform:translateY(-2px);
-        }
-
-        .register-button i{
-
-            margin-right:8px;
-        }
-
-        .message{
-
-            padding:13px 15px;
-
-            border-radius:10px;
-
-            margin-bottom:22px;
-
-            text-align:center;
-
-            font-size:16px;
-        }
-
-        .success{
-
-            background:#e8f5e9;
-
-            color:#176b3a;
-        }
-
-        .error{
-
-            background:#fdecec;
-
-            color:#a52828;
-        }
-
-        .login-link{
-
-            display:block;
-
-            text-align:center;
-
-            margin-top:25px;
-
-            color:#0F5A39;
-
-            text-decoration:none;
-
-            font-size:17px;
-
-            font-weight:600;
-        }
-
-        .login-link:hover{
-
-            text-decoration:underline;
-        }
-
-        @media(max-width:600px){
-
-            .register-container{
-
-                padding:35px 22px;
-
-                border-radius:18px;
-            }
-
-            h1{
-
-                font-size:32px;
-            }
-
-            .subtitle{
-
-                font-size:16px;
-            }
-
-            .input-box{
-
-                height:56px;
-            }
-
-            .register-button{
-
-                height:56px;
-
-                font-size:19px;
-            }
-        }
-
-    </style>
+    <link rel="stylesheet" href="register.css">
 
 </head>
 
 <body>
 
+<div class="register-page">
 
-<div class="register-container">
+    <div class="register-container">
 
+        <!-- LEFT SIDE -->
 
-    <h1>Create Account</h1>
+        <div class="register-left">
 
-    <div class="heading-line"></div>
+            <div class="paw-icon">
+                <i class="fa-solid fa-paw"></i>
+            </div>
 
+            <h1>
+                Join <span>PawConnect</span>
+            </h1>
 
-    <p class="subtitle">
+            <div class="line">
+                <span>
+                    <i class="fa-solid fa-heart"></i>
+                </span>
+            </div>
 
-        Join PawConnect and help rescued animals
-        find their forever homes. 🐾
+            <p>
+                Create your PawConnect account and become part of a
+                community helping rescued animals find safe,
+                loving, and forever homes.
+            </p>
 
-    </p>
+            <div class="benefits">
 
+                <div class="benefit-box">
 
-    <?php if ($message != ""): ?>
+                    <i class="fa-solid fa-paw"></i>
 
-        <div class="message <?php echo $message_type; ?>">
+                    <div>
+                        <h4>Explore</h4>
+                        <p>Rescued Animals</p>
+                    </div>
 
-            <?php echo htmlspecialchars($message); ?>
+                </div>
 
-        </div>
+                <div class="benefit-box">
 
-    <?php endif; ?>
+                    <i class="fa-solid fa-heart"></i>
 
+                    <div>
+                        <h4>Adopt</h4>
+                        <p>Give Them A Home</p>
+                    </div>
 
-    <form method="POST" action="">
+                </div>
 
+                <div class="benefit-box">
 
-        <label for="name">
-            Full Name
-        </label>
+                    <i class="fa-solid fa-shield-heart"></i>
 
-        <div class="input-box">
+                    <div>
+                        <h4>Connect</h4>
+                        <p>Trusted NGOs</p>
+                    </div>
 
-            <i class="fa-regular fa-user"></i>
+                </div>
 
-            <input
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Enter your name"
-                required
-            >
-
-        </div>
-
-
-        <label for="email">
-            Email Address
-        </label>
-
-        <div class="input-box">
-
-            <i class="fa-regular fa-envelope"></i>
-
-            <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Enter your email"
-                required
-            >
-
-        </div>
-
-
-        <label for="password">
-            Password
-        </label>
-
-        <div class="input-box">
-
-            <i class="fa-solid fa-lock"></i>
-
-            <input
-                type="password"
-                id="password"
-                name="password"
-                placeholder="Create a password"
-                required
-            >
+            </div>
 
         </div>
 
 
-        <label for="confirm_password">
-            Confirm Password
-        </label>
+        <!-- RIGHT SIDE -->
 
-        <div class="input-box">
+        <div class="register-right">
 
-            <i class="fa-solid fa-lock"></i>
+            <h2>Create Your Account</h2>
 
-            <input
-                type="password"
-                id="confirm_password"
-                name="confirm_password"
-                placeholder="Confirm your password"
-                required
-            >
+            <div class="heading-line"></div>
+
+            <p class="sub-text">
+                Join PawConnect and start making a difference today.
+            </p>
+
+
+            <form action="register.php" method="POST">
+
+                <!-- NAME -->
+
+                <label>Full Name</label>
+
+                <div class="input-box">
+
+                    <i class="fa-regular fa-user"></i>
+
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Enter your full name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <label>Email Address</label>
+
+                <div class="input-box">
+
+                    <i class="fa-regular fa-envelope"></i>
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <label>Password</label>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Create a password"
+                        required
+                    >
+
+                    <i class="fa-regular fa-eye-slash"></i>
+
+                </div>
+
+
+                <!-- TERMS -->
+
+                <div class="terms">
+
+                    <input type="checkbox" required>
+
+                    <p>
+                        I agree to the PawConnect
+                        <a href="#">Terms & Conditions</a>
+                    </p>
+
+                </div>
+
+
+                <!-- REGISTER BUTTON -->
+
+                <button
+                    type="submit"
+                    name="register"
+                    class="register-button">
+
+                    <i class="fa-solid fa-paw"></i>
+
+                    Create Account
+
+                </button>
+
+            </form>
+
+
+            <!-- LOGIN -->
+
+            <div class="already">
+
+                <p>
+                    Already have an account?
+                </p>
+
+                <a href="login.php">
+                    Login here
+                </a>
+
+            </div>
+
+
+            <!-- NOTE -->
+
+            <div class="note">
+
+                <div class="circle">
+
+                    <i class="fa-regular fa-heart"></i>
+
+                </div>
+
+                <p>
+                    Every new member helps bring rescued animals
+                    one step closer to a forever home. 🐾❤️
+                </p>
+
+            </div>
 
         </div>
 
-
-        <button
-            type="submit"
-            class="register-button"
-        >
-
-            <i class="fa-solid fa-paw"></i>
-
-            Create Account
-
-        </button>
-
-
-    </form>
-
-
-    <a
-        href="login.php"
-        class="login-link"
-    >
-
-        Already have an account? Login
-
-    </a>
-
+    </div>
 
 </div>
 
-
 </body>
-
 </html>

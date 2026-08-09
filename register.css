@@ -1,0 +1,579 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Times New Roman', Times, serif;
+}
+
+
+/* ================= PAGE ================= */
+
+.register-page{
+    min-height:100vh;
+    background:#F8F3E8;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:35px;
+}
+
+
+/* ================= CONTAINER ================= */
+
+.register-container{
+    width:1100px;
+    min-height:650px;
+
+    display:flex;
+
+    background:#FFFDF7;
+
+    border-radius:25px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 15px 45px rgba(18,60,42,0.18);
+}
+
+
+/* ================= LEFT SIDE ================= */
+
+.register-left{
+
+    width:48%;
+
+    background:#123C2A;
+
+    color:#FFFDF7;
+
+    padding:65px 55px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+
+.paw-icon{
+
+    width:65px;
+    height:65px;
+
+    border-radius:50%;
+
+    background:#C6A15B;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:#123C2A;
+
+    font-size:30px;
+
+    margin-bottom:25px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+
+
+.register-left h1{
+
+    font-size:42px;
+
+    line-height:1.2;
+
+    margin-bottom:15px;
+}
+
+
+.register-left h1 span{
+
+    color:#E9DDBF;
+
+    display:block;
+}
+
+
+.line{
+
+    width:100%;
+
+    height:1px;
+
+    background:rgba(233,221,191,0.45);
+
+    margin:15px 0 25px;
+
+    position:relative;
+}
+
+
+.line span{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:42px;
+    height:42px;
+
+    border-radius:50%;
+
+    background:#123C2A;
+
+    border:1px solid #C6A15B;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    color:#C6A15B;
+}
+
+
+.register-left > p{
+
+    font-size:17px;
+
+    line-height:1.7;
+
+    color:#E9DDBF;
+
+    margin-bottom:35px;
+}
+
+
+/* ================= BENEFITS ================= */
+
+.benefits{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:16px;
+}
+
+
+.benefit-box{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    padding:15px;
+
+    border:1px solid rgba(233,221,191,0.25);
+
+    border-radius:12px;
+
+    transition:0.3s;
+}
+
+
+.benefit-box:hover{
+
+    transform:translateX(7px);
+
+    border-color:#C6A15B;
+
+    background:rgba(255,255,255,0.05);
+}
+
+
+.benefit-box > i{
+
+    width:42px;
+    height:42px;
+
+    border-radius:50%;
+
+    background:#C6A15B;
+
+    color:#123C2A;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+}
+
+
+.benefit-box h4{
+
+    color:#FFFDF7;
+
+    font-size:17px;
+
+    margin-bottom:3px;
+}
+
+
+.benefit-box p{
+
+    color:#E9DDBF;
+
+    font-size:14px;
+}
+
+
+/* ================= RIGHT SIDE ================= */
+
+.register-right{
+
+    width:52%;
+
+    padding:55px 65px;
+
+    background:#FFFDF7;
+}
+
+
+.register-right h2{
+
+    color:#0B2419;
+
+    font-size:32px;
+
+    margin-bottom:12px;
+}
+
+
+.heading-line{
+
+    width:70px;
+
+    height:4px;
+
+    background:#C6A15B;
+
+    border-radius:5px;
+
+    margin-bottom:18px;
+}
+
+
+.sub-text{
+
+    color:#55665B;
+
+    font-size:16px;
+
+    line-height:1.5;
+
+    margin-bottom:28px;
+}
+
+
+/* ================= LABEL ================= */
+
+label{
+
+    display:block;
+
+    color:#0B2419;
+
+    font-weight:bold;
+
+    font-size:16px;
+
+    margin-bottom:8px;
+
+    margin-top:17px;
+}
+
+
+/* ================= INPUT ================= */
+
+.input-box{
+
+    height:52px;
+
+    width:100%;
+
+    border:1px solid #D8CFBE;
+
+    border-radius:10px;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:0 15px;
+
+    background:#F8F3E8;
+
+    transition:0.3s;
+}
+
+
+.input-box:focus-within{
+
+    border-color:#C6A15B;
+
+    box-shadow:0 0 0 3px rgba(198,161,91,0.12);
+}
+
+
+.input-box > i{
+
+    color:#123C2A;
+
+    font-size:17px;
+
+    margin-right:12px;
+}
+
+
+.input-box input{
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    width:100%;
+
+    font-size:15px;
+
+    color:#123C2A;
+}
+
+
+.input-box input::placeholder{
+
+    color:#89958D;
+}
+
+
+/* ================= TERMS ================= */
+
+.terms{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin:20px 0;
+}
+
+
+.terms input{
+
+    width:16px;
+    height:16px;
+
+    accent-color:#123C2A;
+}
+
+
+.terms p{
+
+    font-size:13px;
+
+    color:#55665B;
+}
+
+
+.terms a{
+
+    color:#123C2A;
+
+    font-weight:bold;
+
+    text-decoration:none;
+}
+
+
+/* ================= BUTTON ================= */
+
+.register-button{
+
+    width:100%;
+
+    height:52px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#123C2A;
+
+    color:#FFFDF7;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+
+.register-button i{
+
+    margin-right:8px;
+
+    color:#E9DDBF;
+}
+
+
+.register-button:hover{
+
+    background:#0B2419;
+
+    transform:translateY(-2px);
+
+    box-shadow:0 8px 20px rgba(18,60,42,0.2);
+}
+
+
+/* ================= LOGIN ================= */
+
+.already{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:6px;
+
+    margin-top:22px;
+
+    font-size:14px;
+}
+
+
+.already p{
+
+    color:#66736B;
+}
+
+
+.already a{
+
+    color:#123C2A;
+
+    font-weight:bold;
+
+    text-decoration:none;
+}
+
+
+.already a:hover{
+
+    color:#C6A15B;
+}
+
+
+/* ================= NOTE ================= */
+
+.note{
+
+    margin-top:25px;
+
+    padding:13px;
+
+    background:#F8F3E8;
+
+    border-radius:10px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+}
+
+
+.circle{
+
+    min-width:38px;
+    height:38px;
+
+    border-radius:50%;
+
+    background:#123C2A;
+
+    color:#C6A15B;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+}
+
+
+.note p{
+
+    color:#55665B;
+
+    font-size:13px;
+
+    line-height:1.4;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+    .register-container{
+        width:95%;
+    }
+
+    .register-left{
+        padding:45px 35px;
+    }
+
+    .register-right{
+        padding:45px 35px;
+    }
+
+}
+
+
+@media(max-width:700px){
+
+    .register-page{
+        padding:15px;
+    }
+
+    .register-container{
+        flex-direction:column;
+    }
+
+    .register-left,
+    .register-right{
+
+        width:100%;
+    }
+
+    .register-left{
+        padding:40px 30px;
+    }
+
+    .register-right{
+        padding:40px 30px;
+    }
+
+    .register-left h1{
+        font-size:34px;
+    }
+
+}

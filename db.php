@@ -1,14 +1,15 @@
+
 <?php
 
 $host = "localhost";
-$username = "root";
+$user = "root";
 $password = "";
-$database = "PawConnect";
+$database = "pawconnect";
 
-$conn = mysqli_connect($host, $username, $password, $database);
+$conn = mysqli_connect($host, $user, $password, $database);
 
 if (!$conn) {
-    die("Database connection failed: " . mysqli_connect_error());
+     die("connection failed:".mysqli_connect_error());
 }
 
 ?>
