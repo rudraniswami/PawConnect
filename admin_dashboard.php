@@ -97,7 +97,6 @@ href="admin_dashboard.css">
     <a href="admin_dashboard.php"
        class="active">
 
-        <i class="fa-solid fa-envelope"></i>
 
         Contact Messages
 
@@ -106,7 +105,7 @@ href="admin_dashboard.css">
 
     <!-- FUTURE FEATURES -->
 
-    <a href="#">
+    <a href="manage_animals.php">
 
         <i class="fa-solid fa-paw"></i>
 
