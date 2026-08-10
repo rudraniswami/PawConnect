@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h2>PawConnect</h2>
     </div>
     <div class="topbar-links">
-        <a href="dashboard.php">Back to Dashboard</a>
+        <a href="ngo_dashboard.php">Back to Dashboard</a>
         <a href="ngo_logout.php" class="logout-btn">Logout</a>
     </div>
 </div>
