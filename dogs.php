@@ -1,5 +1,5 @@
 <?php
-include "ngodb.php";
+include "db.php";
 
 // Pull dogs added by NGOs through addanimal.php
 $stmt = $conn->prepare("SELECT * FROM animals WHERE type = ? ORDER BY created_at DESC");

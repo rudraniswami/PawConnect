@@ -1,7 +1,7 @@
 <?php
 // Start session so we can log the NGO in right after registering
 session_start();
-include "ngodb.php";
+include "db.php";
 
 $error = "";
 

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "ngodb.php";
+include "db.php";
 
 $error = "";
 

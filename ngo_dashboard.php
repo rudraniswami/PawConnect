@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "ngodb.php";
+include "db.php";
 
 // Protect this page: only logged-in NGOs can see it
 if (!isset($_SESSION["ngo_id"])) {
