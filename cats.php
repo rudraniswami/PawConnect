@@ -1,3 +1,13 @@
+<?php
+include "db.php";
+
+// Pull cats added by NGOs through addanimal.php
+$stmt = $conn->prepare("SELECT * FROM animals WHERE type = ? ORDER BY created_at DESC");
+$type = "Cat";
+$stmt->bind_param("s", $type);
+$stmt->execute();
+$db_cats = $stmt->get_result();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,9 +84,9 @@
 
             <a href="ngo_login.php">NGO Login</a>
 
-            <a href="dashboard.html">Dashboard</a>
+            <a href="dashboard.php">Dashboard</a>
 
-            <a href="addanimal.html">Add Animal</a>
+            <a href="addanimal.php">Add Animal</a>
 
         </div>
 
@@ -86,7 +96,7 @@
 
 <a href="adopt.html">ADOPT</a>
 
-<a href="contact.html">CONTACT</a>l">CONTACT</a>
+<a href="contact.html">CONTACT</a>
     </div>
 
     <a href="login.php" class="login-btn">LOGIN</a>
@@ -775,6 +785,55 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
         </div>
 
 
+        <!-- ============================================
+             CATS ADDED BY NGOs (from the database)
+             Generated automatically — nothing above this
+             comment was changed.
+        ============================================ -->
+
+        <?php while ($cat = $db_cats->fetch_assoc()) { ?>
+
+        <div class="cat-card">
+
+            <div class="cat-image">
+
+                <img src="<?php echo htmlspecialchars($cat['image']); ?>" alt="<?php echo htmlspecialchars($cat['name']); ?>">
+
+                <span>
+                    <?php echo htmlspecialchars($cat['status']); ?>
+                </span>
+
+            </div>
+
+            <div class="cat-info">
+
+                <h3><?php echo htmlspecialchars($cat['name']); ?></h3>
+
+                <p>
+                    <?php echo htmlspecialchars($cat['breed']); ?> • <?php echo htmlspecialchars($cat['age']); ?>
+                </p>
+
+                <div class="cat-tags">
+
+                    <small>
+                        📍 <?php echo htmlspecialchars($cat['location']); ?>
+                    </small>
+
+                    <small>
+                        ✓ <?php echo htmlspecialchars($cat['status']); ?>
+                    </small>
+
+                </div>
+
+                <a href="pet_details.php?id=<?php echo $cat['id']; ?>">
+                    View Profile
+                </a>
+
+            </div>
+
+        </div>
+
+        <?php } ?>
 
 
     </div>

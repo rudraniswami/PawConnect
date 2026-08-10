@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+     font-family:'Times New Roman',serif;
     background: #f8f6ef;
     color: #173c2d;
 }
@@ -159,16 +159,32 @@ body {
 
 /* ================= HERO ================= */
 
-.hero {
-    min-height: 275px;
+.hero{
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+      min-height:50vh;
 
-    padding: 25px 9%;
+    display:flex;
+    align-items:center;
 
-    background: #faf8f1;
+    padding:75px 8%;
+
+    position:relative;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(248,246,239,.96) 0%,
+            rgba(248,246,239,.88) 38%,
+            rgba(248,246,239,.35) 70%,
+            rgba(248,246,239,.08) 100%
+        ),
+        url("storydc.jpeg");
+
+    background-size:cover;
+    background-position:center;
+
+    overflow:hidden;
+
 }
 
 .hero-text {
@@ -195,23 +211,9 @@ body {
     line-height: 1.6;
 }
 
-.share {
-    margin-top: 15px;
-
-    padding: 11px 18px;
-
-    border: none;
-    border-radius: 20px;
-
-    background: #005037;
-    color: white;
-
-    cursor: pointer;
-}
-
-.hero-image {
+/* .hero-image {
     width: 45%;
-}
+} */
 
 .hero-image img {
     width: 100%;
@@ -220,64 +222,40 @@ body {
 }
 
 
-/* ================= FILTERS ================= */
-
-.filters {
-    background: white;
-
-    display: flex;
-    justify-content: center;
-
-    gap: 15px;
-
-    padding: 18px;
-}
-
-.filters button {
-    border: none;
-
-    padding: 10px 17px;
-
-    border-radius: 20px;
-
-    background: #f5f4ef;
-
-    cursor: pointer;
-}
-
-.filters .selected {
-    background: #005037;
-    color: white;
-}
-
 
 /* ================= STORIES ================= */
 
 .stories {
-    background: white;
+    background:#fff;
 
-    padding: 0 4% 20px;
+    padding:65px 7% 70px;
 
-    display: grid;
+    display:grid;
 
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns:repeat(4,1fr);
 
-    gap: 15px;
+    gap:28px;
 }
 
 
 /* ================= CARD ================= */
 
 .card {
-    background: white;
+    background:#fff;
+    border:1px solid #e7e4db;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 5px 18px rgba(24,60,45,.07);
+    transition:.35s ease;
+    position:relative;
+}
 
-    border: 1px solid #ddd;
+.card:hover{
+    transform:translateY(-8px);
 
-    border-radius: 10px;
+    box-shadow:0 16px 35px rgba(24,60,45,.15);
 
-    overflow: hidden;
-
-    box-shadow: 0 2px 7px #ddd;
+    border-color:#d9d2c0;
 }
 .card img {
     width: 100%;
