@@ -56,7 +56,7 @@ href="view_message.css">
 
     <div class="page-header">
 
-        <a href="admin-dashboard.php"
+        <a href="admin_dashboard.php"
            class="back-btn">
 
             <i class="fa-solid fa-arrow-left"></i>

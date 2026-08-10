@@ -105,7 +105,6 @@ href="admin_dashboard.css">
     <a href="admin_dashboard.php"
        class="active">
 
-        <i class="fa-solid fa-envelope"></i>
 
         Contact Messages
 
