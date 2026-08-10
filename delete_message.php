@@ -17,7 +17,7 @@ $query = "DELETE FROM contact_messages WHERE id = $id";
 
 if (mysqli_query($conn, $query)) {
 
-    header("Location: admin-dashboard.php");
+    header("Location: admin_dashboard.php");
     exit;
 
 } else {
