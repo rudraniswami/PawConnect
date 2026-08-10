@@ -35,8 +35,8 @@ $db_cats = $stmt->get_result();
     </div>
 
     <div class="menu">
-        <a href="home.html">HOME</a>
-        <a href="animals.html">ANIMALS</a>
+        <a href="home.php">HOME</a>
+        <a href="animals.php">ANIMALS</a>
 
         <div class="dropdown">
 
@@ -52,9 +52,9 @@ $db_cats = $stmt->get_result();
 
             <h3>About</h3>
 
-            <a href="about.html">About Us</a>
+            <a href="about.php">About Us</a>
 
-            <a href="mission.html">Mission</a>
+            <a href="mission.php">Mission</a>
 
             <a href="contact.php">Contact</a>
 
@@ -67,11 +67,11 @@ $db_cats = $stmt->get_result();
 
             <h3>Adoption</h3>
 
-            <a href="animals.html">Available Animals</a>
+            <a href="animals.php">Available Animals</a>
 
-            <a href="care.html">Care After Adoption</a>
+            <a href="care.php">Care After Adoption</a>
 
-            <a href="stories.html">Adoption Stories</a>
+            <a href="stories.php">Adoption Stories</a>
 
         </div>
 
@@ -94,12 +94,34 @@ $db_cats = $stmt->get_result();
 
 </div>
 
-<a href="adopt.html">ADOPT</a>
+<a href="adopt.php">ADOPT</a>
 
 <a href="contact.php">CONTACT</a>
     </div>
 
-    <a href="login.php" class="login-btn">LOGIN</a>
+    <?php if (isset($_SESSION["user_id"]) || isset($_SESSION["ngo_id"])) { ?>
+
+    <a href="logout.php" class="login-btn">
+        LOGOUT
+    </a>
+
+<?php } else { ?>
+
+    <?php if (isset($_SESSION["user_id"]) || isset($_SESSION["ngo_id"])) { ?>
+
+    <a href="logout.php" class="login-btn">
+        LOGOUT
+    </a>
+
+<?php } else { ?>
+
+    <a href="login.php" class="login-btn">
+        LOGIN
+    </a>
+
+<?php } ?>
+
+<?php } ?>
 </div>
 
 
@@ -195,7 +217,7 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
                 </div>
 
 
-                <a href="theo.html">
+                <a href="theo.php">
                     View Profile
                 </a>
 
@@ -249,7 +271,7 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
                 </div>
 
 
-                <a href="lumi.html">
+                <a href="lumi.php">
                     View Profile
                 </a>
 
@@ -303,7 +325,7 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
                 </div>
 
 
-                <a href="aster.html">
+                <a href="aster.php">
                     View Profile
                 </a>
 
@@ -357,7 +379,7 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
                 </div>
 
 
-                <a href="cosmo.html">
+                <a href="cosmo.php">
                     View Profile
                 </a>
 
@@ -408,7 +430,7 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
                 </div>
 
 
-                <a href="miso.html">
+                <a href="miso.php">
                     View Profile
                 </a>
 
@@ -460,7 +482,7 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
                 </div>
 
 
-                <a href="sia.html">
+                <a href="sia.php">
                     View Profile
                 </a>
 
@@ -512,7 +534,7 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
                 </div>
 
 
-                <a href="yuki.html">
+                <a href="yuki.php">
                     View Profile
                 </a>
 
@@ -564,7 +586,7 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
                 </div>
 
 
-                <a href="kai.html">
+                <a href="kai.php">
                     View Profile
                 </a>
 
@@ -616,7 +638,7 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
                 </div>
 
 
-                <a href="cleo.html">
+                <a href="cleo.php">
                     View Profile
                 </a>
 
@@ -668,7 +690,7 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
                 </div>
 
 
-                <a href="amara.html">
+                <a href="amara.php">
                     View Profile
                 </a>
 
@@ -721,7 +743,7 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
                 </div>
 
 
-                <a href="nia.html">
+                <a href="nia.php">
                     View Profile
                 </a>
 
@@ -774,7 +796,7 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
                 </div>
 
 
-                <a href="lyra.html">
+                <a href="lyra.php">
                     View Profile
                 </a>
 
@@ -904,19 +926,19 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
                 Explore
             </h3>
 
-            <a href="home.html">
+            <a href="home.php">
                 Home
             </a>
 
-            <a href="animals.html">
+            <a href="animals.php">
                 Available Animals
             </a>
 
-            <a href="adopt.html">
+            <a href="adopt.php">
                 Adoption
             </a>
 
-            <a href="stories.html">
+            <a href="stories.php">
                 Adoption Stories
             </a>
 
@@ -932,19 +954,19 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
                 Services
             </h3>
 
-            <a href="care.html">
+            <a href="care.php">
                 Care After Adoption
             </a>
 
-            <a href="petcare.html">
+            <a href="petcare.php">
                 Pet Care
             </a>
 
-            <a href="ngo-partners.html">
+            <a href="ngo-partners.php">
                 NGO Partners
             </a>
 
-            <a href="mission.html">
+            <a href="mission.php">
                 Our Mission
             </a>
 

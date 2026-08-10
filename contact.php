@@ -50,8 +50,8 @@ if (isset($_POST['send_message'])) {
     </div>
 
     <div class="menu">
-        <a href="home.html">HOME</a>
-        <a href="animals.html">ANIMALS</a>
+        <a href="home.php">HOME</a>
+        <a href="animals.php">ANIMALS</a>
 
         <div class="dropdown">
 
@@ -67,9 +67,9 @@ if (isset($_POST['send_message'])) {
 
             <h3>About</h3>
 
-            <a href="about.html">About Us</a>
+            <a href="about.php">About Us</a>
 
-            <a href="mission.html">Mission</a>
+            <a href="mission.php">Mission</a>
 
             <a href="contact.php">Contact</a>
 
@@ -82,11 +82,11 @@ if (isset($_POST['send_message'])) {
 
             <h3>Adoption</h3>
 
-            <a href="animals.html">Available Animals</a>
+            <a href="animals.php">Available Animals</a>
 
-            <a href="care.html">Care After Adoption</a>
+            <a href="care.php">Care After Adoption</a>
 
-            <a href="stories.html">Adoption Stories</a>
+            <a href="stories.php">Adoption Stories</a>
 
         </div>
 
@@ -95,13 +95,13 @@ if (isset($_POST['send_message'])) {
 
         <div class="column">
 
-            <h3>NGO</h3>
+          <h3>NGO</h3>
 
             <a href="ngo_login.php">NGO Login</a>
 
-            <a href="dashboard.html">Dashboard</a>
+            <a href="ngo_register.php">Register NGO</a>
 
-            <a href="addanimal.html">Add Animal</a>
+            <a href="admin_login.php">Admin Login</a>
 
         </div>
 
@@ -109,12 +109,34 @@ if (isset($_POST['send_message'])) {
 
 </div>
 
-<a href="adopt.html">ADOPT</a>
+<a href="adopt.php">ADOPT</a>
 
 <a href="contact.php">CONTACT</a>
     </div>
 
-    <a href="login.php" class="login-btn">LOGIN</a>
+    <?php if (isset($_SESSION["user_id"]) || isset($_SESSION["ngo_id"])) { ?>
+
+    <a href="logout.php" class="login-btn">
+        LOGOUT
+    </a>
+
+<?php } else { ?>
+
+    <?php if (isset($_SESSION["user_id"]) || isset($_SESSION["ngo_id"])) { ?>
+
+    <a href="logout.php" class="login-btn">
+        LOGOUT
+    </a>
+
+<?php } else { ?>
+
+    <a href="login.php" class="login-btn">
+        LOGIN
+    </a>
+
+<?php } ?>
+
+<?php } ?>
 </div>
 
 <!-- ================= HERO ================= -->
@@ -301,19 +323,19 @@ SEND MESSAGE
                 Explore
             </h3>
 
-            <a href="home.html">
+            <a href="home.php">
                 Home
             </a>
 
-            <a href="animals.html">
+            <a href="animals.php">
                 Available Animals
             </a>
 
-            <a href="adopt.html">
+            <a href="adopt.php">
                 Adoption
             </a>
 
-            <a href="stories.html">
+            <a href="stories.php">
                 Adoption Stories
             </a>
 
@@ -329,19 +351,19 @@ SEND MESSAGE
                 Services
             </h3>
 
-            <a href="care.html">
+            <a href="care.php">
                 Care After Adoption
             </a>
 
-            <a href="petcare.html">
+            <a href="petcare.php">
                 Pet Care
             </a>
 
-            <a href="ngo-partners.html">
+            <a href="ngo-partners.php">
                 NGO Partners
             </a>
 
-            <a href="mission.html">
+            <a href="mission.php">
                 Our Mission
             </a>
 

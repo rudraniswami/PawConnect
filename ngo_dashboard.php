@@ -75,11 +75,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
     <div class="main-nav-menu">
 
-        <a href="home.html">
+        <a href="home.php">
             HOME
         </a>
 
-        <a href="animals.html">
+        <a href="animals.php">
             ANIMALS
         </a>
 
@@ -99,11 +99,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
                     <h3>About</h3>
 
-                    <a href="about.html">
+                    <a href="about.php">
                         About Us
                     </a>
 
-                    <a href="mission.html">
+                    <a href="mission.php">
                         Mission
                     </a>
 
@@ -119,15 +119,15 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
                     <h3>Adoption</h3>
 
-                    <a href="animals.html">
+                    <a href="animals.php">
                         Available Animals
                     </a>
 
-                    <a href="care.html">
+                    <a href="care.php">
                         Care After Adoption
                     </a>
 
-                    <a href="stories.html">
+                    <a href="stories.php">
                         Adoption Stories
                     </a>
 
@@ -139,17 +139,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
                     <h3>NGO</h3>
 
-                    <a href="ngo_login.php">
-                        NGO Login
-                    </a>
+                   <a href="ngo_login.php">NGO Login</a>
 
-                    <a href="ngo_dashboard.php">
-                        Dashboard
-                    </a>
+            <a href="ngo_register.php">Register NGO</a>
 
-                    <a href="addanimal.php">
-                        Add Animal
-                    </a>
+            <a href="admin_login.php">Admin Login</a>
 
                 </div>
 
@@ -159,7 +153,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         </div>
 
 
-        <a href="adopt.html">
+        <a href="adopt.php">
             ADOPT
         </a>
 
@@ -370,7 +364,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
         <!-- VIEW ANIMALS -->
 
-        <a href="animals.html" class="action-card">
+        <a href="animals.php" class="action-card">
 
             <div class="action-icon">
 
@@ -398,7 +392,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
         <!-- CARE RESOURCES -->
 
-        <a href="care.html" class="action-card">
+        <a href="care.php" class="action-card">
 
             <div class="action-icon">
 
@@ -698,19 +692,19 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
                 Explore
             </h3>
 
-            <a href="home.html">
+            <a href="home.php">
                 Home
             </a>
 
-            <a href="animals.html">
+            <a href="animals.php">
                 Available Animals
             </a>
 
-            <a href="adopt.html">
+            <a href="adopt.php">
                 Adoption
             </a>
 
-            <a href="stories.html">
+            <a href="stories.php">
                 Adoption Stories
             </a>
 
@@ -724,19 +718,19 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
                 Services
             </h3>
 
-            <a href="care.html">
+            <a href="care.php">
                 Care After Adoption
             </a>
 
-            <a href="petcare.html">
+            <a href="petcare.php">
                 Pet Care
             </a>
 
-            <a href="ngo-partners.html">
+            <a href="ngo-partners.php">
                 NGO Partners
             </a>
 
-            <a href="mission.html">
+            <a href="mission.php">
                 Our Mission
             </a>
 

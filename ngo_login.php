@@ -58,9 +58,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="main-nav-menu">
 
-        <a href="home.html">HOME</a>
+        <a href="home.php">HOME</a>
 
-        <a href="animals.html">ANIMALS</a>
+        <a href="animals.php">ANIMALS</a>
 
         <div class="main-nav-dropdown">
 
@@ -72,30 +72,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <div class="main-nav-column">
                     <h3>About</h3>
-                    <a href="about.html">About Us</a>
-                    <a href="mission.html">Mission</a>
+                    <a href="about.php">About Us</a>
+                    <a href="mission.php">Mission</a>
                     <a href="contact.php">Contact</a>
                 </div>
 
                 <div class="main-nav-column">
                     <h3>Adoption</h3>
-                    <a href="animals.html">Available Animals</a>
-                    <a href="care.html">Care After Adoption</a>
-                    <a href="stories.html">Adoption Stories</a>
+                    <a href="animals.php">Available Animals</a>
+                    <a href="care.php">Care After Adoption</a>
+                    <a href="stories.php">Adoption Stories</a>
                 </div>
 
                 <div class="main-nav-column">
-                    <h3>NGO</h3>
-                    <a href="ngo_login.php">NGO Login</a>
-                    <a href="ngo_dashboard.php">Dashboard</a>
-                    <a href="add_animal.php">Add Animal</a>
+                   <h3>NGO</h3>
+
+            <a href="ngo_login.php">NGO Login</a>
+
+            <a href="ngo_register.php">Register NGO</a>
+
+            <a href="admin_login.php">Admin Login</a>
                 </div>
 
             </div>
 
         </div>
 
-        <a href="adopt.html">ADOPT</a>
+        <a href="adopt.php">ADOPT</a>
 
         <a href="contact.php">CONTACT</a>
 

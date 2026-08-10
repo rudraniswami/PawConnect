@@ -1,0 +1,653 @@
+<?php
+session_start();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <title>PawConnect - Adoption Stories</title>
+
+    <link rel="stylesheet" href="stories.css">
+</head>
+
+<body>
+<!-- ================= NAVBAR ================= -->
+<div class="nav">
+    <div class="logo">
+        <img src="logo.jpeg" alt="PawConnect Logo">
+        <h2>PawConnect</h2>
+    </div>
+
+    <div class="menu">
+        <a href="home.php">HOME</a>
+        <a href="animals.php">ANIMALS</a>
+
+        <div class="dropdown">
+
+    <a href="#">
+        EXPLORE <i class="fa-solid fa-chevron-down"></i>
+    </a>
+
+    <div class="dropdown-content">
+
+        <!-- ABOUT -->
+
+        <div class="column">
+
+            <h3>About</h3>
+
+            <a href="about.php">About Us</a>
+
+            <a href="mission.php">Mission</a>
+
+            <a href="contact.php">Contact</a>
+
+        </div>
+
+
+        <!-- ADOPTION -->
+
+        <div class="column">
+
+            <h3>Adoption</h3>
+
+            <a href="animals.php">Available Animals</a>
+
+            <a href="care.php">Care After Adoption</a>
+
+            <a href="stories.php">Adoption Stories</a>
+
+        </div>
+
+
+        <!-- NGO -->
+
+        <div class="column">
+
+          <h3>NGO</h3>
+
+            <a href="ngo_login.php">NGO Login</a>
+
+            <a href="ngo_register.php">Register NGO</a>
+
+            <a href="admin_login.php">Admin Login</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<a href="adopt.php">ADOPT</a>
+
+<a href="contact.php">CONTACT</a>
+    </div>
+
+    <?php if (isset($_SESSION["user_id"]) || isset($_SESSION["ngo_id"])) { ?>
+
+    <a href="logout.php" class="login-btn">
+        LOGOUT
+    </a>
+
+<?php } else { ?>
+
+    <?php if (isset($_SESSION["user_id"]) || isset($_SESSION["ngo_id"])) { ?>
+
+    <a href="logout.php" class="login-btn">
+        LOGOUT
+    </a>
+
+<?php } else { ?>
+
+    <a href="login.php" class="login-btn">
+        LOGIN
+    </a>
+
+<?php } ?>
+
+<?php } ?>
+</div>
+
+
+<!-- HERO SECTION -->
+<section class="hero">
+
+    <div class="hero-text">
+
+        <p class="title-small">ADOPTION STORIES</p>
+
+        <h1>Adoption Stories</h1>
+
+        <p>
+            Every adoption story is a reminder that<br>
+            love can change everything.<br>
+            Real pets. Real people. Real happiness.
+        </p>
+
+       
+
+    </div>
+
+    <!-- <div class="hero-image">
+        <img src="storydc.jpeg">
+    </div> -->
+
+</section>
+
+<!--  -->
+
+
+<!-- STORIES -->
+<section class="stories">
+
+    <!-- CARD 1 -->
+    <div class="card">
+
+        <img src="story1dc.jpeg">
+
+        <div class="card-content">
+
+            <span class="dog">Dog Adoption</span>
+
+            <h2>From Stray to Family</h2>
+
+            <p>
+                Max was found on the streets, scared and alone.
+                Today, he's living his best life with a loving family.
+            </p>
+
+            <small>📅 May 12, 2024  👤 Riya & Max</small>
+
+        </div>
+
+    </div>
+
+
+    <!-- CARD 2 -->
+    <div class="card">
+
+        <img src="story2dc.jpeg">
+
+        <div class="card-content">
+
+            <span class="cat">Cat Adoption</span>
+
+            <h2>Whiskers' New Home</h2>
+
+            <p>
+                Whiskers was a shy little kitten in our shelter.
+                Now she enjoys sunny windows, cozy beds and endless love.
+            </p>
+
+            <small>📅 Apr 28, 2024  👤 Sneh & Whiskers</small>
+
+        </div>
+
+    </div>
+
+
+    <!-- CARD 3 -->
+    <div class="card">
+
+        <img src="story3dc.jpeg">
+
+        <div class="card-content">
+
+            <span class="dog">Dog Adoption</span>
+
+            <h2>A Bond for Life</h2>
+
+            <p>
+                Rocky came into our shelter with many scars.
+                Love and care helped him find his forever human.
+            </p>
+
+            <small>📅 Mar 18, 2024  👤 Amit & Rocky</small>
+
+        </div>
+
+    </div>
+
+
+    <!-- CARD 4 -->
+    <div class="card">
+
+        <img src="story4dc.jpeg">
+
+        <div class="card-content">
+
+            <span class="cat">Cat Adoption</span>
+
+            <h2>Little Paws, Big Love</h2>
+
+            <p>
+                Simba was just 2 months old when we rescued him.
+                Now he rules the house and our hearts!
+            </p>
+
+            <small>📅 Feb 10, 2024  👤 Neha & Simba</small>
+
+        </div>
+
+    </div>
+
+
+    <!-- CARD 5 -->
+    <div class="card">
+
+        <img src="story5dc.jpeg">
+
+        <div class="card-content">
+
+            <span class="reunion">Happy Reunion</span>
+
+            <h2>Lost and Found Together</h2>
+
+            <p>
+                After weeks apart, Bruno is finally back with his family.
+                Happy tails all around!
+            </p>
+
+            <small>📅 Jan 22, 2024  👤 Pooja & Bruno</small>
+
+        </div>
+
+    </div>
+
+
+    <!-- CARD 6 -->
+    <div class="card">
+
+        <img src="story6dc.jpeg">
+
+        <div class="card-content">
+
+            <span class="special">Special Needs</span>
+
+            <h2>Different, But Perfect</h2>
+
+            <p>
+                Milo may have one eye, but his spirit is full of love.
+                He found a family who sees his true beauty.
+            </p>
+
+            <small>📅 Jan 08, 2024  👤 Karan & Milo</small>
+
+        </div>
+
+    </div>
+
+
+    <!-- CARD 7 -->
+    <div class="card">
+
+        <img src="story7dc.jpeg">
+
+        <div class="card-content">
+
+            <span class="dog">Dog Adoption</span>
+
+            <h2>Second Chance, New Life</h2>
+
+            <p>
+                Daisy was given up once, but her second chance
+                brought her a lifetime of love.
+            </p>
+
+            <small>📅 Dec 15, 2023 👤 Anjali & Daisy</small>
+
+        </div>
+
+    </div>
+
+
+    <!-- CARD 8 -->
+    <div class="card">
+
+        <img src="story8dc.jpeg">
+
+        <div class="card-content">
+
+            <span class="cat">Cat Adoption</span>
+
+            <h2>A Purr-fect Match</h2>
+
+            <p>
+                Charlie walked into our lives and left paw prints
+                on our hearts forever.
+            </p>
+
+            <small>📅 Dec 01, 2023  👤 Vikram & Charlie</small>
+
+        </div>
+
+    </div>
+
+
+    <!-- CARD 9 -->
+    <div class="card">
+
+        <img src="story9dc.jpeg">
+
+        <div class="card-content">
+
+            <span class="dog">Dog Adoption</span>
+
+            <h2>Buddy's Happy Tale</h2>
+
+            <p>
+                Buddy waited a long time for someone to choose him.
+                Now he has a family to love.
+            </p>
+
+            <small>📅 Nov 15, 2023  👤 Rohit & Buddy</small>
+
+        </div>
+
+    </div>
+
+
+    <!-- CARD 10 -->
+    <div class="card">
+
+        <img src="story10dc.jpeg">
+
+        <div class="card-content">
+
+            <span class="cat">Cat Adoption</span>
+
+            <h2>Tiny Whiskers, Big Joy</h2>
+
+            <p>
+                From a tiny rescue to the center of our world.
+                Her purrs say it all!
+            </p>
+
+            <small>📅 Nov 02, 2023  👤 Meera & Lily</small>
+
+        </div>
+
+    </div>
+
+
+    <!-- CARD 11 -->
+    <div class="card">
+
+        <img src="story11dc.jpeg">
+
+        <div class="card-content">
+
+            <span class="special">Special Needs</span>
+
+            <h2>Stronger Every Day</h2>
+
+            <p>
+                Rufus may walk differently, but nothing can stop
+                him from living his best life!
+            </p>
+
+            <small>📅 Oct 18, 2023 👤 kiara & Rufus</small>
+
+        </div>
+
+    </div>
+
+
+    <!-- CARD 12 -->
+    <div class="card">
+
+        <img src="story12dc.jpeg">
+
+        <div class="card-content">
+
+            <span class="reunion">Happy Reunion</span>
+
+            <h2>Homecoming Happiness</h2>
+
+            <p>
+                After months of searching, we found Oliver.
+                Home is where the heart is.
+            </p>
+
+            <small>📅 Oct 05, 2023 👤 Neha & Oliver</small>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- BOTTOM SECTION -->
+<section class="bottom">
+
+    <div class="inspiration">
+
+        <h2>🐾 Their Stories, Our Inspiration</h2>
+
+        <p>
+            Every adoption brings joy, every story brings hope.<br>
+            Thank you for giving them a forever home.
+        </p>
+
+        <div class="numbers">
+
+            <div>
+                <b>350+</b>
+                <small>Stories Shared</small>
+            </div>
+
+            <div>
+                <b>1,200+</b>
+                <small>Pets Adopted</small>
+            </div>
+
+            <div>
+                <b>98%</b>
+                <small>Happy Families</small>
+            </div>
+
+            <div>
+                <b>Countless</b>
+                <small>Happy Tails</small>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="cta">
+
+        <div>
+            <h2>Be a Part of Their Story ♡</h2>
+
+            <p>
+                Your love can write the next happy tale.<br>
+                Adopt, don't shop.
+            </p>
+
+            <button>🐾 Start Your Adoption Journey</button>
+        </div>
+
+        <img src="yuki.jpeg">
+
+    </div>
+
+</section>
+
+
+<!-- QUOTE -->
+<div class="quote">
+
+    🐾
+
+    <p>
+        “Saving one pet may not change the world,<br>
+        but for that one pet, the world will change forever.”
+    </p>
+
+    🐾
+
+</div>
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    <div class="footer-top">
+
+
+        <!-- PAWCONNECT BRAND -->
+
+        <div class="footer-about">
+
+            <div class="footer-logo">
+
+                <img src="logo.jpeg"
+                     alt="PawConnect Logo">
+
+                <h2>
+                    PawConnect
+                </h2>
+
+            </div>
+
+
+            <p>
+                Connecting rescued animals with loving families,
+                trusted shelters and compassionate hearts across India.
+            </p>
+
+
+            <div class="social-icons">
+
+                <a href="#" aria-label="Facebook">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+
+                <a href="#" aria-label="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+
+                <a href="#" aria-label="X">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </a>
+
+                <a href="#" aria-label="LinkedIn">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- EXPLORE -->
+
+        <div class="footer-links">
+
+            <h3>
+                Explore
+            </h3>
+
+            <a href="home.php">
+                Home
+            </a>
+
+            <a href="animals.php">
+                Available Animals
+            </a>
+
+            <a href="adopt.php">
+                Adoption
+            </a>
+
+            <a href="stories.php">
+                Adoption Stories
+            </a>
+
+        </div>
+
+
+
+        <!-- SERVICES -->
+
+        <div class="footer-links">
+
+            <h3>
+                Services
+            </h3>
+
+            <a href="care.php">
+                Care After Adoption
+            </a>
+
+            <a href="petcare.php">
+                Pet Care
+            </a>
+
+            <a href="ngo-partners.php">
+                NGO Partners
+            </a>
+
+            <a href="mission.php">
+                Our Mission
+            </a>
+
+        </div>
+
+
+
+        <!-- CONTACT -->
+
+        <div class="footer-contact">
+
+            <h3>
+                Contact
+            </h3>
+
+            <p>
+                <i class="fa-solid fa-location-dot"></i>
+                Pune, Maharashtra
+            </p>
+
+            <p>
+                <i class="fa-solid fa-phone"></i>
+                +91 98765 43210
+            </p>
+
+            <p>
+                <i class="fa-solid fa-envelope"></i>
+                hello@pawconnect.in
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- FOOTER BOTTOM -->
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 PawConnect • Connecting every paw with care,
+            compassion & a place to belong.
+        </p>
+
+    </div>
+
+
+</footer>
+
+</body>
+</html>

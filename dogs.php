@@ -35,8 +35,8 @@ $db_dogs = $stmt->get_result();
     </div>
 
     <div class="menu">
-        <a href="home.html">HOME</a>
-        <a href="animals.html">ANIMALS</a>
+        <a href="home.php">HOME</a>
+        <a href="animals.php">ANIMALS</a>
 
         <div class="dropdown">
 
@@ -52,9 +52,9 @@ $db_dogs = $stmt->get_result();
 
             <h3>About</h3>
 
-            <a href="about.html">About Us</a>
+            <a href="about.php">About Us</a>
 
-            <a href="mission.html">Mission</a>
+            <a href="mission.php">Mission</a>
 
             <a href="contact.php">Contact</a>
 
@@ -67,11 +67,11 @@ $db_dogs = $stmt->get_result();
 
             <h3>Adoption</h3>
 
-            <a href="animals.html">Available Animals</a>
+            <a href="animals.php">Available Animals</a>
 
-            <a href="care.html">Care After Adoption</a>
+            <a href="care.php">Care After Adoption</a>
 
-            <a href="stories.html">Adoption Stories</a>
+            <a href="stories.php">Adoption Stories</a>
 
         </div>
 
@@ -94,12 +94,34 @@ $db_dogs = $stmt->get_result();
 
 </div>
 
-<a href="adopt.html">ADOPT</a>
+<a href="adopt.php">ADOPT</a>
 
 <a href="contact.php">CONTACT</a>
     </div>
 
-    <a href="login.php" class="login-btn">LOGIN</a>
+    <?php if (isset($_SESSION["user_id"]) || isset($_SESSION["ngo_id"])) { ?>
+
+    <a href="logout.php" class="login-btn">
+        LOGOUT
+    </a>
+
+<?php } else { ?>
+
+    <?php if (isset($_SESSION["user_id"]) || isset($_SESSION["ngo_id"])) { ?>
+
+    <a href="logout.php" class="login-btn">
+        LOGOUT
+    </a>
+
+<?php } else { ?>
+
+    <a href="login.php" class="login-btn">
+        LOGIN
+    </a>
+
+<?php } ?>
+
+<?php } ?>
 </div>
 
 
@@ -199,7 +221,7 @@ where they belong.
                 </div>
 
 
-                <a href="bella.html">
+                <a href="bella.php">
                     View Profile
                 </a>
 
@@ -253,7 +275,7 @@ where they belong.
                 </div>
 
 
-                <a href="bruno.html">
+                <a href="bruno.php">
                     View Profile
                 </a>
 
@@ -307,7 +329,7 @@ where they belong.
                 </div>
 
 
-                <a href="nova.html">
+                <a href="nova.php">
                     View Profile
                 </a>
 
@@ -361,7 +383,7 @@ where they belong.
                 </div>
 
 
-                <a href="buddy.html">
+                <a href="buddy.php">
                     View Profile
                 </a>
 
@@ -412,7 +434,7 @@ where they belong.
                 </div>
 
 
-                <a href="max.html">
+                <a href="max.php">
                     View Profile
                 </a>
 
@@ -464,7 +486,7 @@ where they belong.
                 </div>
 
 
-                <a href="leo.html">
+                <a href="leo.php">
                     View Profile
                 </a>
 
@@ -516,7 +538,7 @@ where they belong.
                 </div>
 
 
-                <a href="Jack.html">
+                <a href="Jack.php">
                     View Profile
                 </a>
 
@@ -568,7 +590,7 @@ where they belong.
                 </div>
 
 
-                <a href="julie.html">
+                <a href="julie.php">
                     View Profile
                 </a>
 
@@ -620,7 +642,7 @@ where they belong.
                 </div>
 
 
-                <a href="snowy.html">
+                <a href="snowy.php">
                     View Profile
                 </a>
 
@@ -672,7 +694,7 @@ where they belong.
                 </div>
 
 
-                <a href="simba.html">
+                <a href="simba.php">
                     View Profile
                 </a>
 
@@ -725,7 +747,7 @@ where they belong.
                 </div>
 
 
-                <a href="rose.html">
+                <a href="rose.php">
                     View Profile
                 </a>
 
@@ -778,7 +800,7 @@ where they belong.
                 </div>
 
 
-                <a href="charlie.html">
+                <a href="charlie.php">
                     View Profile
                 </a>
 
@@ -830,7 +852,7 @@ where they belong.
                 </div>
 
 
-                <a href="pepper.html">
+                <a href="pepper.php">
                     View Profile
                 </a>
 
@@ -880,7 +902,7 @@ where they belong.
                 </div>
 
 
-                <a href="nala.html">
+                <a href="nala.php">
                     View Profile
                 </a>
 
@@ -930,7 +952,7 @@ where they belong.
                 </div>
 
 
-                <a href="ivy.html">
+                <a href="ivy.php">
                     View Profile
                 </a>
 
@@ -981,7 +1003,7 @@ where they belong.
                 </div>
 
 
-                <a href="roxy.html">
+                <a href="roxy.php">
                     View Profile
                 </a>
 
@@ -1110,19 +1132,19 @@ where they belong.
                 Explore
             </h3>
 
-            <a href="home.html">
+            <a href="home.php">
                 Home
             </a>
 
-            <a href="animals.html">
+            <a href="animals.php">
                 Available Animals
             </a>
 
-            <a href="adopt.html">
+            <a href="adopt.php">
                 Adoption
             </a>
 
-            <a href="stories.html">
+            <a href="stories.php">
                 Adoption Stories
             </a>
 
@@ -1138,19 +1160,19 @@ where they belong.
                 Services
             </h3>
 
-            <a href="care.html">
+            <a href="care.php">
                 Care After Adoption
             </a>
 
-            <a href="petcare.html">
+            <a href="petcare.php">
                 Pet Care
             </a>
 
-            <a href="ngo-partners.html">
+            <a href="ngo-partners.php">
                 NGO Partners
             </a>
 
-            <a href="mission.html">
+            <a href="mission.php">
                 Our Mission
             </a>
 
