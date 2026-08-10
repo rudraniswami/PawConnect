@@ -460,13 +460,12 @@ session_start();
 
     <!-- Login required before adoption -->
 
-    <a href="login.php">
+    <a href="adopt.php?pet_id=1">
 
-        Adopt Bella
+    Adopt Bella
 
-        <i class="fa-solid fa-arrow-right"></i>
+    <i class="fa-solid fa-arrow-right"></i></a>
 
-    </a>
 
 
 </section>

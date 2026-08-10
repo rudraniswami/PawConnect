@@ -7,6 +7,10 @@ include "db.php";
 $query = "SELECT * FROM contact_messages ORDER BY created_at DESC";
 $result = mysqli_query($conn, $query);
 
+if (!$result) {
+    die("Contact query error: " . mysqli_error($conn));
+}
+
 
 /* ================= TOTAL MESSAGES ================= */
 
@@ -28,6 +32,10 @@ $new_query = mysqli_query(
      FROM contact_messages
      WHERE status = 'New'"
 );
+
+if (!$new_query) {
+    die("New messages query error: " . mysqli_error($conn));
+}
 
 $new_data = mysqli_fetch_assoc($new_query);
 
@@ -106,7 +114,7 @@ href="admin_dashboard.css">
 
     <!-- FUTURE FEATURES -->
 
-    <a href="#">
+    <a href="animals.php">
 
         <i class="fa-solid fa-paw"></i>
 
@@ -115,16 +123,12 @@ href="admin_dashboard.css">
     </a>
 
 
-    <a href="#">
-
-        <i class="fa-solid fa-heart"></i>
-
-        Adoption Requests
-
-    </a>
+    <a href="adoptions.php" class="admin-btn">
+    View Adoption Requests
+</a>
 
 
-    <a href="#">
+    <a href="ngo.php">
 
         <i class="fa-solid fa-building"></i>
 

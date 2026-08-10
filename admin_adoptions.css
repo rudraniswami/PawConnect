@@ -1,0 +1,369 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f8f6ef;
+    color: #173c2d;
+}
+
+
+/* ================================
+   NAVBAR
+================================ */
+
+.nav {
+    height: 78px;
+    background: #173c2d;
+    display: flex;
+    align-items: center;
+    padding: 0 55px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+}
+
+.logo h2 {
+    color: white;
+    font-size: 22px;
+}
+
+.admin-title {
+    margin-left: auto;
+    margin-right: 30px;
+    color: #e9e0c8;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.admin-title i {
+    margin-right: 7px;
+}
+
+.logout-btn {
+    text-decoration: none;
+    background: #f4e7c5;
+    color: #173c2d;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+
+/* ================================
+   HEADER
+================================ */
+
+.page-header {
+    text-align: center;
+    padding: 65px 20px 40px;
+}
+
+.page-header p {
+    font-size: 11px;
+    letter-spacing: 3px;
+    font-weight: bold;
+}
+
+.page-header h1 {
+    font-family: Georgia, serif;
+    font-size: 44px;
+    margin: 12px 0;
+}
+
+.page-header span {
+    color: #718078;
+    font-size: 15px;
+}
+
+
+/* ================================
+   REQUEST SECTION
+================================ */
+
+.requests-section {
+    width: 900px;
+    max-width: 92%;
+    margin: auto;
+    padding-bottom: 70px;
+}
+
+
+/* ================================
+   REQUEST CARD
+================================ */
+
+.request-card {
+    background: #fffdf7;
+    border-radius: 24px;
+    padding: 30px;
+    margin-bottom: 28px;
+    box-shadow: 0 10px 35px rgba(23, 60, 45, 0.08);
+}
+
+
+/* ================================
+   PET
+================================ */
+
+.pet-box {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #e8e4d8;
+}
+
+.pet-box img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 18px;
+}
+
+.pet-box p {
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    color: #87928c;
+}
+
+.pet-box h2 {
+    font-family: Georgia, serif;
+    font-size: 30px;
+    margin: 5px 0;
+}
+
+.pet-box span {
+    color: #68766e;
+    font-size: 14px;
+}
+
+
+/* ================================
+   STATUS
+================================ */
+
+.status-box {
+    margin: 22px 0;
+}
+
+.status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.pending {
+    background: #f4e7c5;
+}
+
+.approved {
+    background: #dfeee4;
+}
+
+.rejected {
+    background: #f3dddd;
+}
+
+
+/* ================================
+   INFO
+================================ */
+
+.info-section {
+    padding: 22px 0;
+    border-bottom: 1px solid #e8e4d8;
+}
+
+.info-section h3,
+.reason-box h3 {
+    font-family: Georgia, serif;
+    font-size: 20px;
+    margin-bottom: 18px;
+}
+
+.info-section h3 i,
+.reason-box h3 i {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.info-grid div {
+    background: #f8f6ef;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.info-grid small {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: #7d8882;
+    margin-bottom: 6px;
+}
+
+.info-grid strong {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+
+/* ================================
+   REASON
+================================ */
+
+.reason-box {
+    padding: 25px 0 15px;
+}
+
+.reason-box p {
+    background: #f8f6ef;
+    padding: 18px;
+    border-radius: 12px;
+    color: #5d6962;
+    line-height: 1.7;
+    font-size: 14px;
+}
+
+
+/* ================================
+   DATE
+================================ */
+
+.request-date {
+    color: #87928c;
+    font-size: 12px;
+    margin: 12px 0 22px;
+}
+
+.request-date i {
+    margin-right: 5px;
+}
+
+
+/* ================================
+   ACTIONS
+================================ */
+
+.actions {
+    display: flex;
+    gap: 12px;
+}
+
+.actions a {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    padding: 14px;
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.approve-btn {
+    background: #173c2d;
+    color: white;
+}
+
+.reject-btn {
+    background: #eee8df;
+    color: #8b4d4d;
+}
+
+.approve-btn:hover,
+.reject-btn:hover {
+    opacity: .85;
+}
+
+
+/* ================================
+   EMPTY
+================================ */
+
+.empty {
+    background: #fffdf7;
+    text-align: center;
+    padding: 70px 20px;
+    border-radius: 24px;
+}
+
+.empty i {
+    font-size: 45px;
+    margin-bottom: 20px;
+}
+
+.empty h2 {
+    font-family: Georgia, serif;
+    margin-bottom: 8px;
+}
+
+.empty p {
+    color: #78837d;
+}
+
+
+/* ================================
+   FOOTER
+================================ */
+
+footer {
+    background: #173c2d;
+    color: #cbd4ce;
+    text-align: center;
+    padding: 22px;
+    font-size: 12px;
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 700px) {
+
+    .nav {
+        padding: 0 20px;
+    }
+
+    .admin-title {
+        display: none;
+    }
+
+    .page-header h1 {
+        font-size: 34px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+}

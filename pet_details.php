@@ -1,20 +1,61 @@
 <?php
+
 session_start();
+include "db.php";
+
+/* ================================
+   CHECK ANIMAL ID
+================================ */
+
+if (!isset($_GET['id'])) {
+    die("No animal selected.");
+}
+
+$animal_id = intval($_GET['id']);
+
+
+/* ================================
+   GET ANIMAL
+================================ */
+
+$stmt = $conn->prepare("SELECT * FROM animals WHERE id = ?");
+
+if (!$stmt) {
+    die("Database error: " . $conn->error);
+}
+
+$stmt->bind_param("i", $animal_id);
+$stmt->execute();
+
+$result = $stmt->get_result();
+
+if ($result->num_rows == 0) {
+    die("Animal not found. ID = " . $animal_id);
+}
+
+$pet = $result->fetch_assoc();
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
 
-    <title>Bruno | PawConnect</title>
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<title>
+<?php echo htmlspecialchars($pet['name']); ?> | PawConnect
+</title>
 
-    <link rel="stylesheet" href="passport.css">
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link rel="stylesheet"
+      href="passport.css">
 
 </head>
 
@@ -22,15 +63,16 @@ session_start();
 <body>
 
 
-<!-- =====================================================
+<!-- ================================
      NAVBAR
-===================================================== -->
+================================ -->
 
 <div class="nav">
 
     <div class="logo">
 
-        <img src="logo.jpeg" alt="PawConnect Logo">
+        <img src="logo.jpeg"
+             alt="PawConnect Logo">
 
         <h2>PawConnect</h2>
 
@@ -39,102 +81,138 @@ session_start();
 
     <div class="menu">
 
-        <a href="home.php">HOME</a>
+        <a href="home.php">
+            HOME
+        </a>
 
-        <a href="animals.php">ANIMALS</a>
+        <a href="animals.php">
+            ANIMALS
+        </a>
 
 
         <div class="dropdown">
 
-    <a href="#">
-        EXPLORE <i class="fa-solid fa-chevron-down"></i>
-    </a>
+            <a href="#">
+                EXPLORE
+                <i class="fa-solid fa-chevron-down"></i>
+            </a>
 
-    <div class="dropdown-content">
 
-        <!-- ABOUT -->
+            <div class="dropdown-content">
 
-        <div class="column">
+                <div class="column">
 
-            <h3>About</h3>
+                    <h3>About</h3>
 
-            <a href="about.php">About Us</a>
+                    <a href="about.php">
+                        About Us
+                    </a>
 
-            <a href="mission.php">Mission</a>
+                    <a href="mission.php">
+                        Mission
+                    </a>
 
-            <a href="contact.php">Contact</a>
+                    <a href="contact.php">
+                        Contact
+                    </a>
+
+                </div>
+
+
+                <div class="column">
+
+                    <h3>Adoption</h3>
+
+                    <a href="animals.php">
+                        Available Animals
+                    </a>
+
+                    <a href="care.php">
+                        Care After Adoption
+                    </a>
+
+                    <a href="stories.php">
+                        Adoption Stories
+                    </a>
+
+                </div>
+
+
+                <div class="column">
+
+                    <h3>NGO</h3>
+
+                    <a href="ngo_login.php">
+                        NGO Login
+                    </a>
+
+                    <a href="ngo_register.php">
+                        Register NGO
+                    </a>
+
+                    <a href="admin_login.php">
+                        Admin Login
+                    </a>
+
+                </div>
+
+            </div>
 
         </div>
 
 
-        <!-- ADOPTION -->
+        <!-- ADOPT CURRENT ANIMAL -->
 
-        <div class="column">
-
-            <h3>Adoption</h3>
-
-            <a href="animals.php">Available Animals</a>
-
-            <a href="care.php">Care After Adoption</a>
-
-            <a href="stories.php">Adoption Stories</a>
-
-        </div>
+        <a href="adopt.php?animal_id=<?php echo $pet['id']; ?>">
+            ADOPT
+        </a>
 
 
-        <!-- NGO -->
-
-        <div class="column">
-
-          <h3>NGO</h3>
-
-            <a href="ngo_login.php">NGO Login</a>
-
-            <a href="ngo_register.php">Register NGO</a>
-
-            <a href="admin_login.php">Admin Login</a>
-
-        </div>
+        <a href="contact.php">
+            CONTACT
+        </a>
 
     </div>
 
-</div>
 
-<a href="adopt.php">ADOPT</a>
-
-<a href="contact.php">CONTACT</a></div>
-
+    <!-- LOGIN / LOGOUT -->
 
     <?php if (isset($_SESSION["user_id"]) || isset($_SESSION["ngo_id"])) { ?>
 
-    <a href="logout.php" class="login-btn">
-        LOGOUT
-    </a>
+        <a href="logout.php"
+           class="login-btn">
+            LOGOUT
+        </a>
 
-<?php } else { ?>
+    <?php } else { ?>
 
-    <a href="login.php" class="login-btn">
-        LOGIN
-    </a>
+        <a href="login.php"
+           class="login-btn">
+            LOGIN
+        </a>
 
-<?php } ?>
+    <?php } ?>
 
 </div>
 
 
 
-<!-- =====================================================
+<!-- ================================
      PAW PASSPORT
-===================================================== -->
+================================ -->
 
 <section class="passport-section">
 
 
     <div class="passport-heading">
 
-        <p>PAWCONNECT</p>
+        <p>
+            PAWCONNECT
+        </p>
 
-        <h1>Digital Paw Passport</h1>
+        <h1>
+            Digital Paw Passport
+        </h1>
 
         <span>
             Every paw has a story worth knowing.
@@ -144,27 +222,26 @@ session_start();
 
 
 
-    <!-- PASSPORT CARD -->
-
     <div class="passport">
 
 
-        <!-- =========================
-             LEFT SIDE
-        ========================== -->
+        <!-- LEFT -->
 
         <div class="passport-left">
 
 
             <div class="passport-photo">
 
-                <img src="bruno.jpeg"
-                     alt="Bruno - Shih Tzu">
+                <img src="<?php echo htmlspecialchars($pet['image']); ?>"
+                     alt="<?php echo htmlspecialchars($pet['name']); ?>">
 
 
                 <span>
+
                     <i class="fa-solid fa-circle-check"></i>
+
                     AVAILABLE
+
                 </span>
 
             </div>
@@ -177,25 +254,30 @@ session_start();
                 </small>
 
                 <strong>
-                    PC-BRU-002
+
+                    PC-<?php echo strtoupper(
+                        htmlspecialchars($pet['name'])
+                    ); ?>-<?php echo str_pad(
+                        $pet['id'],
+                        3,
+                        '0',
+                        STR_PAD_LEFT
+                    ); ?>
+
                 </strong>
 
             </div>
-
 
         </div>
 
 
 
-        <!-- =========================
-             RIGHT SIDE
-        ========================== -->
+        <!-- RIGHT -->
 
         <div class="passport-right">
 
 
             <div class="passport-top">
-
 
                 <div>
 
@@ -204,11 +286,11 @@ session_start();
                     </p>
 
                     <h2>
-                        Bruno
+                        <?php echo htmlspecialchars($pet['name']); ?>
                     </h2>
 
                     <h3>
-                        Shih Tzu
+                        <?php echo htmlspecialchars($pet['breed']); ?>
                     </h3>
 
                 </div>
@@ -220,12 +302,11 @@ session_start();
 
                 </div>
 
-
             </div>
 
 
 
-            <!-- BASIC INFORMATION -->
+            <!-- DETAILS -->
 
             <div class="passport-details">
 
@@ -237,7 +318,7 @@ session_start();
                     </small>
 
                     <strong>
-                        2 Years
+                        <?php echo htmlspecialchars($pet['age']); ?>
                     </strong>
 
                 </div>
@@ -250,7 +331,7 @@ session_start();
                     </small>
 
                     <strong>
-                        Male
+                        <?php echo htmlspecialchars($pet['gender'] ?? 'Not specified'); ?>
                     </strong>
 
                 </div>
@@ -259,11 +340,11 @@ session_start();
                 <div class="detail">
 
                     <small>
-                        HEALTH
+                        TYPE
                     </small>
 
                     <strong>
-                        Vet Checked
+                        <?php echo htmlspecialchars($pet['type']); ?>
                     </strong>
 
                 </div>
@@ -281,7 +362,6 @@ session_start();
 
                 </div>
 
-
             </div>
 
 
@@ -291,26 +371,26 @@ session_start();
             <div class="passport-personality">
 
                 <p>
-                    PERSONALITY
+                    ABOUT
                 </p>
 
 
                 <div class="tags">
 
                     <span>
-                        ♥ Calm
-                    </span>
-
-                    <span>
-                        ♥ Loyal
-                    </span>
-
-                    <span>
                         ♥ Friendly
                     </span>
 
                     <span>
-                        ♥ Curious
+                        ♥ Loving
+                    </span>
+
+                    <span>
+                        ♥ Caring
+                    </span>
+
+                    <span>
+                        ♥ Companion
                     </span>
 
                 </div>
@@ -322,7 +402,6 @@ session_start();
             <!-- PASSPORT FOOTER -->
 
             <div class="passport-bottom">
-
 
                 <div>
 
@@ -345,23 +424,20 @@ session_start();
 
                 </div>
 
-
             </div>
 
 
         </div>
 
-
     </div>
-
 
 </section>
 
 
 
-<!-- =====================================================
-     ABOUT Bruno
-===================================================== -->
+<!-- ================================
+     PET STORY
+================================ -->
 
 <section class="about-section">
 
@@ -369,14 +445,19 @@ session_start();
     <div class="about-heading">
 
         <p>
-            HIS STORY
+            THEIR STORY
         </p>
 
+
         <h2>
-            Get to know Bruno
+
+            Get to know
+            <?php echo htmlspecialchars($pet['name']); ?>
+
         </h2>
 
     </div>
+
 
 
     <div class="about-content">
@@ -384,10 +465,9 @@ session_start();
 
         <p>
 
-            Bruno is a caring and loyal Shih Tzu
-            looking for a loving family to call him own.
-            He enjoys companionship and deserves a safe,
-            comfortable home filled with patience and love.
+            <?php echo nl2br(
+                htmlspecialchars($pet['description'] ?? 'No description available.')
+            ); ?>
 
         </p>
 
@@ -408,10 +488,14 @@ session_start();
 
             <div>
 
-                <i class="fa-solid fa-syringe"></i>
+                <i class="fa-solid fa-paw"></i>
 
                 <span>
-                    Vaccinated
+
+                    <?php echo htmlspecialchars($pet['type']); ?>
+
+                    looking for a home
+
                 </span>
 
             </div>
@@ -422,14 +506,12 @@ session_start();
                 <i class="fa-solid fa-house"></i>
 
                 <span>
-                    Looking for a home
+                    Looking for a forever family
                 </span>
 
             </div>
 
-
         </div>
-
 
     </div>
 
@@ -437,9 +519,9 @@ session_start();
 
 
 
-<!-- =====================================================
+<!-- ================================
      ADOPTION CTA
-===================================================== -->
+================================ -->
 
 <section class="adoption-cta">
 
@@ -447,42 +529,50 @@ session_start();
     <div>
 
         <p>
-            BRUNO IS WAITING
+
+            <?php echo strtoupper(
+                htmlspecialchars($pet['name'])
+            ); ?>
+
+            IS WAITING
+
         </p>
 
+
         <h2>
-            Could you be her forever family?
+            Could you be their forever family?
         </h2>
 
     </div>
 
 
-    <!-- Login required before adoption -->
+    <!-- IMPORTANT -->
 
-    
-    <a href="adopt.php?pet_id=2">
+    <a href="adopt.php?animal_id=<?php echo $pet['id']; ?>">
 
-    Adopt Bruno
+        Adopt <?php echo htmlspecialchars($pet['name']); ?>
 
-    <i class="fa-solid fa-arrow-right"></i></a>
+        <i class="fa-solid fa-arrow-right"></i>
+
+    </a>
 
 
 </section>
 
 
 
-<!-- =====================================================
+<!-- ================================
      FOOTER
-===================================================== -->
+================================ -->
 
 <footer class="footer">
+
 
     <div class="footer-top">
 
 
-        <!-- PAWCONNECT BRAND -->
-
         <div class="footer-about">
+
 
             <div class="footer-logo">
 
@@ -497,26 +587,28 @@ session_start();
 
 
             <p>
+
                 Connecting rescued animals with loving families,
                 trusted shelters and compassionate hearts across India.
+
             </p>
 
 
             <div class="social-icons">
 
-                <a href="#" aria-label="Facebook">
+                <a href="#">
                     <i class="fa-brands fa-facebook-f"></i>
                 </a>
 
-                <a href="#" aria-label="Instagram">
+                <a href="#">
                     <i class="fa-brands fa-instagram"></i>
                 </a>
 
-                <a href="#" aria-label="X">
+                <a href="#">
                     <i class="fa-brands fa-x-twitter"></i>
                 </a>
 
-                <a href="#" aria-label="LinkedIn">
+                <a href="#">
                     <i class="fa-brands fa-linkedin-in"></i>
                 </a>
 
@@ -525,8 +617,6 @@ session_start();
         </div>
 
 
-
-        <!-- EXPLORE -->
 
         <div class="footer-links">
 
@@ -542,7 +632,7 @@ session_start();
                 Available Animals
             </a>
 
-            <a href="adopt.php">
+            <a href="adopt.php?animal_id=<?php echo $pet['id']; ?>">
                 Adoption
             </a>
 
@@ -553,8 +643,6 @@ session_start();
         </div>
 
 
-
-        <!-- SERVICES -->
 
         <div class="footer-links">
 
@@ -582,8 +670,6 @@ session_start();
 
 
 
-        <!-- CONTACT -->
-
         <div class="footer-contact">
 
             <h3>
@@ -591,41 +677,50 @@ session_start();
             </h3>
 
             <p>
+
                 <i class="fa-solid fa-location-dot"></i>
+
                 Pune, Maharashtra
+
             </p>
 
+
             <p>
+
                 <i class="fa-solid fa-phone"></i>
+
                 +91 98765 43210
+
             </p>
 
+
             <p>
+
                 <i class="fa-solid fa-envelope"></i>
+
                 hello@pawconnect.in
+
             </p>
 
         </div>
 
-
     </div>
 
 
-
-    <!-- FOOTER BOTTOM -->
 
     <div class="footer-bottom">
 
         <p>
+
             © 2026 PawConnect • Connecting every paw with care,
             compassion & a place to belong.
+
         </p>
 
     </div>
 
-
 </footer>
 
-</body>
 
+</body>
 </html>

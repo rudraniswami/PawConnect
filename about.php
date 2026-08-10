@@ -1,7 +1,3 @@
-<?php
-session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,64 +37,80 @@ session_start();
 
 <!-- ================= NAVBAR ================= -->
 
-<header class="navbar">
 
-    <a href="index.php" class="logo">
+<div class="nav">
+    <div class="logo">
+        <img src="logo.jpeg" alt="PawConnect Logo">
+        <h2>PawConnect</h2>
+    </div>
 
-        <div class="logo-icon">
-            <i class="fa-solid fa-paw"></i>
-        </div>
+    <div class="menu">
+        <a href="home.html">HOME</a>
+        <a href="animals.html">ANIMALS</a>
 
-        <div class="logo-text">
+        <div class="dropdown">
 
-            <h2>PawConnect</h2>
-
-            <p>Rescue. Heal. Love. Adopt.</p>
-
-        </div>
-
+    <a href="#">
+        EXPLORE <i class="fa-solid fa-chevron-down"></i>
     </a>
 
+    <div class="dropdown-content">
 
-    <nav class="nav-links">
+        <!-- ABOUT -->
 
-        <a href="index.php">
-            Home
-        </a>
+        <div class="column">
 
-        <a href="about.php" class="active">
-            About Us
-        </a>
+            <h3>About</h3>
 
-        <a href="adopt.php">
-            Adopt
-        </a>
+            <a href="about.html">About Us</a>
 
-        <a href="mission.php">
-            Mission
-        </a>
+            <a href="mission.html">Mission</a>
 
-        <a href="services.php">
-            Services
-        </a>
+            <a href="contact.html">Contact</a>
 
-        <a href="contact.php">
-            Contact
-        </a>
-
-    </nav>
+        </div>
 
 
-    <a href="adopt.php"
-       class="adopt-btn">
+        <!-- ADOPTION -->
 
-        <i class="fa-solid fa-paw"></i>
+        <div class="column">
 
-        Adopt Now
+            <h3>Adoption</h3>
 
-    </a>
+            <a href="animals.html">Available Animals</a>
 
-</header>
+            <a href="care.html">Care After Adoption</a>
+
+            <a href="stories.html">Adoption Stories</a>
+
+        </div>
+
+
+        <!-- NGO -->
+
+        <div class="column">
+
+            <h3>NGO</h3>
+
+            <a href="ngo_login.php">NGO Login</a>
+
+            <a href="dashboard.html">Dashboard</a>
+
+            <a href="addanimal.html">Add Animal</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<a href="adopt.html">ADOPT</a>
+
+<a href="contact.html">CONTACT</a>
+    </div>
+
+    <a href="login.php" class="login-btn">LOGIN</a>
+</div>
 
 
 
@@ -147,7 +159,7 @@ session_start();
 
         <div class="hero-buttons">
 
-            <a href="mission.php"
+            <a href="mission.html"
                class="primary-btn">
 
                 Our Mission
@@ -173,7 +185,7 @@ session_start();
 
     <div class="hero-image">
 
-        <img src="images/about-hero.jpg"
+        <img src="about-hero.jpg.jpeg"
              alt="Woman with rescued dog">
 
 
@@ -204,20 +216,20 @@ session_start();
 
     <div class="story-gallery">
 
-        <img src="images/story.jpg"
+        <img src="caringdog.jpeg"
              class="story-main"
              alt="Rescue animal">
 
 
         <div class="story-small-images">
 
-            <img src="images/dog.jpg"
+            <img src="dog-about.jpg"
                  alt="Dog">
 
-            <img src="images/cat.jpg"
+            <img src="cat-about.jpg"
                  alt="Cat">
 
-            <img src="images/care.jpg"
+            <img src="caredog.jpeg"
                  alt="Animal care">
 
         </div>
@@ -561,7 +573,7 @@ session_start();
 
             <div class="team-member">
 
-                <img src="images/team1.jpg"
+                <img src="team1.png"
                      alt="Team member">
 
                 <h3>Neha Patil</h3>
@@ -583,7 +595,7 @@ session_start();
 
             <div class="team-member">
 
-                <img src="images/team2.jpg"
+                <img src="team2.jpg"
                      alt="Team member">
 
                 <h3>Dr. Amit Joshi</h3>
@@ -605,7 +617,7 @@ session_start();
 
             <div class="team-member">
 
-                <img src="images/team3.jpg"
+                <img src="team3.png"
                      alt="Team member">
 
                 <h3>Sneha More</h3>
@@ -627,7 +639,7 @@ session_start();
 
             <div class="team-member">
 
-                <img src="images/team4.jpg"
+                <img src="team4.png"
                      alt="Team member">
 
                 <h3>Rohan Kale</h3>
@@ -721,7 +733,7 @@ session_start();
 
     <div class="cta-buttons">
 
-        <a href="adopt.php"
+        <a href="adopt.html"
            class="cta-primary">
 
             Adopt Now
@@ -730,75 +742,58 @@ session_start();
 
         </a>
 
-
-        <a href="#"
-           class="cta-secondary">
-
-            Become a Volunteer
-
-            <i class="fa-regular fa-heart"></i>
-
-        </a>
-
     </div>
 
 </section>
 
 
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
-<!-- ================= FOOTER ================= -->
+<footer class="footer">
 
-<footer>
+    <div class="footer-top">
 
 
-    <div class="footer-container">
-
+        <!-- PAWCONNECT BRAND -->
 
         <div class="footer-about">
 
             <div class="footer-logo">
 
-                <div class="footer-logo-icon">
+                <img src="logo.jpeg"
+                     alt="PawConnect Logo">
 
-                    <i class="fa-solid fa-paw"></i>
-
-                </div>
-
-                <div>
-
-                    <h2>PawConnect</h2>
-
-                    <small>
-                        Rescue. Heal. Love. Adopt.
-                    </small>
-
-                </div>
+                <h2>
+                    PawConnect
+                </h2>
 
             </div>
 
 
             <p>
-                Building a better world
-                for animals.
+                Connecting rescued animals with loving families,
+                trusted shelters and compassionate hearts across India.
             </p>
 
 
-            <div class="footer-social">
+            <div class="social-icons">
 
-                <a href="#">
+                <a href="#" aria-label="Facebook">
                     <i class="fa-brands fa-facebook-f"></i>
                 </a>
 
-                <a href="#">
+                <a href="#" aria-label="Instagram">
                     <i class="fa-brands fa-instagram"></i>
                 </a>
 
-                <a href="#">
-                    <i class="fa-brands fa-twitter"></i>
+                <a href="#" aria-label="X">
+                    <i class="fa-brands fa-x-twitter"></i>
                 </a>
 
-                <a href="#">
-                    <i class="fa-brands fa-youtube"></i>
+                <a href="#" aria-label="LinkedIn">
+                    <i class="fa-brands fa-linkedin-in"></i>
                 </a>
 
             </div>
@@ -807,76 +802,83 @@ session_start();
 
 
 
-        <div>
+        <!-- EXPLORE -->
 
-            <h4>Quick Links</h4>
+        <div class="footer-links">
 
-            <a href="index.php">Home</a>
-            <a href="about.php">About Us</a>
-            <a href="adopt.php">Adopt</a>
-            <a href="mission.php">Mission</a>
-            <a href="services.php">Services</a>
-            <a href="contact.php">Contact</a>
+            <h3>
+                Explore
+            </h3>
 
-        </div>
+            <a href="home.html">
+                Home
+            </a>
 
+            <a href="animals.html">
+                Available Animals
+            </a>
 
+            <a href="adopt.html">
+                Adoption
+            </a>
 
-        <div>
-
-            <h4>Our Services</h4>
-
-            <a href="#">Rescue</a>
-            <a href="#">Medical Care</a>
-            <a href="#">Adoption Support</a>
-            <a href="#">Volunteer</a>
-            <a href="#">Awareness</a>
-
-        </div>
-
-
-
-        <div>
-
-            <h4>Stay Connected</h4>
-
-            <p class="footer-text">
-                Subscribe to our newsletter
-                for updates and stories.
-            </p>
-
-            <div class="newsletter">
-
-                <input type="email"
-                       placeholder="Enter your email">
-
-                <button>
-                    <i class="fa-solid fa-paper-plane"></i>
-                </button>
-
-            </div>
+            <a href="stories.html">
+                Adoption Stories
+            </a>
 
         </div>
 
 
 
-        <div>
+        <!-- SERVICES -->
 
-            <h4>Contact Us</h4>
+        <div class="footer-links">
 
-            <p class="contact">
-                <i class="fa-solid fa-phone"></i>
-                +91 12345 67890
-            </p>
+            <h3>
+                Services
+            </h3>
 
-            <p class="contact">
-                <i class="fa-solid fa-envelope"></i>
-                info@pawconnect.com
-            </p>
+            <a href="care.html">
+                Care After Adoption
+            </a>
 
-            <p class="contact">
+            <a href="petcare.html">
+                Pet Care
+            </a>
+
+            <a href="ngo-partners.html">
+                NGO Partners
+            </a>
+
+            <a href="mission.html">
+                Our Mission
+            </a>
+
+        </div>
+
+
+
+        <!-- CONTACT -->
+
+        <div class="footer-contact">
+
+            <h3>
+                Contact
+            </h3>
+
+            <p>
                 <i class="fa-solid fa-location-dot"></i>
-                Pune, Maharashtra, India
+                Pune, Maharashtra
+            </p>
+
+            <p>
+                <i class="fa-solid fa-phone"></i>
+                +91 98765 43210
+            </p>
+
+            <p>
+                <i class="fa-solid fa-envelope"></i>
+                hello@pawconnect.in
             </p>
 
         </div>
@@ -885,12 +887,18 @@ session_start();
     </div>
 
 
-    <div class="copyright">
 
-        © 2025 PawConnect.
-        All rights reserved. 🐾
+    <!-- FOOTER BOTTOM -->
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 PawConnect • Connecting every paw with care,
+            compassion & a place to belong.
+        </p>
 
     </div>
+
 
 </footer>
 

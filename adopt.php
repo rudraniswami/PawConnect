@@ -1,762 +1,968 @@
 <?php
+
 session_start();
+include "db.php";
+
+
+/* ================================
+   CHECK LOGIN
+================================ */
+
+if (!isset($_SESSION['user_id'])) {
+
+    header("Location: login.php");
+    exit();
+
+}
+
+
+/* ================================
+   CHECK ANIMAL ID
+================================ */
+
+if (!isset($_GET['animal_id'])) {
+
+    die("No animal selected.");
+
+}
+
+$animal_id = intval($_GET['animal_id']);
+
+
+/* ================================
+   GET ANIMAL
+================================ */
+
+$stmt = $conn->prepare(
+    "SELECT * FROM animals WHERE id = ?"
+);
+
+if (!$stmt) {
+
+    die("Database error: " . $conn->error);
+
+}
+
+$stmt->bind_param("i", $animal_id);
+
+$stmt->execute();
+
+$result = $stmt->get_result();
+
+
+if ($result->num_rows == 0) {
+
+    die("Animal not found. ID = " . $animal_id);
+
+}
+
+
+$pet = $result->fetch_assoc();
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <title>Document</title>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>
+Adopt <?php echo htmlspecialchars($pet['name']); ?> | PawConnect
+</title>
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link rel="stylesheet"
+      href="adopt.css">
+
 </head>
-<style>
-    *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Times New Roman', Times, serif;
-    }
-/* ================= NAVBAR ================= */
-
-.nav{
-    width:100%;
-    min-height:80px;
-    position:sticky;
-    top:0;
-    z-index:999;
-    background:#123C2A;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:0 40px;
-    box-shadow:0 4px 15px rgba(0,0,0,0.12);
-    
-    gap:20px;
-}
 
 
-
-.logo{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    flex-shrink:0;
-}
-
-.logo img{
-    width:65px;
-    height:65px;
-    border-radius:50%;
-    object-fit:cover;
-}
-
-.logo h2{
-    color:#FFFDF7;
-    font-size:28px;
-    letter-spacing:1px;
-}
-
-.menu{
-    display:flex;
-    align-items:center;
-    gap:26px;
-    flex-wrap:wrap;
-    justify-content:center;
-}
-
-.menu a{
-    text-decoration:none;
-    color:#FFFDF7;
-    font-size:16px;
-    font-weight:bold;
-    transition:0.3s ease;
-}
-
-.menu > a:hover{
-    color:#C6A15B;
-}
-
-.login-btn{
-    text-decoration:none;
-    color:#FFFDF7;
-    background:#C6A15B;
-    padding:10px 22px;
-    border-radius:30px;
-    font-weight:bold;
-    transition:0.3s ease;
-    flex-shrink:0;
-}
-
-.login-btn:hover{
-    background:#a88344;
-    transform:translateY(-2px);
-}
-
-/* EXPLORE DROPDOWN */
-.dropdown{
-    position:relative;
-}
-
-.dropdown > a{
-    display:flex;
-    align-items:center;
-    gap:6px;
-    padding:10px 14px;
-    border-radius:25px;
-    transition:0.3s ease;
-}
-
-.dropdown > a:hover{
-    background:rgba(255,255,255,0.08);
-}
-
-.dropdown-content{
-    position:absolute;
-    top:52px;
-    left:50%;
-    transform:translateX(-50%) translateY(10px);
-    width:620px;
-    padding:22px;
-    background:#FFFDF7;
-    border-radius:16px;
-    box-shadow:0 12px 28px rgba(0,0,0,.18);
-    display:flex;
-    justify-content:space-between;
-    gap:20px;
-    opacity:0;
-    visibility:hidden;
-    transition:0.3s ease;
-}
-
-.dropdown:hover .dropdown-content{
-    opacity:1;
-    visibility:visible;
-    transform:translateX(-50%) translateY(0);
-}
-
-.column{
-    width:30%;
-    display:flex;
-    flex-direction:column;
-}
-
-.column h3{
-    color:#123C2A;
-    font-size:18px;
-    margin-bottom:12px;
-    padding-bottom:8px;
-    border-bottom:2px solid #C6A15B;
-}
-
-.column a{
-    text-decoration:none;
-    color:#444;
-    margin:7px 0;
-    font-size:15px;
-    font-weight:normal;
-    transition:0.3s;
-}
-
-.column a:hover{
-    color:#C6A15B;
-    padding-left:4px;
-}
-
-
-/* ================= HERO SECTION ================= */
-
-/* HERO SECTION */
-
-.hero{
-    width:100%;
-    height:260px;
-    background:#fbf7f0;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:40px 70px;
-    overflow:hidden;
-    position:relative;
-}
-
-.hero::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:url("leaf-bg.png") no-repeat right center;
-    background-size:320px;
-    opacity:0.18;
-}
-
-.hero-text{
-    width:45%;
-    z-index:2;
-}
-
-.hero-text h1{
-    font-size:72px;
-    color:#0f4b35;
-    margin-bottom:15px;
-    font-weight:bold;
-}
-
-.hero-text span{
-    color:#c79a3b;
-}
-
-.hero-text p{
-    font-size:26px;
-    color:#555;
-}
-
-.hero-image{
-    position:absolute;
-    right:0;
-    bottom:0;
-    width:48%;
-}
-
-.adopt-hero{
-    position:relative;
-}.adopt-hero{
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    height: 330px;
-    background: #fdf9f2;
-    overflow: hidden;
-    padding: 0 70px;
-}
-
-.hero-text{
-    width: 45%;
-    z-index: 2;
-}
-
-.hero-text h1{
-    font-size: 65px;
-    color: #123C2A;
-    margin-bottom: 15px;
-}
-
-.hero-text p{
-    font-size: 24px;
-    color: #555;
-}
-
-.hero-image{
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 50%;
-    height: 100%;
-}
-
-.hero-image img{
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: right bottom;
-}
-/* ================= SEARCH FILTER ================= */
-
-.search-section{
-    width:90%;
-    margin:35px auto;
-    display:flex;
-    gap:18px;
-    align-items:center;
-    justify-content:center;
-    flex-wrap:wrap;
-}
-
-.search-box,
-.filter-box{
-    background:#fff;
-    border:1px solid #ddd;
-    border-radius:12px;
-    padding:15px 18px;
-    display:flex;
-    align-items:center;
-    gap:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
-}
-
-.search-box{
-    flex:2;
-    min-width:280px;
-}
-
-.filter-box{
-    flex:1;
-    min-width:180px;
-}
-
-.search-box i,
-.filter-box i{
-    color:#123C2A;
-    font-size:18px;
-}
-
-.search-box input{
-    border:none;
-    outline:none;
-    width:100%;
-    font-size:16px;
-    background:transparent;
-}
-
-.filter-box select{
-    border:none;
-    outline:none;
-    width:100%;
-    font-size:16px;
-    background:transparent;
-    cursor:pointer;
-}
-
-.search-btn{
-    background:#123C2A;
-    color:#fff;
-    border:none;
-    padding:15px 28px;
-    border-radius:12px;
-    font-size:16px;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.search-btn:hover{
-    background:#1c5a3d;
-}
-
-.search-btn i{
-    margin-right:8px;
-}
-/* ================= PET CARDS ================= */
-
-.pets-section{
-    width:90%;
-    margin:40px auto;
-}
-
-.section-title{
-    font-size:34px;
-    color:#123C2A;
-    margin-bottom:25px;
-}
-
-.pets-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:25px;
-}
-
-.pet-card{
-    background:#fff;
-    border-radius:18px;
-    overflow:hidden;
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
-    transition:.3s;
-    position:relative;
-}
-
-.pet-card:hover{
-    transform:translateY(-10px);
-}
-
-.pet-card img{
-    width:100%;
-    height:240px;
-    object-fit:cover;
-}
-
-.status{
-    position:absolute;
-    top:15px;
-    right:15px;
-    background:#32b44a;
-    color:#fff;
-    padding:6px 12px;
-    border-radius:20px;
-    font-size:13px;
-    font-weight:bold;
-}
-
-.pet-info{
-    padding:18px;
-}
-
-.pet-info h3{
-    color:#123C2A;
-    margin-bottom:10px;
-    font-size:28px;
-}
-
-.pet-info p{
-    margin:8px 0;
-    color:#555;
-}
-
-.pet-info i{
-    color:#C6A15B;
-    margin-right:8px;
-}
-
-.buttons{
-    display:flex;
-    justify-content:space-between;
-    margin-top:18px;
-}
-
-.details-btn{
-    text-decoration:none;
-    padding:10px 16px;
-    border:2px solid #123C2A;
-    color:#123C2A;
-    border-radius:10px;
-    font-weight:bold;
-}
-
-.adopt-btn{
-    text-decoration:none;
-    background:#C6A15B;
-    color:#fff;
-    padding:10px 16px;
-    border-radius:10px;
-    font-weight:bold;
-}
-
-.adopt-btn:hover{
-    background:#b08d49;
-}
-</style>
 <body>
 
-<!-- ================= NAVBAR ================= -->
+
+<!-- ================================
+     NAVBAR
+================================ -->
+
 <div class="nav">
+
     <div class="logo">
-        <img src="logo.jpeg" alt="PawConnect Logo">
-        <h2>PawConnect</h2>
+
+        <img src="logo.jpeg"
+             alt="PawConnect Logo">
+
+        <h2>
+            PawConnect
+        </h2>
+
     </div>
 
+
     <div class="menu">
-        <a href="home.php">HOME</a>
-        <a href="animals.php">ANIMALS</a>
+
+        <a href="home.php">
+            HOME
+        </a>
+
+        <a href="animals.php">
+            ANIMALS
+        </a>
+
 
         <div class="dropdown">
 
-    <a href="#">
-        EXPLORE <i class="fa-solid fa-chevron-down"></i>
-    </a>
+            <a href="#">
 
-    <div class="dropdown-content">
+                EXPLORE
 
-        <!-- ABOUT -->
+                <i class="fa-solid fa-chevron-down"></i>
 
-        <div class="column">
+            </a>
 
-            <h3>About</h3>
 
-            <a href="about.php">About Us</a>
+            <div class="dropdown-content">
 
-            <a href="mission.php">Mission</a>
 
-            <a href="contact.php">Contact</a>
+                <div class="column">
+
+                    <h3>
+                        About
+                    </h3>
+
+                    <a href="about.php">
+                        About Us
+                    </a>
+
+                    <a href="mission.php">
+                        Mission
+                    </a>
+
+                    <a href="contact.php">
+                        Contact
+                    </a>
+
+                </div>
+
+
+                <div class="column">
+
+                    <h3>
+                        Adoption
+                    </h3>
+
+                    <a href="animals.php">
+                        Available Animals
+                    </a>
+
+                    <a href="care.php">
+                        Care After Adoption
+                    </a>
+
+                    <a href="stories.php">
+                        Adoption Stories
+                    </a>
+
+                </div>
+
+
+                <div class="column">
+
+                    <h3>
+                        NGO
+                    </h3>
+
+                    <a href="ngo_login.php">
+                        NGO Login
+                    </a>
+
+                    <a href="ngo_register.php">
+                        Register NGO
+                    </a>
+
+                    <a href="admin_login.php">
+                        Admin Login
+                    </a>
+
+                </div>
+
+            </div>
 
         </div>
 
 
-        <!-- ADOPTION -->
-
-        <div class="column">
-
-            <h3>Adoption</h3>
-
-            <a href="animals.php">Available Animals</a>
-
-            <a href="care.php">Care After Adoption</a>
-
-            <a href="stories.php">Adoption Stories</a>
-
-        </div>
+        <a href="adopt.php?animal_id=<?php echo $animal_id; ?>">
+            ADOPT
+        </a>
 
 
-        <!-- NGO -->
-
-        <div class="column">
-
-          <h3>NGO</h3>
-
-            <a href="ngo_login.php">NGO Login</a>
-
-            <a href="ngo_register.php">Register NGO</a>
-
-            <a href="admin_login.php">Admin Login</a>
-
-        </div>
+        <a href="contact.php">
+            CONTACT
+        </a>
 
     </div>
 
+
+    <?php if (isset($_SESSION["user_id"])) { ?>
+
+        <a href="logout.php"
+           class="login-btn">
+
+            LOGOUT
+
+        </a>
+
+    <?php } else { ?>
+
+        <a href="login.php"
+           class="login-btn">
+
+            LOGIN
+
+        </a>
+
+    <?php } ?>
+
 </div>
 
-<a href="adopt.php">ADOPT</a>
 
-<a href="contact.php">CONTACT</a></div>
 
-    <?php if (isset($_SESSION["user_id"]) || isset($_SESSION["ngo_id"])) { ?>
+<!-- ================================
+     PAGE HEADER
+================================ -->
 
-    <a href="logout.php" class="login-btn">
-        LOGOUT
-    </a>
+<section class="adopt-header">
 
-<?php } else { ?>
+    <p>
+        PAWCONNECT ADOPTION
+    </p>
 
-    <?php if (isset($_SESSION["user_id"]) || isset($_SESSION["ngo_id"])) { ?>
+    <h1>
+        Give a Paw a Place to Call Home
+    </h1>
 
-    <a href="logout.php" class="login-btn">
-        LOGOUT
-    </a>
+    <span>
+        A little information about you helps us
+        find the right match for every companion.
+    </span>
 
-<?php } else { ?>
+</section>
 
-    <a href="login.php" class="login-btn">
-        LOGIN
-    </a>
 
-<?php } ?>
 
-<?php } ?>
-</div>
-<!-- ================= HERO SECTION ================= -->
+<!-- ================================
+     SELECTED ANIMAL
+================================ -->
 
-<section class="adopt-hero">
+<section class="selected-pet">
 
-    <div class="hero-text">
 
-        <h1>Adopt a Pet <span>♡</span></h1>
+    <div class="pet-image">
 
-        <p>Give love. Get loyalty. Adopt your forever friend.</p>
+        <img src="<?php echo htmlspecialchars($pet['image']); ?>"
+             alt="<?php echo htmlspecialchars($pet['name']); ?>">
 
     </div>
 
-    <div class="hero-image">
 
-        <img src="dogcat.jpeg" alt="Dog and Cat">
+    <div class="pet-info">
+
+        <p>
+            YOU ARE APPLYING TO ADOPT
+        </p>
+
+
+        <h2>
+            <?php echo htmlspecialchars($pet['name']); ?>
+        </h2>
+
+
+        <h3>
+            <?php echo htmlspecialchars($pet['breed']); ?>
+        </h3>
+
+
+        <div class="pet-details">
+
+            <span>
+
+                <i class="fa-solid fa-cake-candles"></i>
+
+                <?php echo htmlspecialchars($pet['age']); ?>
+
+            </span>
+
+
+            <span>
+
+                <i class="fa-solid fa-venus-mars"></i>
+
+                <?php echo htmlspecialchars($pet['gender'] ?? 'Not specified'); ?>
+
+            </span>
+
+        </div>
+
+
+        <p class="pet-note">
+
+            You don't need to enter
+            <?php echo htmlspecialchars($pet['name']); ?>'s
+            information again. We already have it.
+
+        </p>
 
     </div>
 
 </section>
-<!-- ================= SEARCH FILTER ================= -->
 
-<section class="search-section">
 
-    <div class="search-box">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" placeholder="Search pets...">
+
+<!-- ================================
+     FORM
+================================ -->
+
+<section class="form-section">
+
+
+    <div class="form-heading">
+
+        <p>
+            ADOPTION APPLICATION
+        </p>
+
+        <h2>
+            Tell us about yourself
+        </h2>
+
+        <span>
+            Your answers help PawConnect understand
+            whether you can provide a safe and caring home.
+        </span>
+
     </div>
 
-    <div class="filter-box">
-        <i class="fa-solid fa-paw"></i>
 
-        <select>
-            <option>All Animals</option>
-            <option>Dogs</option>
-            <option>Cats</option>
-            <option>Rabbits</option>
-            <option>Birds</option>
-        </select>
+
+<form action="submit_adoption.php"
+      method="POST">
+
+
+    <!-- IMPORTANT -->
+
+    <input type="hidden"
+           name="animal_id"
+           value="<?php echo $animal_id; ?>">
+
+
+
+    <!-- ============================
+         ABOUT YOU
+    ============================= -->
+
+    <div class="form-card">
+
+
+        <div class="section-title">
+
+            <span>
+                01
+            </span>
+
+            <div>
+
+                <h3>
+                    About You
+                </h3>
+
+                <p>
+                    Basic information about the person adopting.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+
+            <div class="input-group">
+
+                <label>
+                    Full Name
+                </label>
+
+                <input type="text"
+                       name="full_name"
+                       placeholder="Enter your full name"
+                       required>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    Phone Number
+                </label>
+
+                <input type="tel"
+                       name="phone"
+                       placeholder="Enter your phone number"
+                       required>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    Email Address
+                </label>
+
+                <input type="email"
+                       name="email"
+                       placeholder="Enter your email"
+                       required>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    City
+                </label>
+
+                <input type="text"
+                       name="city"
+                       placeholder="e.g. Pune"
+                       required>
+
+            </div>
+
+        </div>
+
     </div>
 
-    <div class="filter-box">
-        <i class="fa-solid fa-calendar"></i>
 
-        <select>
-            <option>All Age</option>
-            <option>Baby</option>
-            <option>Young</option>
-            <option>Adult</option>
-        </select>
+
+    <!-- ============================
+         HOME
+    ============================= -->
+
+    <div class="form-card">
+
+
+        <div class="section-title">
+
+            <span>
+                02
+            </span>
+
+            <div>
+
+                <h3>
+                    Your Home
+                </h3>
+
+                <p>
+                    Help us understand the environment
+                    your new companion will live in.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+
+            <div class="input-group">
+
+                <label>
+                    What type of home do you live in?
+                </label>
+
+                <select name="home_type"
+                        required>
+
+                    <option value="">
+                        Select
+                    </option>
+
+                    <option value="Own House">
+                        Own House
+                    </option>
+
+                    <option value="Own Flat">
+                        Own Flat
+                    </option>
+
+                    <option value="Rented House">
+                        Rented House
+                    </option>
+
+                    <option value="Rented Flat">
+                        Rented Flat
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    Do you own your home?
+                </label>
+
+                <select name="owns_home"
+                        required>
+
+                    <option value="">
+                        Select
+                    </option>
+
+                    <option value="Yes">
+                        Yes
+                    </option>
+
+                    <option value="No">
+                        No
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    Do you have other pets?
+                </label>
+
+                <select name="other_pets"
+                        required>
+
+                    <option value="">
+                        Select
+                    </option>
+
+                    <option value="No">
+                        No
+                    </option>
+
+                    <option value="Yes">
+                        Yes
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    Is your home pet-friendly?
+                </label>
+
+                <select name="pet_friendly"
+                        required>
+
+                    <option value="">
+                        Select
+                    </option>
+
+                    <option value="Yes">
+                        Yes
+                    </option>
+
+                    <option value="No">
+                        No
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
     </div>
 
-    <div class="filter-box">
-        <i class="fa-solid fa-location-dot"></i>
 
-        <select>
-            <option>All Location</option>
-            <option>Pune</option>
-            <option>Mumbai</option>
-            <option>Nashik</option>
-            <option>Nagpur</option>
-        </select>
+
+    <!-- ============================
+         TIME & CARE
+    ============================= -->
+
+    <div class="form-card">
+
+
+        <div class="section-title">
+
+            <span>
+                03
+            </span>
+
+            <div>
+
+                <h3>
+                    Time & Care
+                </h3>
+
+                <p>
+                    Every pet needs attention, companionship
+                    and daily care.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+
+            <div class="input-group">
+
+                <label>
+                    How much time can you spend daily?
+                </label>
+
+                <select name="time_available"
+                        required>
+
+                    <option value="">
+                        Select
+                    </option>
+
+                    <option value="1-2 hours">
+                        1–2 hours
+                    </option>
+
+                    <option value="2-4 hours">
+                        2–4 hours
+                    </option>
+
+                    <option value="4-6 hours">
+                        4–6 hours
+                    </option>
+
+                    <option value="6+ hours">
+                        6+ hours
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="input-group full">
+
+                <label>
+                    Who will care for the pet when you are away?
+                </label>
+
+                <input type="text"
+                       name="caretaker"
+                       placeholder="e.g. Family member, pet sitter">
+
+            </div>
+
+        </div>
+
     </div>
 
-    <button class="search-btn">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        Search
+
+
+    <!-- ============================
+         FINANCIAL
+    ============================= -->
+
+    <div class="form-card">
+
+
+        <div class="section-title">
+
+            <span>
+                04
+            </span>
+
+            <div>
+
+                <h3>
+                    Financial Readiness
+                </h3>
+
+                <p>
+                    Caring for a pet includes regular food,
+                    healthcare and other expenses.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+
+            <div class="input-group">
+
+                <label>
+                    Monthly income range
+                </label>
+
+                <select name="income_range"
+                        required>
+
+                    <option value="">
+                        Select
+                    </option>
+
+                    <option value="Below ₹20,000">
+                        Below ₹20,000
+                    </option>
+
+                    <option value="₹20,000 - ₹40,000">
+                        ₹20,000 – ₹40,000
+                    </option>
+
+                    <option value="₹40,000 - ₹70,000">
+                        ₹40,000 – ₹70,000
+                    </option>
+
+                    <option value="₹70,000+">
+                        ₹70,000+
+                    </option>
+
+                    <option value="Prefer not to say">
+                        Prefer not to say
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    Comfortable monthly pet-care budget
+                </label>
+
+                <select name="monthly_budget"
+                        required>
+
+                    <option value="">
+                        Select
+                    </option>
+
+                    <option value="Below ₹2,000">
+                        Below ₹2,000
+                    </option>
+
+                    <option value="₹2,000 - ₹5,000">
+                        ₹2,000 – ₹5,000
+                    </option>
+
+                    <option value="₹5,000 - ₹10,000">
+                        ₹5,000 – ₹10,000
+                    </option>
+
+                    <option value="₹10,000+">
+                        ₹10,000+
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="input-group full">
+
+                <label>
+                    Are you prepared for veterinary and emergency expenses?
+                </label>
+
+                <select name="ready_for_expenses"
+                        required>
+
+                    <option value="">
+                        Select
+                    </option>
+
+                    <option value="Yes">
+                        Yes, I am prepared
+                    </option>
+
+                    <option value="No">
+                        No
+                    </option>
+
+                    <option value="Need more information">
+                        I need more information
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ============================
+         ADOPTION STORY
+    ============================= -->
+
+    <div class="form-card">
+
+
+        <div class="section-title">
+
+            <span>
+                05
+            </span>
+
+            <div>
+
+                <h3>
+                    Your Adoption Story
+                </h3>
+
+                <p>
+                    Tell us what makes you ready to welcome a pet.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>
+                Have you had a pet before?
+            </label>
+
+            <select name="previous_pet"
+                    required>
+
+                <option value="">
+                    Select
+                </option>
+
+                <option value="No">
+                    No
+                </option>
+
+                <option value="Yes">
+                    Yes
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <br>
+
+
+        <div class="input-group">
+
+            <label>
+
+                Why would you like to adopt
+                <?php echo htmlspecialchars($pet['name']); ?>?
+
+            </label>
+
+
+            <textarea name="reason"
+                      rows="5"
+                      placeholder="Tell us a little about why you want to adopt..."
+                      required></textarea>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ============================
+         AGREEMENT
+    ============================= -->
+
+    <div class="agreement">
+
+        <label>
+
+            <input type="checkbox"
+                   name="agreement"
+                   value="1"
+                   required>
+
+            <span>
+
+                I understand that adoption is a long-term
+                responsibility and I am ready to provide
+                a safe, caring and supportive home.
+
+            </span>
+
+        </label>
+
+    </div>
+
+
+
+    <!-- ============================
+         SUBMIT
+    ============================= -->
+
+    <button type="submit"
+            class="submit-btn">
+
+        Submit Adoption Request
+
+        <i class="fa-solid fa-arrow-right"></i>
+
     </button>
 
-</section>
-<!-- ================= AVAILABLE PETS ================= -->
 
-<section class="pets-section">
-
-    <h2 class="section-title">
-        🐾 Available Pets
-    </h2>
-
-    <div class="pets-grid">
-
-        <!-- Card 1 -->
-
-        <div class="pet-card">
-
-            <span class="status">Available</span>
-
-            <img src="dog1.jpeg" alt="Dog">
-
-            <div class="pet-info">
-
-                <h3>Bruno</h3>
-
-                <p><i class="fa-solid fa-dog"></i> Breed : Labrador</p>
-
-                <p><i class="fa-solid fa-cake-candles"></i> Age : 2 Years</p>
-
-                <p><i class="fa-solid fa-mars"></i> Gender : Male</p>
-
-                <p><i class="fa-solid fa-location-dot"></i> Pune</p>
-
-                <div class="buttons">
-
-                    <a href="#" class="details-btn">View Details</a>
-
-                    <a href="#" class="adopt-btn">Adopt Now</a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- Card 2 -->
-
-        <div class="pet-card">
-
-            <span class="status">Available</span>
-
-            <img src="cat.jpeg" alt="Cat">
-
-            <div class="pet-info">
-
-                <h3>Luna</h3>
-
-                <p><i class="fa-solid fa-cat"></i> Breed : Indie Cat</p>
-
-                <p><i class="fa-solid fa-cake-candles"></i> Age : 1 Year</p>
-
-                <p><i class="fa-solid fa-venus"></i> Gender : Female</p>
-
-                <p><i class="fa-solid fa-location-dot"></i> Mumbai</p>
-
-                <div class="buttons">
-
-                    <a href="#" class="details-btn">View Details</a>
-
-                    <a href="#" class="adopt-btn">Adopt Now</a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- Card 3 -->
-
-        <div class="pet-card">
-
-            <span class="status">Available</span>
-
-            <img src="dog2.jpeg" alt="Rabbit">
-
-            <div class="pet-info">
-
-                <h3>Cocoa</h3>
-
-                <p><i class="fa-solid fa-paw"></i> Breed : Rabbit</p>
-
-                <p><i class="fa-solid fa-cake-candles"></i> Age : 8 Months</p>
-
-                <p><i class="fa-solid fa-venus"></i> Gender : Female</p>
-
-                <p><i class="fa-solid fa-location-dot"></i> Pune</p>
-
-                <div class="buttons">
-
-                    <a href="#" class="details-btn">View Details</a>
-
-                    <a href="#" class="adopt-btn">Adopt Now</a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- Card 4 -->
-
-        <div class="pet-card">
-
-            <span class="status">Available</span>
-
-            <img src="cat2.jpeg" alt="Dog">
-
-            <div class="pet-info">
-
-                <h3>Max</h3>
-
-                <p><i class="fa-solid fa-dog"></i> Breed : Beagle</p>
-
-                <p><i class="fa-solid fa-cake-candles"></i> Age : 1.5 Years</p>
-
-                <p><i class="fa-solid fa-mars"></i> Gender : Male</p>
-
-                <p><i class="fa-solid fa-location-dot"></i> Nashik</p>
-
-                <div class="buttons">
-
-                    <a href="#" class="details-btn">View Details</a>
-
-                    <a href="#" class="adopt-btn">Adopt Now</a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
+</form>
 
 </section>
 
 
-<!-- =====================================================
+
+<!-- ================================
      FOOTER
-===================================================== -->
+================================ -->
 
 <footer class="footer">
+
 
     <div class="footer-top">
 
 
-        <!-- PAWCONNECT BRAND -->
-
         <div class="footer-about">
+
 
             <div class="footer-logo">
 
@@ -771,36 +977,15 @@ session_start();
 
 
             <p>
+
                 Connecting rescued animals with loving families,
                 trusted shelters and compassionate hearts across India.
+
             </p>
-
-
-            <div class="social-icons">
-
-                <a href="#" aria-label="Facebook">
-                    <i class="fa-brands fa-facebook-f"></i>
-                </a>
-
-                <a href="#" aria-label="Instagram">
-                    <i class="fa-brands fa-instagram"></i>
-                </a>
-
-                <a href="#" aria-label="X">
-                    <i class="fa-brands fa-x-twitter"></i>
-                </a>
-
-                <a href="#" aria-label="LinkedIn">
-                    <i class="fa-brands fa-linkedin-in"></i>
-                </a>
-
-            </div>
 
         </div>
 
 
-
-        <!-- EXPLORE -->
 
         <div class="footer-links">
 
@@ -816,7 +1001,7 @@ session_start();
                 Available Animals
             </a>
 
-            <a href="adopt.php">
+            <a href="adopt.php?animal_id=<?php echo $animal_id; ?>">
                 Adoption
             </a>
 
@@ -827,8 +1012,6 @@ session_start();
         </div>
 
 
-
-        <!-- SERVICES -->
 
         <div class="footer-links">
 
@@ -856,8 +1039,6 @@ session_start();
 
 
 
-        <!-- CONTACT -->
-
         <div class="footer-contact">
 
             <h3>
@@ -865,39 +1046,50 @@ session_start();
             </h3>
 
             <p>
+
                 <i class="fa-solid fa-location-dot"></i>
+
                 Pune, Maharashtra
+
             </p>
 
+
             <p>
+
                 <i class="fa-solid fa-phone"></i>
+
                 +91 98765 43210
+
             </p>
 
+
             <p>
+
                 <i class="fa-solid fa-envelope"></i>
+
                 hello@pawconnect.in
+
             </p>
 
         </div>
 
-
     </div>
 
 
-
-    <!-- FOOTER BOTTOM -->
 
     <div class="footer-bottom">
 
         <p>
+
             © 2026 PawConnect • Connecting every paw with care,
             compassion & a place to belong.
+
         </p>
 
     </div>
 
-
 </footer>
+
+
 </body>
 </html>
