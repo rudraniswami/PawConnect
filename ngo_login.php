@@ -50,14 +50,55 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <link rel="stylesheet" href="ngo.css">
 </head>
 <body>
-
-<div class="ngo-topbar">
-    <div class="logo">
+<div class="main-nav">
+    <div class="main-nav-logo">
         <img src="logo.jpeg" alt="PawConnect Logo">
         <h2>PawConnect</h2>
     </div>
-    <div class="topbar-links">
-        <a href="home.html">Back to Home</a>
+
+    <div class="main-nav-menu">
+
+        <a href="home.html">HOME</a>
+
+        <a href="animals.html">ANIMALS</a>
+
+        <div class="main-nav-dropdown">
+
+            <a href="#">
+                EXPLORE <i class="fa-solid fa-chevron-down"></i>
+            </a>
+
+            <div class="main-nav-dropdown-content">
+
+                <div class="main-nav-column">
+                    <h3>About</h3>
+                    <a href="about.html">About Us</a>
+                    <a href="mission.html">Mission</a>
+                    <a href="contact.php">Contact</a>
+                </div>
+
+                <div class="main-nav-column">
+                    <h3>Adoption</h3>
+                    <a href="animals.html">Available Animals</a>
+                    <a href="care.html">Care After Adoption</a>
+                    <a href="stories.html">Adoption Stories</a>
+                </div>
+
+                <div class="main-nav-column">
+                    <h3>NGO</h3>
+                    <a href="ngo_login.php">NGO Login</a>
+                    <a href="ngo_dashboard.php">Dashboard</a>
+                    <a href="add_animal.php">Add Animal</a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <a href="adopt.html">ADOPT</a>
+
+        <a href="contact.php">CONTACT</a>
+
     </div>
 </div>
 

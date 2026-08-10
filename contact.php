@@ -71,7 +71,7 @@ if (isset($_POST['send_message'])) {
 
             <a href="mission.html">Mission</a>
 
-            <a href="contact.html">Contact</a>
+            <a href="contact.php">Contact</a>
 
         </div>
 
@@ -111,7 +111,7 @@ if (isset($_POST['send_message'])) {
 
 <a href="adopt.html">ADOPT</a>
 
-<a href="contact.html">CONTACT</a>
+<a href="contact.php">CONTACT</a>
     </div>
 
     <a href="login.php" class="login-btn">LOGIN</a>
