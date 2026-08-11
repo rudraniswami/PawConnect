@@ -362,8 +362,8 @@ session_start();
                 </div>
 
 
-                <a href="bruno.php">
-                    Meet Bruno
+                <a href="nova.php">
+                    Meet Nova
                 </a>
 
             </div>

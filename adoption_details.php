@@ -15,9 +15,31 @@ $request_id = intval($_GET['id']);
 
 /* ================================
    GET ADOPTION REQUEST
+   (joined with animals / pets so we
+   can show the real name, not just
+   a raw ID)
 ================================ */
 
-$sql = "SELECT * FROM adoption_requests WHERE id = ?";
+$sql = "
+SELECT
+    ar.*,
+
+    a.name AS animal_name,
+    a.breed AS animal_breed,
+
+    p.name AS old_pet_name,
+    p.breed AS old_pet_breed
+
+FROM adoption_requests ar
+
+LEFT JOIN animals a
+    ON ar.animal_id = a.id
+
+LEFT JOIN pets p
+    ON ar.pet_id = p.id
+
+WHERE ar.id = ?
+";
 
 $stmt = $conn->prepare($sql);
 
@@ -37,6 +59,35 @@ if ($result->num_rows == 0) {
 
 
 $request = $result->fetch_assoc();
+
+
+/* ================================
+   FIND CORRECT ANIMAL NAME
+   (same logic used on admin_adoptions.php)
+================================ */
+
+if (
+    isset($request['animal_id']) &&
+    $request['animal_id'] > 0 &&
+    !empty($request['animal_name'])
+) {
+
+    /* NEW ANIMAL */
+
+    $animal_name = $request['animal_name'];
+    $animal_breed = $request['animal_breed'];
+
+} else {
+
+    /* OLD PET */
+
+    $animal_name = !empty($request['old_pet_name'])
+        ? $request['old_pet_name']
+        : "Unknown Animal";
+
+    $animal_breed = $request['old_pet_breed'] ?? "";
+
+}
 
 ?>
 
@@ -252,10 +303,13 @@ body {
 
             <div class="info">
 
-                <small>Pet ID</small>
+                <small>Animal</small>
 
                 <strong>
-                    <?php echo htmlspecialchars($request['pet_id']); ?>
+                    <?php echo htmlspecialchars($animal_name); ?>
+                    <?php if (!empty($animal_breed)) { ?>
+                        (<?php echo htmlspecialchars($animal_breed); ?>)
+                    <?php } ?>
                 </strong>
 
             </div>
