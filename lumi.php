@@ -26,24 +26,19 @@ session_start();
      NAVBAR
 ===================================================== -->
 
+
+
 <div class="nav">
-
     <div class="logo">
-
         <img src="logo.jpeg" alt="PawConnect Logo">
-
         <h2>PawConnect</h2>
-
     </div>
 
-
     <div class="menu">
-
         <a href="home.php">HOME</a>
+        <a href="about.php">ABOUT US</a>
 
-        <a href="animals.php">ANIMALS</a>
-
-<div class="dropdown">
+        <div class="dropdown">
 
     <a href="#">
         EXPLORE <i class="fa-solid fa-chevron-down"></i>
@@ -99,10 +94,9 @@ session_start();
 
 </div>
 
-<a href="adopt.php">ADOPT</a>
+<a href="animals.php">ANIMALS</a>
 
 <a href="contact.php">CONTACT</a>
-
     </div>
 
 

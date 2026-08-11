@@ -21,7 +21,7 @@ session_start();
 
     <div class="menu">
         <a href="home.php">HOME</a>
-        <a href="animals.php">ANIMALS</a>
+        <a href="about.php">ABOUT US</a>
 
         <div class="dropdown">
 
@@ -79,7 +79,7 @@ session_start();
 
 </div>
 
-<a href="adopt.php">ADOPT</a>
+<a href="animals.php">ANIMALS</a>
 
 <a href="contact.php">CONTACT</a>
     </div>

@@ -584,7 +584,8 @@ display: block;
 
 <!-- NAVBAR -->
 
-   <div class="nav">
+
+<div class="nav">
     <div class="logo">
         <img src="logo.jpeg" alt="PawConnect Logo">
         <h2>PawConnect</h2>
@@ -592,7 +593,7 @@ display: block;
 
     <div class="menu">
         <a href="home.php">HOME</a>
-        <a href="animals.php">ANIMALS</a>
+        <a href="about.php">ABOUT US</a>
 
         <div class="dropdown">
 
@@ -650,7 +651,7 @@ display: block;
 
 </div>
 
-<a href="adopt.php">ADOPT</a>
+<a href="animals.php">ANIMALS</a>
 
 <a href="contact.php">CONTACT</a>
     </div>

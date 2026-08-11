@@ -40,7 +40,7 @@ if(isset($_POST['register']))
 
     <title>PawConnect Register</title>
 
-    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="user_register.css">
 
 </head>
 

@@ -62,105 +62,76 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
      NAVBAR
 ===================================================== -->
 
-<div class="main-nav">
 
-    <div class="main-nav-logo">
-
+<div class="nav">
+    <div class="logo">
         <img src="logo.jpeg" alt="PawConnect Logo">
-
         <h2>PawConnect</h2>
-
     </div>
 
+    <div class="menu">
+        <a href="home.php">HOME</a>
+        <a href="about.php">ABOUT US</a>
 
-    <div class="main-nav-menu">
+        <div class="dropdown">
 
-        <a href="home.php">
-            HOME
-        </a>
+    <a href="#">
+        EXPLORE <i class="fa-solid fa-chevron-down"></i>
+    </a>
 
-        <a href="animals.php">
-            ANIMALS
-        </a>
+    <div class="dropdown-content">
 
+        <!-- ABOUT -->
 
-        <div class="main-nav-dropdown">
+        <div class="column">
 
-            <a href="#">
-                EXPLORE
-                <i class="fa-solid fa-chevron-down"></i>
-            </a>
+            <h3>About</h3>
 
+            <a href="about.php">About Us</a>
 
-            <div class="main-nav-dropdown-content">
+            <a href="mission.php">Mission</a>
 
+            <a href="contact.php">Contact</a>
 
-                <div class="main-nav-column">
-
-                    <h3>About</h3>
-
-                    <a href="about.php">
-                        About Us
-                    </a>
-
-                    <a href="mission.php">
-                        Mission
-                    </a>
-
-                    <a href="contact.php">
-                        Contact
-                    </a>
-
-                </div>
+        </div>
 
 
+        <!-- ADOPTION -->
 
-                <div class="main-nav-column">
+        <div class="column">
 
-                    <h3>Adoption</h3>
+            <h3>Adoption</h3>
 
-                    <a href="animals.php">
-                        Available Animals
-                    </a>
+            <a href="animals.php">Available Animals</a>
 
-                    <a href="care.php">
-                        Care After Adoption
-                    </a>
+            <a href="care.php">Care After Adoption</a>
 
-                    <a href="stories.php">
-                        Adoption Stories
-                    </a>
+            <a href="stories.php">Adoption Stories</a>
 
-                </div>
+        </div>
 
 
+        <!-- NGO -->
 
-                <div class="main-nav-column">
+        <div class="column">
 
-                    <h3>NGO</h3>
+          <h3>NGO</h3>
 
-                   <a href="ngo_login.php">NGO Login</a>
+            <a href="ngo_login.php">NGO Login</a>
 
             <a href="ngo_register.php">Register NGO</a>
 
             <a href="admin_login.php">Admin Login</a>
 
-                </div>
-
-
-            </div>
-
         </div>
 
+    </div>
 
-        <a href="adopt.php">
-            ADOPT
-        </a>
+</div>
 
-        <a href="contact.php">
-            CONTACT
-        </a>
+<a href="animals.php">ANIMALS</a>
 
+<a href="contact.php">CONTACT</a>
     </div>
 
 

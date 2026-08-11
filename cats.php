@@ -28,7 +28,8 @@ $db_cats = $stmt->get_result();
 
 <!-- NAVBAR -->
 
-   <div class="nav">
+
+<div class="nav">
     <div class="logo">
         <img src="logo.jpeg" alt="PawConnect Logo">
         <h2>PawConnect</h2>
@@ -36,7 +37,7 @@ $db_cats = $stmt->get_result();
 
     <div class="menu">
         <a href="home.php">HOME</a>
-        <a href="animals.php">ANIMALS</a>
+        <a href="about.php">ABOUT US</a>
 
         <div class="dropdown">
 
@@ -80,13 +81,13 @@ $db_cats = $stmt->get_result();
 
         <div class="column">
 
-            <h3>NGO</h3>
+          <h3>NGO</h3>
 
             <a href="ngo_login.php">NGO Login</a>
 
-            <a href="dashboard.php">Dashboard</a>
+            <a href="ngo_register.php">Register NGO</a>
 
-            <a href="addanimal.php">Add Animal</a>
+            <a href="admin_login.php">Admin Login</a>
 
         </div>
 
@@ -94,11 +95,11 @@ $db_cats = $stmt->get_result();
 
 </div>
 
-<a href="adopt.php">ADOPT</a>
+<a href="animals.php">ANIMALS</a>
 
 <a href="contact.php">CONTACT</a>
     </div>
-
+    
     <?php if (isset($_SESSION["user_id"]) || isset($_SESSION["ngo_id"])) { ?>
 
     <a href="logout.php" class="login-btn">

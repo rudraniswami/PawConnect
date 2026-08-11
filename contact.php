@@ -43,6 +43,8 @@ if (isset($_POST['send_message'])) {
 <body>
 
 <!-- ================= NAVBAR ================= -->
+
+
 <div class="nav">
     <div class="logo">
         <img src="logo.jpeg" alt="PawConnect Logo">
@@ -51,7 +53,7 @@ if (isset($_POST['send_message'])) {
 
     <div class="menu">
         <a href="home.php">HOME</a>
-        <a href="animals.php">ANIMALS</a>
+        <a href="about.php">ABOUT US</a>
 
         <div class="dropdown">
 
@@ -109,11 +111,12 @@ if (isset($_POST['send_message'])) {
 
 </div>
 
-<a href="adopt.php">ADOPT</a>
+<a href="animals.php">ANIMALS</a>
 
 <a href="contact.php">CONTACT</a>
     </div>
 
+    
     <?php if (isset($_SESSION["user_id"]) || isset($_SESSION["ngo_id"])) { ?>
 
     <a href="logout.php" class="login-btn">

@@ -11,7 +11,9 @@ session_start();
     <link rel="stylesheet" href="animals.css">
 </head>
 <body>
-    <div class="nav">
+
+
+<div class="nav">
     <div class="logo">
         <img src="logo.jpeg" alt="PawConnect Logo">
         <h2>PawConnect</h2>
@@ -19,9 +21,9 @@ session_start();
 
     <div class="menu">
         <a href="home.php">HOME</a>
-        <a href="animals.php">ANIMALS</a>
+        <a href="about.php">ABOUT US</a>
 
-       <div class="dropdown">
+        <div class="dropdown">
 
     <a href="#">
         EXPLORE <i class="fa-solid fa-chevron-down"></i>
@@ -77,7 +79,7 @@ session_start();
 
 </div>
 
-<a href="adopt.php">ADOPT</a>
+<a href="animals.php">ANIMALS</a>
 
 <a href="contact.php">CONTACT</a>
     </div>
