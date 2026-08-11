@@ -460,7 +460,7 @@ session_start();
 
     <!-- Login required before adoption -->
 
-    <a href="adopt.php?pet_id=7">
+    <a href="adopt.php?pet_id=17">
 
         Adopt Jack
 
