@@ -460,13 +460,11 @@ session_start();
 
     <!-- Login required before adoption -->
 
-    <a href="adopt.php?pet_id=18">
+    <a href="adopt.php?pet_id=17">
 
         Adopt Theo
 
-        <i class="fa-solid fa-arrow-right"></i>
-
-    </a>
+    <i class="fa-solid fa-arrow-right"></i></a>
 
 
 </section>

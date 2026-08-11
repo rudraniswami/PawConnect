@@ -1,607 +1,612 @@
 <?php
-
-include "db.php";
-
-
-/* ==========================================
-   GET ADOPTION REQUESTS
-========================================== */
-
-$sql = "
-SELECT
-    ar.*,
-
-    a.name AS animal_name,
-    a.image AS animal_image,
-    a.breed AS animal_breed,
-
-    p.name AS old_pet_name,
-    p.image AS old_pet_image,
-    p.breed AS old_pet_breed
-
-FROM adoption_requests ar
-
-LEFT JOIN animals a
-    ON ar.animal_id = a.id
-
-LEFT JOIN pets p
-    ON ar.pet_id = p.id
-
-ORDER BY ar.created_at DESC
-";
-
-
-$result = mysqli_query($conn, $sql);
-
-
-if (!$result) {
-    die("Database Error: " . mysqli_error($conn));
-}
-
+session_start();
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<title>Adoption Requests | PawConnect</title>
-
-
-<style>
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-
-body {
-
-    font-family: Arial, sans-serif;
-
-    background: #f7f4ed;
-
-    color: #173c2d;
-
-}
-
-
-.container {
-
-    width: 92%;
-
-    max-width: 1200px;
-
-    margin: 50px auto;
-
-}
-
-
-h1 {
-
-    margin-bottom: 10px;
-
-}
-
-
-.subtitle {
-
-    color: #777;
-
-    margin-bottom: 30px;
-
-}
-
-
-.request-card {
-
-    background: white;
-
-    border-radius: 15px;
-
-    padding: 20px;
-
-    margin-bottom: 20px;
-
-    display: flex;
-
-    gap: 20px;
-
-    align-items: center;
-
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-
-}
-
-
-.pet-image {
-
-    width: 130px;
-
-    height: 130px;
-
-    object-fit: cover;
-
-    border-radius: 12px;
-
-}
-
-
-.info {
-
-    flex: 1;
-
-}
-
-
-.info h2 {
-
-    margin-bottom: 6px;
-
-}
-
-
-.info p {
-
-    margin: 5px 0;
-
-    color: #555;
-
-}
-
-
-.status {
-
-    display: inline-block;
-
-    padding: 6px 12px;
-
-    border-radius: 20px;
-
-    margin-top: 8px;
-
-    font-size: 13px;
-
-    font-weight: bold;
-
-}
-
-
-.pending {
-
-    background: #fff3cd;
-
-    color: #856404;
-
-}
-
-
-.approved {
-
-    background: #d4edda;
-
-    color: #155724;
-
-}
-
-
-.rejected {
-
-    background: #f8d7da;
-
-    color: #721c24;
-
-}
-
-
-.buttons {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 8px;
-
-}
-
-
-.buttons a {
-
-    text-decoration: none;
-
-    padding: 10px 16px;
-
-    border-radius: 7px;
-
-    text-align: center;
-
-    color: white;
-
-    font-size: 14px;
-
-}
-
-
-.view {
-
-    background: #173c2d;
-
-}
-
-
-.approve {
-
-    background: #4d8b62;
-
-}
-
-
-.reject {
-
-    background: #c94c4c;
-
-}
-
-
-.no-data {
-
-    background: white;
-
-    padding: 30px;
-
-    border-radius: 15px;
-
-    text-align: center;
-
-}
-
-
-@media (max-width: 700px) {
-
-    .request-card {
-
-        flex-direction: column;
-
-        align-items: flex-start;
-
-    }
-
-
-    .buttons {
-
-        width: 100%;
-
-    }
-
-}
-
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animals-PawConnect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="animals.css">
 </head>
-
-
 <body>
+    <div class="nav">
+    <div class="logo">
+        <img src="logo.jpeg" alt="PawConnect Logo">
+        <h2>PawConnect</h2>
+    </div>
+
+    <div class="menu">
+        <a href="home.php">HOME</a>
+        <a href="animals.php">ANIMALS</a>
+
+       <div class="dropdown">
+
+    <a href="#">
+        EXPLORE <i class="fa-solid fa-chevron-down"></i>
+    </a>
+
+    <div class="dropdown-content">
+
+        <!-- ABOUT -->
+
+        <div class="column">
+
+            <h3>About</h3>
+
+            <a href="about.php">About Us</a>
+
+            <a href="mission.php">Mission</a>
+
+            <a href="contact.php">Contact</a>
+
+        </div>
 
 
-<div class="container">
+        <!-- ADOPTION -->
+
+        <div class="column">
+
+            <h3>Adoption</h3>
+
+            <a href="animals.php">Available Animals</a>
+
+            <a href="care.php">Care After Adoption</a>
+
+            <a href="stories.php">Adoption Stories</a>
+
+        </div>
 
 
-    <h1>
-        Adoption Requests
-    </h1>
+        <!-- NGO -->
 
+        <div class="column">
 
-    <p class="subtitle">
-        Review and manage PawConnect adoption applications.
-    </p>
+          <h3>NGO</h3>
 
+            <a href="ngo_login.php">NGO Login</a>
 
-<?php
+            <a href="ngo_register.php">Register NGO</a>
 
+            <a href="admin_login.php">Admin Login</a>
 
-if (mysqli_num_rows($result) == 0) {
-
-
-    echo '
-
-    <div class="no-data">
-
-        No adoption requests found.
+        </div>
 
     </div>
 
-    ';
+</div>
 
+<a href="adopt.php">ADOPT</a>
 
-}
+<a href="contact.php">CONTACT</a>
+    </div>
 
+    <?php if (isset($_SESSION["user_id"]) || isset($_SESSION["ngo_id"])) { ?>
 
-while ($row = mysqli_fetch_assoc($result)) {
+    <a href="logout.php" class="login-btn">
+        LOGOUT
+    </a>
 
+<?php } else { ?>
 
-    /* ==========================================
-       FIND CORRECT ANIMAL
-    ========================================== */
+    <?php if (isset($_SESSION["user_id"]) || isset($_SESSION["ngo_id"])) { ?>
 
+    <a href="logout.php" class="login-btn">
+        LOGOUT
+    </a>
 
-    if (
-        isset($row['animal_id']) &&
-        $row['animal_id'] > 0 &&
-        !empty($row['animal_name'])
-    ) {
+<?php } else { ?>
 
+    <a href="login.php" class="login-btn">
+        LOGIN
+    </a>
 
-        /* NEW ANIMAL */
+<?php } ?>
 
-        $animal_name = $row['animal_name'];
+<?php } ?>
+</div>
 
-        $animal_image = $row['animal_image'];
+<div class="animalshero">
+    <div class="animalshero-text">
+        
+        <h1>Every Paw<br><span>Has a Story.</span><br></h1>
+        <p>Discover loving companions waiting for a place to call home. <br>Find the one whose story becomes a part of yours.</p>
+        <div class="animalshero-btn">
+            <a href="#animals" class="btn12"><i class="fa-solid fa-paw"></i>Meet Our Animals</a>
+    </div>
+</div>
+</div>
 
-        $animal_breed = $row['animal_breed'];
 
 
-    } else {
 
 
-        /* OLD PET */
+<section class="companion-section">
 
-        $animal_name = !empty($row['old_pet_name'])
-            ? $row['old_pet_name']
-            : "Unknown Animal";
+    <div class="paw-decoration">🐾</div>
 
+    <div class="companion-content">
 
-        $animal_image = $row['old_pet_image'] ?? "";
-
-
-        $animal_breed = $row['old_pet_breed'] ?? "";
-
-    }
-
-
-
-    /* ==========================================
-       IMAGE PATH
-    ========================================== */
-
-
-    if (!empty($animal_image)) {
-
-
-        /*
-           If database already contains
-           a complete path.
-        */
-
-        if (
-            strpos($animal_image, "http://") === 0 ||
-            strpos($animal_image, "https://") === 0
-        ) {
-
-
-            $image_path = $animal_image;
-
-
-        }
-
-
-        elseif (
-            strpos($animal_image, "uploads/") === 0
-        ) {
-
-
-            $image_path = $animal_image;
-
-
-        }
-
-
-        elseif (
-            strpos($animal_image, "images/") === 0
-        ) {
-
-
-            $image_path = $animal_image;
-
-
-        }
-
-
-        else {
-
-
-            /*
-               Most likely image filename
-            */
-
-            $image_path = "uploads/" . $animal_image;
-
-        }
-
-
-    } else {
-
-
-        $image_path = "logo.jpeg";
-
-    }
-
-
-
-    /* ==========================================
-       STATUS
-    ========================================== */
-
-
-    $status = $row['status'] ?? "Pending";
-
-
-    if ($status == "Approved") {
-
-        $status_class = "approved";
-
-    }
-
-    elseif ($status == "Rejected") {
-
-        $status_class = "rejected";
-
-    }
-
-    else {
-
-        $status_class = "pending";
-
-    }
-
-
-?>
-
-
-<div class="request-card">
-
-
-    <!-- IMAGE -->
-
-    <img
-
-        src="<?php echo htmlspecialchars($image_path); ?>"
-
-        class="pet-image"
-
-        alt="<?php echo htmlspecialchars($animal_name); ?>"
-
-        onerror="this.src='logo.jpeg';"
-
-    >
-
-
-
-    <!-- INFORMATION -->
-
-    <div class="info">
-
+        <p class="small-title">FIND YOUR FRIEND</p>
 
         <h2>
-
-            <?php echo htmlspecialchars($animal_name); ?>
-
+            A Heart Waiting
+            To Be Loved
         </h2>
 
-
         <p>
-
-            <strong>Breed:</strong>
-
-            <?php echo htmlspecialchars($animal_breed); ?>
-
+            Whether you are looking for a playful dog
+            or a gentle cat, every companion has a
+            unique story waiting to become yours.
         </p>
 
+        <div class="mini-points">
 
-        <p>
+            <span>🐾 Loving Companions</span>
+            <span>♡ Forever Homes</span>
 
-            <strong>Applicant:</strong>
+        </div>
 
-            <?php echo htmlspecialchars($row['full_name']); ?>
-
-        </p>
-
-
-        <p>
-
-            <strong>Email:</strong>
-
-            <?php echo htmlspecialchars($row['email']); ?>
-
-        </p>
+    </div>
 
 
-        <span class="status <?php echo $status_class; ?>">
 
-            <?php echo htmlspecialchars($status); ?>
+    <div class="companion-images">
 
+
+        <div class="pet-box dog-box">
+
+            <img src="compdog.jpeg">
+
+            <div>
+                <h3>Dogs</h3>
+                <a href="dogs.php">
+                    Explore →
+                </a>
+            </div>
+
+        </div>
+
+
+
+        <div class="pet-box cat-box">
+
+            <img src="compcat.jpeg">
+
+            <div>
+                <h3>Cats</h3>
+                <a href="cats.php">
+                    Explore →
+                </a>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+<!-- featured companion -->
+
+<!-- FEATURED COMPANIONS SECTION -->
+
+<section class="featured-companions" id="animals">
+
+    <div class="featured-heading">
+
+        <p>OUR FRIENDS</p>
+
+        <h2>Meet Our Companions</h2>
+
+        <span>
+            Each one has a story, a personality, and a heart waiting for a home.
         </span>
 
+    </div>
+
+
+    <div class="animal-grid">
+
+
+        <!-- CARD 1 -->
+
+        <div class="animal-card">
+
+            <div class="animal-image">
+
+                <img src="bella.jpeg" alt="Bella">
+
+                <span class="status">
+                    Available
+                </span>
+
+            </div>
+
+
+            <div class="animal-details">
+
+                <h3>Bella</h3>
+
+                <p class="breed">
+                    Golden Retriever
+                </p>
+
+
+                <div class="info">
+
+                    <span>♀ 2 Years</span>
+
+                    <span>📍 Pune</span>
+
+                </div>
+
+
+                <div class="tags">
+
+                    <span>Vaccinated</span>
+
+                    <span>Friendly</span>
+
+                </div>
+
+
+                <a href="bella.php">
+                    Meet Bella
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+
+        <!-- CARD 2 -->
+
+
+        <div class="animal-card">
+
+            <div class="animal-image">
+
+                <img src="luna.jpeg" alt="Luna">
+
+                <span class="status">
+                    Available
+                </span>
+
+            </div>
+
+
+            <div class="animal-details">
+
+                <h3>Luna</h3>
+
+                <p class="breed">
+                    Persian Cat
+                </p>
+
+
+                <div class="info">
+
+                    <span>♀ 1 Year</span>
+
+                    <span>📍 Pune</span>
+
+                </div>
+
+
+                <div class="tags">
+
+                    <span>Healthy</span>
+
+                    <span>Calm</span>
+
+                </div>
+
+
+                <a href="luna.php">
+                    Meet Luna
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+
+
+        <!-- CARD 3 -->
+
+
+        <div class="animal-card">
+
+            <div class="animal-image">
+
+                <img src="nova.jpeg" >
+
+                <span class="status">
+                    Available
+                </span>
+
+            </div>
+
+
+            <div class="animal-details">
+
+                <h3>Nova</h3>
+
+                <p class="breed">
+                    Labrador
+                </p>
+
+
+                <div class="info">
+
+                    <span>♂ 3 Years</span>
+
+                    <span>📍 Pune</span>
+
+                </div>
+
+
+                <div class="tags">
+
+                    <span>Active</span>
+
+                    <span>Loyal</span>
+
+                </div>
+
+
+                <a href="nova.php">
+                    Meet Nova
+                </a>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+<!-- 
+journey section -->
+
+<!-- ANIMAL STORIES SECTION -->
+
+<section class="journey-section">
+
+    <div class="journey-heading">
+
+        <p>THEIR STORIES</p>
+
+        <h2>Their Journey Matters</h2>
+
+        <span>
+            Every paw carries a story of hope, care, and a second chance.
+        </span>
 
     </div>
 
 
 
-    <!-- BUTTONS -->
-
-    <div class="buttons">
+    <div class="story-container">
 
 
-        <a
+        <div class="story-image">
 
-            href="adoption_details.php?id=<?php echo $row['id']; ?>"
+            <img src="journey.jpeg" alt="Animal Story">
 
-            class="view"
-
-        >
-
-            View Details
-
-        </a>
+        </div>
 
 
 
-        <?php if ($status == "Pending") { ?>
+        <div class="story-content">
+
+            <h3>From Rescue To Forever Home</h3>
+
+            <p>
+                Every animal deserves love, safety, and a family.
+                Through care and compassion, they get a second chance
+                to live a happy life.
+            </p>
 
 
-            <a
+            <div class="story-points">
 
-                href="update_adoption.php?id=<?php echo $row['id']; ?>&status=Approved"
+                <div>
+                    <strong>1876</strong>
+                    <span>Rescued with care</span>
+                </div>
 
-                class="approve"
 
-            >
+                <div>
+                    <strong>1058</strong>
+                    <span>Health & support</span>
+                </div>
 
-                Approve
 
+                <div>
+                    <strong>679</strong>
+                    <span>Forever family</span>
+                </div>
+
+            </div>
+
+
+            <a href="#">
+                Read More Stories
             </a>
 
 
-
-            <a
-
-                href="update_adoption.php?id=<?php echo $row['id']; ?>&status=Rejected"
-
-                class="reject"
-
-            >
-
-                Reject
-
-            </a>
-
-
-        <?php } ?>
+        </div>
 
 
     </div>
 
 
-</div>
+</section>
 
 
-<?php
+<!-- footer -->
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
-}
+<footer class="footer">
 
-?>
-
-
-</div>
+    <div class="footer-top">
 
 
+        <!-- PAWCONNECT BRAND -->
+
+        <div class="footer-about">
+
+            <div class="footer-logo">
+
+                <img src="logo.jpeg"
+                     alt="PawConnect Logo">
+
+                <h2>
+                    PawConnect
+                </h2>
+
+            </div>
+
+
+            <p>
+                Connecting rescued animals with loving families,
+                trusted shelters and compassionate hearts across India.
+            </p>
+
+
+            <div class="social-icons">
+
+                <a href="#" aria-label="Facebook">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+
+                <a href="#" aria-label="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+
+                <a href="#" aria-label="X">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </a>
+
+                <a href="#" aria-label="LinkedIn">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- EXPLORE -->
+
+        <div class="footer-links">
+
+            <h3>
+                Explore
+            </h3>
+
+            <a href="home.php">
+                Home
+            </a>
+
+            <a href="animals.php">
+                Available Animals
+            </a>
+
+            <a href="adopt.php">
+                Adoption
+            </a>
+
+            <a href="stories.php">
+                Adoption Stories
+            </a>
+
+        </div>
+
+
+
+        <!-- SERVICES -->
+
+        <div class="footer-links">
+
+            <h3>
+                Services
+            </h3>
+
+            <a href="care.php">
+                Care After Adoption
+            </a>
+
+            <a href="petcare.php">
+                Pet Care
+            </a>
+
+            <a href="ngo-partners.php">
+                NGO Partners
+            </a>
+
+            <a href="mission.php">
+                Our Mission
+            </a>
+
+        </div>
+
+
+
+        <!-- CONTACT -->
+
+        <div class="footer-contact">
+
+            <h3>
+                Contact
+            </h3>
+
+            <p>
+                <i class="fa-solid fa-location-dot"></i>
+                Pune, Maharashtra
+            </p>
+
+            <p>
+                <i class="fa-solid fa-phone"></i>
+                +91 98765 43210
+            </p>
+
+            <p>
+                <i class="fa-solid fa-envelope"></i>
+                hello@pawconnect.in
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- FOOTER BOTTOM -->
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 PawConnect • Connecting every paw with care,
+            compassion & a place to belong.
+        </p>
+
+    </div>
+
+
+</footer>
 </body>
-
 </html>
