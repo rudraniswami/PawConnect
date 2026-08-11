@@ -104,16 +104,13 @@ if(!isset($_SESSION['user_id']))
     </div>
 
 
-    <a href="#" class="menu">
+    <a href="my_profile.php" class="menu">
 
         <i class="fa-regular fa-user"></i>
 
         <span>My Profile</span>
 
     </a>
-
-    </a>
-
 
     <a href="logout.php" class="menu logout">
 
