@@ -24,7 +24,7 @@ if(!isset($_SESSION['user_id']))
     <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="user_dashboard.css">
 
 </head>
 
@@ -63,16 +63,16 @@ if(!isset($_SESSION['user_id']))
     </a>
 
 
-    <a href="#" class="menu">
+    <a href="about.php" class="menu">
 
-        <i class="fa-solid fa-paw"></i>
+        <i class="fa-solid fa-circle-info"></i>
 
-        <span>Rescued Animals</span>
+        <span>About Us</span>
 
     </a>
 
 
-    <a href="#" class="menu">
+    <a href="adoption_details.php" class="menu">
 
         <i class="fa-solid fa-heart"></i>
 
@@ -81,20 +81,20 @@ if(!isset($_SESSION['user_id']))
     </a>
 
 
-    <a href="#" class="menu">
+    <a href="mission.php" class="menu">
 
-        <i class="fa-solid fa-notes-medical"></i>
+        <i class="fa-solid fa-bullseye"></i>
 
-        <span>Health Passport</span>
+        <span> Our Mission</span>
 
     </a>
 
 
-    <a href="#" class="menu">
+    <a href="contact.php" class="menu">
 
-        <i class="fa-solid fa-hand-holding-heart"></i>
+        <i class="fa-solid fa-envelope"></i>
 
-        <span>My Adoptions</span>
+        <span>Contact Us</span>
 
     </a>
 
@@ -111,13 +111,6 @@ if(!isset($_SESSION['user_id']))
         <span>My Profile</span>
 
     </a>
-
-
-    <a href="#" class="menu">
-
-        <i class="fa-solid fa-gear"></i>
-
-        <span>Settings</span>
 
     </a>
 

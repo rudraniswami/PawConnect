@@ -123,17 +123,11 @@ href="admin_dashboard.css">
 
 
     <a href="adoptions.php" class="admin-btn">
+
+      <i class="fa-solid fa-heart"></i>
+      
     View Adoption Requests
 </a>
-
-
-    <a href="ngo.php">
-
-        <i class="fa-solid fa-building"></i>
-
-        NGO Management
-
-    </a>
 
 
 </div>

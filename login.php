@@ -28,7 +28,7 @@ if(isset($_POST['login']))
             $_SESSION['user_name'] = $user['name'];
             $_SESSION['user_email'] = $user['email'];
 
-            header("Location: dashboard.php");
+            header("Location: user_dashboard.php");
             exit();
         }
         else
