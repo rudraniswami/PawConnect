@@ -1,0 +1,455 @@
+/* =========================
+   PAWCONNECT NGO PAGE
+   ========================= */
+
+body {
+    background-color: #fffaf0;
+    color: #064331;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.nav{
+    width:100%;
+    min-height:80px;
+    position:sticky;
+    top:0;
+    z-index:999;
+    background:#123C2A;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 40px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.12);
+    opacity:0;
+    transform:translateY(-100%);
+    animation:navIn 1s ease forwards;
+    animation-delay:0s;
+    gap:20px;
+}
+
+@keyframes navIn{
+    from{opacity:0; transform:translateY(-100%);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    flex-shrink:0;
+}
+
+.logo img{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.logo h2{
+    color:#FFFDF7;
+    font-size:28px;
+    letter-spacing:1px;
+}
+
+.menu{
+    display:flex;
+    align-items:center;
+    gap:26px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#FFFDF7;
+    font-size:16px;
+    font-weight:bold;
+    transition:0.3s ease;
+}
+
+.menu > a:hover{
+    color:#C6A15B;
+}
+
+.login-btn{
+    text-decoration:none;
+    color:#FFFDF7;
+    background:#C6A15B;
+    padding:10px 22px;
+    border-radius:30px;
+    font-weight:bold;
+    transition:0.3s ease;
+    flex-shrink:0;
+}
+
+.login-btn:hover{
+    background:#a88344;
+    transform:translateY(-2px);
+}
+
+/* EXPLORE DROPDOWN */
+
+.dropdown{
+    position:relative;
+}
+
+.dropdown > a{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:10px 14px;
+    border-radius:25px;
+    transition:0.3s ease;
+}
+
+.dropdown > a:hover{
+    background:rgba(255,255,255,0.08);
+}
+
+.dropdown-content{
+    position:absolute;
+    top:52px;
+    left:50%;
+    transform:translateX(-50%) translateY(10px);
+    width:620px;
+    padding:22px;
+    background:#FFFDF7;
+    border-radius:16px;
+    box-shadow:0 12px 28px rgba(0,0,0,.18);
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    opacity:0;
+    visibility:hidden;
+    transition:0.3s ease;
+}
+
+.dropdown:hover .dropdown-content{
+    opacity:1;
+    visibility:visible;
+    transform:translateX(-50%) translateY(0);
+}
+
+.column{
+    width:30%;
+    display:flex;
+    flex-direction:column;
+}
+
+.column h3{
+    color:#123C2A;
+    font-size:18px;
+    margin-bottom:12px;
+    padding-bottom:8px;
+    border-bottom:2px solid #C6A15B;
+}
+
+.column a{
+    text-decoration:none;
+    color:#444;
+    margin:7px 0;
+    font-size:15px;
+    font-weight:normal;
+    transition:0.3s;
+}
+
+.column a:hover{
+    color:#C6A15B;
+    padding-left:4px;
+}
+
+/* HERO */
+
+.hero-section {
+    padding: 60px 0;
+}
+
+.hero-title {
+    color: #064331;
+    font-size: 55px;
+    font-weight: bold;
+}
+
+.hero-text {
+    color: #555;
+    line-height: 1.6;
+}
+
+.hero-image {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 30px;
+}
+
+
+/* GREEN MISSION SECTION */
+
+.mission-section {
+    background-color: #064331;
+    color: white;
+    border-radius: 25px;
+}
+
+.mission-item {
+    padding: 15px;
+    border-right: 1px solid rgba(255,255,255,0.5);
+}
+
+.mission-item:last-child {
+    border-right: none;
+}
+
+.mission-icon {
+    font-size: 35px;
+}
+
+
+/* NGO HEADING */
+
+.ngo-title {
+    color: #064331;
+    font-weight: bold;
+}
+
+.ngo-subtitle {
+    color: #666;
+}
+/* NGO CARDS */
+
+.ngo-card {
+    border: none;
+    border-radius: 18px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.ngo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(6,67,49,0.15);
+}
+
+.ngo-card img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+}
+
+.ngo-card h5 {
+    color: #064331;
+    font-weight: bold;
+}
+
+.ngo-card p {
+    font-size: 13px;
+    color: #666;
+}
+
+
+/* BUTTON */
+
+.green-btn {
+    background-color: #064331;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+}
+
+.green-btn:hover {
+    background-color: #042f23;
+    color: white;
+}
+
+
+/* IMPACT SECTION */
+
+.impact-section {
+    background-color: #064331;
+    color: white;
+    border-radius: 25px;
+}
+
+.impact-section h2 {
+    font-weight: bold;
+}
+
+.impact-section p {
+    font-size: 13px;
+}
+
+
+/* CTA */
+
+.cta-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 30px;
+}
+
+.cta-title {
+    color: #064331;
+    font-weight: bold;
+}
+
+.cta-box {
+    border: 1px solid #aaa;
+    border-radius: 20px;
+    padding: 25px;
+    background-color: #fffdf7;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer{
+    background:#123C2A;
+    color:white;
+    padding:45px 70px 15px;
+}
+
+
+/* FOOTER TOP */
+
+.footer-top{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1.3fr;
+    gap:40px;
+    padding-bottom:25px;
+    border-bottom:1px solid rgba(255,255,255,.15);
+}
+
+
+/* LOGO */
+
+.footer-logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:15px;
+}
+
+
+.footer-logo img{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+
+.footer-logo h2{
+    color:#C6A15B;
+    font-size:30px;
+}
+
+
+/* ABOUT */
+
+.footer-about p{
+    color:#E8E8E8;
+    line-height:1.6;
+    margin-bottom:16px;
+    max-width:350px;
+}
+
+
+/* SOCIAL ICONS */
+
+.social-icons{
+    display:flex;
+    gap:10px;
+}
+
+
+.social-icons a{
+    width:40px;
+    height:40px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.08);
+
+    color:white;
+
+    text-decoration:none;
+
+    transition:.3s;
+}
+
+
+.social-icons a:hover{
+    background:#C6A15B;
+    color:#123C2A;
+    transform:translateY(-3px);
+}
+
+
+/* FOOTER LINKS */
+
+.footer-links h3,
+.footer-contact h3{
+    color:#C6A15B;
+    margin-bottom:16px;
+}
+
+
+.footer-links a{
+    display:block;
+
+    color:#E8E8E8;
+
+    text-decoration:none;
+
+    margin-bottom:9px;
+
+    transition:.3s;
+}
+
+
+.footer-links a:hover{
+    color:#C6A15B;
+    padding-left:5px;
+}
+
+
+/* CONTACT */
+
+.footer-contact p{
+    margin-bottom:10px;
+    color:#E8E8E8;
+}
+
+
+.footer-contact i{
+    color:#C6A15B;
+    margin-right:8px;
+}
+
+
+/* FOOTER BOTTOM */
+
+.footer-bottom{
+    text-align:center;
+
+    padding-top:18px;
+
+    color:#ddd;
+
+    font-size:14px;
+}
