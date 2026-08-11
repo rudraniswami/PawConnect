@@ -3,28 +3,43 @@
 include "db.php";
 
 
-/* ================================
+/* ==========================================
    GET ADOPTION REQUESTS
-================================ */
+========================================== */
 
-$sql = "SELECT 
-            adoption_requests.*,
-            animals.name AS animal_name,
-            animals.image AS animal_image
-        FROM adoption_requests
-        LEFT JOIN animals
-        ON adoption_requests.pet_id = animals.id
-        ORDER BY adoption_requests.created_at DESC";
+$sql = "
+SELECT
+    ar.*,
+
+    a.name AS animal_name,
+    a.image AS animal_image,
+    a.breed AS animal_breed,
+
+    p.name AS old_pet_name,
+    p.image AS old_pet_image,
+    p.breed AS old_pet_breed
+
+FROM adoption_requests ar
+
+LEFT JOIN animals a
+    ON ar.animal_id = a.id
+
+LEFT JOIN pets p
+    ON ar.pet_id = p.id
+
+ORDER BY ar.created_at DESC
+";
 
 
 $result = mysqli_query($conn, $sql);
 
 
 if (!$result) {
-    die("Database error: " . mysqli_error($conn));
+    die("Database Error: " . mysqli_error($conn));
 }
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +51,8 @@ if (!$result) {
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
-<title>Adoption Requests | PawConnect Admin</title>
+<title>Adoption Requests | PawConnect</title>
+
 
 <style>
 
@@ -46,198 +62,223 @@ if (!$result) {
     box-sizing: border-box;
 }
 
+
 body {
+
     font-family: Arial, sans-serif;
-    background: #f6f4ed;
+
+    background: #f7f4ed;
+
     color: #173c2d;
+
 }
 
-
-/* ================= NAVBAR ================= */
-
-.nav {
-    height: 75px;
-    background: #173c2d;
-    display: flex;
-    align-items: center;
-    padding: 0 55px;
-    color: white;
-}
-
-.nav h2 {
-    font-family: Georgia, serif;
-}
-
-
-/* ================= CONTAINER ================= */
 
 .container {
-    width: 1100px;
-    max-width: 92%;
+
+    width: 92%;
+
+    max-width: 1200px;
+
     margin: 50px auto;
+
 }
 
 
-.header {
+h1 {
+
+    margin-bottom: 10px;
+
+}
+
+
+.subtitle {
+
+    color: #777;
+
     margin-bottom: 30px;
+
 }
 
-.header p {
-    font-size: 12px;
-    letter-spacing: 3px;
-    font-weight: bold;
-}
-
-.header h1 {
-    font-family: Georgia, serif;
-    font-size: 42px;
-    margin-top: 8px;
-}
-
-.header span {
-    display: block;
-    color: #718078;
-    margin-top: 8px;
-}
-
-
-/* ================= CARD ================= */
 
 .request-card {
+
     background: white;
-    border-radius: 18px;
-    padding: 22px;
-    margin-bottom: 18px;
-    display: flex;
-    align-items: center;
-    gap: 22px;
-    box-shadow: 0 7px 25px rgba(23,60,45,0.07);
-}
 
-
-/* ================= PHOTO ================= */
-
-.animal-photo {
-    width: 100px;
-    height: 100px;
-    flex-shrink: 0;
-}
-
-.animal-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
     border-radius: 15px;
+
+    padding: 20px;
+
+    margin-bottom: 20px;
+
+    display: flex;
+
+    gap: 20px;
+
+    align-items: center;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+
 }
 
 
-/* ================= INFO ================= */
+.pet-image {
 
-.request-info {
+    width: 130px;
+
+    height: 130px;
+
+    object-fit: cover;
+
+    border-radius: 12px;
+
+}
+
+
+.info {
+
     flex: 1;
+
 }
 
-.request-info h2 {
-    font-family: Georgia, serif;
-    font-size: 25px;
+
+.info h2 {
+
     margin-bottom: 6px;
-}
 
-.request-info p {
-    color: #69756e;
-    font-size: 14px;
-    margin-bottom: 5px;
-}
-
-.request-info strong {
-    color: #173c2d;
 }
 
 
-/* ================= STATUS ================= */
+.info p {
+
+    margin: 5px 0;
+
+    color: #555;
+
+}
+
 
 .status {
+
     display: inline-block;
-    padding: 6px 13px;
+
+    padding: 6px 12px;
+
     border-radius: 20px;
-    font-size: 12px;
-    font-weight: bold;
+
     margin-top: 8px;
-}
 
-.status.Pending {
-    background: #f4e7c5;
-    color: #765d25;
-}
+    font-size: 13px;
 
-.status.Approved {
-    background: #dcefe4;
-    color: #21623c;
-}
-
-.status.Rejected {
-    background: #f5dada;
-    color: #963c3c;
-}
-
-
-/* ================= BUTTONS ================= */
-
-.actions {
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-    min-width: 145px;
-}
-
-.actions a {
-    text-decoration: none;
-    text-align: center;
-    padding: 10px 15px;
-    border-radius: 22px;
-    font-size: 12px;
     font-weight: bold;
+
 }
 
 
-.view-btn {
-    background: #173c2d;
-    color: white;
-}
+.pending {
 
-.approve-btn {
-    background: #dcefe4;
-    color: #21623c;
-}
+    background: #fff3cd;
 
-.reject-btn {
-    background: #f5dada;
-    color: #963c3c;
+    color: #856404;
+
 }
 
 
-/* ================= EMPTY ================= */
+.approved {
 
-.empty {
-    background: white;
-    padding: 50px;
+    background: #d4edda;
+
+    color: #155724;
+
+}
+
+
+.rejected {
+
+    background: #f8d7da;
+
+    color: #721c24;
+
+}
+
+
+.buttons {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+}
+
+
+.buttons a {
+
+    text-decoration: none;
+
+    padding: 10px 16px;
+
+    border-radius: 7px;
+
     text-align: center;
-    border-radius: 18px;
-    color: #777;
+
+    color: white;
+
+    font-size: 14px;
+
 }
 
 
-/* ================= MOBILE ================= */
+.view {
 
-@media(max-width: 750px) {
+    background: #173c2d;
+
+}
+
+
+.approve {
+
+    background: #4d8b62;
+
+}
+
+
+.reject {
+
+    background: #c94c4c;
+
+}
+
+
+.no-data {
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 15px;
+
+    text-align: center;
+
+}
+
+
+@media (max-width: 700px) {
 
     .request-card {
+
         flex-direction: column;
+
         align-items: flex-start;
+
     }
 
-    .actions {
+
+    .buttons {
+
         width: 100%;
+
     }
 
 }
@@ -250,196 +291,312 @@ body {
 <body>
 
 
-<!-- ================= NAVBAR ================= -->
+<div class="container">
 
-<div class="nav">
 
-    <h2>
-        PawConnect Admin
-    </h2>
+    <h1>
+        Adoption Requests
+    </h1>
+
+
+    <p class="subtitle">
+        Review and manage PawConnect adoption applications.
+    </p>
+
+
+<?php
+
+
+if (mysqli_num_rows($result) == 0) {
+
+
+    echo '
+
+    <div class="no-data">
+
+        No adoption requests found.
+
+    </div>
+
+    ';
+
+
+}
+
+
+while ($row = mysqli_fetch_assoc($result)) {
+
+
+    /* ==========================================
+       FIND CORRECT ANIMAL
+    ========================================== */
+
+
+    if (
+        isset($row['animal_id']) &&
+        $row['animal_id'] > 0 &&
+        !empty($row['animal_name'])
+    ) {
+
+
+        /* NEW ANIMAL */
+
+        $animal_name = $row['animal_name'];
+
+        $animal_image = $row['animal_image'];
+
+        $animal_breed = $row['animal_breed'];
+
+
+    } else {
+
+
+        /* OLD PET */
+
+        $animal_name = !empty($row['old_pet_name'])
+            ? $row['old_pet_name']
+            : "Unknown Animal";
+
+
+        $animal_image = $row['old_pet_image'] ?? "";
+
+
+        $animal_breed = $row['old_pet_breed'] ?? "";
+
+    }
+
+
+
+    /* ==========================================
+       IMAGE PATH
+    ========================================== */
+
+
+    if (!empty($animal_image)) {
+
+
+        /*
+           If database already contains
+           a complete path.
+        */
+
+        if (
+            strpos($animal_image, "http://") === 0 ||
+            strpos($animal_image, "https://") === 0
+        ) {
+
+
+            $image_path = $animal_image;
+
+
+        }
+
+
+        elseif (
+            strpos($animal_image, "uploads/") === 0
+        ) {
+
+
+            $image_path = $animal_image;
+
+
+        }
+
+
+        elseif (
+            strpos($animal_image, "images/") === 0
+        ) {
+
+
+            $image_path = $animal_image;
+
+
+        }
+
+
+        else {
+
+
+            /*
+               Most likely image filename
+            */
+
+            $image_path = "uploads/" . $animal_image;
+
+        }
+
+
+    } else {
+
+
+        $image_path = "logo.jpeg";
+
+    }
+
+
+
+    /* ==========================================
+       STATUS
+    ========================================== */
+
+
+    $status = $row['status'] ?? "Pending";
+
+
+    if ($status == "Approved") {
+
+        $status_class = "approved";
+
+    }
+
+    elseif ($status == "Rejected") {
+
+        $status_class = "rejected";
+
+    }
+
+    else {
+
+        $status_class = "pending";
+
+    }
+
+
+?>
+
+
+<div class="request-card">
+
+
+    <!-- IMAGE -->
+
+    <img
+
+        src="<?php echo htmlspecialchars($image_path); ?>"
+
+        class="pet-image"
+
+        alt="<?php echo htmlspecialchars($animal_name); ?>"
+
+        onerror="this.src='logo.jpeg';"
+
+    >
+
+
+
+    <!-- INFORMATION -->
+
+    <div class="info">
+
+
+        <h2>
+
+            <?php echo htmlspecialchars($animal_name); ?>
+
+        </h2>
+
+
+        <p>
+
+            <strong>Breed:</strong>
+
+            <?php echo htmlspecialchars($animal_breed); ?>
+
+        </p>
+
+
+        <p>
+
+            <strong>Applicant:</strong>
+
+            <?php echo htmlspecialchars($row['full_name']); ?>
+
+        </p>
+
+
+        <p>
+
+            <strong>Email:</strong>
+
+            <?php echo htmlspecialchars($row['email']); ?>
+
+        </p>
+
+
+        <span class="status <?php echo $status_class; ?>">
+
+            <?php echo htmlspecialchars($status); ?>
+
+        </span>
+
+
+    </div>
+
+
+
+    <!-- BUTTONS -->
+
+    <div class="buttons">
+
+
+        <a
+
+            href="adoption_details.php?id=<?php echo $row['id']; ?>"
+
+            class="view"
+
+        >
+
+            View Details
+
+        </a>
+
+
+
+        <?php if ($status == "Pending") { ?>
+
+
+            <a
+
+                href="update_adoption.php?id=<?php echo $row['id']; ?>&status=Approved"
+
+                class="approve"
+
+            >
+
+                Approve
+
+            </a>
+
+
+
+            <a
+
+                href="update_adoption.php?id=<?php echo $row['id']; ?>&status=Rejected"
+
+                class="reject"
+
+            >
+
+                Reject
+
+            </a>
+
+
+        <?php } ?>
+
+
+    </div>
+
 
 </div>
 
 
+<?php
 
-<!-- ================= CONTENT ================= -->
+}
 
-<div class="container">
-
-
-    <div class="header">
-
-        <p>
-            PAWCONNECT ADMIN
-        </p>
-
-        <h1>
-            Adoption Requests
-        </h1>
-
-        <span>
-            Review applications and manage adoption requests.
-        </span>
-
-    </div>
-
-
-
-<?php if (mysqli_num_rows($result) > 0) { ?>
-
-
-    <?php while ($row = mysqli_fetch_assoc($result)) { ?>
-
-
-        <div class="request-card">
-
-
-            <!-- ANIMAL PHOTO -->
-
-            <div class="animal-photo">
-
-                <?php if (!empty($row['animal_image'])) { ?>
-
-                    <img
-                        src="<?php echo htmlspecialchars($row['animal_image']); ?>"
-                        alt="<?php echo htmlspecialchars($row['animal_name']); ?>">
-
-                <?php } else { ?>
-
-                    <img
-                        src="logo.jpeg"
-                        alt="PawConnect">
-
-                <?php } ?>
-
-            </div>
-
-
-
-            <!-- REQUEST INFO -->
-
-            <div class="request-info">
-
-                <h2>
-
-                    <?php
-
-                    echo htmlspecialchars(
-                        $row['animal_name'] ?? 'Unknown Animal'
-                    );
-
-                    ?>
-
-                </h2>
-
-
-                <p>
-
-                    Applicant:
-                    
-                    <strong>
-                        <?php echo htmlspecialchars($row['full_name']); ?>
-                    </strong>
-
-                </p>
-
-
-                <p>
-
-                    Email:
-                    
-                    <?php echo htmlspecialchars($row['email']); ?>
-
-                </p>
-
-
-                <p>
-
-                    Request ID:
-                    
-                    #<?php echo htmlspecialchars($row['id']); ?>
-
-                </p>
-
-
-                <span class="status <?php echo htmlspecialchars($row['status']); ?>">
-
-                    <?php echo htmlspecialchars($row['status']); ?>
-
-                </span>
-
-            </div>
-
-
-
-            <!-- ACTIONS -->
-
-            <div class="actions">
-
-
-                <a
-                    href="adoption_details.php?id=<?php echo $row['id']; ?>"
-                    class="view-btn">
-
-                    View Details
-
-                </a>
-
-
-                <?php if ($row['status'] != 'Approved') { ?>
-
-                    <a
-                        href="update_adoption_status.php?id=<?php echo $row['id']; ?>&status=Approved"
-                        class="approve-btn"
-                        onclick="return confirm('Approve this adoption request?');">
-
-                        ✓ Approve
-
-                    </a>
-
-                <?php } ?>
-
-
-                <?php if ($row['status'] != 'Rejected') { ?>
-
-                    <a
-                        href="update_adoption_status.php?id=<?php echo $row['id']; ?>&status=Rejected"
-                        class="reject-btn"
-                        onclick="return confirm('Reject this adoption request?');">
-
-                        ✕ Reject
-
-                    </a>
-
-                <?php } ?>
-
-
-            </div>
-
-
-        </div>
-
-
-    <?php } ?>
-
-
-<?php } else { ?>
-
-
-    <div class="empty">
-
-        <h2>
-            No Adoption Requests
-        </h2>
-
-        <p>
-            There are currently no adoption applications.
-        </p>
-
-    </div>
-
-
-<?php } ?>
+?>
 
 
 </div>

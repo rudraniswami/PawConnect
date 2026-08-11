@@ -9,41 +9,57 @@ include "db.php";
 ================================ */
 
 if (!isset($_SESSION['user_id'])) {
-
     header("Location: login.php");
     exit();
-
 }
 
 
 /* ================================
-   CHECK ANIMAL ID
+   CHECK ANIMAL / PET ID
 ================================ */
 
-if (!isset($_GET['animal_id'])) {
+$animal_id = 0;
+$pet_id = 0;
+
+
+/* NEW ANIMAL */
+
+if (isset($_GET['animal_id'])) {
+
+    $animal_id = intval($_GET['animal_id']);
+
+    $stmt = $conn->prepare(
+        "SELECT * FROM animals WHERE id = ?"
+    );
+
+    $stmt->bind_param("i", $animal_id);
+
+}
+
+
+/* OLD PET */
+
+elseif (isset($_GET['pet_id'])) {
+
+    $pet_id = intval($_GET['pet_id']);
+
+    $stmt = $conn->prepare(
+        "SELECT * FROM pets WHERE id = ?"
+    );
+
+    $stmt->bind_param("i", $pet_id);
+
+}
+
+
+/* NOTHING SELECTED */
+
+else {
 
     die("No animal selected.");
 
 }
 
-$animal_id = intval($_GET['animal_id']);
-
-
-/* ================================
-   GET ANIMAL
-================================ */
-
-$stmt = $conn->prepare(
-    "SELECT * FROM animals WHERE id = ?"
-);
-
-if (!$stmt) {
-
-    die("Database error: " . $conn->error);
-
-}
-
-$stmt->bind_param("i", $animal_id);
 
 $stmt->execute();
 
@@ -52,7 +68,7 @@ $result = $stmt->get_result();
 
 if ($result->num_rows == 0) {
 
-    die("Animal not found. ID = " . $animal_id);
+    die("Animal not found.");
 
 }
 
@@ -198,8 +214,6 @@ Adopt <?php echo htmlspecialchars($pet['name']); ?> | PawConnect
 
 
         <a href="adopt.php?animal_id=<?php echo $animal_id; ?>">
-            ADOPT
-        </a>
 
 
         <a href="contact.php">
@@ -356,9 +370,19 @@ Adopt <?php echo htmlspecialchars($pet['name']); ?> | PawConnect
 
     <!-- IMPORTANT -->
 
+    <?php if ($animal_id > 0) { ?>
+
     <input type="hidden"
            name="animal_id"
            value="<?php echo $animal_id; ?>">
+
+<?php } else { ?>
+
+    <input type="hidden"
+           name="pet_id"
+           value="<?php echo $pet_id; ?>">
+
+<?php } ?>
 
 
 
@@ -1001,9 +1025,7 @@ Adopt <?php echo htmlspecialchars($pet['name']); ?> | PawConnect
                 Available Animals
             </a>
 
-            <a href="adopt.php?animal_id=<?php echo $animal_id; ?>">
-                Adoption
-            </a>
+           <a href="adopt.php?animal_id=<?php echo $animal_id; ?>">
 
             <a href="stories.php">
                 Adoption Stories
