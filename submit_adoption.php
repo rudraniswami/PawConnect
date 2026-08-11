@@ -18,82 +18,45 @@ $user_id = intval($_SESSION['user_id']);
 
 
 /* ==========================================
-   CHECK PET / ANIMAL
+   CHECK PET ID
 ========================================== */
 
-$pet_id = 0;
-$animal_id = 0;
+if (!isset($_POST['pet_id']) || empty($_POST['pet_id'])) {
 
-
-/* ------------------------------------------
-   NEW ANIMAL
------------------------------------------- */
-
-if (isset($_POST['animal_id']) && !empty($_POST['animal_id'])) {
-
-    $animal_id = intval($_POST['animal_id']);
-
-    $check = $conn->prepare(
-        "SELECT id FROM animals WHERE id = ?"
-    );
-
-    if (!$check) {
-        die("Database error: " . $conn->error);
-    }
-
-    $check->bind_param("i", $animal_id);
-    $check->execute();
-
-    $check_result = $check->get_result();
-
-    if ($check_result->num_rows == 0) {
-
-        die("Animal not found.");
-
-    }
+    die("No pet selected.");
 
 }
 
+$pet_id = intval($_POST['pet_id']);
 
-/* ------------------------------------------
-   OLD PET
------------------------------------------- */
 
-elseif (isset($_POST['pet_id']) && !empty($_POST['pet_id'])) {
+/* ==========================================
+   CHECK PET EXISTS
+========================================== */
 
-    $pet_id = intval($_POST['pet_id']);
+$check = $conn->prepare(
+    "SELECT id FROM pets WHERE id = ?"
+);
 
-    $check = $conn->prepare(
-        "SELECT id FROM pets WHERE id = ?"
-    );
+if (!$check) {
 
-    if (!$check) {
-        die("Database error: " . $conn->error);
-    }
-
-    $check->bind_param("i", $pet_id);
-    $check->execute();
-
-    $check_result = $check->get_result();
-
-    if ($check_result->num_rows == 0) {
-
-        die("Pet not found.");
-
-    }
+    die("Database error: " . $conn->error);
 
 }
 
+$check->bind_param("i", $pet_id);
 
-/* ------------------------------------------
-   NOTHING SELECTED
------------------------------------------- */
+$check->execute();
 
-else {
+$result = $check->get_result();
 
-    die("No animal selected.");
+if ($result->num_rows == 0) {
+
+    die("Pet not found.");
 
 }
+
+$check->close();
 
 
 /* ==========================================
@@ -120,7 +83,7 @@ $reason = trim($_POST['reason'] ?? '');
 
 
 /* ==========================================
-   BASIC VALIDATION
+   VALIDATION
 ========================================== */
 
 if (
@@ -144,12 +107,10 @@ if (
 
 
 /* ==========================================
-   AGREEMENT
+   CHECK AGREEMENT
 ========================================== */
 
-$agreement = isset($_POST['agreement']) ? 1 : 0;
-
-if ($agreement != 1) {
+if (!isset($_POST['agreement'])) {
 
     die("Please accept the adoption agreement.");
 
@@ -171,7 +132,6 @@ $sql = "INSERT INTO adoption_requests
 (
     user_id,
     pet_id,
-    animal_id,
     full_name,
     phone,
     email,
@@ -189,7 +149,7 @@ $sql = "INSERT INTO adoption_requests
 )
 VALUES
 (
-    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 )";
 
 
@@ -203,20 +163,14 @@ if (!$stmt) {
 }
 
 
-/*
-   3 integers:
-   user_id
-   pet_id
-   animal_id
-
-   Then 14 strings.
-*/
+/* ==========================================
+   BIND VALUES
+========================================== */
 
 $stmt->bind_param(
-    "iiissssssssssssss",
+    "iissssssssssssss",
     $user_id,
     $pet_id,
-    $animal_id,
     $full_name,
     $phone,
     $email,
@@ -240,88 +194,227 @@ $stmt->bind_param(
 
 if ($stmt->execute()) {
 
-    echo "
-    <!DOCTYPE html>
-    <html>
-    <head>
+?>
 
-        <meta charset='UTF-8'>
+<!DOCTYPE html>
 
-        <title>Adoption Request Submitted</title>
+<html lang="en">
 
-        <style>
+<head>
 
-            body {
-                font-family: Arial, sans-serif;
-                background: #f7f4ed;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                min-height: 100vh;
-                margin: 0;
-            }
+    <meta charset="UTF-8">
 
-            .box {
-                background: white;
-                padding: 45px;
-                border-radius: 18px;
-                text-align: center;
-                width: 90%;
-                max-width: 500px;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.10);
-            }
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-            .icon {
-                font-size: 50px;
-                margin-bottom: 15px;
-            }
+    <title>Adoption Request Submitted | PawConnect</title>
 
-            h1 {
-                color: #173c2d;
-                margin-bottom: 10px;
-            }
+    <style>
 
-            p {
-                color: #666;
-                line-height: 1.6;
-            }
+        * {
+            box-sizing: border-box;
+        }
 
-            a {
-                display: inline-block;
-                margin-top: 20px;
-                padding: 12px 25px;
-                background: #173c2d;
-                color: white;
-                text-decoration: none;
-                border-radius: 8px;
-            }
+        body {
 
-        </style>
+            margin: 0;
 
-    </head>
+            min-height: 100vh;
 
-    <body>
+            display: flex;
 
-        <div class='box'>
+            justify-content: center;
 
-            <div class='icon'>🐾</div>
+            align-items: center;
 
-            <h1>Request Submitted!</h1>
+            font-family: Arial, sans-serif;
 
-            <p>
-                Your adoption request has been submitted successfully.
-                Our team will review your application.
-            </p>
+            background: #f7f4ed;
 
-            <a href='animals.php'>
-                Back to Animals
-            </a>
+        }
 
-        </div>
 
-    </body>
-    </html>
-    ";
+        .success-box {
+
+            width: 90%;
+
+            max-width: 520px;
+
+            background: #ffffff;
+
+            padding: 45px 35px;
+
+            text-align: center;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.10);
+
+        }
+
+
+        .icon {
+
+            width: 75px;
+
+            height: 75px;
+
+            margin: 0 auto 20px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background: #173c2d;
+
+            color: white;
+
+            border-radius: 50%;
+
+            font-size: 38px;
+
+        }
+
+
+        h1 {
+
+            margin: 0 0 15px;
+
+            color: #173c2d;
+
+            font-size: 30px;
+
+        }
+
+
+        p {
+
+            color: #666;
+
+            line-height: 1.7;
+
+            font-size: 16px;
+
+        }
+
+
+        .status {
+
+            display: inline-block;
+
+            margin-top: 10px;
+
+            padding: 8px 18px;
+
+            border-radius: 20px;
+
+            background: #f1ead9;
+
+            color: #173c2d;
+
+            font-weight: bold;
+
+        }
+
+
+        .btn {
+
+            display: inline-block;
+
+            margin-top: 25px;
+
+            padding: 13px 28px;
+
+            background: #173c2d;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+        }
+
+
+        .btn:hover {
+
+            background: #245541;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="success-box">
+
+
+    <div class="icon">
+
+        🐾
+
+    </div>
+
+
+    <h1>
+
+        Adoption Request Submitted!
+
+    </h1>
+
+
+    <p>
+
+        Thank you for choosing to give a rescued animal
+
+        a loving home.
+
+    </p>
+
+
+    <p>
+
+        Your adoption request has been successfully
+
+        submitted to the PawConnect team.
+
+    </p>
+
+
+    <div class="status">
+
+        Status: Pending
+
+    </div>
+
+
+    <br>
+
+
+    <a href="animals.php" class="btn">
+
+        Back to Animals
+
+    </a>
+
+
+</div>
+
+
+</body>
+
+</html>
+
+<?php
 
 } else {
 
@@ -329,6 +422,7 @@ if ($stmt->execute()) {
         "Error submitting adoption request: "
         . $stmt->error
     );
+
 }
 
 
