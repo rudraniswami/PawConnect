@@ -6,51 +6,50 @@ session_start();
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
     <title>About Us | PawConnect</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
     <link rel="stylesheet"
           href="about.css">
-          <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 </head>
-
 
 <body>
 
 
-<?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-?>
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
 
 <div class="nav">
+
 
     <!-- LOGO -->
 
     <div class="logo">
 
-        <img src="logo.jpeg" alt="PawConnect Logo">
+        <img src="logo.jpeg"
+             alt="PawConnect Logo">
 
         <h2>PawConnect</h2>
 
     </div>
 
 
-    <!-- CENTER MENU -->
+    <!-- MENU -->
 
     <div class="menu">
 
         <a href="home.php">
             HOME
         </a>
-
 
         <a href="about.php">
             ABOUT US
@@ -70,13 +69,9 @@ if (session_status() === PHP_SESSION_NONE) {
             <div class="dropdown-content">
 
 
-                <!-- ABOUT -->
-
                 <div class="column">
 
-                    <h3>
-                        About
-                    </h3>
+                    <h3>About</h3>
 
                     <a href="about.php">
                         About Us
@@ -93,13 +88,9 @@ if (session_status() === PHP_SESSION_NONE) {
                 </div>
 
 
-                <!-- ADOPTION -->
-
                 <div class="column">
 
-                    <h3>
-                        Adoption
-                    </h3>
+                    <h3>Adoption</h3>
 
                     <a href="animals.php">
                         Available Animals
@@ -116,13 +107,9 @@ if (session_status() === PHP_SESSION_NONE) {
                 </div>
 
 
-                <!-- LOGIN -->
-
                 <div class="column">
 
-                    <h3>
-                        Login
-                    </h3>
+                    <h3>Login</h3>
 
                     <a href="login.php">
                         User Login
@@ -138,20 +125,15 @@ if (session_status() === PHP_SESSION_NONE) {
 
                 </div>
 
-
             </div>
 
         </div>
 
 
-        <!-- ANIMALS -->
-
         <a href="animals.php">
             ANIMALS
         </a>
 
-
-        <!-- DASHBOARD -->
 
         <a href="<?php
             echo isset($_SESSION['user_id'])
@@ -164,19 +146,21 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
 
 
-    <!-- RIGHT SIDE -->
+    <!-- LOGIN / LOGOUT -->
 
-   <div class="main-nav-action">
+    <div class="main-nav-action">
 
         <?php if (isset($_SESSION['user_id'])) { ?>
 
-            <a href="logout.php" class="login-btn">
+            <a href="logout.php"
+               class="login-btn">
                 LOGOUT
             </a>
 
         <?php } else { ?>
 
-            <a href="login.php" class="login-btn">
+            <a href="login.php"
+               class="login-btn">
                 LOGIN
             </a>
 
@@ -184,94 +168,289 @@ if (session_status() === PHP_SESSION_NONE) {
 
     </div>
 
-
 </div>
 
-<!-- ================= HERO ================= -->
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
 
 <section class="about-hero">
 
+
     <div class="hero-content">
 
-        <div class="small-title">
+
+        <div class="eyebrow">
 
             <i class="fa-solid fa-paw"></i>
 
-            ABOUT US
+            THE PAWCONNECT STORY
 
         </div>
 
 
         <h1>
 
-            About
+            More Than Adoption.<br>
 
-            <span>PawConnect</span>
+            <span>A Connection For Life.</span>
 
         </h1>
 
 
-        <div class="tagline">
-
-            Connecting Hearts. Changing Lives.
-
-            <span>♡</span>
-
-        </div>
-
-
         <p>
 
-            At PawConnect, we believe every animal deserves
-            a second chance and a forever home. We rescue,
-            heal, and rehabilitate animals in need and connect
-            them with loving, responsible families.
+            PawConnect was created with one simple belief:
+
+            <strong>
+                every animal deserves a safe place to belong.
+            </strong>
 
         </p>
 
 
-        <div class="hero-buttons">
+        <p>
 
-            <a href="mission.php"
-               class="primary-btn">
+            We bring rescued animals, caring people and
+            animal welfare organisations together through
+            one simple platform.
 
-                Our Mission
-
-                <i class="fa-solid fa-paw"></i>
-
-            </a>
+        </p>
 
 
-            <a href="#story"
-               class="secondary-btn">
+        <a href="animals.php"
+           class="hero-btn">
 
-                Get Involved
+            Meet The Animals
 
-                <i class="fa-regular fa-heart"></i>
+            <i class="fa-solid fa-arrow-right"></i>
 
-            </a>
+        </a>
+
+    </div>
+
+
+    <div class="hero-visual">
+
+
+        <div class="image-frame">
+
+            <img src="firstimageabout.jpeg"
+                 alt="Rescued animal">
+
+        </div>
+
+
+        <div class="floating-card">
+
+            <i class="fa-solid fa-heart"></i>
+
+            <div>
+
+                <strong>
+                    Every paw matters.
+                </strong>
+
+                <span>
+                    Every connection counts.
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="paw-decoration paw-a">
+            <i class="fa-solid fa-paw"></i>
+        </div>
+
+        <div class="paw-decoration paw-b">
+            <i class="fa-solid fa-paw"></i>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     INTRO
+===================================================== -->
+
+<section class="intro-section">
+
+
+    <div class="intro-label">
+
+        WHY PAWCONNECT?
+
+    </div>
+
+
+    <div class="intro-grid">
+
+
+        <h2>
+
+            Because finding a home
+            should never be the end
+            of the story.
+
+        </h2>
+
+
+        <div>
+
+            <p>
+
+                Animal adoption is more than choosing a pet.
+                It is the beginning of a relationship built on
+                patience, responsibility and love.
+
+            </p>
+
+
+            <p>
+
+                PawConnect makes that journey simpler by
+                connecting animals waiting for homes with
+                people ready to give them one.
+
+            </p>
 
         </div>
 
     </div>
 
-
-    <div class="hero-image">
-
-        <img src="firstimageabout.jpeg"
-             alt="Woman with rescued dog">
+</section>
 
 
-        <div class="hero-note">
 
-            <div class="note-icon">
+<!-- =====================================================
+     HOW IT WORKS
+===================================================== -->
+
+<section class="journey-section">
+
+
+    <div class="section-heading">
+
+        <span>
+            THE PAWCONNECT JOURNEY
+        </span>
+
+        <h2>
+            From rescue to forever home.
+        </h2>
+
+        <p>
+            A simple journey, with one purpose.
+        </p>
+
+    </div>
+
+
+    <div class="journey">
+
+
+        <div class="journey-card">
+
+            <div class="number">
+                01
+            </div>
+
+            <div class="journey-icon">
+
+                <i class="fa-solid fa-paw"></i>
+
+            </div>
+
+            <h3>
+                Discover
+            </h3>
+
+            <p>
+
+                Browse animals who are looking
+                for a second chance and learn
+                about their stories.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="journey-line">
+
+            <i class="fa-solid fa-paw"></i>
+
+        </div>
+
+
+
+        <div class="journey-card featured">
+
+            <div class="number">
+                02
+            </div>
+
+            <div class="journey-icon">
 
                 <i class="fa-solid fa-heart"></i>
 
             </div>
 
-            Because every paw has a story,
-            and every story matters.
+            <h3>
+                Connect
+            </h3>
+
+            <p>
+
+                Submit an adoption request and
+                begin the process of connecting
+                with your future companion.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="journey-line">
+
+            <i class="fa-solid fa-paw"></i>
+
+        </div>
+
+
+
+        <div class="journey-card">
+
+            <div class="number">
+                03
+            </div>
+
+            <div class="journey-icon">
+
+                <i class="fa-solid fa-house"></i>
+
+            </div>
+
+            <h3>
+                Belong
+            </h3>
+
+            <p>
+
+                Complete the adoption journey
+                and give an animal a place
+                they can finally call home.
+
+            </p>
 
         </div>
 
@@ -281,341 +460,105 @@ if (session_status() === PHP_SESSION_NONE) {
 
 
 
-<!-- ================= OUR STORY ================= -->
-
-<section class="story"
-         id="story">
-
-
-    <div class="story-gallery">
-
-        <img src="maindog.jpg"
-             class="story-main"
-             alt="Rescue animal">
-
-
-        <div class="story-small-images">
-
-            <img src="dog-about.jpg"
-                 alt="Dog">
-
-            <img src="cat-about.jpg"
-                 alt="Cat">
-
-            <img src="carringdog.jpeg"
-                 alt="Animal care">
-
-        </div>
-
-    </div>
-
-
-
-    <div class="story-content">
-
-        <div class="section-label">
-            OUR STORY
-        </div>
-
-
-        <h2>
-
-            Compassion Started
-            This Journey.
-
-        </h2>
-
-
-        <p>
-
-            What started as a small act of kindness has grown
-            into a community movement. Every step we take is
-            for the animals who cannot speak for themselves.
-
-        </p>
-
-
-        <p>
-
-            PawConnect connects rescuers, veterinarians,
-            NGOs and responsible adopters through one
-            simple platform.
-
-        </p>
-
-
-        <!-- TIMELINE -->
-
-        <div class="timeline">
-
-
-            <div class="timeline-item">
-
-                <div class="timeline-icon">
-
-                    <i class="fa-solid fa-paw"></i>
-
-                </div>
-
-                <h4>2022</h4>
-
-                <p>
-                    A small group of animal
-                    lovers came together.
-                </p>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="timeline-icon gold">
-
-                    <i class="fa-solid fa-kit-medical"></i>
-
-                </div>
-
-                <h4>2023</h4>
-
-                <p>
-                    We started rescue and
-                    medical care operations.
-                </p>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="timeline-icon">
-
-                    <i class="fa-solid fa-house"></i>
-
-                </div>
-
-                <h4>2024</h4>
-
-                <p>
-                    Hundreds of adoptions
-                    and countless lives changed.
-                </p>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="timeline-icon gold">
-
-                    <i class="fa-solid fa-globe"></i>
-
-                </div>
-
-                <h4>Future</h4>
-
-                <p>
-                    A world where every animal
-                    has a safe and loving home.
-                </p>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- ================= VALUES ================= -->
+<!-- =====================================================
+     VALUES
+===================================================== -->
 
 <section class="values-section">
 
 
-    <div class="values-box">
+    <div class="values-heading">
+
+        <span>
+            WHAT WE BELIEVE
+        </span>
+
+        <h2>
+            Four paws of our philosophy.
+        </h2>
+
+    </div>
 
 
-        <!-- CORE VALUES -->
-
-        <div class="core-values">
-
-            <h2 class="box-title">
-
-                Our Core Values
-
-                <i class="fa-solid fa-paw"></i>
-
-            </h2>
+    <div class="values-grid">
 
 
-            <div class="values-grid">
+        <div class="value-card">
 
-
-                <div class="value-item">
-
-                    <div class="value-icon">
-
-                        <i class="fa-solid fa-heart"></i>
-
-                    </div>
-
-                    <div>
-
-                        <h3>Compassion</h3>
-
-                        <p>
-                            We treat every animal
-                            with kindness and love.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="value-item">
-
-                    <div class="value-icon">
-
-                        <i class="fa-solid fa-shield-heart"></i>
-
-                    </div>
-
-                    <div>
-
-                        <h3>Trust</h3>
-
-                        <p>
-                            We build transparency
-                            and faith in everything.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="value-item">
-
-                    <div class="value-icon">
-
-                        <i class="fa-solid fa-users"></i>
-
-                    </div>
-
-                    <div>
-
-                        <h3>Responsibility</h3>
-
-                        <p>
-                            We are committed to
-                            animal welfare.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="value-item">
-
-                    <div class="value-icon">
-
-                        <i class="fa-solid fa-leaf"></i>
-
-                    </div>
-
-                    <div>
-
-                        <h3>Sustainability</h3>
-
-                        <p>
-                            We work for a better future
-                            for animals and our planet.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
+            <div class="value-number">
+                01
             </div>
+
+            <i class="fa-solid fa-heart"></i>
+
+            <h3>
+                Compassion
+            </h3>
+
+            <p>
+                Every animal deserves patience,
+                kindness and care.
+            </p>
 
         </div>
 
 
+        <div class="value-card">
 
-        <!-- IMPACT -->
-
-        <div class="impact">
-
-            <h2 class="box-title">
-
-                Our Impact So Far
-
-                <i class="fa-solid fa-paw"></i>
-
-            </h2>
-
-
-            <div class="impact-grid">
-
-
-                <div class="impact-card">
-
-                    <i class="fa-solid fa-paw"></i>
-
-                    <h3>1200+</h3>
-
-                    <p>
-                        Animals Rescued
-                    </p>
-
-                </div>
-
-
-                <div class="impact-card">
-
-                    <i class="fa-solid fa-heart"></i>
-
-                    <h3>750+</h3>
-
-                    <p>
-                        Successful Adoptions
-                    </p>
-
-                </div>
-
-
-                <div class="impact-card">
-
-                    <i class="fa-solid fa-kit-medical"></i>
-
-                    <h3>3000+</h3>
-
-                    <p>
-                        Medical Treatments
-                    </p>
-
-                </div>
-
-
-                <div class="impact-card">
-
-                    <i class="fa-solid fa-users"></i>
-
-                    <h3>100+</h3>
-
-                    <p>
-                        NGO & Shelter Partners
-                    </p>
-
-                </div>
-
-
+            <div class="value-number">
+                02
             </div>
+
+            <i class="fa-solid fa-shield-heart"></i>
+
+            <h3>
+                Responsibility
+            </h3>
+
+            <p>
+                Adoption is a commitment,
+                not an impulse.
+            </p>
+
+        </div>
+
+
+        <div class="value-card">
+
+            <div class="value-number">
+                03
+            </div>
+
+            <i class="fa-solid fa-handshake"></i>
+
+            <h3>
+                Trust
+            </h3>
+
+            <p>
+                We believe every adoption
+                should be transparent and safe.
+            </p>
+
+        </div>
+
+
+        <div class="value-card">
+
+            <div class="value-number">
+                04
+            </div>
+
+            <i class="fa-solid fa-house"></i>
+
+            <h3>
+                Belonging
+            </h3>
+
+            <p>
+                The goal isn't just a home.
+                It is a forever home.
+            </p>
 
         </div>
 
@@ -625,197 +568,63 @@ if (session_status() === PHP_SESSION_NONE) {
 
 
 
-<!-- ================= TEAM ================= -->
+<!-- =====================================================
+     QUOTE
+===================================================== -->
 
-<section class="team-section">
-
-
-    <div class="team">
-
-        <h2 class="section-heading">
-
-            Meet Our Team
-
-            <i class="fa-solid fa-paw"></i>
-
-        </h2>
+<section class="quote-section">
 
 
-        <div class="team-grid">
+    <div class="quote-paw">
 
-
-            <div class="team-member">
-
-                <img src="team1.png"
-                     alt="Team member">
-
-                <h3>Neha Patil</h3>
-
-                <p>Founder & Director</p>
-
-                <div class="social-icons">
-
-                    <i class="fa-brands fa-facebook"></i>
-
-                    <i class="fa-brands fa-instagram"></i>
-
-                    <i class="fa-brands fa-linkedin"></i>
-
-                </div>
-
-            </div>
-
-
-            <div class="team-member">
-
-                <img src="team2.png"
-                     alt="Team member">
-
-                <h3>Dr. Amit Joshi</h3>
-
-                <p>Veterinarian</p>
-
-                <div class="social-icons">
-
-                    <i class="fa-brands fa-facebook"></i>
-
-                    <i class="fa-brands fa-instagram"></i>
-
-                    <i class="fa-brands fa-linkedin"></i>
-
-                </div>
-
-            </div>
-
-
-            <div class="team-member">
-
-                <img src="team3.png"
-                     alt="Team member">
-
-                <h3>Sneha More</h3>
-
-                <p>Operations Lead</p>
-
-                <div class="social-icons">
-
-                    <i class="fa-brands fa-facebook"></i>
-
-                    <i class="fa-brands fa-instagram"></i>
-
-                    <i class="fa-brands fa-linkedin"></i>
-
-                </div>
-
-            </div>
-
-
-            <div class="team-member">
-
-                <img src="team4.png"
-                     alt="Team member">
-
-                <h3>Rohan Kale</h3>
-
-                <p>Community Lead</p>
-
-                <div class="social-icons">
-
-                    <i class="fa-brands fa-facebook"></i>
-
-                    <i class="fa-brands fa-instagram"></i>
-
-                    <i class="fa-brands fa-linkedin"></i>
-
-                </div>
-
-            </div>
-
-
-        </div>
+        <i class="fa-solid fa-paw"></i>
 
     </div>
 
 
+    <h2>
 
-    <!-- WHY CHOOSE -->
+        "A home is not just a place.
+        It's where a paw feels safe."
 
-    <div class="why">
-
-        <h2 class="section-heading">
-
-            Why Choose PawConnect?
-
-            <i class="fa-solid fa-paw"></i>
-
-        </h2>
+    </h2>
 
 
-        <ul>
-
-            <li>
-                <i class="fa-solid fa-check"></i>
-                Verified adoption process
-            </li>
-
-            <li>
-                <i class="fa-solid fa-check"></i>
-                Complete medical & vaccination records
-            </li>
-
-            <li>
-                <i class="fa-solid fa-check"></i>
-                Post-adoption support & guidance
-            </li>
-
-            <li>
-                <i class="fa-solid fa-check"></i>
-                Dedicated team and NGO network
-            </li>
-
-            <li>
-                <i class="fa-solid fa-check"></i>
-                Safe, transparent and trustworthy
-            </li>
-
-        </ul>
-
-    </div>
+    <p>
+        That is what PawConnect is here to build.
+    </p>
 
 </section>
 
 
 
-<!-- ================= CTA ================= -->
+<!-- =====================================================
+     CTA
+===================================================== -->
 
-<section class="cta">
+<section class="about-cta">
+
 
     <div>
 
+        <span>
+            YOUR NEXT CONNECTION COULD CHANGE A LIFE.
+        </span>
+
         <h2>
-            Be a part of the change.
+            Ready to meet your new best friend?
         </h2>
 
-        <p>
-            Together, we can give them
-            the life they deserve.
-        </p>
-
     </div>
 
 
-    <div class="cta-buttons">
+    <a href="animals.php">
 
-        <a href="animals.php"
-           class="cta-primary">
+        Explore Animals
 
-            Adopt Now
+        <i class="fa-solid fa-paw"></i>
 
-            <i class="fa-solid fa-paw"></i>
-
-        </a>
-
-    </div>
+    </a>
 
 </section>
 

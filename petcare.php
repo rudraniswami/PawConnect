@@ -6,61 +6,37 @@ session_start();
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Pet Care | PawConnect</title>
 
-    <!-- FONT AWESOME -->
+    <!-- ONLY FONT AWESOME -->
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-    <!-- PET CARE CSS -->
+    <!-- CUSTOM CSS -->
     <link rel="stylesheet" href="petcare.css">
-
 </head>
 
 <body>
 
-
 <!-- =====================================================
      NAVBAR
 ===================================================== -->
-<?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-?>
 
-<div class="nav">
-
-    <!-- LOGO -->
+<nav class="nav">
 
     <div class="logo">
-
         <img src="logo.jpeg" alt="PawConnect Logo">
-
         <h2>PawConnect</h2>
-
     </div>
-
-
-    <!-- CENTER MENU -->
 
     <div class="menu">
 
-        <a href="home.php">
-            HOME
-        </a>
+        <a href="home.php">HOME</a>
 
-
-        <a href="about.php">
-            ABOUT US
-        </a>
-
-
-        <!-- EXPLORE -->
+        <a href="about.php">ABOUT US</a>
 
         <div class="dropdown">
 
@@ -69,92 +45,33 @@ if (session_status() === PHP_SESSION_NONE) {
                 <i class="fa-solid fa-chevron-down"></i>
             </a>
 
-
             <div class="dropdown-content">
 
-
-                <!-- ABOUT -->
-
                 <div class="column">
-
-                    <h3>
-                        About
-                    </h3>
-
-                    <a href="about.php">
-                        About Us
-                    </a>
-
-                    <a href="mission.php">
-                        Mission
-                    </a>
-
-                    <a href="contact.php">
-                        Contact
-                    </a>
-
+                    <h3>About</h3>
+                    <a href="about.php">About Us</a>
+                    <a href="mission.php">Mission</a>
+                    <a href="contact.php">Contact</a>
                 </div>
 
-
-                <!-- ADOPTION -->
-
                 <div class="column">
-
-                    <h3>
-                        Adoption
-                    </h3>
-
-                    <a href="animals.php">
-                        Available Animals
-                    </a>
-
-                    <a href="care.php">
-                        Care After Adoption
-                    </a>
-
-                    <a href="stories.php">
-                        Adoption Stories
-                    </a>
-
+                    <h3>Adoption</h3>
+                    <a href="animals.php">Available Animals</a>
+                    <a href="care.php">Care After Adoption</a>
+                    <a href="stories.php">Adoption Stories</a>
                 </div>
 
-
-                <!-- LOGIN -->
-
                 <div class="column">
-
-                    <h3>
-                        Login
-                    </h3>
-
-                    <a href="login.php">
-                        User Login
-                    </a>
-
-                    <a href="ngo_login.php">
-                        NGO Login
-                    </a>
-
-                    <a href="admin_login.php">
-                        Admin Login
-                    </a>
-
+                    <h3>Login</h3>
+                    <a href="login.php">User Login</a>
+                    <a href="ngo_login.php">NGO Login</a>
+                    <a href="admin_login.php">Admin Login</a>
                 </div>
-
 
             </div>
-
         </div>
 
-
-        <!-- ANIMALS -->
-
-        <a href="animals.php">
-            ANIMALS
-        </a>
-
-
-        <!-- DASHBOARD -->
+        <a href="animals.php">ANIMALS</a>
 
         <a href="<?php
             echo isset($_SESSION['user_id'])
@@ -166,67 +83,55 @@ if (session_status() === PHP_SESSION_NONE) {
 
     </div>
 
-
-    <!-- RIGHT SIDE -->
-
-   <div class="main-nav-action">
+    <div class="main-nav-action">
 
         <?php if (isset($_SESSION['user_id'])) { ?>
 
-            <a href="logout.php" class="login-btn">
-                LOGOUT
-            </a>
+            <a href="logout.php" class="login-btn">LOGOUT</a>
 
         <?php } else { ?>
 
-            <a href="login.php" class="login-btn">
-                LOGIN
-            </a>
+            <a href="login.php" class="login-btn">LOGIN</a>
 
         <?php } ?>
 
     </div>
 
+</nav>
 
-</div>
+
 <!-- =====================================================
-     HERO SECTION
+     HERO
 ===================================================== -->
 
 <section class="hero">
 
     <div class="hero-content">
 
-
-        <!-- LEFT -->
-
         <div class="hero-text">
 
             <p class="tag">
-                🐾 Happy Pets, Healthy Life
+                <i class="fa-solid fa-paw"></i>
+                Happy Pets, Healthy Life
             </p>
-
 
             <h1>
                 Pet Care<br>
                 Suggestions
             </h1>
 
-
             <p class="description">
-
                 Your pet's well-being is our priority.
                 Explore expert-backed tips and daily care
                 guides to keep your furry friend happy,
                 healthy and active.
-
             </p>
-
 
             <div class="buttons">
 
                 <a href="#guides" class="btn-green">
-                    Daily Care Tips 🐾
+                    Daily Care Tips
+                    <i class="fa-solid fa-paw"></i>
                 </a>
 
             </div>
@@ -234,16 +139,13 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
 
 
-        <!-- RIGHT -->
-
         <div class="hero-image">
 
             <img src="petcare.png" alt="Happy Dog and Cat">
 
-
             <div class="note">
 
-                🐾
+                <i class="fa-solid fa-paw"></i>
 
                 <span>
                     Small care today,<br>
@@ -259,7 +161,6 @@ if (session_status() === PHP_SESSION_NONE) {
 </section>
 
 
-
 <!-- =====================================================
      FEATURES
 ===================================================== -->
@@ -268,101 +169,60 @@ if (session_status() === PHP_SESSION_NONE) {
 
     <div class="container">
 
-        <div class="row text-center">
+        <div class="feature-grid">
 
-
-            <!-- 1 -->
-
-            <div class="col-md">
-
+            <div class="feature-item">
                 <div class="circle">
-                    🍚
+                    <i class="fa-solid fa-bowl-food"></i>
                 </div>
 
-                <h3>
-                    Nutritious Food
-                </h3>
+                <h3>Nutritious Food</h3>
 
-                <p>
-                    Balanced diet for stronger pets.
-                </p>
-
+                <p>Balanced diet for stronger pets.</p>
             </div>
 
 
-            <!-- 2 -->
-
-            <div class="col-md">
-
+            <div class="feature-item">
                 <div class="circle">
-                    🐾
+                    <i class="fa-solid fa-paw"></i>
                 </div>
 
-                <h3>
-                    Regular Exercise
-                </h3>
+                <h3>Regular Exercise</h3>
 
-                <p>
-                    Daily activity keeps them fit and happy.
-                </p>
-
+                <p>Daily activity keeps them fit and happy.</p>
             </div>
 
 
-            <!-- 3 -->
-
-            <div class="col-md">
-
+            <div class="feature-item">
                 <div class="circle">
-                    ✚
+                    <i class="fa-solid fa-kit-medical"></i>
                 </div>
 
-                <h3>
-                    Health Checkups
-                </h3>
+                <h3>Health Checkups</h3>
 
-                <p>
-                    Routine checkups for a healthy life.
-                </p>
-
+                <p>Routine checkups for a healthy life.</p>
             </div>
 
 
-            <!-- 4 -->
-
-            <div class="col-md">
-
+            <div class="feature-item">
                 <div class="circle">
-                    ✂
+                    <i class="fa-solid fa-scissors"></i>
                 </div>
 
-                <h3>
-                    Grooming
-                </h3>
+                <h3>Grooming</h3>
 
-                <p>
-                    Clean pets are happy pets.
-                </p>
-
+                <p>Clean pets are happy pets.</p>
             </div>
 
 
-            <!-- 5 -->
-
-            <div class="col-md">
-
+            <div class="feature-item">
                 <div class="circle">
-                    ♥
+                    <i class="fa-solid fa-heart"></i>
                 </div>
 
-                <h3>
-                    Love & Care
-                </h3>
+                <h3>Love & Care</h3>
 
-                <p>
-                    Give them love, they give you joy.
-                </p>
-
+                <p>Give them love, they give you joy.</p>
             </div>
 
         </div>
@@ -370,7 +230,6 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
 
 </section>
-
 
 
 <!-- =====================================================
@@ -381,11 +240,12 @@ if (session_status() === PHP_SESSION_NONE) {
 
     <div class="container">
 
-
         <div class="heading">
 
             <h2>
-                🌿 Pet Care Guides 🌿
+                <i class="fa-solid fa-leaf"></i>
+                Pet Care Guides
+                <i class="fa-solid fa-leaf"></i>
             </h2>
 
             <p>
@@ -395,153 +255,113 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
 
 
-        <div class="row guides-row">
+        <div class="guides-grid">
 
 
-            <!-- 1 -->
+            <div class="card">
 
-            <div class="guide-column">
+                <img src="diet.png" alt="Healthy Diet">
 
-                <div class="card">
+                <div class="card-body">
 
-                    <img src="diet.png" alt="Healthy Diet">
+                    <span>
+                        <i class="fa-solid fa-bowl-food"></i>
+                    </span>
 
-                    <div class="card-body">
+                    <h3>Healthy Diet</h3>
 
-                        <span>
-                            🍚
-                        </span>
-
-                        <h3>
-                            Healthy Diet
-                        </h3>
-
-                        <p>
-                            Choose the right food for your
-                            pet's age and breed.
-                        </p>
-
-                    </div>
+                    <p>
+                        Choose the right food for your
+                        pet's age and breed.
+                    </p>
 
                 </div>
 
             </div>
 
 
-            <!-- 2 -->
+            <div class="card">
 
-            <div class="guide-column">
+                <img src="exercise.jpg" alt="Exercise">
 
-                <div class="card">
+                <div class="card-body">
 
-                    <img src="exercise.jpg" alt="Exercise">
+                    <span>
+                        <i class="fa-solid fa-dog"></i>
+                    </span>
 
-                    <div class="card-body">
+                    <h3>Exercise & Play</h3>
 
-                        <span>
-                            🐕
-                        </span>
-
-                        <h3>
-                            Exercise & Play
-                        </h3>
-
-                        <p>
-                            Fun activities and daily exercise
-                            keep them energetic.
-                        </p>
-
-                    </div>
+                    <p>
+                        Fun activities and daily exercise
+                        keep them energetic.
+                    </p>
 
                 </div>
 
             </div>
 
 
-            <!-- 3 -->
+            <div class="card">
 
-            <div class="guide-column">
+                <img src="health.jpg" alt="Health">
 
-                <div class="card">
+                <div class="card-body">
 
-                    <img src="health.jpg" alt="Health">
+                    <span>
+                        <i class="fa-solid fa-kit-medical"></i>
+                    </span>
 
-                    <div class="card-body">
+                    <h3>Health & Hygiene</h3>
 
-                        <span>
-                            ✚
-                        </span>
-
-                        <h3>
-                            Health & Hygiene
-                        </h3>
-
-                        <p>
-                            Vaccination, hygiene and regular
-                            vet visits are important.
-                        </p>
-
-                    </div>
+                    <p>
+                        Vaccination, hygiene and regular
+                        vet visits are important.
+                    </p>
 
                 </div>
 
             </div>
 
 
-            <!-- 4 -->
+            <div class="card">
 
-            <div class="guide-column">
+                <img src="grooming.jpg" alt="Grooming">
 
-                <div class="card">
+                <div class="card-body">
 
-                    <img src="grooming.jpg" alt="Grooming">
+                    <span>
+                        <i class="fa-solid fa-scissors"></i>
+                    </span>
 
-                    <div class="card-body">
+                    <h3>Grooming Tips</h3>
 
-                        <span>
-                            ✂
-                        </span>
-
-                        <h3>
-                            Grooming Tips
-                        </h3>
-
-                        <p>
-                            Brushing, bathing and nail care
-                            for a clean and healthy pet.
-                        </p>
-
-                    </div>
+                    <p>
+                        Brushing, bathing and nail care
+                        for a clean and healthy pet.
+                    </p>
 
                 </div>
 
             </div>
 
 
-            <!-- 5 -->
+            <div class="card">
 
-            <div class="guide-column">
+                <img src="training.jpg" alt="Training">
 
-                <div class="card">
+                <div class="card-body">
 
-                    <img src="training.jpg" alt="Training">
+                    <span>
+                        <i class="fa-solid fa-heart"></i>
+                    </span>
 
-                    <div class="card-body">
+                    <h3>Behavior & Training</h3>
 
-                        <span>
-                            ♥
-                        </span>
-
-                        <h3>
-                            Behavior & Training
-                        </h3>
-
-                        <p>
-                            Positive training builds trust
-                            and good behavior.
-                        </p>
-
-                    </div>
+                    <p>
+                        Positive training builds trust
+                        and good behavior.
+                    </p>
 
                 </div>
 
@@ -552,7 +372,6 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
 
 </section>
-
 
 
 <!-- =====================================================
@@ -565,11 +384,11 @@ if (session_status() === PHP_SESSION_NONE) {
 
         <div class="emergency-row">
 
-
             <div class="emergency-left">
 
                 <h2>
-                    🧰 Emergency Care
+                    <i class="fa-solid fa-kit-medical"></i>
+                    Emergency Care
                 </h2>
 
                 <p>
@@ -577,7 +396,6 @@ if (session_status() === PHP_SESSION_NONE) {
                 </p>
 
             </div>
-
 
             <div class="emergency-text">
 
@@ -588,13 +406,11 @@ if (session_status() === PHP_SESSION_NONE) {
 
             </div>
 
-
         </div>
 
     </div>
 
 </section>
-
 
 
 <!-- =====================================================
@@ -605,30 +421,26 @@ if (session_status() === PHP_SESSION_NONE) {
 
     <div class="container">
 
-
         <div class="heading">
 
             <h2>
-                Quick Daily Tips ♡
+                Quick Daily Tips
+                <i class="fa-solid fa-heart"></i>
             </h2>
 
         </div>
 
 
-        <div class="row text-center">
+        <div class="tips-grid">
 
 
-            <!-- 1 -->
-
-            <div class="col-md">
+            <div class="tip-item">
 
                 <div class="tip-circle">
-                    💧
+                    <i class="fa-solid fa-droplet"></i>
                 </div>
 
-                <h3>
-                    Fresh Water
-                </h3>
+                <h3>Fresh Water</h3>
 
                 <p>
                     Always keep clean water available.
@@ -637,17 +449,13 @@ if (session_status() === PHP_SESSION_NONE) {
             </div>
 
 
-            <!-- 2 -->
-
-            <div class="col-md">
+            <div class="tip-item">
 
                 <div class="tip-circle">
-                    ◷
+                    <i class="fa-regular fa-clock"></i>
                 </div>
 
-                <h3>
-                    Routine
-                </h3>
+                <h3>Routine</h3>
 
                 <p>
                     Maintain a daily feeding schedule.
@@ -656,17 +464,13 @@ if (session_status() === PHP_SESSION_NONE) {
             </div>
 
 
-            <!-- 3 -->
-
-            <div class="col-md">
+            <div class="tip-item">
 
                 <div class="tip-circle">
-                    ⌂
+                    <i class="fa-solid fa-house"></i>
                 </div>
 
-                <h3>
-                    Safe Space
-                </h3>
+                <h3>Safe Space</h3>
 
                 <p>
                     Give them a clean, comfortable space.
@@ -675,17 +479,13 @@ if (session_status() === PHP_SESSION_NONE) {
             </div>
 
 
-            <!-- 4 -->
-
-            <div class="col-md">
+            <div class="tip-item">
 
                 <div class="tip-circle">
-                    ♡
+                    <i class="fa-solid fa-heart"></i>
                 </div>
 
-                <h3>
-                    Affection
-                </h3>
+                <h3>Affection</h3>
 
                 <p>
                     Spend quality time with your pet.
@@ -694,17 +494,13 @@ if (session_status() === PHP_SESSION_NONE) {
             </div>
 
 
-            <!-- 5 -->
-
-            <div class="col-md">
+            <div class="tip-item">
 
                 <div class="tip-circle">
-                    ♢
+                    <i class="fa-solid fa-eye"></i>
                 </div>
 
-                <h3>
-                    Stay Alert
-                </h3>
+                <h3>Stay Alert</h3>
 
                 <p>
                     Watch for changes in their behavior.
@@ -719,7 +515,6 @@ if (session_status() === PHP_SESSION_NONE) {
 </section>
 
 
-
 <!-- =====================================================
      CTA
 ===================================================== -->
@@ -730,26 +525,18 @@ if (session_status() === PHP_SESSION_NONE) {
 
         <div class="cta-row">
 
-
             <div class="cta-image">
 
-                <img
-                    src="petcare-bottom.jpg"
-                    alt="Happy Pets">
+                <img src="petcare-bottom.jpg" alt="Happy Pets">
 
             </div>
-
 
             <div class="cta-text">
 
                 <h2>
-
                     A little care goes a long way.
-
                     <br>
-
                     Happy pet, happy home.
-
                 </h2>
 
             </div>
@@ -761,7 +548,6 @@ if (session_status() === PHP_SESSION_NONE) {
 </section>
 
 
-
 <!-- =====================================================
      FOOTER
 ===================================================== -->
@@ -770,31 +556,20 @@ if (session_status() === PHP_SESSION_NONE) {
 
     <div class="footer-top">
 
-
-        <!-- BRAND -->
-
         <div class="footer-about">
 
             <div class="footer-logo">
 
-                <img
-                    src="logo.jpeg"
-                    alt="PawConnect Logo">
+                <img src="logo.jpeg" alt="PawConnect Logo">
 
-                <h2>
-                    PawConnect
-                </h2>
+                <h2>PawConnect</h2>
 
             </div>
 
-
             <p>
-
                 Connecting rescued animals with loving families,
                 trusted shelters and compassionate hearts across India.
-
             </p>
-
 
             <div class="social-icons">
 
@@ -819,70 +594,33 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
 
 
-
-        <!-- EXPLORE -->
-
         <div class="footer-links">
 
-            <h3>
-                Explore
-            </h3>
+            <h3>Explore</h3>
 
-            <a href="home.php">
-                Home
-            </a>
-
-            <a href="animals.php">
-                Available Animals
-            </a>
-
-            <a href="adopt.php">
-                Adoption
-            </a>
-
-            <a href="stories.php">
-                Adoption Stories
-            </a>
+            <a href="home.php">Home</a>
+            <a href="animals.php">Available Animals</a>
+            <a href="adopt.php">Adoption</a>
+            <a href="stories.php">Adoption Stories</a>
 
         </div>
 
 
-
-        <!-- SERVICES -->
-
         <div class="footer-links">
 
-            <h3>
-                Services
-            </h3>
+            <h3>Services</h3>
 
-            <a href="care.php">
-                Care After Adoption
-            </a>
-
-            <a href="petcare.php">
-                Pet Care
-            </a>
-
-            <a href="ngo-partners.php">
-                NGO Partners
-            </a>
-
-            <a href="mission.php">
-                Our Mission
-            </a>
+            <a href="care.php">Care After Adoption</a>
+            <a href="petcare.php">Pet Care</a>
+            <a href="ngo-partners.php">NGO Partners</a>
+            <a href="mission.php">Our Mission</a>
 
         </div>
 
-
-
-        <!-- CONTACT -->
 
         <div class="footer-contact">
 
-            <h3>
-                Contact
-            </h3>
+            <h3>Contact</h3>
 
             <p>
                 <i class="fa-solid fa-location-dot"></i>
@@ -904,23 +642,16 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
 
 
-
-    <!-- FOOTER BOTTOM -->
-
     <div class="footer-bottom">
 
         <p>
-
             © 2026 PawConnect • Connecting every paw with care,
             compassion & a place to belong.
-
         </p>
 
     </div>
 
 </footer>
 
-
 </body>
-
 </html>

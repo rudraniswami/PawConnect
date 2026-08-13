@@ -1,62 +1,53 @@
 <?php
 session_start();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>NGO Partners | PawConnect</title>
 
-    <!-- ONLY BOOTSTRAP -->
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           rel="stylesheet">
-    <link rel="stylesheet"href="ngopartners.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="ngopartners.css">
+
 </head>
 
-<body style="background:#fffaf0; color:#064331;">
 
+<body>
 
 
 <!-- =====================================================
-     NAVBAR
+     MAIN NAVBAR
 ===================================================== -->
-<?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-?>
 
 <div class="nav">
 
     <!-- LOGO -->
-
     <div class="logo">
-
         <img src="logo.jpeg" alt="PawConnect Logo">
-
         <h2>PawConnect</h2>
-
     </div>
 
 
     <!-- CENTER MENU -->
-
     <div class="menu">
 
-        <a href="home.php">
-            HOME
-        </a>
+        <a href="home.php">HOME</a>
 
-
-        <a href="about.php">
-            ABOUT US
-        </a>
-
-
-        <!-- EXPLORE -->
+        <a href="about.php">ABOUT US</a>
 
         <div class="dropdown">
 
@@ -65,93 +56,37 @@ if (session_status() === PHP_SESSION_NONE) {
                 <i class="fa-solid fa-chevron-down"></i>
             </a>
 
-
             <div class="dropdown-content">
 
-
-                <!-- ABOUT -->
-
                 <div class="column">
+                    <h3>About</h3>
 
-                    <h3>
-                        About
-                    </h3>
-
-                    <a href="about.php">
-                        About Us
-                    </a>
-
-                    <a href="mission.php">
-                        Mission
-                    </a>
-
-                    <a href="contact.php">
-                        Contact
-                    </a>
-
+                    <a href="about.php">About Us</a>
+                    <a href="mission.php">Mission</a>
+                    <a href="contact.php">Contact</a>
                 </div>
 
-
-                <!-- ADOPTION -->
-
                 <div class="column">
+                    <h3>Adoption</h3>
 
-                    <h3>
-                        Adoption
-                    </h3>
-
-                    <a href="animals.php">
-                        Available Animals
-                    </a>
-
-                    <a href="care.php">
-                        Care After Adoption
-                    </a>
-
-                    <a href="stories.php">
-                        Adoption Stories
-                    </a>
-
+                    <a href="animals.php">Available Animals</a>
+                    <a href="care.php">Care After Adoption</a>
+                    <a href="stories.php">Adoption Stories</a>
                 </div>
 
-
-                <!-- LOGIN -->
-
                 <div class="column">
+                    <h3>Login</h3>
 
-                    <h3>
-                        Login
-                    </h3>
-
-                    <a href="login.php">
-                        User Login
-                    </a>
-
-                    <a href="ngo_login.php">
-                        NGO Login
-                    </a>
-
-                    <a href="admin_login.php">
-                        Admin Login
-                    </a>
-
+                    <a href="login.php">User Login</a>
+                    <a href="ngo_login.php">NGO Login</a>
+                    <a href="admin_login.php">Admin Login</a>
                 </div>
-
 
             </div>
 
         </div>
 
-
-        <!-- ANIMALS -->
-
-        <a href="animals.php">
-            ANIMALS
-        </a>
-
-
-        <!-- DASHBOARD -->
-
+        <a href="animals.php">ANIMALS</a>
         <a href="<?php
             echo isset($_SESSION['user_id'])
                 ? 'user_dashboard.php'
@@ -164,8 +99,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 
     <!-- RIGHT SIDE -->
-
-   <div class="main-nav-action">
+    <div class="nav-actions">
 
         <?php if (isset($_SESSION['user_id'])) { ?>
 
@@ -173,624 +107,611 @@ if (session_status() === PHP_SESSION_NONE) {
                 LOGOUT
             </a>
 
-        <?php } else { ?>
-
-            <a href="login.php" class="login-btn">
-                LOGIN
-            </a>
-
         <?php } ?>
 
     </div>
 
-
 </div>
-<!-- ================= HERO ================= -->
+<!-- =====================================================
+     HERO SECTION
+===================================================== -->
 
-<section class="container py-5">
+<section class="ngo-hero">
 
-    <div class="row align-items-center">
+    <div class="container">
 
-        <div class="col-md-5 text-center">
+        <div class="row align-items-center g-4">
 
-            <p class="fw-bold small"
-               style="letter-spacing:2px;">
-                TOGETHER, WE CREATE HOPE
+            <!-- TEXT -->
+
+            <div class="col-md-5">
+
+                <div class="hero-content">
+
+                    <p class="hero-label">
+                        <i class="fa-solid fa-paw"></i>
+                        TOGETHER, WE CREATE HOPE
+                    </p>
+
+                    <h1>
+                        Our NGO
+                        <span>Partners</span>
+                    </h1>
+
+                    <p class="hero-text">
+                        PawConnect proudly works alongside organizations
+                        dedicated to rescuing, caring for and protecting
+                        animals in need.
+                    </p>
+
+                    <div class="hero-line">
+                        <span></span>
+                        <i class="fa-solid fa-paw"></i>
+                        <span></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- IMAGE -->
+
+            <div class="col-md-7">
+
+                <div class="hero-image">
+
+                    <img src="ngo-hero.jpg"
+                         alt="NGO Volunteers">
+
+                    <div class="hero-image-tag">
+
+                        <i class="fa-solid fa-heart"></i>
+
+                        Making a Difference Together
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     MISSION STRIP
+===================================================== -->
+
+<section class="container">
+
+    <div class="mission-strip">
+
+        <div class="mission-item">
+
+            <i class="fa-solid fa-paw"></i>
+
+            <div>
+                <h5>Rescue</h5>
+                <p>Saving animals in need</p>
+            </div>
+
+        </div>
+
+
+        <div class="mission-item">
+
+            <i class="fa-solid fa-kit-medical"></i>
+
+            <div>
+                <h5>Care</h5>
+                <p>Supporting better health</p>
+            </div>
+
+        </div>
+
+
+        <div class="mission-item">
+
+            <i class="fa-solid fa-house"></i>
+
+            <div>
+                <h5>Adoption</h5>
+                <p>Finding loving homes</p>
+            </div>
+
+        </div>
+
+
+        <div class="mission-item">
+
+            <i class="fa-solid fa-heart"></i>
+
+            <div>
+                <h5>Hope</h5>
+                <p>Creating brighter futures</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     NGO PARTNERS
+===================================================== -->
+
+<section class="ngo-partners">
+
+    <div class="container">
+
+        <div class="partners-heading">
+
+            <p>
+                OUR COMMUNITY
             </p>
 
-            <h1 class="display-3 fw-bold"
-                style="color:#064331;">
-                Our NGO<br>Partners
-            </h1>
-
-            <p class="fs-5 text-secondary">
-                We collaborate with amazing organizations
-                working tirelessly to rescue, heal and
-                rehabilitate animals in need.
-            </p>
-
-            <p class="fs-4">──── ♥ ────</p>
-
-        </div>
-
-
-        <div class="col-md-7">
-
-            <img src="ngo-hero.jpg"
-                 class="img-fluid rounded-5"
-                 style="height:350px; width:100%; object-fit:cover;"
-                 alt="NGO Volunteer">
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= MISSION ================= -->
-
-<section class="container mb-5">
-
-    <div class="row text-white rounded-4 p-4"
-         style="background:#064331;">
-
-        <div class="col-md-3 text-center border-end">
-
-            <div class="fs-1">🐾</div>
-
-            <h5>Rescue</h5>
-
-            <p class="mb-1">More Animals</p>
-
-            <small>Saving lives, one paw at a time.</small>
-
-        </div>
-
-
-        <div class="col-md-3 text-center border-end">
-
-            <div class="fs-1">✚</div>
-
-            <h5>Support</h5>
-
-            <p class="mb-1">Medical Care</p>
-
-            <small>Providing treatment and better health.</small>
-
-        </div>
-
-
-        <div class="col-md-3 text-center border-end">
-
-            <div class="fs-1">🐾</div>
-
-            <h5>Promote</h5>
-
-            <p class="mb-1">Adoption</p>
-
-            <small>Finding loving homes for every animal.</small>
-
-        </div>
-
-
-        <div class="col-md-3 text-center">
-
-            <div class="fs-1">🏠</div>
-
-            <h5>Create Forever</h5>
-
-            <p class="mb-1">Homes</p>
-
-            <small>Building a future filled with love.</small>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= NGO PARTNERS ================= -->
-
-<section class="container py-4">
-
-    <div class="text-center mb-4">
-
-        <h2 class="fw-bold"
-            style="color:#064331;">
-            ❧ Our Trusted NGO Partners ❧
-        </h2>
-
-        <p class="text-secondary">
-            Working together for a kinder, safer world for animals.
-        </p>
-
-    </div>
-
-    <!-- ================= CARDS ================= -->
-
-    <div class="row g-4">
-
-
-        <!-- CARD 1 -->
-
-        <div class="col-md-6 col-lg-3">
-
-            <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
-
-                <img src="ngo1.jpg"
-                     class="card-img-top"
-                     style="height:170px;object-fit:cover;"
-                     alt="Happy Paws">
-
-                <div class="card-body">
-
-                    <h5 class="fw-bold"
-                        style="color:#064331;">
-                        Happy Paws Foundation
-                    </h5>
-
-                    <p class="small">
-                        📍 Pune, Maharashtra
-                    </p>
-
-                    <p class="small text-secondary">
-                        🐾 Rescue • Medical • Adoption
-                    </p>
-
-                    <div class="d-flex justify-content-between align-items-center">
-
-                        <strong style="color:#064331;">
-                            🐾 120+
-                            <small class="d-block text-secondary">
-                                Animals Rescued
-                            </small>
-                        </strong>
-
-                        <button class="btn btn-sm text-white"
-                                style="background:#064331;">
-                            View Profile
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- CARD 2 -->
-
-        <div class="col-md-6 col-lg-3">
-
-            <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
-
-                <img src="ngo2.jpg"
-                     class="card-img-top"
-                     style="height:170px;object-fit:cover;"
-                     alt="Care Animals">
-
-                <div class="card-body">
-
-                    <h5 class="fw-bold"
-                        style="color:#064331;">
-                        Care Animals Trust
-                    </h5>
-
-                    <p class="small">
-                        📍 Mumbai, Maharashtra
-                    </p>
-
-                    <p class="small text-secondary">
-                        🐾 Rescue • Treatment • Adoption
-                    </p>
-
-                    <div class="d-flex justify-content-between align-items-center">
-
-                        <strong style="color:#064331;">
-                            🐾 95+
-                            <small class="d-block text-secondary">
-                                Animals Rescued
-                            </small>
-                        </strong>
-
-                        <button class="btn btn-sm text-white"
-                                style="background:#064331;">
-                            View Profile
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- CARD 3 -->
-
-        <div class="col-md-6 col-lg-3">
-
-            <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
-
-                <img src="ngo3.jpg"
-                     class="card-img-top"
-                     style="height:170px;object-fit:cover;"
-                     alt="Paws of Hope">
-
-                <div class="card-body">
-
-                    <h5 class="fw-bold"
-                        style="color:#064331;">
-                        Paws of Hope NGO
-                    </h5>
-
-                    <p class="small">
-                        📍 Nagpur, Maharashtra
-                    </p>
-
-                    <p class="small text-secondary">
-                        🐾 Shelter • Vaccination • Adoption
-                    </p>
-
-                    <div class="d-flex justify-content-between align-items-center">
-
-                        <strong style="color:#064331;">
-                            🐾 140+
-                            <small class="d-block text-secondary">
-                                Animals Rescued
-                            </small>
-                        </strong>
-
-                        <button class="btn btn-sm text-white"
-                                style="background:#064331;">
-                            View Profile
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- CARD 4 -->
-
-        <div class="col-md-6 col-lg-3">
-
-            <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
-
-                <img src="ngo4.jpg"
-                     class="card-img-top"
-                     style="height:170px;object-fit:cover;"
-                     alt="Second Chance">
-
-                <div class="card-body">
-
-                    <h5 class="fw-bold"
-                        style="color:#064331;">
-                        Second Chance Shelter
-                    </h5>
-
-                    <p class="small">
-                        📍 Nashik, Maharashtra
-                    </p>
-
-                    <p class="small text-secondary">
-                        🐾 Rescue • Care • Rehabilitation
-                    </p>
-
-                    <div class="d-flex justify-content-between align-items-center">
-
-                        <strong style="color:#064331;">
-                            🐾 110+
-                            <small class="d-block text-secondary">
-                                Animals Rescued
-                            </small>
-                        </strong>
-
-                        <button class="btn btn-sm text-white"
-                                style="background:#064331;">
-                            View Profile
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- CARD 5 -->
-
-        <div class="col-md-6 col-lg-3">
-
-            <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
-
-                <img src="ngo5.jpg"
-                     class="card-img-top"
-                     style="height:170px;object-fit:cover;"
-                     alt="Stray Safe">
-
-                <div class="card-body">
-
-                    <h5 class="fw-bold"
-                        style="color:#064331;">
-                        Stray Safe India
-                    </h5>
-
-                    <p class="small">
-                        📍 Aurangabad, Maharashtra
-                    </p>
-
-                    <p class="small text-secondary">
-                        🐾 Rescue • Sterilization • Adoption
-                    </p>
-
-                    <div class="d-flex justify-content-between">
-
-                        <strong style="color:#064331;">
-                            🐾 98+
-                            <small class="d-block text-secondary">
-                                Animals Rescued
-                            </small>
-                        </strong>
-
-                        <button class="btn btn-sm text-white"
-                                style="background:#064331;">
-                            View Profile
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- CARD 6 -->
-
-        <div class="col-md-6 col-lg-3">
-
-            <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
-
-                <img src="ngo6.jpg"
-                     class="card-img-top"
-                     style="height:170px;object-fit:cover;"
-                     alt="Voice for Animals">
-
-                <div class="card-body">
-
-                    <h5 class="fw-bold"
-                        style="color:#064331;">
-                        Voice for Animals
-                    </h5>
-
-                    <p class="small">
-                        📍 Thane, Maharashtra
-                    </p>
-
-                    <p class="small text-secondary">
-                        🐾 Rescue • Rehabilitation • Adoption
-                    </p>
-
-                    <div class="d-flex justify-content-between">
-
-                        <strong style="color:#064331;">
-                            🐾 87+
-                            <small class="d-block text-secondary">
-                                Animals Rescued
-                            </small>
-                        </strong>
-
-                        <button class="btn btn-sm text-white"
-                                style="background:#064331;">
-                            View Profile
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- CARD 7 -->
-
-        <div class="col-md-6 col-lg-3">
-
-            <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
-
-                <img src="ngo7.jpg"
-                     class="card-img-top"
-                     style="height:170px;object-fit:cover;"
-                     alt="Animal Care">
-
-                <div class="card-body">
-
-                    <h5 class="fw-bold"
-                        style="color:#064331;">
-                        Animal Care Society
-                    </h5>
-
-                    <p class="small">
-                        📍 Kolhapur, Maharashtra
-                    </p>
-
-                    <p class="small text-secondary">
-                        🐾 Rescue • Medical • Adoption
-                    </p>
-
-                    <div class="d-flex justify-content-between">
-
-                        <strong style="color:#064331;">
-                            🐾 130+
-                            <small class="d-block text-secondary">
-                                Animals Rescued
-                            </small>
-                        </strong>
-
-                        <button class="btn btn-sm text-white"
-                                style="background:#064331;">
-                            View Profile
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- CARD 8 -->
-
-        <div class="col-md-6 col-lg-3">
-
-            <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
-
-                <img src="ngo8.jpg"
-                     class="card-img-top"
-                     style="height:170px;object-fit:cover;"
-                     alt="Love Paws">
-
-                <div class="card-body">
-
-                    <h5 class="fw-bold"
-                        style="color:#064331;">
-                        Love Paws Foundation
-                    </h5>
-
-                    <p class="small">
-                        📍 Solapur, Maharashtra
-                    </p>
-
-                    <p class="small text-secondary">
-                        🐾 Rescue • Care • Adoption
-                    </p>
-
-                    <div class="d-flex justify-content-between">
-
-                        <strong style="color:#064331;">
-                            🐾 100+
-                            <small class="d-block text-secondary">
-                                Animals Rescued
-                            </small>
-                        </strong>
-
-                        <button class="btn btn-sm text-white"
-                                style="background:#064331;">
-                            View Profile
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= IMPACT ================= -->
-
-<section class="container my-5">
-
-    <div class="row text-center text-white rounded-4 p-4"
-         style="background:#064331;">
-
-        <div class="col-md-3">
-            <h2>500+</h2>
-            <p>NGO Partners</p>
-        </div>
-
-        <div class="col-md-3">
-            <h2>12,500+</h2>
-            <p>Animals Rescued</p>
-        </div>
-
-        <div class="col-md-3">
-            <h2>3,200+</h2>
-            <p>Successful Adoptions</p>
-        </div>
-
-        <div class="col-md-3">
-            <h2>28+</h2>
-            <p>Cities Covered</p>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= CTA ================= -->
-
-<section class="container my-5">
-
-    <div class="row align-items-center">
-
-        <div class="col-md-5">
-
-            <img src="last-image-ngo.jpg"
-                 class="img-fluid rounded-5"
-                 style="height:250px;width:100%;object-fit:cover;"
-                 alt="Volunteer">
-
-        </div>
-
-
-        <div class="col-md-4 text-center">
-
-            <h2 class="fw-bold"
-                style="color:#064331;">
-                Alone we can do so little,
-                together we can do so much.
+            <h2>
+                <i class="fa-solid fa-paw"></i>
+                Trusted NGO Partners
             </h2>
 
-            <p class="text-secondary">
-                Join hands with us and our NGO partners
-                to create a better world for animals.
-            </p>
+            <span>
+                Together, we are creating a kinder world for animals.
+            </span>
 
         </div>
 
 
-        <div class="col-md-3">
+        <div class="row g-4">
 
-            <div class="border rounded-4 p-4">
 
-                <h5 class="fw-bold"
-                    style="color:#064331;">
-                    🐾 Become an NGO Partner
-                </h5>
+            <!-- NGO 1 -->
 
-                <p class="small text-secondary">
-                    Let's work together to rescue,
-                    care and create forever homes.
-                </p>
+            <div class="col-md-6 col-lg-3">
 
-                <button class="btn text-white rounded-pill"
-                        style="background:#064331;">
-                    Partner With Us
-                </button>
+                <div class="ngo-card">
+
+                    <div class="ngo-image">
+
+                        <img src="ngo1.jpg"
+                             alt="Happy Paws Foundation">
+
+                        <span>
+                            <i class="fa-solid fa-paw"></i>
+                        </span>
+
+                    </div>
+
+                    <div class="ngo-card-body">
+
+                        <h3>
+                            Happy Paws Foundation
+                        </h3>
+
+                        <p class="ngo-location">
+                            <i class="fa-solid fa-location-dot"></i>
+                            Pune, Maharashtra
+                        </p>
+
+                        <div class="ngo-services">
+
+                            <span>Rescue</span>
+                            <span>Medical Care</span>
+                            <span>Adoption</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- NGO 2 -->
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="ngo-card">
+
+                    <div class="ngo-image">
+
+                        <img src="ngo2.jpg"
+                             alt="Care Animals Trust">
+
+                        <span>
+                            <i class="fa-solid fa-heart"></i>
+                        </span>
+
+                    </div>
+
+                    <div class="ngo-card-body">
+
+                        <h3>
+                            Care Animals Trust
+                        </h3>
+
+                        <p class="ngo-location">
+                            <i class="fa-solid fa-location-dot"></i>
+                            Mumbai, Maharashtra
+                        </p>
+
+                        <div class="ngo-services">
+
+                            <span>Rescue</span>
+                            <span>Treatment</span>
+                            <span>Adoption</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- NGO 3 -->
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="ngo-card">
+
+                    <div class="ngo-image">
+
+                        <img src="ngo3.jpg"
+                             alt="Paws of Hope NGO">
+
+                        <span>
+                            <i class="fa-solid fa-house"></i>
+                        </span>
+
+                    </div>
+
+                    <div class="ngo-card-body">
+
+                        <h3>
+                            Paws of Hope NGO
+                        </h3>
+
+                        <p class="ngo-location">
+                            <i class="fa-solid fa-location-dot"></i>
+                            Nagpur, Maharashtra
+                        </p>
+
+                        <div class="ngo-services">
+
+                            <span>Shelter</span>
+                            <span>Vaccination</span>
+                            <span>Adoption</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- NGO 4 -->
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="ngo-card">
+
+                    <div class="ngo-image">
+
+                        <img src="ngo4.jpg"
+                             alt="Second Chance Shelter">
+
+                        <span>
+                            <i class="fa-solid fa-hand-holding-heart"></i>
+                        </span>
+
+                    </div>
+
+                    <div class="ngo-card-body">
+
+                        <h3>
+                            Second Chance Shelter
+                        </h3>
+
+                        <p class="ngo-location">
+                            <i class="fa-solid fa-location-dot"></i>
+                            Nashik, Maharashtra
+                        </p>
+
+                        <div class="ngo-services">
+
+                            <span>Rescue</span>
+                            <span>Care</span>
+                            <span>Rehabilitation</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- NGO 5 -->
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="ngo-card">
+
+                    <div class="ngo-image">
+
+                        <img src="ngo5.jpg"
+                             alt="Stray Safe India">
+
+                        <span>
+                            <i class="fa-solid fa-shield-heart"></i>
+                        </span>
+
+                    </div>
+
+                    <div class="ngo-card-body">
+
+                        <h3>
+                            Stray Safe India
+                        </h3>
+
+                        <p class="ngo-location">
+                            <i class="fa-solid fa-location-dot"></i>
+                            Aurangabad, Maharashtra
+                        </p>
+
+                        <div class="ngo-services">
+
+                            <span>Rescue</span>
+                            <span>Sterilization</span>
+                            <span>Adoption</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- NGO 6 -->
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="ngo-card">
+
+                    <div class="ngo-image">
+
+                        <img src="ngo6.jpg"
+                             alt="Voice for Animals">
+
+                        <span>
+                            <i class="fa-solid fa-volume-high"></i>
+                        </span>
+
+                    </div>
+
+                    <div class="ngo-card-body">
+
+                        <h3>
+                            Voice for Animals
+                        </h3>
+
+                        <p class="ngo-location">
+                            <i class="fa-solid fa-location-dot"></i>
+                            Thane, Maharashtra
+                        </p>
+
+                        <div class="ngo-services">
+
+                            <span>Rescue</span>
+                            <span>Rehabilitation</span>
+                            <span>Adoption</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- NGO 7 -->
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="ngo-card">
+
+                    <div class="ngo-image">
+
+                        <img src="ngo7.jpg"
+                             alt="Animal Care Society">
+
+                        <span>
+                            <i class="fa-solid fa-user-group"></i>
+                        </span>
+
+                    </div>
+
+                    <div class="ngo-card-body">
+
+                        <h3>
+                            Animal Care Society
+                        </h3>
+
+                        <p class="ngo-location">
+                            <i class="fa-solid fa-location-dot"></i>
+                            Kolhapur, Maharashtra
+                        </p>
+
+                        <div class="ngo-services">
+
+                            <span>Rescue</span>
+                            <span>Medical</span>
+                            <span>Adoption</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- NGO 8 -->
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="ngo-card">
+
+                    <div class="ngo-image">
+
+                        <img src="ngo8.jpg"
+                             alt="Love Paws Foundation">
+
+                        <span>
+                            <i class="fa-solid fa-heart"></i>
+                        </span>
+
+                    </div>
+
+                    <div class="ngo-card-body">
+
+                        <h3>
+                            Love Paws Foundation
+                        </h3>
+
+                        <p class="ngo-location">
+                            <i class="fa-solid fa-location-dot"></i>
+                            Solapur, Maharashtra
+                        </p>
+
+                        <div class="ngo-services">
+
+                            <span>Rescue</span>
+                            <span>Care</span>
+                            <span>Adoption</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     IMPACT
+===================================================== -->
+
+<section class="container">
+
+    <div class="impact-section">
+
+        <div class="impact-heading">
+
+            <p>
+                OUR COLLECTIVE IMPACT
+            </p>
+
+            <h2>
+                Every Paw Matters
+            </h2>
+
+        </div>
+
+
+        <div class="row text-center">
+
+            <div class="col-6 col-md-3">
+
+                <div class="impact-item">
+
+                    <i class="fa-solid fa-building"></i>
+
+                    <h3>500+</h3>
+
+                    <p>NGO Partners</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-6 col-md-3">
+
+                <div class="impact-item">
+
+                    <i class="fa-solid fa-paw"></i>
+
+                    <h3>12,500+</h3>
+
+                    <p>Animals Rescued</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-6 col-md-3">
+
+                <div class="impact-item">
+
+                    <i class="fa-solid fa-house-heart"></i>
+
+                    <h3>3,200+</h3>
+
+                    <p>Successful Adoptions</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-6 col-md-3">
+
+                <div class="impact-item">
+
+                    <i class="fa-solid fa-map-location-dot"></i>
+
+                    <h3>28+</h3>
+
+                    <p>Cities Covered</p>
+
+                </div>
 
             </div>
 
@@ -799,6 +720,47 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
 
 </section>
+
+
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="container">
+
+    <div class="ngo-cta">
+
+        <div>
+
+            <p>
+                <i class="fa-solid fa-paw"></i>
+                PAWCONNECT COMMUNITY
+            </p>
+
+            <h2>
+                Together, we can give every animal
+                a second chance.
+            </h2>
+
+            <span>
+                Our NGO partners make this mission possible
+                through compassion, care and teamwork.
+            </span>
+
+        </div>
+
+
+        <div class="cta-icon">
+
+            <i class="fa-solid fa-hand-holding-heart"></i>
+
+        </div>
+
+    </div>
+
+</section>
+
 
 <!-- =====================================================
      FOOTER
@@ -954,6 +916,5 @@ if (session_status() === PHP_SESSION_NONE) {
 
 
 </footer>
-
 </body>
 </html>
