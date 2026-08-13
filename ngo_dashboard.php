@@ -61,99 +61,156 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 <!-- =====================================================
      NAVBAR
 ===================================================== -->
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 
+<div class="main-nav">
 
-<div class="nav">
-    <div class="logo">
+    <div class="main-nav-logo">
+
         <img src="logo.jpeg" alt="PawConnect Logo">
+
         <h2>PawConnect</h2>
+
     </div>
 
-    <div class="menu">
-        <a href="home.php">HOME</a>
-        <a href="about.php">ABOUT US</a>
 
-        <div class="dropdown">
+    <div class="main-nav-menu">
 
-    <a href="#">
-        EXPLORE <i class="fa-solid fa-chevron-down"></i>
-    </a>
+        <a href="home.php">
+            HOME
+        </a>
 
-    <div class="dropdown-content">
 
-        <!-- ABOUT -->
+        <a href="about.php">
+            ABOUT US
+        </a>
 
-        <div class="column">
 
-            <h3>About</h3>
+        <div class="main-nav-dropdown">
 
-            <a href="about.php">About Us</a>
+            <a href="#">
+                EXPLORE
+                <i class="fa-solid fa-chevron-down"></i>
+            </a>
 
-            <a href="mission.php">Mission</a>
 
-            <a href="contact.php">Contact</a>
+            <div class="main-nav-dropdown-content">
+
+
+                <!-- ABOUT -->
+
+                <div class="main-nav-column">
+
+                    <h3>
+                        About
+                    </h3>
+
+                    <a href="about.php">
+                        About Us
+                    </a>
+
+                    <a href="mission.php">
+                        Mission
+                    </a>
+
+                    <a href="contact.php">
+                        Contact
+                    </a>
+
+                </div>
+
+
+                <!-- ADOPTION -->
+
+                <div class="main-nav-column">
+
+                    <h3>
+                        Adoption
+                    </h3>
+
+                    <a href="animals.php">
+                        Available Animals
+                    </a>
+
+                    <a href="care.php">
+                        Care After Adoption
+                    </a>
+
+                    <a href="stories.php">
+                        Adoption Stories
+                    </a>
+
+                </div>
+
+
+                <!-- LOGIN -->
+
+                <div class="main-nav-column">
+
+                    <h3>
+                        Login
+                    </h3>
+
+                    <a href="login.php">
+                        User Login
+                    </a>
+
+                    <a href="ngo_login.php">
+                        NGO Login
+                    </a>
+
+                    <a href="admin_login.php">
+                        Admin Login
+                    </a>
+
+                </div>
+
+
+            </div>
 
         </div>
 
 
-        <!-- ADOPTION -->
-
-        <div class="column">
-
-            <h3>Adoption</h3>
-
-            <a href="animals.php">Available Animals</a>
-
-            <a href="care.php">Care After Adoption</a>
-
-            <a href="stories.php">Adoption Stories</a>
-
-        </div>
+        <a href="animals.php">
+            ANIMALS
+        </a>
 
 
-        <!-- NGO -->
+        <!-- DASHBOARD -->
 
-        <div class="column">
-
-          <h3>NGO</h3>
-
-            <a href="ngo_login.php">NGO Login</a>
-
-            <a href="ngo_register.php">Register NGO</a>
-
-            <a href="admin_login.php">Admin Login</a>
-
-        </div>
-
-    </div>
-
-</div>
-
-<a href="animals.php">ANIMALS</a>
-
-<a href="contact.php">CONTACT</a>
-    </div>
-
-
-    <div class="topbar-links">
-
-        <span style="color:#FFFDF7;">
-
-            Welcome,
-            <?php echo htmlspecialchars($_SESSION["ngo_name"]); ?>
-
-        </span>
-
-
-        <a href="ngo_logout.php" class="logout-btn">
-            Logout
+        <a href="<?php
+            echo isset($_SESSION['user_id'])
+                ? 'user_dashboard.php'
+                : 'login.php';
+        ?>">
+            DASHBOARD
         </a>
 
     </div>
 
-</div>
 
 
+<div class="main-nav-action">
+
+        <?php if (isset($_SESSION['user_id'])) { ?>
+
+            <a href="logout.php" class="login-btn">
+                LOGOUT
+            </a>
+
+        <?php } else { ?>
+
+            <a href="login.php" class="login-btn">
+                LOGIN
+            </a>
+
+        <?php } ?>
+
+</div></div>
 
 <!-- =====================================================
      DASHBOARD
@@ -308,7 +365,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
         <!-- ADD ANIMAL -->
 
-        <a href="addanimal.php" class="action-card">
+        <a href="add_animal.php" class="action-card">
 
             <div class="action-icon">
 
@@ -414,7 +471,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
             </div>
 
 
-            <a href="addanimal.php"
+            <a href="add_animal.php"
                class="add-animal-btn">
 
                 <i class="fa-solid fa-plus"></i>
@@ -581,7 +638,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
                 Start by adding your first animal to PawConnect.
             </p>
 
-            <a href="addanimal.php"
+            <a href="add_animal.php"
                class="add-animal-btn">
 
                 <i class="fa-solid fa-plus"></i>

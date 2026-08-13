@@ -42,8 +42,6 @@ $result = mysqli_query($conn, $query);
             margin: 35px auto;
         }
 
-        /* HEADER */
-
         .header {
             display: flex;
             justify-content: space-between;
@@ -74,8 +72,6 @@ $result = mysqli_query($conn, $query);
         .add-btn:hover {
             background: #0f2c39;
         }
-
-        /* TABLE BOX */
 
         .table-box {
             background: #fffdf8;
@@ -116,8 +112,6 @@ $result = mysqli_query($conn, $query);
             background: #faf7ef;
         }
 
-        /* IMAGE */
-
         .animal-img {
             width: 65px;
             height: 65px;
@@ -137,8 +131,6 @@ $result = mysqli_query($conn, $query);
             color: #777;
         }
 
-        /* STATUS */
-
         .status {
             display: inline-block;
             padding: 6px 11px;
@@ -147,8 +139,6 @@ $result = mysqli_query($conn, $query);
             color: #315b70;
             font-size: 12px;
         }
-
-        /* ACTION BUTTONS */
 
         .actions {
             white-space: nowrap;
@@ -181,8 +171,6 @@ $result = mysqli_query($conn, $query);
             background: #713f50;
         }
 
-        /* EMPTY */
-
         .empty {
             text-align: center;
             padding: 50px;
@@ -194,8 +182,6 @@ $result = mysqli_query($conn, $query);
             margin-bottom: 15px;
             color: #c6a15b;
         }
-
-        /* BACK */
 
         .back {
             display: inline-block;
@@ -227,12 +213,17 @@ $result = mysqli_query($conn, $query);
         <div class="heading">
 
             <h1>
+
                 <i class="fa-solid fa-paw"></i>
+
                 Manage Animals
+
             </h1>
 
             <p>
+
                 Add and manage rescued animals on PawConnect.
+
             </p>
 
         </div>
@@ -418,7 +409,7 @@ $result = mysqli_query($conn, $query);
                         <span class="status">
 
                             <?php
-                            echo htmlspecialchars($animal['adoption_status']);
+                            echo htmlspecialchars($animal['status']);
                             ?>
 
                         </span>

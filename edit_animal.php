@@ -2,6 +2,11 @@
 
 include "db.php";
 
+
+/* ================================
+   CHECK ANIMAL ID
+================================ */
+
 if (!isset($_GET['id'])) {
     die("Invalid Animal ID");
 }
@@ -9,10 +14,17 @@ if (!isset($_GET['id'])) {
 $id = intval($_GET['id']);
 
 
-/* FETCH ANIMAL */
+/* ================================
+   FETCH ANIMAL
+================================ */
 
 $query = "SELECT * FROM animals WHERE id = $id";
+
 $result = mysqli_query($conn, $query);
+
+if (!$result) {
+    die("Database Error: " . mysqli_error($conn));
+}
 
 if (mysqli_num_rows($result) == 0) {
     die("Animal not found");
@@ -21,7 +33,9 @@ if (mysqli_num_rows($result) == 0) {
 $animal = mysqli_fetch_assoc($result);
 
 
-/* UPDATE ANIMAL */
+/* ================================
+   UPDATE ANIMAL
+================================ */
 
 if (isset($_POST['update_animal'])) {
 
@@ -30,15 +44,19 @@ if (isset($_POST['update_animal'])) {
     $breed = $_POST['breed'];
     $age = $_POST['age'];
     $gender = $_POST['gender'];
+    $location = $_POST['location'];
     $health_status = $_POST['health_status'];
-    $rescue_location = $_POST['rescue_location'];
     $description = $_POST['description'];
-    $adoption_status = $_POST['adoption_status'];
+    $status = $_POST['status'];
+
+    /* KEEP OLD IMAGE */
 
     $image = $animal['image'];
 
 
-    /* NEW IMAGE */
+    /* ================================
+       NEW IMAGE
+    ================================= */
 
     if (!empty($_FILES['image']['name'])) {
 
@@ -46,6 +64,10 @@ if (isset($_POST['update_animal'])) {
         $temp_image = $_FILES['image']['tmp_name'];
 
         $image_folder = "uploads/animals/";
+
+        if (!is_dir($image_folder)) {
+            mkdir($image_folder, 0777, true);
+        }
 
         move_uploaded_file(
             $temp_image,
@@ -56,7 +78,9 @@ if (isset($_POST['update_animal'])) {
     }
 
 
-    /* UPDATE QUERY */
+    /* ================================
+       UPDATE QUERY
+    ================================= */
 
     $update = "UPDATE animals SET
 
@@ -65,11 +89,11 @@ if (isset($_POST['update_animal'])) {
         breed='$breed',
         age='$age',
         gender='$gender',
-        health_status='$health_status',
-        rescue_location='$rescue_location',
-        description='$description',
+        location='$location',
         image='$image',
-        adoption_status='$adoption_status'
+        status='$status',
+        health_status='$health_status',
+        description='$description'
 
         WHERE id=$id";
 
@@ -115,153 +139,111 @@ content="width=device-width, initial-scale=1.0">
 }
 
 body {
-
     font-family: Georgia, serif;
-
     background: #f8f3e8;
-
     color: #123c2a;
 }
 
 .container {
-
     width: 90%;
-
     max-width: 900px;
-
     margin: 40px auto;
-
     background: #fffdf7;
-
     padding: 35px;
-
     border-radius: 15px;
-
-    box-shadow:
-    0 5px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
 }
 
 h1 {
-
     margin-bottom: 8px;
 }
 
 .subtitle {
-
     color: #66766d;
-
     margin-bottom: 30px;
 }
 
 .form-row {
-
     display: flex;
-
     gap: 20px;
 }
 
 .form-group {
-
     flex: 1;
-
     margin-bottom: 20px;
 }
 
 label {
-
     display: block;
-
     margin-bottom: 8px;
-
     font-weight: bold;
 }
 
 input,
 select,
 textarea {
-
     width: 100%;
-
     padding: 12px;
-
     border: 1px solid #d8d0c0;
-
     border-radius: 8px;
-
     font-size: 15px;
 }
 
 textarea {
-
     height: 110px;
-
     resize: none;
 }
 
 input:focus,
 select:focus,
 textarea:focus {
-
     outline: none;
-
     border-color: #c6a15b;
 }
 
 .current-image {
-
     width: 100px;
-
     height: 100px;
-
     object-fit: cover;
-
     border-radius: 10px;
-
-    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .buttons {
-
     margin-top: 15px;
-
     display: flex;
-
     gap: 12px;
 }
 
 button {
-
     border: none;
-
     padding: 13px 25px;
-
     border-radius: 8px;
-
     background: #123c2a;
-
     color: white;
-
     font-size: 15px;
-
     cursor: pointer;
 }
 
 button:hover {
-
     background: #0b2419;
 }
 
 .back {
-
     text-decoration: none;
-
     padding: 13px 25px;
-
     border-radius: 8px;
-
     background: #e9ddbf;
-
     color: #123c2a;
+}
+
+@media(max-width: 700px) {
+
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
 }
 
 </style>
@@ -270,21 +252,20 @@ button:hover {
 
 <body>
 
-
 <div class="container">
 
     <h1>🐾 Edit Animal</h1>
 
     <p class="subtitle">
-
         Update rescued animal information.
-
     </p>
 
 
     <form method="POST"
           enctype="multipart/form-data">
 
+
+        <!-- NAME + TYPE -->
 
         <div class="form-row">
 
@@ -293,10 +274,10 @@ button:hover {
                 <label>Animal Name</label>
 
                 <input
-                type="text"
-                name="name"
-                value="<?php echo htmlspecialchars($animal['name']); ?>"
-                required>
+                    type="text"
+                    name="name"
+                    value="<?php echo htmlspecialchars($animal['name']); ?>"
+                    required>
 
             </div>
 
@@ -305,16 +286,24 @@ button:hover {
 
                 <label>Animal Type</label>
 
-                <select name="type">
+                <select name="type" required>
 
                     <option value="Dog"
-                    <?php if($animal['type']=="Dog") echo "selected"; ?>>
-                    Dog
+                    <?php
+                    if ($animal['type'] == "Dog") {
+                        echo "selected";
+                    }
+                    ?>>
+                        Dog
                     </option>
 
                     <option value="Cat"
-                    <?php if($animal['type']=="Cat") echo "selected"; ?>>
-                    Cat
+                    <?php
+                    if ($animal['type'] == "Cat") {
+                        echo "selected";
+                    }
+                    ?>>
+                        Cat
                     </option>
 
                 </select>
@@ -324,6 +313,8 @@ button:hover {
         </div>
 
 
+        <!-- BREED + AGE -->
+
         <div class="form-row">
 
             <div class="form-group">
@@ -331,9 +322,9 @@ button:hover {
                 <label>Breed</label>
 
                 <input
-                type="text"
-                name="breed"
-                value="<?php echo htmlspecialchars($animal['breed']); ?>">
+                    type="text"
+                    name="breed"
+                    value="<?php echo htmlspecialchars($animal['breed']); ?>">
 
             </div>
 
@@ -343,14 +334,16 @@ button:hover {
                 <label>Age</label>
 
                 <input
-                type="text"
-                name="age"
-                value="<?php echo htmlspecialchars($animal['age']); ?>">
+                    type="text"
+                    name="age"
+                    value="<?php echo htmlspecialchars($animal['age']); ?>">
 
             </div>
 
         </div>
 
+
+        <!-- GENDER + HEALTH -->
 
         <div class="form-row">
 
@@ -360,14 +353,26 @@ button:hover {
 
                 <select name="gender">
 
+                    <option value="">
+                        Select Gender
+                    </option>
+
                     <option value="Male"
-                    <?php if($animal['gender']=="Male") echo "selected"; ?>>
-                    Male
+                    <?php
+                    if ($animal['gender'] == "Male") {
+                        echo "selected";
+                    }
+                    ?>>
+                        Male
                     </option>
 
                     <option value="Female"
-                    <?php if($animal['gender']=="Female") echo "selected"; ?>>
-                    Female
+                    <?php
+                    if ($animal['gender'] == "Female") {
+                        echo "selected";
+                    }
+                    ?>>
+                        Female
                     </option>
 
                 </select>
@@ -381,19 +386,35 @@ button:hover {
 
                 <select name="health_status">
 
+                    <option value="">
+                        Select Health Status
+                    </option>
+
                     <option value="Healthy"
-                    <?php if($animal['health_status']=="Healthy") echo "selected"; ?>>
-                    Healthy
+                    <?php
+                    if ($animal['health_status'] == "Healthy") {
+                        echo "selected";
+                    }
+                    ?>>
+                        Healthy
                     </option>
 
                     <option value="Under Treatment"
-                    <?php if($animal['health_status']=="Under Treatment") echo "selected"; ?>>
-                    Under Treatment
+                    <?php
+                    if ($animal['health_status'] == "Under Treatment") {
+                        echo "selected";
+                    }
+                    ?>>
+                        Under Treatment
                     </option>
 
                     <option value="Recovering"
-                    <?php if($animal['health_status']=="Recovering") echo "selected"; ?>>
-                    Recovering
+                    <?php
+                    if ($animal['health_status'] == "Recovering") {
+                        echo "selected";
+                    }
+                    ?>>
+                        Recovering
                     </option>
 
                 </select>
@@ -403,27 +424,35 @@ button:hover {
         </div>
 
 
+        <!-- LOCATION -->
+
         <div class="form-group">
 
-            <label>Rescue Location</label>
+            <label>Location</label>
 
             <input
-            type="text"
-            name="rescue_location"
-            value="<?php echo htmlspecialchars($animal['rescue_location']); ?>">
+                type="text"
+                name="location"
+                value="<?php echo htmlspecialchars($animal['location']); ?>"
+                placeholder="Enter location">
 
         </div>
 
+
+        <!-- DESCRIPTION -->
 
         <div class="form-group">
 
             <label>Description</label>
 
             <textarea
-            name="description"><?php echo htmlspecialchars($animal['description']); ?></textarea>
+                name="description"
+                placeholder="Enter animal description"><?php echo htmlspecialchars($animal['description']); ?></textarea>
 
         </div>
 
+
+        <!-- CURRENT IMAGE -->
 
         <div class="form-group">
 
@@ -434,45 +463,66 @@ button:hover {
                 <br>
 
                 <img
-                src="uploads/animals/<?php echo htmlspecialchars($animal['image']); ?>"
-                class="current-image">
+                    src="uploads/animals/<?php echo htmlspecialchars($animal['image']); ?>"
+                    class="current-image"
+                    alt="Animal Image">
+
+            <?php } else { ?>
+
+                <p>No image available.</p>
 
             <?php } ?>
 
         </div>
 
 
+        <!-- CHANGE IMAGE -->
+
         <div class="form-group">
 
             <label>Change Image</label>
 
             <input
-            type="file"
-            name="image"
-            accept="image/*">
+                type="file"
+                name="image"
+                accept="image/*">
 
         </div>
 
 
+        <!-- STATUS -->
+
         <div class="form-group">
 
-            <label>Adoption Status</label>
+            <label>Status</label>
 
-            <select name="adoption_status">
+            <select name="status">
 
                 <option value="Available"
-                <?php if($animal['adoption_status']=="Available") echo "selected"; ?>>
-                Available
+                <?php
+                if ($animal['status'] == "Available") {
+                    echo "selected";
+                }
+                ?>>
+                    Available
                 </option>
 
                 <option value="Pending"
-                <?php if($animal['adoption_status']=="Pending") echo "selected"; ?>>
-                Pending
+                <?php
+                if ($animal['status'] == "Pending") {
+                    echo "selected";
+                }
+                ?>>
+                    Pending
                 </option>
 
                 <option value="Adopted"
-                <?php if($animal['adoption_status']=="Adopted") echo "selected"; ?>>
-                Adopted
+                <?php
+                if ($animal['status'] == "Adopted") {
+                    echo "selected";
+                }
+                ?>>
+                    Adopted
                 </option>
 
             </select>
@@ -480,11 +530,13 @@ button:hover {
         </div>
 
 
+        <!-- BUTTONS -->
+
         <div class="buttons">
 
             <button
-            type="submit"
-            name="update_animal">
+                type="submit"
+                name="update_animal">
 
                 Update Animal
 
@@ -492,8 +544,8 @@ button:hover {
 
 
             <a
-            href="admin_animal.php"
-            class="back">
+                href="admin_animal.php"
+                class="back">
 
                 Cancel
 

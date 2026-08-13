@@ -6,7 +6,7 @@ include "db.php";
    CHECK REQUEST ID
 ================================ */
 
-if (!isset($_GET['id'])) {
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     die("No adoption request selected.");
 }
 
@@ -15,9 +15,6 @@ $request_id = intval($_GET['id']);
 
 /* ================================
    GET ADOPTION REQUEST
-   (joined with animals / pets so we
-   can show the real name, not just
-   a raw ID)
 ================================ */
 
 $sql = "
@@ -52,18 +49,15 @@ $stmt->execute();
 
 $result = $stmt->get_result();
 
-
 if ($result->num_rows == 0) {
     die("Adoption request not found.");
 }
-
 
 $request = $result->fetch_assoc();
 
 
 /* ================================
-   FIND CORRECT ANIMAL NAME
-   (same logic used on admin_adoptions.php)
+   FIND CORRECT ANIMAL
 ================================ */
 
 if (
@@ -72,14 +66,10 @@ if (
     !empty($request['animal_name'])
 ) {
 
-    /* NEW ANIMAL */
-
     $animal_name = $request['animal_name'];
     $animal_breed = $request['animal_breed'];
 
 } else {
-
-    /* OLD PET */
 
     $animal_name = !empty($request['old_pet_name'])
         ? $request['old_pet_name']
@@ -92,6 +82,7 @@ if (
 ?>
 
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -103,6 +94,7 @@ if (
 
 <title>Adoption Request | PawConnect</title>
 
+
 <style>
 
 * {
@@ -111,140 +103,380 @@ if (
     box-sizing: border-box;
 }
 
+
 body {
+
     font-family: Arial, sans-serif;
+
     background: #f6f4ed;
+
     color: #173c2d;
+
 }
+
 
 .nav {
+
     height: 75px;
+
     background: #173c2d;
+
     display: flex;
+
     align-items: center;
+
     padding: 0 50px;
+
     color: white;
+
 }
+
 
 .nav h2 {
+
     font-family: Georgia, serif;
+
 }
+
 
 .container {
+
     width: 900px;
+
     max-width: 92%;
+
     margin: 50px auto;
+
 }
+
 
 .header {
+
     margin-bottom: 30px;
+
 }
+
 
 .header p {
+
     font-size: 12px;
+
     letter-spacing: 2px;
+
     font-weight: bold;
+
 }
+
 
 .header h1 {
+
     font-family: Georgia, serif;
+
     font-size: 40px;
+
     margin-top: 8px;
+
 }
+
 
 .card {
+
     background: white;
+
     border-radius: 18px;
+
     padding: 30px;
+
     margin-bottom: 20px;
+
     box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+
 }
+
 
 .card h2 {
+
     font-family: Georgia, serif;
+
     margin-bottom: 20px;
+
 }
+
 
 .info-grid {
+
     display: grid;
+
     grid-template-columns: 1fr 1fr;
+
     gap: 18px;
+
 }
+
 
 .info {
+
     background: #f8f6ef;
+
     padding: 15px;
+
     border-radius: 10px;
+
 }
+
 
 .info small {
+
     display: block;
+
     color: #777;
+
     font-size: 11px;
+
     margin-bottom: 6px;
+
     text-transform: uppercase;
+
 }
+
 
 .info strong {
+
     font-size: 14px;
+
 }
+
 
 .reason {
+
     background: #f8f6ef;
+
     padding: 18px;
+
     border-radius: 10px;
+
     line-height: 1.6;
+
 }
+
 
 .status {
+
     display: inline-block;
+
     padding: 8px 16px;
+
     border-radius: 20px;
+
     background: #eee;
+
     font-size: 13px;
+
     font-weight: bold;
+
 }
+
+
+/* ===============================
+   STATUS COLORS
+================================ */
+
+.status-pending {
+
+    background: #fff3cd;
+
+    color: #856404;
+
+}
+
+
+.status-approved {
+
+    background: #d4edda;
+
+    color: #155724;
+
+}
+
+
+.status-rejected {
+
+    background: #f8d7da;
+
+    color: #721c24;
+
+}
+
+
+.status-completed {
+
+    background: #dff3e5;
+
+    color: #176b3a;
+
+}
+
+
+/* ===============================
+   CURRENT STATUS
+================================ */
+
+.current-status {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.status-label {
+
+    font-size: 13px;
+
+    color: #777;
+
+    font-weight: bold;
+
+}
+
+
+/* ===============================
+   ACTIONS
+================================ */
 
 .actions {
+
     display: flex;
+
     gap: 15px;
+
     margin-top: 25px;
+
+    flex-wrap: wrap;
+
 }
+
 
 .actions a {
+
     text-decoration: none;
+
     padding: 13px 25px;
+
     border-radius: 25px;
+
     font-weight: bold;
+
     font-size: 14px;
+
 }
+
 
 .approve {
+
     background: #173c2d;
+
     color: white;
+
 }
+
 
 .reject {
+
     background: #b94a48;
+
     color: white;
+
 }
 
-.back {
-    display: inline-block;
-    margin-top: 25px;
-    color: #173c2d;
-    text-decoration: none;
-    font-weight: bold;
+
+.complete {
+
+    background: #c49a28;
+
+    color: white;
+
 }
+
+
+.completed-message {
+
+    background: #dff3e5;
+
+    color: #176b3a;
+
+    padding: 14px 20px;
+
+    border-radius: 25px;
+
+    font-weight: bold;
+
+}
+
+
+.completed-message i {
+
+    margin-right: 8px;
+
+}
+
+
+.back {
+
+    display: inline-block;
+
+    margin-top: 25px;
+
+    color: #173c2d;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+}
+
+
+.back:hover {
+
+    text-decoration: underline;
+
+}
+
 
 @media(max-width:700px) {
 
     .info-grid {
+
         grid-template-columns: 1fr;
+
     }
 
+
     .actions {
+
         flex-direction: column;
+
+    }
+
+
+    .actions a {
+
+        text-align: center;
+
+    }
+
+
+    .current-status {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
     }
 
 }
@@ -253,8 +485,11 @@ body {
 
 </head>
 
+
 <body>
 
+
+<!-- ================= NAVBAR ================= -->
 
 <div class="nav">
 
@@ -268,9 +503,13 @@ body {
 <div class="container">
 
 
+    <!-- ================= HEADER ================= -->
+
     <div class="header">
 
-        <p>PAWCONNECT ADMIN</p>
+        <p>
+            PAWCONNECT ADMIN
+        </p>
 
         <h1>
             Adoption Request
@@ -280,7 +519,7 @@ body {
 
 
 
-    <!-- REQUEST INFORMATION -->
+    <!-- ================= REQUEST INFORMATION ================= -->
 
     <div class="card">
 
@@ -288,53 +527,139 @@ body {
             Request Information
         </h2>
 
+
         <div class="info-grid">
 
+
             <div class="info">
 
-                <small>Request ID</small>
+                <small>
+                    Request ID
+                </small>
 
                 <strong>
-                    #<?php echo $request['id']; ?>
+
+                    #<?php
+                    echo htmlspecialchars(
+                        $request['id']
+                    );
+                    ?>
+
                 </strong>
 
             </div>
 
 
+
             <div class="info">
 
-                <small>Animal</small>
+                <small>
+                    Animal
+                </small>
 
                 <strong>
-                    <?php echo htmlspecialchars($animal_name); ?>
-                    <?php if (!empty($animal_breed)) { ?>
-                        (<?php echo htmlspecialchars($animal_breed); ?>)
+
+                    <?php
+                    echo htmlspecialchars(
+                        $animal_name
+                    );
+                    ?>
+
+                    <?php
+                    if (!empty($animal_breed)) {
+                    ?>
+
+                        (
+                        <?php
+                        echo htmlspecialchars(
+                            $animal_breed
+                        );
+                        ?>
+                        )
+
                     <?php } ?>
+
                 </strong>
 
             </div>
 
 
+
             <div class="info">
 
-                <small>Status</small>
+                <small>
+                    Status
+                </small>
 
-                <span class="status">
-                    <?php echo htmlspecialchars($request['status']); ?>
+                <?php
+
+                $current_status =
+                    $request['status'];
+
+                if ($current_status == "Approved") {
+
+                    $status_class =
+                        "status-approved";
+
+                }
+                elseif ($current_status == "Completed") {
+
+                    $status_class =
+                        "status-completed";
+
+                }
+                elseif (
+                    strpos(
+                        $current_status,
+                        "Rejected"
+                    ) === 0
+                ) {
+
+                    $status_class =
+                        "status-rejected";
+
+                }
+                else {
+
+                    $status_class =
+                        "status-pending";
+
+                }
+
+                ?>
+
+                <span class="status <?php echo $status_class; ?>">
+
+                    <?php
+                    echo htmlspecialchars(
+                        $current_status
+                    );
+                    ?>
+
                 </span>
 
             </div>
 
 
+
             <div class="info">
 
-                <small>Created At</small>
+                <small>
+                    Created At
+                </small>
 
                 <strong>
-                    <?php echo htmlspecialchars($request['created_at']); ?>
+
+                    <?php
+                    echo htmlspecialchars(
+                        $request['created_at']
+                    );
+                    ?>
+
                 </strong>
 
             </div>
+
 
         </div>
 
@@ -342,7 +667,7 @@ body {
 
 
 
-    <!-- APPLICANT -->
+    <!-- ================= APPLICANT ================= -->
 
     <div class="card">
 
@@ -350,36 +675,64 @@ body {
             Applicant Details
         </h2>
 
+
         <div class="info-grid">
 
+
             <div class="info">
 
-                <small>Full Name</small>
+                <small>
+                    Full Name
+                </small>
 
                 <strong>
-                    <?php echo htmlspecialchars($request['full_name']); ?>
+
+                    <?php
+                    echo htmlspecialchars(
+                        $request['full_name']
+                    );
+                    ?>
+
                 </strong>
 
             </div>
 
 
+
             <div class="info">
 
-                <small>Phone</small>
+                <small>
+                    Phone
+                </small>
 
                 <strong>
-                    <?php echo htmlspecialchars($request['phone']); ?>
+
+                    <?php
+                    echo htmlspecialchars(
+                        $request['phone']
+                    );
+                    ?>
+
                 </strong>
 
             </div>
 
 
+
             <div class="info">
 
-                <small>Email</small>
+                <small>
+                    Email
+                </small>
 
                 <strong>
-                    <?php echo htmlspecialchars($request['email']); ?>
+
+                    <?php
+                    echo htmlspecialchars(
+                        $request['email']
+                    );
+                    ?>
+
                 </strong>
 
             </div>
@@ -391,7 +744,7 @@ body {
 
 
 
-    <!-- HOME -->
+    <!-- ================= HOME DETAILS ================= -->
 
     <div class="card">
 
@@ -399,50 +752,88 @@ body {
             Home Details
         </h2>
 
+
         <div class="info-grid">
 
+
             <div class="info">
 
-                <small>Home Type</small>
+                <small>
+                    Home Type
+                </small>
 
                 <strong>
-                    <?php echo htmlspecialchars($request['home_type']); ?>
+
+                    <?php
+                    echo htmlspecialchars(
+                        $request['home_type']
+                    );
+                    ?>
+
                 </strong>
 
             </div>
 
 
+
             <div class="info">
 
-                <small>Owns Home</small>
+                <small>
+                    Owns Home
+                </small>
 
                 <strong>
-                    <?php echo htmlspecialchars($request['owns_home']); ?>
+
+                    <?php
+                    echo htmlspecialchars(
+                        $request['owns_home']
+                    );
+                    ?>
+
                 </strong>
 
             </div>
 
 
+
             <div class="info">
 
-                <small>Pet Friendly</small>
+                <small>
+                    Pet Friendly
+                </small>
 
                 <strong>
-                    <?php echo htmlspecialchars($request['pet_friendly']); ?>
+
+                    <?php
+                    echo htmlspecialchars(
+                        $request['pet_friendly']
+                    );
+                    ?>
+
                 </strong>
 
             </div>
 
 
+
             <div class="info">
 
-                <small>Other Pets</small>
+                <small>
+                    Other Pets
+                </small>
 
                 <strong>
-                    <?php echo htmlspecialchars($request['other_pets']); ?>
+
+                    <?php
+                    echo htmlspecialchars(
+                        $request['other_pets']
+                    );
+                    ?>
+
                 </strong>
 
             </div>
+
 
         </div>
 
@@ -450,7 +841,7 @@ body {
 
 
 
-    <!-- CARE -->
+    <!-- ================= CARE DETAILS ================= -->
 
     <div class="card">
 
@@ -458,61 +849,108 @@ body {
             Time & Care
         </h2>
 
+
         <div class="info-grid">
 
+
             <div class="info">
 
-                <small>Time Available</small>
+                <small>
+                    Time Available
+                </small>
 
                 <strong>
-                    <?php echo htmlspecialchars($request['time_available']); ?>
+
+                    <?php
+                    echo htmlspecialchars(
+                        $request['time_available']
+                    );
+                    ?>
+
                 </strong>
 
             </div>
 
 
+
             <div class="info">
 
-                <small>Caretaker</small>
+                <small>
+                    Caretaker
+                </small>
 
                 <strong>
-                    <?php echo htmlspecialchars($request['caretaker']); ?>
+
+                    <?php
+                    echo htmlspecialchars(
+                        $request['caretaker']
+                    );
+                    ?>
+
                 </strong>
 
             </div>
 
 
+
             <div class="info">
 
-                <small>Previous Pet</small>
+                <small>
+                    Previous Pet
+                </small>
 
                 <strong>
-                    <?php echo htmlspecialchars($request['previous_pet']); ?>
+
+                    <?php
+                    echo htmlspecialchars(
+                        $request['previous_pet']
+                    );
+                    ?>
+
                 </strong>
 
             </div>
 
 
+
             <div class="info">
 
-                <small>Monthly Budget</small>
+                <small>
+                    Monthly Budget
+                </small>
 
                 <strong>
-                    <?php echo htmlspecialchars($request['monthly_budget']); ?>
+
+                    <?php
+                    echo htmlspecialchars(
+                        $request['monthly_budget']
+                    );
+                    ?>
+
                 </strong>
 
             </div>
 
 
+
             <div class="info">
 
-                <small>Ready For Expenses</small>
+                <small>
+                    Ready For Expenses
+                </small>
 
                 <strong>
-                    <?php echo htmlspecialchars($request['ready_for_expenses']); ?>
+
+                    <?php
+                    echo htmlspecialchars(
+                        $request['ready_for_expenses']
+                    );
+                    ?>
+
                 </strong>
 
             </div>
+
 
         </div>
 
@@ -520,7 +958,7 @@ body {
 
 
 
-    <!-- REASON -->
+    <!-- ================= REASON ================= -->
 
     <div class="card">
 
@@ -528,11 +966,18 @@ body {
             Why They Want To Adopt
         </h2>
 
+
         <div class="reason">
 
-            <?php echo nl2br(
-                htmlspecialchars($request['reason'])
-            ); ?>
+            <?php
+
+            echo nl2br(
+                htmlspecialchars(
+                    $request['reason']
+                )
+            );
+
+            ?>
 
         </div>
 
@@ -540,39 +985,152 @@ body {
 
 
 
-    <!-- ACTIONS -->
+    <!-- ================= ADMIN ACTION ================= -->
 
     <div class="card">
 
         <h2>
-            Admin Decision
+            Adoption Status
         </h2>
 
-        <div class="actions">
 
-            <a
-                href="update_adoption_status.php?id=<?php echo $request['id']; ?>&status=Approved"
-                class="approve"
-                onclick="return confirm('Approve this adoption request?');">
+        <div class="current-status">
 
-                ✓ Approve Request
-
-            </a>
+            <span class="status-label">
+                Current Status:
+            </span>
 
 
-            <a
-                href="update_adoption_status.php?id=<?php echo $request['id']; ?>&status=Rejected"
-                class="reject"
-                onclick="return confirm('Reject this adoption request?');">
+            <?php
 
-                ✕ Reject Request
+            if ($current_status == "Approved") {
 
-            </a>
+                $display_class =
+                    "status-approved";
+
+            }
+            elseif ($current_status == "Completed") {
+
+                $display_class =
+                    "status-completed";
+
+            }
+            elseif (
+                strpos(
+                    $current_status,
+                    "Rejected"
+                ) === 0
+            ) {
+
+                $display_class =
+                    "status-rejected";
+
+            }
+            else {
+
+                $display_class =
+                    "status-pending";
+
+            }
+
+            ?>
+
+
+            <span class="status <?php echo $display_class; ?>">
+
+                <?php
+                echo htmlspecialchars(
+                    $current_status
+                );
+                ?>
+
+            </span>
 
         </div>
 
-        <a href="admin_adoptions.php" class="back">
+
+
+        <div class="actions">
+
+
+            <!-- PENDING -->
+
+            <?php
+            if ($current_status == "Pending") {
+            ?>
+
+                <a
+                    href="update_adoption_status.php?id=<?php echo $request['id']; ?>&status=Approved"
+                    class="approve">
+
+                    ✓ Approve Request
+
+                </a>
+
+
+                <a
+                    href="update_adoption_status.php?id=<?php echo $request['id']; ?>&status=Rejected"
+                    class="reject">
+
+                    ✕ Reject Request
+
+                </a>
+
+            <?php
+            }
+            ?>
+
+
+
+            <!-- APPROVED -->
+
+            <?php
+            if ($current_status == "Approved") {
+            ?>
+
+                <a
+                    href="complete_adoption.php?id=<?php echo $request['id']; ?>"
+                    class="complete">
+
+                    🐾 Mark Adoption Completed
+
+                </a>
+
+            <?php
+            }
+            ?>
+
+
+
+            <!-- COMPLETED -->
+
+            <?php
+            if ($current_status == "Completed") {
+            ?>
+
+                <div class="completed-message">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    Adoption Completed Successfully
+
+                </div>
+
+            <?php
+            }
+            ?>
+
+
+        </div>
+
+
+
+        <a
+            href="admin_adoptions.php"
+            class="back">
+
             ← Back to Adoption Requests
+
         </a>
 
     </div>

@@ -128,7 +128,12 @@ href="admin_dashboard.css">
       
     View Adoption Requests
 </a>
+<a href="home.php" class="admin-btn">
 
+      <i class="fa-solid fa-home"></i>
+      
+    Home
+</a>
 
 </div>
 

@@ -159,7 +159,7 @@ if(isset($_POST['login']))
       <button 
     class="create-btn"
     type="button"
-    onclick="window.location.href='register.php'">
+    onclick="window.location.href='user_register.php'">
 
     <i class="fa-regular fa-user"></i>
     Create New Account

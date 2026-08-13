@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,25 +13,10 @@
           content="width=device-width, initial-scale=1.0">
 
     <title>About Us | PawConnect</title>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@400;500;600;700&family=Caveat:wght@500;600&display=swap"
-          rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-    <!-- CSS -->
     <link rel="stylesheet"
           href="about.css">
+          <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 </head>
 
@@ -35,84 +24,168 @@
 <body>
 
 
-<!-- ================= NAVBAR ================= -->
-
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 
 <div class="nav">
+
+    <!-- LOGO -->
+
     <div class="logo">
+
         <img src="logo.jpeg" alt="PawConnect Logo">
+
         <h2>PawConnect</h2>
+
     </div>
 
+
+    <!-- CENTER MENU -->
+
     <div class="menu">
-        <a href="home.html">HOME</a>
-        <a href="animals.html">ANIMALS</a>
+
+        <a href="home.php">
+            HOME
+        </a>
+
+
+        <a href="about.php">
+            ABOUT US
+        </a>
+
+
+        <!-- EXPLORE -->
 
         <div class="dropdown">
 
-    <a href="#">
-        EXPLORE <i class="fa-solid fa-chevron-down"></i>
-    </a>
+            <a href="#">
+                EXPLORE
+                <i class="fa-solid fa-chevron-down"></i>
+            </a>
 
-    <div class="dropdown-content">
 
-        <!-- ABOUT -->
+            <div class="dropdown-content">
 
-        <div class="column">
 
-            <h3>About</h3>
+                <!-- ABOUT -->
 
-            <a href="about.html">About Us</a>
+                <div class="column">
 
-            <a href="mission.html">Mission</a>
+                    <h3>
+                        About
+                    </h3>
 
-            <a href="contact.html">Contact</a>
+                    <a href="about.php">
+                        About Us
+                    </a>
+
+                    <a href="mission.php">
+                        Mission
+                    </a>
+
+                    <a href="contact.php">
+                        Contact
+                    </a>
+
+                </div>
+
+
+                <!-- ADOPTION -->
+
+                <div class="column">
+
+                    <h3>
+                        Adoption
+                    </h3>
+
+                    <a href="animals.php">
+                        Available Animals
+                    </a>
+
+                    <a href="care.php">
+                        Care After Adoption
+                    </a>
+
+                    <a href="stories.php">
+                        Adoption Stories
+                    </a>
+
+                </div>
+
+
+                <!-- LOGIN -->
+
+                <div class="column">
+
+                    <h3>
+                        Login
+                    </h3>
+
+                    <a href="login.php">
+                        User Login
+                    </a>
+
+                    <a href="ngo_login.php">
+                        NGO Login
+                    </a>
+
+                    <a href="admin_login.php">
+                        Admin Login
+                    </a>
+
+                </div>
+
+
+            </div>
 
         </div>
 
 
-        <!-- ADOPTION -->
+        <!-- ANIMALS -->
 
-        <div class="column">
-
-            <h3>Adoption</h3>
-
-            <a href="animals.html">Available Animals</a>
-
-            <a href="care.html">Care After Adoption</a>
-
-            <a href="stories.html">Adoption Stories</a>
-
-        </div>
+        <a href="animals.php">
+            ANIMALS
+        </a>
 
 
-        <!-- NGO -->
+        <!-- DASHBOARD -->
 
-        <div class="column">
-
-            <h3>NGO</h3>
-
-            <a href="ngo_login.php">NGO Login</a>
-
-            <a href="dashboard.html">Dashboard</a>
-
-            <a href="addanimal.html">Add Animal</a>
-
-        </div>
+        <a href="<?php
+            echo isset($_SESSION['user_id'])
+                ? 'user_dashboard.php'
+                : 'login.php';
+        ?>">
+            DASHBOARD
+        </a>
 
     </div>
 
-</div>
 
-<a href="adopt.html">ADOPT</a>
+    <!-- RIGHT SIDE -->
 
-<a href="contact.html">CONTACT</a>
+   <div class="main-nav-action">
+
+        <?php if (isset($_SESSION['user_id'])) { ?>
+
+            <a href="logout.php" class="login-btn">
+                LOGOUT
+            </a>
+
+        <?php } else { ?>
+
+            <a href="login.php" class="login-btn">
+                LOGIN
+            </a>
+
+        <?php } ?>
+
     </div>
 
-    <a href="login.php" class="login-btn">LOGIN</a>
+
 </div>
-
-
 
 <!-- ================= HERO ================= -->
 
@@ -159,7 +232,7 @@
 
         <div class="hero-buttons">
 
-            <a href="mission.html"
+            <a href="mission.php"
                class="primary-btn">
 
                 Our Mission
@@ -733,7 +806,7 @@
 
     <div class="cta-buttons">
 
-        <a href="adopt.html"
+        <a href="animals.php"
            class="cta-primary">
 
             Adopt Now
@@ -810,19 +883,19 @@
                 Explore
             </h3>
 
-            <a href="home.html">
+            <a href="home.php">
                 Home
             </a>
 
-            <a href="animals.html">
+            <a href="animals.php">
                 Available Animals
             </a>
 
-            <a href="adopt.html">
+            <a href="adopt.php">
                 Adoption
             </a>
 
-            <a href="stories.html">
+            <a href="stories.php">
                 Adoption Stories
             </a>
 
@@ -838,19 +911,19 @@
                 Services
             </h3>
 
-            <a href="care.html">
+            <a href="care.php">
                 Care After Adoption
             </a>
 
-            <a href="petcare.html">
+            <a href="petcare.php">
                 Pet Care
             </a>
 
-            <a href="ngo-partners.html">
+            <a href="ngo-partners.php">
                 NGO Partners
             </a>
 
-            <a href="mission.html">
+            <a href="mission.php">
                 Our Mission
             </a>
 

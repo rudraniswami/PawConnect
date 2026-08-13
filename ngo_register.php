@@ -60,62 +60,149 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <link rel="stylesheet" href="ngo.css">
 </head>
 <body>
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 
 <div class="main-nav">
+
     <div class="main-nav-logo">
+
         <img src="logo.jpeg" alt="PawConnect Logo">
+
         <h2>PawConnect</h2>
+
     </div>
+
 
     <div class="main-nav-menu">
 
-        <a href="home.php">HOME</a>
+        <a href="home.php">
+            HOME
+        </a>
 
-        <a href="animals.php">ANIMALS</a>
+
+        <a href="about.php">
+            ABOUT US
+        </a>
+
 
         <div class="main-nav-dropdown">
 
             <a href="#">
-                EXPLORE <i class="fa-solid fa-chevron-down"></i>
+                EXPLORE
+                <i class="fa-solid fa-chevron-down"></i>
             </a>
+
 
             <div class="main-nav-dropdown-content">
 
-                <div class="main-nav-column">
-                    <h3>About</h3>
-                    <a href="about.php">About Us</a>
-                    <a href="mission.php">Mission</a>
-                    <a href="contact.php">Contact</a>
-                </div>
+
+                <!-- ABOUT -->
 
                 <div class="main-nav-column">
-                    <h3>Adoption</h3>
-                    <a href="animals.php">Available Animals</a>
-                    <a href="care.php">Care After Adoption</a>
-                    <a href="stories.php">Adoption Stories</a>
+
+                    <h3>
+                        About
+                    </h3>
+
+                    <a href="about.php">
+                        About Us
+                    </a>
+
+                    <a href="mission.php">
+                        Mission
+                    </a>
+
+                    <a href="contact.php">
+                        Contact
+                    </a>
+
                 </div>
+
+
+                <!-- ADOPTION -->
 
                 <div class="main-nav-column">
-                   <h3>NGO</h3>
 
-            <a href="ngo_login.php">NGO Login</a>
+                    <h3>
+                        Adoption
+                    </h3>
 
-            <a href="ngo_register.php">Register NGO</a>
+                    <a href="animals.php">
+                        Available Animals
+                    </a>
 
-            <a href="admin_login.php">Admin Login</a>
+                    <a href="care.php">
+                        Care After Adoption
+                    </a>
+
+                    <a href="stories.php">
+                        Adoption Stories
+                    </a>
+
                 </div>
+
+
+                <!-- LOGIN -->
+
+                <div class="main-nav-column">
+
+                    <h3>
+                        Login
+                    </h3>
+
+                    <a href="login.php">
+                        User Login
+                    </a>
+
+                    <a href="ngo_login.php">
+                        NGO Login
+                    </a>
+
+                    <a href="admin_login.php">
+                        Admin Login
+                    </a>
+
+                </div>
+
 
             </div>
 
         </div>
 
-        <a href="adopt.php">ADOPT</a>
 
-        <a href="contact.php">CONTACT</a>
+        <a href="animals.php">
+            ANIMALS
+        </a>
+
+
+        <!-- DASHBOARD -->
+
+        <a href="<?php
+            echo isset($_SESSION['user_id'])
+                ? 'user_dashboard.php'
+                : 'login.php';
+        ?>">
+            DASHBOARD
+        </a>
 
     </div>
-</div>
-    
+
+
+    <!-- LOGOUT -->
+
+    <?php if (isset($_SESSION['user_id'])) { ?>
+
+        <a href="logout.php" class="login-btn">
+            LOGOUT
+        </a>
+
+    <?php } ?>
+
+
 </div>
 
 <div class="auth-wrapper">

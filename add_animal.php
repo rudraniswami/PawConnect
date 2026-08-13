@@ -1,6 +1,23 @@
 <?php
 
 include "db.php";
+session_start();
+
+
+/* ================================
+   CHECK NGO LOGIN
+================================ */
+
+if (!isset($_SESSION['ngo_id'])) {
+    die("NGO is not logged in.");
+}
+
+$ngo_id = $_SESSION['ngo_id'];
+
+
+/* ================================
+   ADD ANIMAL
+================================ */
 
 if (isset($_POST['add_animal'])) {
 
@@ -10,11 +27,14 @@ if (isset($_POST['add_animal'])) {
     $age = $_POST['age'];
     $gender = $_POST['gender'];
     $health_status = $_POST['health_status'];
-    $rescue_location = $_POST['rescue_location'];
+    $location = $_POST['rescue_location'];
     $description = $_POST['description'];
-    $adoption_status = $_POST['adoption_status'];
+    $status = $_POST['adoption_status'];
 
-    /* IMAGE UPLOAD */
+
+    /* ================================
+       IMAGE UPLOAD
+    ================================= */
 
     $image = $_FILES['image']['name'];
     $temp_image = $_FILES['image']['tmp_name'];
@@ -30,16 +50,40 @@ if (isset($_POST['add_animal'])) {
         $image_folder . $image
     );
 
-    /* INSERT DATA */
+
+    /* ================================
+       INSERT DATA
+    ================================= */
 
     $query = "INSERT INTO animals
-    (name, type, breed, age, gender, health_status,
-     rescue_location, description, image, adoption_status)
-     
+    (
+        ngo_id,
+        name,
+        type,
+        breed,
+        age,
+        gender,
+        location,
+        image,
+        status,
+        health_status,
+        description
+    )
     VALUES
-    ('$name', '$type', '$breed', '$age', '$gender',
-     '$health_status', '$rescue_location', '$description',
-     '$image', '$adoption_status')";
+    (
+        '$ngo_id',
+        '$name',
+        '$type',
+        '$breed',
+        '$age',
+        '$gender',
+        '$location',
+        '$image',
+        '$status',
+        '$health_status',
+        '$description'
+    )";
+
 
     if (mysqli_query($conn, $query)) {
 
@@ -51,23 +95,27 @@ if (isset($_POST['add_animal'])) {
     } else {
 
         echo "Error: " . mysqli_error($conn);
+
     }
+
 }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
 <title>Add Animal - PawConnect</title>
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 
 <style>
 
@@ -170,11 +218,22 @@ button:hover {
     color: #123c2a;
 }
 
+@media(max-width: 700px) {
+
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+}
+
 </style>
 
 </head>
 
+
 <body>
+
 
 <div class="container">
 
@@ -187,8 +246,12 @@ button:hover {
         Add rescued animal information to PawConnect.
     </p>
 
+
     <form method="POST"
           enctype="multipart/form-data">
+
+
+        <!-- NAME + TYPE -->
 
         <div class="form-row">
 
@@ -203,6 +266,7 @@ button:hover {
 
             </div>
 
+
             <div class="form-group">
 
                 <label>Animal Type</label>
@@ -210,8 +274,14 @@ button:hover {
                 <select name="type" required>
 
                     <option value="">Select Type</option>
-                    <option value="Dog">Dog</option>
-                    <option value="Cat">Cat</option>
+
+                    <option value="Dog">
+                        Dog
+                    </option>
+
+                    <option value="Cat">
+                        Cat
+                    </option>
 
                 </select>
 
@@ -219,6 +289,8 @@ button:hover {
 
         </div>
 
+
+        <!-- BREED + AGE -->
 
         <div class="form-row">
 
@@ -231,6 +303,7 @@ button:hover {
                        placeholder="Enter breed">
 
             </div>
+
 
             <div class="form-group">
 
@@ -245,6 +318,8 @@ button:hover {
         </div>
 
 
+        <!-- GENDER + HEALTH -->
+
         <div class="form-row">
 
             <div class="form-group">
@@ -253,13 +328,22 @@ button:hover {
 
                 <select name="gender">
 
-                    <option value="">Select Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
+                    <option value="">
+                        Select Gender
+                    </option>
+
+                    <option value="Male">
+                        Male
+                    </option>
+
+                    <option value="Female">
+                        Female
+                    </option>
 
                 </select>
 
             </div>
+
 
             <div class="form-group">
 
@@ -267,10 +351,21 @@ button:hover {
 
                 <select name="health_status">
 
-                    <option value="">Select Health Status</option>
-                    <option value="Healthy">Healthy</option>
-                    <option value="Under Treatment">Under Treatment</option>
-                    <option value="Recovering">Recovering</option>
+                    <option value="">
+                        Select Health Status
+                    </option>
+
+                    <option value="Healthy">
+                        Healthy
+                    </option>
+
+                    <option value="Under Treatment">
+                        Under Treatment
+                    </option>
+
+                    <option value="Recovering">
+                        Recovering
+                    </option>
 
                 </select>
 
@@ -278,6 +373,8 @@ button:hover {
 
         </div>
 
+
+        <!-- LOCATION -->
 
         <div class="form-group">
 
@@ -290,6 +387,8 @@ button:hover {
         </div>
 
 
+        <!-- DESCRIPTION -->
+
         <div class="form-group">
 
             <label>Description</label>
@@ -299,6 +398,8 @@ button:hover {
 
         </div>
 
+
+        <!-- IMAGE -->
 
         <div class="form-group">
 
@@ -312,20 +413,32 @@ button:hover {
         </div>
 
 
+        <!-- STATUS -->
+
         <div class="form-group">
 
             <label>Adoption Status</label>
 
             <select name="adoption_status">
 
-                <option value="Available">Available</option>
-                <option value="Adopted">Adopted</option>
-                <option value="Pending">Pending</option>
+                <option value="Available">
+                    Available
+                </option>
+
+                <option value="Adopted">
+                    Adopted
+                </option>
+
+                <option value="Pending">
+                    Pending
+                </option>
 
             </select>
 
         </div>
 
+
+        <!-- BUTTONS -->
 
         <div class="buttons">
 
@@ -333,9 +446,11 @@ button:hover {
                     name="add_animal">
 
                 <i class="fa-solid fa-plus"></i>
+
                 Add Animal
 
             </button>
+
 
             <a href="admin_dashboard.php"
                class="back">
@@ -349,6 +464,7 @@ button:hover {
     </form>
 
 </div>
+
 
 </body>
 

@@ -1,120 +1,227 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Pet Care | PawConnect</title>
 
-    <!-- ONLY BOOTSTRAP -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-          rel="stylesheet">
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
+    <!-- PET CARE CSS -->
     <link rel="stylesheet" href="petcare.css">
+
 </head>
 
 <body>
 
-<!-- ================= NAVBAR ================= -->
 
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 
 <div class="nav">
+
+    <!-- LOGO -->
+
     <div class="logo">
+
         <img src="logo.jpeg" alt="PawConnect Logo">
+
         <h2>PawConnect</h2>
+
     </div>
 
+
+    <!-- CENTER MENU -->
+
     <div class="menu">
-        <a href="home.html">HOME</a>
-        <a href="animals.html">ANIMALS</a>
+
+        <a href="home.php">
+            HOME
+        </a>
+
+
+        <a href="about.php">
+            ABOUT US
+        </a>
+
+
+        <!-- EXPLORE -->
 
         <div class="dropdown">
 
-    <a href="#">
-        EXPLORE <i class="fa-solid fa-chevron-down"></i>
-    </a>
+            <a href="#">
+                EXPLORE
+                <i class="fa-solid fa-chevron-down"></i>
+            </a>
 
-    <div class="dropdown-content">
 
-        <!-- ABOUT -->
+            <div class="dropdown-content">
 
-        <div class="column">
 
-            <h3>About</h3>
+                <!-- ABOUT -->
 
-            <a href="about.html">About Us</a>
+                <div class="column">
 
-            <a href="mission.html">Mission</a>
+                    <h3>
+                        About
+                    </h3>
 
-            <a href="contact.html">Contact</a>
+                    <a href="about.php">
+                        About Us
+                    </a>
+
+                    <a href="mission.php">
+                        Mission
+                    </a>
+
+                    <a href="contact.php">
+                        Contact
+                    </a>
+
+                </div>
+
+
+                <!-- ADOPTION -->
+
+                <div class="column">
+
+                    <h3>
+                        Adoption
+                    </h3>
+
+                    <a href="animals.php">
+                        Available Animals
+                    </a>
+
+                    <a href="care.php">
+                        Care After Adoption
+                    </a>
+
+                    <a href="stories.php">
+                        Adoption Stories
+                    </a>
+
+                </div>
+
+
+                <!-- LOGIN -->
+
+                <div class="column">
+
+                    <h3>
+                        Login
+                    </h3>
+
+                    <a href="login.php">
+                        User Login
+                    </a>
+
+                    <a href="ngo_login.php">
+                        NGO Login
+                    </a>
+
+                    <a href="admin_login.php">
+                        Admin Login
+                    </a>
+
+                </div>
+
+
+            </div>
 
         </div>
 
 
-        <!-- ADOPTION -->
+        <!-- ANIMALS -->
 
-        <div class="column">
-
-            <h3>Adoption</h3>
-
-            <a href="animals.html">Available Animals</a>
-
-            <a href="care.html">Care After Adoption</a>
-
-            <a href="stories.html">Adoption Stories</a>
-
-        </div>
+        <a href="animals.php">
+            ANIMALS
+        </a>
 
 
-        <!-- NGO -->
+        <!-- DASHBOARD -->
 
-        <div class="column">
-
-            <h3>NGO</h3>
-
-            <a href="ngo_login.php">NGO Login</a>
-
-            <a href="dashboard.html">Dashboard</a>
-
-            <a href="addanimal.html">Add Animal</a>
-
-        </div>
+        <a href="<?php
+            echo isset($_SESSION['user_id'])
+                ? 'user_dashboard.php'
+                : 'login.php';
+        ?>">
+            DASHBOARD
+        </a>
 
     </div>
 
-</div>
 
-<a href="adopt.html">ADOPT</a>
+    <!-- RIGHT SIDE -->
 
-<a href="contact.html">CONTACT</a>
+   <div class="main-nav-action">
+
+        <?php if (isset($_SESSION['user_id'])) { ?>
+
+            <a href="logout.php" class="login-btn">
+                LOGOUT
+            </a>
+
+        <?php } else { ?>
+
+            <a href="login.php" class="login-btn">
+                LOGIN
+            </a>
+
+        <?php } ?>
+
     </div>
 
-    <a href="login.php" class="login-btn">LOGIN</a>
+
 </div>
-
-
-<!-- HERO SECTION -->
+<!-- =====================================================
+     HERO SECTION
+===================================================== -->
 
 <section class="hero">
 
     <div class="hero-content">
 
+
+        <!-- LEFT -->
+
         <div class="hero-text">
 
-            <p class="tag">🐾 Happy Pets, Healthy Life</p>
+            <p class="tag">
+                🐾 Happy Pets, Healthy Life
+            </p>
+
 
             <h1>
                 Pet Care<br>
                 Suggestions
             </h1>
 
+
             <p class="description">
+
                 Your pet's well-being is our priority.
                 Explore expert-backed tips and daily care
                 guides to keep your furry friend happy,
                 healthy and active.
+
             </p>
+
 
             <div class="buttons">
 
@@ -127,16 +234,22 @@
         </div>
 
 
+        <!-- RIGHT -->
+
         <div class="hero-image">
 
             <img src="petcare.png" alt="Happy Dog and Cat">
 
+
             <div class="note">
+
                 🐾
+
                 <span>
                     Small care today,<br>
                     happier tomorrow.
                 </span>
+
             </div>
 
         </div>
@@ -144,7 +257,12 @@
     </div>
 
 </section>
-<!-- ================= FEATURES ================= -->
+
+
+
+<!-- =====================================================
+     FEATURES
+===================================================== -->
 
 <section class="features">
 
@@ -152,34 +270,99 @@
 
         <div class="row text-center">
 
-            <div class="col-md">
-                <div class="circle">🍚</div>
-                <h3>Nutritious Food</h3>
-                <p>Balanced diet for stronger pets.</p>
-            </div>
+
+            <!-- 1 -->
 
             <div class="col-md">
-                <div class="circle">🐾</div>
-                <h3>Regular Exercise</h3>
-                <p>Daily activity keeps them fit and happy.</p>
+
+                <div class="circle">
+                    🍚
+                </div>
+
+                <h3>
+                    Nutritious Food
+                </h3>
+
+                <p>
+                    Balanced diet for stronger pets.
+                </p>
+
             </div>
 
-            <div class="col-md">
-                <div class="circle">✚</div>
-                <h3>Health Checkups</h3>
-                <p>Routine checkups for a healthy life.</p>
-            </div>
+
+            <!-- 2 -->
 
             <div class="col-md">
-                <div class="circle">✂</div>
-                <h3>Grooming</h3>
-                <p>Clean pets are happy pets.</p>
+
+                <div class="circle">
+                    🐾
+                </div>
+
+                <h3>
+                    Regular Exercise
+                </h3>
+
+                <p>
+                    Daily activity keeps them fit and happy.
+                </p>
+
             </div>
 
+
+            <!-- 3 -->
+
             <div class="col-md">
-                <div class="circle">♥</div>
-                <h3>Love & Care</h3>
-                <p>Give them love, they give you joy.</p>
+
+                <div class="circle">
+                    ✚
+                </div>
+
+                <h3>
+                    Health Checkups
+                </h3>
+
+                <p>
+                    Routine checkups for a healthy life.
+                </p>
+
+            </div>
+
+
+            <!-- 4 -->
+
+            <div class="col-md">
+
+                <div class="circle">
+                    ✂
+                </div>
+
+                <h3>
+                    Grooming
+                </h3>
+
+                <p>
+                    Clean pets are happy pets.
+                </p>
+
+            </div>
+
+
+            <!-- 5 -->
+
+            <div class="col-md">
+
+                <div class="circle">
+                    ♥
+                </div>
+
+                <h3>
+                    Love & Care
+                </h3>
+
+                <p>
+                    Give them love, they give you joy.
+                </p>
+
             </div>
 
         </div>
@@ -189,22 +372,35 @@
 </section>
 
 
-<!-- ================= GUIDES ================= -->
+
+<!-- =====================================================
+     GUIDES
+===================================================== -->
 
 <section class="guides" id="guides">
 
     <div class="container">
 
+
         <div class="heading">
-            <h2>🌿 Pet Care Guides 🌿</h2>
-            <p>Everything you need to know for a better life for your pet.</p>
+
+            <h2>
+                🌿 Pet Care Guides 🌿
+            </h2>
+
+            <p>
+                Everything you need to know for a better life for your pet.
+            </p>
+
         </div>
 
 
-        <div class="row g-4">
+        <div class="row guides-row">
+
 
             <!-- 1 -->
-            <div class="col-lg-4 col-xl">
+
+            <div class="guide-column">
 
                 <div class="card">
 
@@ -212,9 +408,13 @@
 
                     <div class="card-body">
 
-                        <span>🍚</span>
+                        <span>
+                            🍚
+                        </span>
 
-                        <h3>Healthy Diet</h3>
+                        <h3>
+                            Healthy Diet
+                        </h3>
 
                         <p>
                             Choose the right food for your
@@ -229,7 +429,8 @@
 
 
             <!-- 2 -->
-            <div class="col-lg-4 col-xl">
+
+            <div class="guide-column">
 
                 <div class="card">
 
@@ -237,9 +438,13 @@
 
                     <div class="card-body">
 
-                        <span>🐕</span>
+                        <span>
+                            🐕
+                        </span>
 
-                        <h3>Exercise & Play</h3>
+                        <h3>
+                            Exercise & Play
+                        </h3>
 
                         <p>
                             Fun activities and daily exercise
@@ -254,7 +459,8 @@
 
 
             <!-- 3 -->
-            <div class="col-lg-4 col-xl">
+
+            <div class="guide-column">
 
                 <div class="card">
 
@@ -262,9 +468,13 @@
 
                     <div class="card-body">
 
-                        <span>✚</span>
+                        <span>
+                            ✚
+                        </span>
 
-                        <h3>Health & Hygiene</h3>
+                        <h3>
+                            Health & Hygiene
+                        </h3>
 
                         <p>
                             Vaccination, hygiene and regular
@@ -279,7 +489,8 @@
 
 
             <!-- 4 -->
-            <div class="col-lg-4 col-xl">
+
+            <div class="guide-column">
 
                 <div class="card">
 
@@ -287,9 +498,13 @@
 
                     <div class="card-body">
 
-                        <span>✂</span>
+                        <span>
+                            ✂
+                        </span>
 
-                        <h3>Grooming Tips</h3>
+                        <h3>
+                            Grooming Tips
+                        </h3>
 
                         <p>
                             Brushing, bathing and nail care
@@ -304,7 +519,8 @@
 
 
             <!-- 5 -->
-            <div class="col-lg-4 col-xl">
+
+            <div class="guide-column">
 
                 <div class="card">
 
@@ -312,9 +528,13 @@
 
                     <div class="card-body">
 
-                        <span>♥</span>
+                        <span>
+                            ♥
+                        </span>
 
-                        <h3>Behavior & Training</h3>
+                        <h3>
+                            Behavior & Training
+                        </h3>
 
                         <p>
                             Positive training builds trust
@@ -334,17 +554,23 @@
 </section>
 
 
-<!-- ================= EMERGENCY ================= -->
+
+<!-- =====================================================
+     EMERGENCY
+===================================================== -->
 
 <section class="emergency">
 
     <div class="container">
 
-        <div class="row align-items-center">
+        <div class="emergency-row">
 
-            <div class="col-md-4">
 
-                <h2>🧰 Emergency Care</h2>
+            <div class="emergency-left">
+
+                <h2>
+                    🧰 Emergency Care
+                </h2>
 
                 <p>
                     Know what to do in an emergency situation.
@@ -352,7 +578,8 @@
 
             </div>
 
-            <div class="col-md-4 emergency-text">
+
+            <div class="emergency-text">
 
                 <h3>
                     Because every second<br>
@@ -361,6 +588,7 @@
 
             </div>
 
+
         </div>
 
     </div>
@@ -368,46 +596,120 @@
 </section>
 
 
-<!-- ================= QUICK TIPS ================= -->
+
+<!-- =====================================================
+     QUICK TIPS
+===================================================== -->
 
 <section class="tips" id="tips">
 
     <div class="container">
 
+
         <div class="heading">
-            <h2>Quick Daily Tips ♡</h2>
+
+            <h2>
+                Quick Daily Tips ♡
+            </h2>
+
         </div>
+
 
         <div class="row text-center">
 
-            <div class="col-md">
-                <div class="tip-circle">💧</div>
-                <h3>Fresh Water</h3>
-                <p>Always keep clean water available.</p>
-            </div>
+
+            <!-- 1 -->
 
             <div class="col-md">
-                <div class="tip-circle">◷</div>
-                <h3>Routine</h3>
-                <p>Maintain a daily feeding schedule.</p>
+
+                <div class="tip-circle">
+                    💧
+                </div>
+
+                <h3>
+                    Fresh Water
+                </h3>
+
+                <p>
+                    Always keep clean water available.
+                </p>
+
             </div>
 
-            <div class="col-md">
-                <div class="tip-circle">⌂</div>
-                <h3>Safe Space</h3>
-                <p>Give them a clean, comfortable space.</p>
-            </div>
+
+            <!-- 2 -->
 
             <div class="col-md">
-                <div class="tip-circle">♡</div>
-                <h3>Affection</h3>
-                <p>Spend quality time with your pet.</p>
+
+                <div class="tip-circle">
+                    ◷
+                </div>
+
+                <h3>
+                    Routine
+                </h3>
+
+                <p>
+                    Maintain a daily feeding schedule.
+                </p>
+
             </div>
 
+
+            <!-- 3 -->
+
             <div class="col-md">
-                <div class="tip-circle">♢</div>
-                <h3>Stay Alert</h3>
-                <p>Watch for changes in their behavior.</p>
+
+                <div class="tip-circle">
+                    ⌂
+                </div>
+
+                <h3>
+                    Safe Space
+                </h3>
+
+                <p>
+                    Give them a clean, comfortable space.
+                </p>
+
+            </div>
+
+
+            <!-- 4 -->
+
+            <div class="col-md">
+
+                <div class="tip-circle">
+                    ♡
+                </div>
+
+                <h3>
+                    Affection
+                </h3>
+
+                <p>
+                    Spend quality time with your pet.
+                </p>
+
+            </div>
+
+
+            <!-- 5 -->
+
+            <div class="col-md">
+
+                <div class="tip-circle">
+                    ♢
+                </div>
+
+                <h3>
+                    Stay Alert
+                </h3>
+
+                <p>
+                    Watch for changes in their behavior.
+                </p>
+
             </div>
 
         </div>
@@ -417,26 +719,37 @@
 </section>
 
 
-<!-- ================= CTA ================= -->
+
+<!-- =====================================================
+     CTA
+===================================================== -->
 
 <section class="cta">
 
     <div class="container">
 
-        <div class="row align-items-center">
+        <div class="cta-row">
 
-            <div class="col-md-5">
 
-                <img src="petcare-bottom.jpg" alt="Happy Pets">
+            <div class="cta-image">
+
+                <img
+                    src="petcare-bottom.jpg"
+                    alt="Happy Pets">
 
             </div>
 
-            <div class="col-md-7">
+
+            <div class="cta-text">
 
                 <h2>
+
                     A little care goes a long way.
+
                     <br>
+
                     Happy pet, happy home.
+
                 </h2>
 
             </div>
@@ -446,6 +759,8 @@
     </div>
 
 </section>
+
+
 
 <!-- =====================================================
      FOOTER
@@ -456,14 +771,15 @@
     <div class="footer-top">
 
 
-        <!-- PAWCONNECT BRAND -->
+        <!-- BRAND -->
 
         <div class="footer-about">
 
             <div class="footer-logo">
 
-                <img src="logo.jpeg"
-                     alt="PawConnect Logo">
+                <img
+                    src="logo.jpeg"
+                    alt="PawConnect Logo">
 
                 <h2>
                     PawConnect
@@ -473,8 +789,10 @@
 
 
             <p>
+
                 Connecting rescued animals with loving families,
                 trusted shelters and compassionate hearts across India.
+
             </p>
 
 
@@ -510,19 +828,19 @@
                 Explore
             </h3>
 
-            <a href="home.html">
+            <a href="home.php">
                 Home
             </a>
 
-            <a href="animals.html">
+            <a href="animals.php">
                 Available Animals
             </a>
 
-            <a href="adopt.html">
+            <a href="adopt.php">
                 Adoption
             </a>
 
-            <a href="stories.html">
+            <a href="stories.php">
                 Adoption Stories
             </a>
 
@@ -538,19 +856,19 @@
                 Services
             </h3>
 
-            <a href="care.html">
+            <a href="care.php">
                 Care After Adoption
             </a>
 
-            <a href="petcare.html">
+            <a href="petcare.php">
                 Pet Care
             </a>
 
-            <a href="ngo-partners.html">
+            <a href="ngo-partners.php">
                 NGO Partners
             </a>
 
-            <a href="mission.html">
+            <a href="mission.php">
                 Our Mission
             </a>
 
@@ -583,7 +901,6 @@
 
         </div>
 
-
     </div>
 
 
@@ -593,14 +910,17 @@
     <div class="footer-bottom">
 
         <p>
+
             © 2026 PawConnect • Connecting every paw with care,
             compassion & a place to belong.
+
         </p>
 
     </div>
 
-
 </footer>
 
+
 </body>
+
 </html>

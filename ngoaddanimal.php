@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="success-msg"><?php echo htmlspecialchars($success); ?></div>
         <?php } ?>
 
-        <form method="POST" action="addanimal.php" enctype="multipart/form-data">
+        <form method="POST" action="add_animal.php" enctype="multipart/form-data">
 
             <div class="form-group">
                 <label>Animal Name</label>

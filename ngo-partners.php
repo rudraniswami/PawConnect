@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,85 +18,173 @@
 
 <body style="background:#fffaf0; color:#064331;">
 
-<!-- ================= NAVBAR ================= -->
 
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 
 <div class="nav">
+
+    <!-- LOGO -->
+
     <div class="logo">
+
         <img src="logo.jpeg" alt="PawConnect Logo">
+
         <h2>PawConnect</h2>
+
     </div>
 
+
+    <!-- CENTER MENU -->
+
     <div class="menu">
-        <a href="home.html">HOME</a>
-        <a href="animals.html">ANIMALS</a>
+
+        <a href="home.php">
+            HOME
+        </a>
+
+
+        <a href="about.php">
+            ABOUT US
+        </a>
+
+
+        <!-- EXPLORE -->
 
         <div class="dropdown">
 
-    <a href="#">
-        EXPLORE <i class="fa-solid fa-chevron-down"></i>
-    </a>
+            <a href="#">
+                EXPLORE
+                <i class="fa-solid fa-chevron-down"></i>
+            </a>
 
-    <div class="dropdown-content">
 
-        <!-- ABOUT -->
+            <div class="dropdown-content">
 
-        <div class="column">
 
-            <h3>About</h3>
+                <!-- ABOUT -->
 
-            <a href="about.html">About Us</a>
+                <div class="column">
 
-            <a href="mission.html">Mission</a>
+                    <h3>
+                        About
+                    </h3>
 
-            <a href="contact.html">Contact</a>
+                    <a href="about.php">
+                        About Us
+                    </a>
+
+                    <a href="mission.php">
+                        Mission
+                    </a>
+
+                    <a href="contact.php">
+                        Contact
+                    </a>
+
+                </div>
+
+
+                <!-- ADOPTION -->
+
+                <div class="column">
+
+                    <h3>
+                        Adoption
+                    </h3>
+
+                    <a href="animals.php">
+                        Available Animals
+                    </a>
+
+                    <a href="care.php">
+                        Care After Adoption
+                    </a>
+
+                    <a href="stories.php">
+                        Adoption Stories
+                    </a>
+
+                </div>
+
+
+                <!-- LOGIN -->
+
+                <div class="column">
+
+                    <h3>
+                        Login
+                    </h3>
+
+                    <a href="login.php">
+                        User Login
+                    </a>
+
+                    <a href="ngo_login.php">
+                        NGO Login
+                    </a>
+
+                    <a href="admin_login.php">
+                        Admin Login
+                    </a>
+
+                </div>
+
+
+            </div>
 
         </div>
 
 
-        <!-- ADOPTION -->
+        <!-- ANIMALS -->
 
-        <div class="column">
-
-            <h3>Adoption</h3>
-
-            <a href="animals.html">Available Animals</a>
-
-            <a href="care.html">Care After Adoption</a>
-
-            <a href="stories.html">Adoption Stories</a>
-
-        </div>
+        <a href="animals.php">
+            ANIMALS
+        </a>
 
 
-        <!-- NGO -->
+        <!-- DASHBOARD -->
 
-        <div class="column">
-
-            <h3>NGO</h3>
-
-            <a href="ngo_login.php">NGO Login</a>
-
-            <a href="dashboard.html">Dashboard</a>
-
-            <a href="addanimal.html">Add Animal</a>
-
-        </div>
+        <a href="<?php
+            echo isset($_SESSION['user_id'])
+                ? 'user_dashboard.php'
+                : 'login.php';
+        ?>">
+            DASHBOARD
+        </a>
 
     </div>
 
-</div>
 
-<a href="adopt.html">ADOPT</a>
+    <!-- RIGHT SIDE -->
 
-<a href="contact.html">CONTACT</a>
+   <div class="main-nav-action">
+
+        <?php if (isset($_SESSION['user_id'])) { ?>
+
+            <a href="logout.php" class="login-btn">
+                LOGOUT
+            </a>
+
+        <?php } else { ?>
+
+            <a href="login.php" class="login-btn">
+                LOGIN
+            </a>
+
+        <?php } ?>
+
     </div>
 
-    <a href="login.php" class="login-btn">LOGIN</a>
+
 </div>
-
-
-
 <!-- ================= HERO ================= -->
 
 <section class="container py-5">
@@ -709,72 +800,158 @@
 
 </section>
 
-<!-- ================= FOOTER ================= -->
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
-<footer>
+<footer class="footer">
 
-    <div class="container">
-
-        <div class="row">
-
-            <div class="col-lg-4">
-
-                <h2>🐾 PawConnect</h2>
-
-                <p>Every Rescue Deserves a Forever Home.</p>
-
-                <p>
-                    Connecting rescued animals with loving
-                    families and compassionate hearts.
-                </p>
-
-            </div>
+    <div class="footer-top">
 
 
-            <div class="col-lg-2">
+        <!-- PAWCONNECT BRAND -->
 
-                <h4>Quick Links</h4>
+        <div class="footer-about">
 
-                <a href="home.html">Home</a>
-                <a href="animals.html">Animals</a>
-                <a href="adopt.html">Adopt</a>
-                <a href="petcare.html">Pet Care</a>
-                <a href="contact.html">Contact</a>
+            <div class="footer-logo">
+
+                <img src="logo.jpeg"
+                     alt="PawConnect Logo">
+
+                <h2>
+                    PawConnect
+                </h2>
 
             </div>
 
 
-            <div class="col-lg-2">
-
-                <h4>Explore</h4>
-
-                <a href="about.html">About Us</a>
-                <a href="mission.html">Mission</a>
-                <a href="ngo-partners.html">NGO Partners</a>
-
-            </div>
+            <p>
+                Connecting rescued animals with loving families,
+                trusted shelters and compassionate hearts across India.
+            </p>
 
 
-            <div class="col-lg-4">
+            <div class="social-icons">
 
-                <h4>Contact Us</h4>
+                <a href="#" aria-label="Facebook">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
 
-                <p>📍 Pune, Maharashtra</p>
-                <p>📞 +91 98765 43210</p>
-                <p>✉ hello@pawconnect.in</p>
+                <a href="#" aria-label="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+
+                <a href="#" aria-label="X">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </a>
+
+                <a href="#" aria-label="LinkedIn">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </a>
 
             </div>
 
         </div>
 
-        <hr>
 
-        <p class="copyright">
+
+        <!-- EXPLORE -->
+
+        <div class="footer-links">
+
+            <h3>
+                Explore
+            </h3>
+
+            <a href="home.php">
+                Home
+            </a>
+
+            <a href="animals.php">
+                Available Animals
+            </a>
+
+            <a href="adopt.php">
+                Adoption
+            </a>
+
+            <a href="stories.php">
+                Adoption Stories
+            </a>
+
+        </div>
+
+
+
+        <!-- SERVICES -->
+
+        <div class="footer-links">
+
+            <h3>
+                Services
+            </h3>
+
+            <a href="care.php">
+                Care After Adoption
+            </a>
+
+            <a href="petcare.php">
+                Pet Care
+            </a>
+
+            <a href="ngo-partners.php">
+                NGO Partners
+            </a>
+
+            <a href="mission.php">
+                Our Mission
+            </a>
+
+        </div>
+
+
+
+        <!-- CONTACT -->
+
+        <div class="footer-contact">
+
+            <h3>
+                Contact
+            </h3>
+
+            <p>
+                <i class="fa-solid fa-location-dot"></i>
+                Pune, Maharashtra
+            </p>
+
+            <p>
+                <i class="fa-solid fa-phone"></i>
+                +91 98765 43210
+            </p>
+
+            <p>
+                <i class="fa-solid fa-envelope"></i>
+                hello@pawconnect.in
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- FOOTER BOTTOM -->
+
+    <div class="footer-bottom">
+
+        <p>
             © 2026 PawConnect • Connecting every paw with care,
             compassion & a place to belong.
         </p>
 
     </div>
+
 
 </footer>
 

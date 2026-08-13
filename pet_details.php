@@ -66,18 +66,26 @@ $pet = $result->fetch_assoc();
 <!-- ================================
      NAVBAR
 ================================ -->
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 
 <div class="nav">
 
+    <!-- LOGO -->
+
     <div class="logo">
 
-        <img src="logo.jpeg"
-             alt="PawConnect Logo">
+        <img src="logo.jpeg" alt="PawConnect Logo">
 
         <h2>PawConnect</h2>
 
     </div>
 
+
+    <!-- CENTER MENU -->
 
     <div class="menu">
 
@@ -85,10 +93,13 @@ $pet = $result->fetch_assoc();
             HOME
         </a>
 
-        <a href="animals.php">
-            ANIMALS
+
+        <a href="about.php">
+            ABOUT US
         </a>
 
+
+        <!-- EXPLORE -->
 
         <div class="dropdown">
 
@@ -100,9 +111,14 @@ $pet = $result->fetch_assoc();
 
             <div class="dropdown-content">
 
+
+                <!-- ABOUT -->
+
                 <div class="column">
 
-                    <h3>About</h3>
+                    <h3>
+                        About
+                    </h3>
 
                     <a href="about.php">
                         About Us
@@ -119,9 +135,13 @@ $pet = $result->fetch_assoc();
                 </div>
 
 
+                <!-- ADOPTION -->
+
                 <div class="column">
 
-                    <h3>Adoption</h3>
+                    <h3>
+                        Adoption
+                    </h3>
 
                     <a href="animals.php">
                         Available Animals
@@ -138,16 +158,20 @@ $pet = $result->fetch_assoc();
                 </div>
 
 
+                <!-- LOGIN -->
+
                 <div class="column">
 
-                    <h3>NGO</h3>
+                    <h3>
+                        Login
+                    </h3>
+
+                    <a href="login.php">
+                        User Login
+                    </a>
 
                     <a href="ngo_login.php">
                         NGO Login
-                    </a>
-
-                    <a href="ngo_register.php">
-                        Register NGO
                     </a>
 
                     <a href="admin_login.php">
@@ -156,47 +180,54 @@ $pet = $result->fetch_assoc();
 
                 </div>
 
+
             </div>
 
         </div>
 
 
-        <!-- ADOPT CURRENT ANIMAL -->
+        <!-- ANIMALS -->
 
-        <a href="adopt.php?animal_id=<?php echo $pet['id']; ?>">
-            ADOPT
+        <a href="animals.php">
+            ANIMALS
         </a>
 
 
-        <a href="contact.php">
-            CONTACT
+        <!-- DASHBOARD -->
+
+        <a href="<?php
+            echo isset($_SESSION['user_id'])
+                ? 'user_dashboard.php'
+                : 'login.php';
+        ?>">
+            DASHBOARD
         </a>
 
     </div>
 
 
-    <!-- LOGIN / LOGOUT -->
+    <!-- RIGHT SIDE -->
 
-    <?php if (isset($_SESSION["user_id"]) || isset($_SESSION["ngo_id"])) { ?>
+   <div class="main-nav-action">
 
-        <a href="logout.php"
-           class="login-btn">
-            LOGOUT
-        </a>
+        <?php if (isset($_SESSION['user_id'])) { ?>
 
-    <?php } else { ?>
+            <a href="logout.php" class="login-btn">
+                LOGOUT
+            </a>
 
-        <a href="login.php"
-           class="login-btn">
-            LOGIN
-        </a>
+        <?php } else { ?>
 
-    <?php } ?>
+            <a href="login.php" class="login-btn">
+                LOGIN
+            </a>
+
+        <?php } ?>
+
+    </div>
+
 
 </div>
-
-
-
 <!-- ================================
      PAW PASSPORT
 ================================ -->

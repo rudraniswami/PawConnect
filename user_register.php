@@ -127,7 +127,7 @@ if(isset($_POST['register']))
             </p>
 
 
-            <form action="register.php" method="POST">
+            <form action="user_register.php" method="POST">
 
                 <!-- NAME -->
 
