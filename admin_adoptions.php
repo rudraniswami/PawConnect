@@ -99,6 +99,19 @@ h1 {
     margin-bottom: 30px;
 
 }
+.back-btn{
+    text-decoration:none;
+    color:#123C2A;
+    font-weight:bold;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.back-btn:hover{
+    color:#C6A15B;
+}
+
 
 
 .request-card {
@@ -302,6 +315,15 @@ h1 {
     <p class="subtitle">
         Review and manage PawConnect adoption applications.
     </p>
+
+    <a href="admin_dashboard.php"
+           class="back-btn">
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+            Back to Dashboard
+
+        </a>
 
 
 <?php
