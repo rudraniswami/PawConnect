@@ -493,7 +493,7 @@ $result = mysqli_query($conn, $query);
 
     <!-- BACK TO DASHBOARD -->
 
-    <a href="admin_dashboard.php" class="back">
+    <a href="ngo_dashboard.php" class="back">
 
         <i class="fa-solid fa-arrow-left"></i>
 

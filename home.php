@@ -112,9 +112,9 @@ if (session_status() === PHP_SESSION_NONE) {
         <p>PawConnect is a platform that connects rescued animals with loving families and helps NGOs provide the care they deserve.</p>
         <div class="hero-btn">
             <a href="animals.php" class="btn1"><i class="fa-solid fa-paw"></i> Explore Animals</a>
-            <a href="adopt.php" class="gold-btn"><i class="fa-solid fa-heart"></i> Start Adoption</a>
-        </div>
-    </div>
+            <!-- <a href="adopt.php" class="gold-btn"><i class="fa-solid fa-heart"></i> Start Adoption</a>
+        </div> -->
+    </div></div>
     <div class="hero-image"></div>
 </section>
    <!-- <button class="explore-btn">
