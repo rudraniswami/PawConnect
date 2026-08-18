@@ -653,3 +653,93 @@ body{
 
     font-size:14px;
 }
+
+/* =====================================================
+   PAWCONNECT - TABLET RESPONSIVE
+===================================================== */
+
+@media (max-width: 900px) {
+
+    /* NAVBAR */
+    .nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 10px 20px;
+        gap: 10px;
+    }
+
+    .logo {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .menu {
+        gap: 14px;
+        justify-content: center;
+    }
+
+    .menu > a,
+    .dropdown > a {
+        font-size: 14px;
+    }
+
+    .login-btn {
+        padding: 9px 17px;
+        font-size: 14px;
+    }
+
+    /* DROPDOWN */
+    .dropdown-content {
+        width: 90vw;
+        max-width: 600px;
+    }
+
+    /* HERO */
+    .cat-hero {
+        height: auto;
+        min-height: 600px;
+        padding: 70px 50px;
+        background-position: center;
+    }
+
+    .hero-content {
+        max-width: 600px;
+    }
+
+    .hero-content h1 {
+        font-size: 55px;
+    }
+
+    .hero-content h3 {
+        font-size: 19px;
+    }
+
+    /* COLLECTION */
+    .cat-collection {
+        padding: 75px 40px;
+    }
+
+    .collection-heading h2 {
+        font-size: 40px;
+    }
+
+    .cat-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+
+    .cat-image {
+        height: 270px;
+    }
+
+    /* FOOTER */
+    .footer {
+        padding: 45px 40px 15px;
+    }
+
+    .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 35px;
+    }
+}
+

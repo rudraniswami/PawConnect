@@ -92,7 +92,11 @@ Adopt <?php echo htmlspecialchars($pet['name']); ?> | PawConnect
 <!-- ================================
      NAVBAR
 ================================ -->
-
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <div class="nav">
 
     <div class="logo">
@@ -107,7 +111,12 @@ Adopt <?php echo htmlspecialchars($pet['name']); ?> | PawConnect
     </div>
 
 
+      
+
+    <!-- CENTER MENU -->
+
     <div class="menu">
+
 
         <a href="home.php">
             HOME

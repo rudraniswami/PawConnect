@@ -31,36 +31,24 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 ?>
-
 <div class="nav">
 
     <!-- LOGO -->
-
     <div class="logo">
-
         <img src="logo.jpeg" alt="PawConnect Logo">
-
         <h2>PawConnect</h2>
-
     </div>
 
+     
 
     <!-- CENTER MENU -->
-
     <div class="menu">
 
-        <a href="home.php">
-            HOME
-        </a>
+        <a href="home.php">HOME</a>
 
-
-        <a href="about.php">
-            ABOUT US
-        </a>
-
+        <a href="about.php">ABOUT US</a>
 
         <!-- EXPLORE -->
-
         <div class="dropdown">
 
             <a href="#">
@@ -68,92 +56,37 @@ if (session_status() === PHP_SESSION_NONE) {
                 <i class="fa-solid fa-chevron-down"></i>
             </a>
 
-
             <div class="dropdown-content">
 
-
-                <!-- ABOUT -->
-
                 <div class="column">
+                    <h3>About</h3>
 
-                    <h3>
-                        About
-                    </h3>
-
-                    <a href="about.php">
-                        About Us
-                    </a>
-
-                    <a href="mission.php">
-                        Mission
-                    </a>
-
-                    <a href="contact.php">
-                        Contact
-                    </a>
-
+                    <a href="about.php">About Us</a>
+                    <a href="mission.php">Mission</a>
+                    <a href="contact.php">Contact</a>
                 </div>
 
-
-                <!-- ADOPTION -->
-
                 <div class="column">
+                    <h3>Adoption</h3>
 
-                    <h3>
-                        Adoption
-                    </h3>
-
-                    <a href="animals.php">
-                        Available Animals
-                    </a>
-
-                    <a href="care.php">
-                        Care After Adoption
-                    </a>
-
-                    <a href="stories.php">
-                        Adoption Stories
-                    </a>
-
+                    <a href="animals.php">Available Animals</a>
+                    <a href="care.php">Care After Adoption</a>
+                    <a href="stories.php">Adoption Stories</a>
                 </div>
 
-
-                <!-- LOGIN -->
-
                 <div class="column">
+                    <h3>Login</h3>
 
-                    <h3>
-                        Login
-                    </h3>
-
-                    <a href="login.php">
-                        User Login
-                    </a>
-
-                    <a href="ngo_login.php">
-                        NGO Login
-                    </a>
-
-                    <a href="admin_login.php">
-                        Admin Login
-                    </a>
-
+                    <a href="login.php">User Login</a>
+                    <a href="ngo_login.php">NGO Login</a>
+                    <a href="admin_login.php">Admin Login</a>
                 </div>
-
 
             </div>
 
         </div>
 
-
-        <!-- ANIMALS -->
-
-        <a href="animals.php">
-            ANIMALS
-        </a>
-
-
-        <!-- DASHBOARD -->
+        <a href="animals.php">ANIMALS</a>
 
         <a href="<?php
             echo isset($_SESSION['user_id'])
@@ -165,10 +98,8 @@ if (session_status() === PHP_SESSION_NONE) {
 
     </div>
 
-
     <!-- RIGHT SIDE -->
-
-   <div class="main-nav-action">
+    <div class="nav-actions">
 
         <?php if (isset($_SESSION['user_id'])) { ?>
 
@@ -186,9 +117,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
     </div>
 
-
 </div>
-
 
 <!-- =====================================================
      PAW PASSPORT

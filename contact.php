@@ -129,7 +129,12 @@ if (isset($_POST['send_message'])) {
 
     <!-- CENTER MENU -->
 
+      
+
+    <!-- CENTER MENU -->
+
     <div class="menu">
+
 
 
         <a href="home.php">

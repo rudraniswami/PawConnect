@@ -43,18 +43,25 @@ session_start();
 
 
     <!-- CENTER MENU -->
+      
+
+    <!-- CENTER MENU -->
+
     <div class="menu">
+
 
         <a href="home.php">HOME</a>
 
         <a href="about.php">ABOUT US</a>
 
-        <div class="dropdown">
+      <div class="dropdown">
 
-            <a href="#">
-                EXPLORE
-                <i class="fa-solid fa-chevron-down"></i>
-            </a>
+    <a href="#">
+        EXPLORE
+        <i class="fa-solid fa-chevron-down"></i>
+    </a>
+
+    <div class="dropdown-content">
 
             <div class="dropdown-content">
 
@@ -99,17 +106,24 @@ session_start();
 
 
     <!-- RIGHT SIDE -->
-    <div class="nav-actions">
+     <div class="nav-actions">
 
-        <?php if (isset($_SESSION['user_id'])) { ?>
+    <?php if (isset($_SESSION['user_id'])) { ?>
 
-            <a href="logout.php" class="login-btn">
-                LOGOUT
-            </a>
+        <a href="logout.php" class="login-btn">
+            LOGOUT
+        </a>
 
-        <?php } ?>
+    <?php } else { ?>
 
-    </div>
+        <a href="login.php" class="login-btn">
+            LOGIN
+        </a>
+
+    <?php } ?>
+
+</div>
+
 
 </div>
 <!-- =====================================================

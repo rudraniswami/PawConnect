@@ -45,18 +45,25 @@ if (session_status() === PHP_SESSION_NONE) {
 
 
     <!-- CENTER MENU -->
+      
+
+    <!-- CENTER MENU -->
+
     <div class="menu">
+
 
         <a href="home.php">HOME</a>
 
         <a href="about.php">ABOUT US</a>
 
-        <div class="dropdown">
+      <div class="dropdown">
 
-            <a href="#">
-                EXPLORE
-                <i class="fa-solid fa-chevron-down"></i>
-            </a>
+    <a href="#">
+        EXPLORE
+        <i class="fa-solid fa-chevron-down"></i>
+    </a>
+
+    <div class="dropdown-content">
 
             <div class="dropdown-content">
 
@@ -103,15 +110,21 @@ if (session_status() === PHP_SESSION_NONE) {
     <!-- RIGHT SIDE -->
     <div class="nav-actions">
 
-        <?php if (isset($_SESSION['user_id'])) { ?>
+    <?php if (isset($_SESSION['user_id'])) { ?>
 
-            <a href="logout.php" class="login-btn">
-                LOGOUT
-            </a>
+        <a href="logout.php" class="login-btn">
+            LOGOUT
+        </a>
 
-        <?php } ?>
+    <?php } else { ?>
 
-    </div>
+        <a href="login.php" class="login-btn">
+            LOGIN
+        </a>
+
+    <?php } ?>
+
+</div>
 
 </div>
 <section class="hero">
@@ -241,6 +254,7 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
 
     </div>
+
 </section>
 <!-- Features Section -->
 <section class="features">
@@ -439,7 +453,6 @@ if (session_status() === PHP_SESSION_NONE) {
                 Learn what to feed your pet according to its age, breed and lifestyle.
             </p>
 
-           
         </div>
 
         <div class="care-card">
@@ -453,7 +466,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 Stay updated with essential vaccines and regular health check-ups.
             </p>
 
-            
+           
         </div>
 
         <div class="care-card">
@@ -480,7 +493,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
     <div class="community-content">
 
-        <span class="community-tag">🐾 Join Our Community</span>
+       
 
         <h2>
             Every Paw Deserves a <br>
@@ -494,22 +507,16 @@ if (session_status() === PHP_SESSION_NONE) {
 
         <div class="community-buttons">
 
-            <a href="adopt.php" class="community-btn primary">
+            <a href="animals.php" class="  primary">
                 <i class="fa-solid fa-paw"></i>
                 Adopt Now
             </a>
 
-            <a href="#" class="community-btn secondary">
-                <i class="fa-solid fa-hand-holding-heart"></i>
-                Become a Volunteer
-            </a>
-
-        </div>
+</div>
 
     </div>
 
 </section>
-
 <!-- =====================================================
      FOOTER
 ===================================================== -->
