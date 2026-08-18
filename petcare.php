@@ -32,18 +32,25 @@ session_start();
         <h2>PawConnect</h2>
     </div>
 
+      
+
+    <!-- CENTER MENU -->
+
     <div class="menu">
+
 
         <a href="home.php">HOME</a>
 
         <a href="about.php">ABOUT US</a>
 
-        <div class="dropdown">
+      <div class="dropdown">
 
-            <a href="#">
-                EXPLORE
-                <i class="fa-solid fa-chevron-down"></i>
-            </a>
+    <a href="#">
+        EXPLORE
+        <i class="fa-solid fa-chevron-down"></i>
+    </a>
+
+    <div class="dropdown-content">
 
             <div class="dropdown-content">
 

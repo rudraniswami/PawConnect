@@ -13,6 +13,10 @@ html, body{
 /* =========================
    NAVBAR
 ========================= */
+ 
+/* =========================
+   NAVBAR
+========================= */
 
 .nav{
     width:100%;
@@ -158,35 +162,6 @@ html, body{
 .column a:hover{
     color:#C6A15B;
     padding-left:4px;
-}
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media (max-width: 1100px) {
-
-    .nav {
-        grid-template-columns: 1fr;
-        gap: 12px;
-
-        padding: 12px 20px;
-    }
-
-    .logo {
-        justify-self: center;
-    }
-
-    .menu {
-        flex-wrap: wrap;
-    }
-
-    .nav-actions {
-        justify-self: end;
-        display:flex;
-        align-items: center;
-        gap:14px;
-    }
-
 }
 /* =========================
    HERO
@@ -968,16 +943,6 @@ html, body{
     margin:auto;
 }
 
-.community-tag{
-    display:inline-block;
-    background:#C6A15B;
-    color:white;
-    padding:10px 22px;
-    border-radius:40px;
-    font-size:15px;
-    font-weight:600;
-    margin-bottom:28px;
-}
 
 .community h2{
     color:white;
@@ -992,42 +957,67 @@ html, body{
     line-height:1.8;
     margin-bottom:45px;
 }
+/* =========================
+   ADOPT NOW BUTTON
+========================= */
 
 .community-buttons{
     display:flex;
     justify-content:center;
-    gap:20px;
-    flex-wrap:wrap;
+    align-items:center;
 }
 
-.community-btn{
-    text-decoration:none;
-    padding:16px 34px;
-    border-radius:50px;
-    font-size:17px;
-    font-weight:600;
-    transition:.35s;
-}
+.community-buttons .primary{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
 
-.primary{
+    padding:15px 32px;
+
     background:#C6A15B;
     color:#123C2A;
+
+    border:2px solid #C6A15B;
+    border-radius:50px;
+
+    text-decoration:none;
+
+    font-family:'Times New Roman', Times, serif;
+    font-size:17px;
+    font-weight:bold;
+
+    box-shadow:0 10px 25px rgba(198,161,91,.25);
+
+    transition:all .3s ease;
 }
 
-.primary:hover{
-    background:#D8B87C;
-    transform:translateY(-5px);
+.community-buttons .primary i{
+    font-size:16px;
 }
 
-.secondary{
-    border:2px solid white;
-    color:white;
-}
-
-.secondary:hover{
-    background:white;
+.community-buttons .primary:hover{
+    background:#FFFDF7;
     color:#123C2A;
-    transform:translateY(-5px);
+
+    border-color:#FFFDF7;
+
+    transform:translateY(-4px);
+
+    box-shadow:0 14px 30px rgba(0,0,0,.20);
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .community-buttons .primary{
+        width:260px;
+        padding:14px 25px;
+        font-size:16px;
+    }
+
 }
 
 @media(max-width:768px){

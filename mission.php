@@ -581,13 +581,11 @@ display: block;
     </style>
 </head>
 <body>
-
 <?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 ?>
-
 <div class="nav">
 
     <!-- LOGO -->
@@ -596,6 +594,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <h2>PawConnect</h2>
     </div>
 
+     
 
     <!-- CENTER MENU -->
     <div class="menu">
@@ -604,6 +603,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
         <a href="about.php">ABOUT US</a>
 
+        <!-- EXPLORE -->
         <div class="dropdown">
 
             <a href="#">
@@ -642,6 +642,7 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
 
         <a href="animals.php">ANIMALS</a>
+
         <a href="<?php
             echo isset($_SESSION['user_id'])
                 ? 'user_dashboard.php'
@@ -652,7 +653,6 @@ if (session_status() === PHP_SESSION_NONE) {
 
     </div>
 
-
     <!-- RIGHT SIDE -->
     <div class="nav-actions">
 
@@ -660,6 +660,12 @@ if (session_status() === PHP_SESSION_NONE) {
 
             <a href="logout.php" class="login-btn">
                 LOGOUT
+            </a>
+
+        <?php } else { ?>
+
+            <a href="login.php" class="login-btn">
+                LOGIN
             </a>
 
         <?php } ?>
