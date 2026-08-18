@@ -1,55 +1,86 @@
 <?php
 include "db.php";
 
-// Pull cats added by NGOs through add_animal.php
-$stmt = $conn->prepare("SELECT * FROM animals WHERE type = ? ORDER BY created_at DESC");
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+/* =====================================================
+   GET CATS ADDED BY NGOs
+===================================================== */
+
+$stmt = $conn->prepare("
+    SELECT *
+    FROM animals
+    WHERE type = ?
+    ORDER BY created_at DESC
+");
+
 $type = "Cat";
 $stmt->bind_param("s", $type);
 $stmt->execute();
+
 $db_cats = $stmt->get_result();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
 <title>Cats | PawConnect</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-<link rel="stylesheet" href="cats.css">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link rel="stylesheet"
+      href="cats.css">
 
 </head>
-
 
 <body>
 
 
-<!-- NAVBAR -->
-<?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-?>
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
 <div class="nav">
 
     <!-- LOGO -->
+
     <div class="logo">
-        <img src="logo.jpeg" alt="PawConnect Logo">
-        <h2>PawConnect</h2>
+
+        <img src="logo.jpeg"
+             alt="PawConnect Logo">
+
+        <h2>
+            PawConnect
+        </h2>
+
     </div>
 
-    
 
     <!-- CENTER MENU -->
+
     <div class="menu">
 
-        <a href="home.php">HOME</a>
+        <a href="home.php">
+            HOME
+        </a>
 
-        <a href="about.php">ABOUT US</a>
+        <a href="about.php">
+            ABOUT US
+        </a>
+
 
         <!-- EXPLORE -->
+
         <div class="dropdown">
 
             <a href="#">
@@ -57,37 +88,80 @@ if (session_status() === PHP_SESSION_NONE) {
                 <i class="fa-solid fa-chevron-down"></i>
             </a>
 
+
             <div class="dropdown-content">
 
                 <div class="column">
-                    <h3>About</h3>
 
-                    <a href="about.php">About Us</a>
-                    <a href="mission.php">Mission</a>
-                    <a href="contact.php">Contact</a>
+                    <h3>
+                        About
+                    </h3>
+
+                    <a href="about.php">
+                        About Us
+                    </a>
+
+                    <a href="mission.php">
+                        Mission
+                    </a>
+
+                    <a href="contact.php">
+                        Contact
+                    </a>
+
                 </div>
 
-                <div class="column">
-                    <h3>Adoption</h3>
 
-                    <a href="animals.php">Available Animals</a>
-                    <a href="care.php">Care After Adoption</a>
-                    <a href="stories.php">Adoption Stories</a>
+                <div class="column">
+
+                    <h3>
+                        Adoption
+                    </h3>
+
+                    <a href="animals.php">
+                        Available Animals
+                    </a>
+
+                    <a href="care.php">
+                        Care After Adoption
+                    </a>
+
+                    <a href="stories.php">
+                        Adoption Stories
+                    </a>
+
                 </div>
 
-                <div class="column">
-                    <h3>Login</h3>
 
-                    <a href="login.php">User Login</a>
-                    <a href="ngo_login.php">NGO Login</a>
-                    <a href="admin_login.php">Admin Login</a>
+                <div class="column">
+
+                    <h3>
+                        Login
+                    </h3>
+
+                    <a href="login.php">
+                        User Login
+                    </a>
+
+                    <a href="ngo_login.php">
+                        NGO Login
+                    </a>
+
+                    <a href="admin_login.php">
+                        Admin Login
+                    </a>
+
                 </div>
 
             </div>
 
         </div>
 
-        <a href="animals.php">ANIMALS</a>
+
+        <a href="animals.php">
+            ANIMALS
+        </a>
+
 
         <a href="<?php
             echo isset($_SESSION['user_id'])
@@ -99,19 +173,27 @@ if (session_status() === PHP_SESSION_NONE) {
 
     </div>
 
+
     <!-- RIGHT SIDE -->
+
     <div class="nav-actions">
 
         <?php if (isset($_SESSION['user_id'])) { ?>
 
-            <a href="logout.php" class="login-btn">
+            <a href="logout.php"
+               class="login-btn">
+
                 LOGOUT
+
             </a>
 
         <?php } else { ?>
 
-            <a href="login.php" class="login-btn">
+            <a href="login.php"
+               class="login-btn">
+
                 LOGIN
+
             </a>
 
         <?php } ?>
@@ -119,65 +201,85 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
 
 </div>
-<!-- HERO -->
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
 
 <section class="cat-hero">
 
-<div class="hero-content">
+    <div class="hero-content">
 
-<p>FIND YOUR FOREVER FRIEND</p>
-
-<h1>
-Little Paws,<br>Endless Love.
-</h1>
+        <p>
+            FIND YOUR FOREVER FRIEND
+        </p>
 
 
-<h3>
-Explore caring cats ready to bring comfort,joy<br>and companionship into your life.
-</h3>
+        <h1>
+            Little Paws,<br>
+            Endless Love.
+        </h1>
 
 
+        <h3>
+            Explore caring cats ready to bring
+            comfort, joy<br>
+            and companionship into your life.
+        </h3>
 
-
-</div>
+    </div>
 
 </section>
 
-<!-- cat COLLECTION SECTION -->
 
-<section class="cat-collection" id="cats">
+
+<!-- =====================================================
+     CAT COLLECTION
+===================================================== -->
+
+<section class="cat-collection"
+         id="cats">
 
 
     <div class="collection-heading">
 
-        <p>AVAILABLE COMPANIONS</p>
+        <p>
+            AVAILABLE COMPANIONS
+        </p>
 
-        <h2>Meet Cats Waiting For A Home</h2>
+
+        <h2>
+            Meet Cats Waiting For A Home
+        </h2>
+
 
         <span>
-            Every cat has a unique story, a quiet soul, and a loving family waiting to welcome them.
+            Every cat has a unique story, a quiet soul,
+            and a loving family waiting to welcome them.
         </span>
 
     </div>
 
 
 
-
-    <!-- CAT CARDS -->
-
+    <!-- =================================================
+         CAT GRID
+    ================================================== -->
 
     <div class="cat-grid">
 
 
 
-        <!-- Theo -->
+        <!-- THEO -->
 
         <div class="cat-card">
 
-
             <div class="cat-image">
 
-                <img src="theo.jpeg">
+                <img src="theo.jpeg"
+                     alt="Theo">
 
                 <span>
                     Available
@@ -186,10 +288,11 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
             </div>
 
 
-
             <div class="cat-info">
 
-                <h3>Theo</h3>
+                <h3>
+                    Theo
+                </h3>
 
                 <p>
                     Orange Tabby • 1 Year
@@ -213,25 +316,20 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
                     View Profile
                 </a>
 
-
             </div>
-
 
         </div>
 
 
 
-
-
-        <!-- Lumi -->
-
+        <!-- LUMI -->
 
         <div class="cat-card">
 
-
             <div class="cat-image">
 
-                <img src="lumi.jpeg">
+                <img src="lumi.jpeg"
+                     alt="Lumi">
 
                 <span>
                     Available
@@ -240,10 +338,11 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
             </div>
 
 
-
             <div class="cat-info">
 
-                <h3>Lumi</h3>
+                <h3>
+                    Lumi
+                </h3>
 
                 <p>
                     Indie Cat • 2 Years
@@ -267,25 +366,20 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
                     View Profile
                 </a>
 
-
             </div>
-
 
         </div>
 
 
 
-
-
-        <!-- Aster -->
-
+        <!-- ASTER -->
 
         <div class="cat-card">
 
-
             <div class="cat-image">
 
-                <img src="aster.jpeg">
+                <img src="aster.jpeg"
+                     alt="Aster">
 
                 <span>
                     Available
@@ -294,10 +388,11 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
             </div>
 
 
-
             <div class="cat-info">
 
-                <h3>Aster</h3>
+                <h3>
+                    Aster
+                </h3>
 
                 <p>
                     Persian mix • 1.5 years
@@ -321,25 +416,20 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
                     View Profile
                 </a>
 
-
             </div>
-
 
         </div>
 
 
 
-
-
-        <!-- Cosmo -->
-
+        <!-- COSMO -->
 
         <div class="cat-card">
 
-
             <div class="cat-image">
 
-                <img src="cosmo.jpeg">
+                <img src="cosmo.jpeg"
+                     alt="Cosmo">
 
                 <span>
                     Available
@@ -348,10 +438,11 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
             </div>
 
 
-
             <div class="cat-info">
 
-                <h3>Cosmo</h3>
+                <h3>
+                    Cosmo
+                </h3>
 
                 <p>
                     Domestic Shorthair Tabby • 2 Years
@@ -361,7 +452,7 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
                 <div class="cat-tags">
 
                     <small>
-                        ♂ male
+                        ♂ Male
                     </small>
 
                     <small>
@@ -375,22 +466,20 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
                     View Profile
                 </a>
 
-
             </div>
-
 
         </div>
 
-        
-        <!-- Miso -->
 
+
+        <!-- MISO -->
 
         <div class="cat-card">
 
-
             <div class="cat-image">
 
-                <img src="miso.jpeg">
+                <img src="miso.jpeg"
+                     alt="Miso">
 
                 <span>
                     Available
@@ -399,10 +488,11 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
             </div>
 
 
-
             <div class="cat-info">
 
-                <h3>Miso</h3>
+                <h3>
+                    Miso
+                </h3>
 
                 <p>
                     Domestic Shorthair • 1 Year
@@ -426,23 +516,20 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
                     View Profile
                 </a>
 
-
             </div>
-
 
         </div>
 
 
-        
-        <!-- sia -->
 
+        <!-- SIA -->
 
         <div class="cat-card">
 
-
             <div class="cat-image">
 
-                <img src="sia.jpeg">
+                <img src="sia.jpeg"
+                     alt="Sia">
 
                 <span>
                     Available
@@ -451,10 +538,11 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
             </div>
 
 
-
             <div class="cat-info">
 
-                <h3>Sia</h3>
+                <h3>
+                    Sia
+                </h3>
 
                 <p>
                     Tortoiseshell • 2.5 Years
@@ -478,23 +566,20 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
                     View Profile
                 </a>
 
-
             </div>
-
 
         </div>
 
 
-        
-        <!-- Yuki -->
 
+        <!-- YUKI -->
 
         <div class="cat-card">
 
-
             <div class="cat-image">
 
-                <img src="yuki.jpeg" >
+                <img src="yuki.jpeg"
+                     alt="Yuki">
 
                 <span>
                     Available
@@ -503,10 +588,11 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
             </div>
 
 
-
             <div class="cat-info">
 
-                <h3>Yuki</h3>
+                <h3>
+                    Yuki
+                </h3>
 
                 <p>
                     Bicolor Shorthair • 1.5 Years
@@ -530,23 +616,20 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
                     View Profile
                 </a>
 
-
             </div>
-
 
         </div>
 
 
-        
-        <!-- kai -->
 
+        <!-- KAI -->
 
         <div class="cat-card">
 
-
             <div class="cat-image">
 
-                <img src="kai.jpeg">
+                <img src="kai.jpeg"
+                     alt="Kai">
 
                 <span>
                     Available
@@ -555,10 +638,11 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
             </div>
 
 
-
             <div class="cat-info">
 
-                <h3>Kai</h3>
+                <h3>
+                    Kai
+                </h3>
 
                 <p>
                     Domestic Shorthair • 8 months
@@ -582,23 +666,20 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
                     View Profile
                 </a>
 
-
             </div>
-
 
         </div>
 
 
-        
-        <!-- cleo -->
 
+        <!-- CLEO -->
 
         <div class="cat-card">
 
-
             <div class="cat-image">
 
-                <img src="cleo.jpeg">
+                <img src="cleo.jpeg"
+                     alt="Cleo">
 
                 <span>
                     Available
@@ -607,10 +688,11 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
             </div>
 
 
-
             <div class="cat-info">
 
-                <h3>Cleo</h3>
+                <h3>
+                    Cleo
+                </h3>
 
                 <p>
                     Orange Tabby • 1.5 Years
@@ -634,23 +716,20 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
                     View Profile
                 </a>
 
-
             </div>
-
 
         </div>
 
 
-        
-        <!-- Amara -->
 
+        <!-- AMARA -->
 
         <div class="cat-card">
 
-
             <div class="cat-image">
 
-                <img src="amara.jpeg">
+                <img src="amara.jpeg"
+                     alt="Amara">
 
                 <span>
                     Available
@@ -659,10 +738,11 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
             </div>
 
 
-
             <div class="cat-info">
 
-                <h3>Amara</h3>
+                <h3>
+                    Amara
+                </h3>
 
                 <p>
                     Longhair-Silver Tabby • 1.5 Years
@@ -686,24 +766,20 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
                     View Profile
                 </a>
 
-
             </div>
-
 
         </div>
 
 
 
-        
-        <!-- nia -->
-
+        <!-- NIA -->
 
         <div class="cat-card">
 
-
             <div class="cat-image">
 
-                <img src="nia.jpeg">
+                <img src="nia.jpeg"
+                     alt="Nia">
 
                 <span>
                     Available
@@ -712,10 +788,11 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
             </div>
 
 
-
             <div class="cat-info">
 
-                <h3>Nia</h3>
+                <h3>
+                    Nia
+                </h3>
 
                 <p>
                     Ragdoll mix • 11 weeks
@@ -739,24 +816,20 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
                     View Profile
                 </a>
 
-
             </div>
-
 
         </div>
 
 
 
-        
-        <!-- Lyra -->
-
+        <!-- LYRA -->
 
         <div class="cat-card">
 
-
             <div class="cat-image">
 
-                <img src="lyra.jpeg" alt="Max">
+                <img src="lyra.jpeg"
+                     alt="Lyra">
 
                 <span>
                     Available
@@ -765,13 +838,14 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
             </div>
 
 
-
             <div class="cat-info">
 
-                <h3>Lyra</h3>
+                <h3>
+                    Lyra
+                </h3>
 
                 <p>
-                    Persian • 1 Years
+                    Persian • 1 Year
                 </p>
 
 
@@ -792,68 +866,121 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
                     View Profile
                 </a>
 
-
             </div>
-
 
         </div>
 
 
-        <!-- ============================================
-             CATS ADDED BY NGOs (from the database)
-             Generated automatically — nothing above this
-             comment was changed.
-        ============================================ -->
+
+        <!-- =================================================
+             NGO ADDED CATS
+        ================================================== -->
 
         <?php while ($cat = $db_cats->fetch_assoc()) { ?>
 
-        <div class="cat-card">
+            <div class="cat-card">
 
-            <div class="cat-image">
+                <div class="cat-image">
 
-                <img src="<?php echo htmlspecialchars($cat['image']); ?>" alt="<?php echo htmlspecialchars($cat['name']); ?>">
+                    <!-- IMPORTANT:
+                         Database stores only filename.
+                         Actual file is inside uploads/animals/
+                    -->
 
-                <span>
-                    <?php echo htmlspecialchars($cat['status']); ?>
-                </span>
+                    <img
+                        src="uploads/animals/<?php echo htmlspecialchars($cat['image']); ?>"
+                        alt="<?php echo htmlspecialchars($cat['name']); ?>"
+                        onerror="this.style.display='none';"
+                    >
 
-            </div>
 
-            <div class="cat-info">
-
-                <h3><?php echo htmlspecialchars($cat['name']); ?></h3>
-
-                <p>
-                    <?php echo htmlspecialchars($cat['breed']); ?> • <?php echo htmlspecialchars($cat['age']); ?>
-                </p>
-
-                <div class="cat-tags">
-
-                    <small>
-                        📍 <?php echo htmlspecialchars($cat['location']); ?>
-                    </small>
-
-                    <small>
-                        ✓ <?php echo htmlspecialchars($cat['status']); ?>
-                    </small>
+                    <span>
+                        <?php echo htmlspecialchars($cat['status']); ?>
+                    </span>
 
                 </div>
 
-                <a href="pet_details.php?id=<?php echo $cat['id']; ?>">
-                    View Profile
-                </a>
+
+                <div class="cat-info">
+
+                    <h3>
+                        <?php echo htmlspecialchars($cat['name']); ?>
+                    </h3>
+
+
+                    <p>
+
+                        <?php
+                        echo htmlspecialchars(
+                            !empty($cat['breed'])
+                                ? $cat['breed']
+                                : 'Cat'
+                        );
+                        ?>
+
+                        •
+                        
+                        <?php
+                        echo htmlspecialchars(
+                            !empty($cat['age'])
+                                ? $cat['age']
+                                : 'Age not specified'
+                        );
+                        ?>
+
+                    </p>
+
+
+                    <div class="cat-tags">
+
+                        <small>
+
+                            <?php
+                            if (!empty($cat['gender'])) {
+                                echo htmlspecialchars($cat['gender']);
+                            } else {
+                                echo "Gender not specified";
+                            }
+                            ?>
+
+                        </small>
+
+
+                        <small>
+
+                            ✓
+
+                            <?php
+                            echo htmlspecialchars(
+                                !empty($cat['health_status'])
+                                    ? $cat['health_status']
+                                    : $cat['status']
+                            );
+                            ?>
+
+                        </small>
+
+                    </div>
+
+
+                    <a href="pet_details.php?id=<?php echo (int)$cat['id']; ?>">
+
+                        View Profile
+
+                    </a>
+
+                </div>
 
             </div>
-
-        </div>
 
         <?php } ?>
 
 
     </div>
 
-
 </section>
+
+
 
 <!-- =====================================================
      FOOTER
@@ -881,27 +1008,44 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
 
 
             <p>
+
                 Connecting rescued animals with loving families,
                 trusted shelters and compassionate hearts across India.
+
             </p>
 
 
             <div class="social-icons">
 
-                <a href="#" aria-label="Facebook">
+                <a href="#"
+                   aria-label="Facebook">
+
                     <i class="fa-brands fa-facebook-f"></i>
+
                 </a>
 
-                <a href="#" aria-label="Instagram">
+
+                <a href="#"
+                   aria-label="Instagram">
+
                     <i class="fa-brands fa-instagram"></i>
+
                 </a>
 
-                <a href="#" aria-label="X">
+
+                <a href="#"
+                   aria-label="X">
+
                     <i class="fa-brands fa-x-twitter"></i>
+
                 </a>
 
-                <a href="#" aria-label="LinkedIn">
+
+                <a href="#"
+                   aria-label="LinkedIn">
+
                     <i class="fa-brands fa-linkedin-in"></i>
+
                 </a>
 
             </div>
@@ -963,9 +1107,6 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
             </a>
 
         </div>
-
-
-
         <!-- CONTACT -->
 
         <div class="footer-contact">
@@ -975,18 +1116,29 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
             </h3>
 
             <p>
+
                 <i class="fa-solid fa-location-dot"></i>
+
                 Pune, Maharashtra
+
             </p>
 
+
             <p>
+
                 <i class="fa-solid fa-phone"></i>
+
                 +91 98765 43210
+
             </p>
 
+
             <p>
+
                 <i class="fa-solid fa-envelope"></i>
+
                 hello@pawconnect.in
+
             </p>
 
         </div>
@@ -1001,13 +1153,19 @@ Explore caring cats ready to bring comfort,joy<br>and companionship into your li
     <div class="footer-bottom">
 
         <p>
+
             © 2026 PawConnect • Connecting every paw with care,
             compassion & a place to belong.
+
         </p>
 
     </div>
 
-
 </footer>
+
+
 </body>
+
 </html>
+
+

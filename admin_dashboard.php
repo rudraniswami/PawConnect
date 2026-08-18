@@ -113,11 +113,11 @@ href="admin_dashboard.css">
 
     <!-- FUTURE FEATURES -->
 
-    <a href="animals.php">
+    <a href="manage_animals.php">
 
         <i class="fa-solid fa-paw"></i>
 
-        Animals
+        Manage Animals
 
     </a>
 

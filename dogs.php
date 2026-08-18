@@ -1,13 +1,22 @@
 <?php
 include "db.php";
 
-// Pull dogs added by NGOs through add_animal.php
-$stmt = $conn->prepare("SELECT * FROM animals WHERE type = ? ORDER BY created_at DESC");
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+/* Pull dogs added by NGOs */
+$stmt = $conn->prepare(
+    "SELECT * FROM animals WHERE type = ? ORDER BY created_at DESC"
+);
+
 $type = "Dog";
 $stmt->bind_param("s", $type);
 $stmt->execute();
+
 $db_dogs = $stmt->get_result();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,40 +26,41 @@ $db_dogs = $stmt->get_result();
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Dogs | PawConnect</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 <link rel="stylesheet" href="dogs.css">
 
 </head>
 
-
 <body>
 
 
-<!-- NAVBAR -->
+<!-- =========================
+     NAVBAR
+========================= -->
 
-<?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-?>
 <div class="nav">
 
-    <!-- LOGO -->
     <div class="logo">
+
         <img src="logo.jpeg" alt="PawConnect Logo">
+
         <h2>PawConnect</h2>
+
     </div>
 
-    
 
-    <!-- CENTER MENU -->
     <div class="menu">
 
         <a href="home.php">HOME</a>
 
         <a href="about.php">ABOUT US</a>
 
+
         <!-- EXPLORE -->
+
         <div class="dropdown">
 
             <a href="#">
@@ -58,37 +68,70 @@ if (session_status() === PHP_SESSION_NONE) {
                 <i class="fa-solid fa-chevron-down"></i>
             </a>
 
+
             <div class="dropdown-content">
 
+
                 <div class="column">
+
                     <h3>About</h3>
 
                     <a href="about.php">About Us</a>
+
                     <a href="mission.php">Mission</a>
+
                     <a href="contact.php">Contact</a>
+
                 </div>
 
+
                 <div class="column">
+
                     <h3>Adoption</h3>
 
-                    <a href="animals.php">Available Animals</a>
-                    <a href="care.php">Care After Adoption</a>
-                    <a href="stories.php">Adoption Stories</a>
+                    <a href="animals.php">
+                        Available Animals
+                    </a>
+
+                    <a href="care.php">
+                        Care After Adoption
+                    </a>
+
+                    <a href="stories.php">
+                        Adoption Stories
+                    </a>
+
                 </div>
+
 
                 <div class="column">
+
                     <h3>Login</h3>
 
-                    <a href="login.php">User Login</a>
-                    <a href="ngo_login.php">NGO Login</a>
-                    <a href="admin_login.php">Admin Login</a>
+                    <a href="login.php">
+                        User Login
+                    </a>
+
+                    <a href="ngo_login.php">
+                        NGO Login
+                    </a>
+
+                    <a href="admin_login.php">
+                        Admin Login
+                    </a>
+
                 </div>
+
 
             </div>
 
         </div>
 
-        <a href="animals.php">ANIMALS</a>
+
+        <a href="animals.php">
+            ANIMALS
+        </a>
+
 
         <a href="<?php
             echo isset($_SESSION['user_id'])
@@ -100,7 +143,9 @@ if (session_status() === PHP_SESSION_NONE) {
 
     </div>
 
+
     <!-- RIGHT SIDE -->
+
     <div class="nav-actions">
 
         <?php if (isset($_SESSION['user_id'])) { ?>
@@ -120,43 +165,54 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
 
 </div>
-<!-- HERO -->
+
+
+
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="dog-hero">
 
-<div class="hero-content">
+    <div class="hero-content">
 
-<p>FIND YOUR FOREVER FRIEND</p>
+        <p>
+            FIND YOUR FOREVER FRIEND
+        </p>
 
-<h1>
-Some Friendships
-Begin With A
-<span>Paw</span>
-</h1>
+        <h1>
+            Some Friendships
+            Begin With A
+            <span>Paw</span>
+        </h1>
 
+        <h3>
+            Discover loving dogs waiting for a family
+            where they belong.
+        </h3>
 
-<h3>
-Discover loving dogs waiting for a family
-where they belong.
-</h3>
-
-
-
-
-</div>
+    </div>
 
 </section>
 
-<!-- DOG COLLECTION SECTION -->
+
+
+<!-- =========================
+     DOG COLLECTION
+========================= -->
 
 <section class="dog-collection" id="dogs">
 
 
     <div class="collection-heading">
 
-        <p>AVAILABLE COMPANIONS</p>
+        <p>
+            AVAILABLE COMPANIONS
+        </p>
 
-        <h2>Meet Dogs Waiting For A Home</h2>
+        <h2>
+            Meet Dogs Waiting For A Home
+        </h2>
 
         <span>
             Every dog has a unique story, a loving heart,
@@ -167,30 +223,20 @@ where they belong.
 
 
 
-
-    <!-- DOG CARDS -->
-
-
     <div class="dog-grid">
 
 
-
-        <!-- Bella -->
+        <!-- BELLA -->
 
         <div class="dog-card">
-
 
             <div class="dog-image">
 
                 <img src="bella.jpeg">
 
-                <span>
-                    Available
-                </span>
+                <span>Available</span>
 
             </div>
-
-
 
             <div class="dog-info">
 
@@ -200,51 +246,35 @@ where they belong.
                     American Pit Bull • 3 Years
                 </p>
 
-
                 <div class="dog-tags">
 
-                    <small>
-                        ♀ Female
-                    </small>
+                    <small>♀ Female</small>
 
-                    <small>
-                        ✓ Vaccinated
-                    </small>
+                    <small>✓ Vaccinated</small>
 
                 </div>
-
 
                 <a href="bella.php">
                     View Profile
                 </a>
 
-
             </div>
-
 
         </div>
 
 
 
-
-
-        <!-- Bruno -->
-
+        <!-- BRUNO -->
 
         <div class="dog-card">
-
 
             <div class="dog-image">
 
                 <img src="bruno.jpeg">
 
-                <span>
-                    Available
-                </span>
+                <span>Available</span>
 
             </div>
-
-
 
             <div class="dog-info">
 
@@ -254,51 +284,35 @@ where they belong.
                     Shih Tzu • 2 Years
                 </p>
 
-
                 <div class="dog-tags">
 
-                    <small>
-                        ♂ Male
-                    </small>
+                    <small>♂ Male</small>
 
-                    <small>
-                        ✓ Healthy
-                    </small>
+                    <small>✓ Healthy</small>
 
                 </div>
-
 
                 <a href="bruno.php">
                     View Profile
                 </a>
 
-
             </div>
-
 
         </div>
 
 
 
-
-
-        <!-- Nova -->
-
+        <!-- NOVA -->
 
         <div class="dog-card">
-
 
             <div class="dog-image">
 
                 <img src="nova.jpeg">
 
-                <span>
-                    Available
-                </span>
+                <span>Available</span>
 
             </div>
-
-
 
             <div class="dog-info">
 
@@ -308,51 +322,35 @@ where they belong.
                     Indie • 9 weeks
                 </p>
 
-
                 <div class="dog-tags">
 
-                    <small>
-                        ♂ Male
-                    </small>
+                    <small>♂ Male</small>
 
-                    <small>
-                        ♥ Friendly
-                    </small>
+                    <small>♥ Friendly</small>
 
                 </div>
-
 
                 <a href="nova.php">
                     View Profile
                 </a>
 
-
             </div>
-
 
         </div>
 
 
 
-
-
-        <!-- Buddy -->
-
+        <!-- BUDDY -->
 
         <div class="dog-card">
-
 
             <div class="dog-image">
 
                 <img src="buddy.jpeg">
 
-                <span>
-                    Available
-                </span>
+                <span>Available</span>
 
             </div>
-
-
 
             <div class="dog-info">
 
@@ -362,48 +360,35 @@ where they belong.
                     Indie mix • 1.5 Years
                 </p>
 
-
                 <div class="dog-tags">
 
-                    <small>
-                        ♀ Female
-                    </small>
+                    <small>♀ Female</small>
 
-                    <small>
-                        ♥ Playful
-                    </small>
+                    <small>♥ Playful</small>
 
                 </div>
-
 
                 <a href="buddy.php">
                     View Profile
                 </a>
 
-
             </div>
-
 
         </div>
 
-        
-        <!-- Max -->
 
+
+        <!-- MAX -->
 
         <div class="dog-card">
-
 
             <div class="dog-image">
 
                 <img src="max.jpeg">
 
-                <span>
-                    Available
-                </span>
+                <span>Available</span>
 
             </div>
-
-
 
             <div class="dog-info">
 
@@ -413,49 +398,35 @@ where they belong.
                     Rottweiler • 3 Years
                 </p>
 
-
                 <div class="dog-tags">
 
-                    <small>
-                        ♂ Male
-                    </small>
+                    <small>♂ Male</small>
 
-                    <small>
-                        ♥ Calm
-                    </small>
+                    <small>♥ Calm</small>
 
                 </div>
-
 
                 <a href="max.php">
                     View Profile
                 </a>
 
-
             </div>
-
 
         </div>
 
 
-        
-        <!--Leo  -->
 
+        <!-- LEO -->
 
         <div class="dog-card">
-
 
             <div class="dog-image">
 
                 <img src="leo.jpeg">
 
-                <span>
-                    Available
-                </span>
+                <span>Available</span>
 
             </div>
-
-
 
             <div class="dog-info">
 
@@ -465,49 +436,35 @@ where they belong.
                     Pit Bull mix • 4 Years
                 </p>
 
-
                 <div class="dog-tags">
 
-                    <small>
-                        ♀ Female
-                    </small>
+                    <small>♀ Female</small>
 
-                    <small>
-                        ♥ Energetic
-                    </small>
+                    <small>♥ Energetic</small>
 
                 </div>
-
 
                 <a href="leo.php">
                     View Profile
                 </a>
 
-
             </div>
-
 
         </div>
 
 
-        
-        <!-- Jack -->
 
+        <!-- JACK -->
 
         <div class="dog-card">
 
-
             <div class="dog-image">
 
-                <img src="jack.jpeg" >
+                <img src="jack.jpeg">
 
-                <span>
-                    Available
-                </span>
+                <span>Available</span>
 
             </div>
-
-
 
             <div class="dog-info">
 
@@ -517,49 +474,35 @@ where they belong.
                     Catahoula Leopard Dog • 2.5 Years
                 </p>
 
-
                 <div class="dog-tags">
 
-                    <small>
-                        ♂ Male
-                    </small>
+                    <small>♂ Male</small>
 
-                    <small>
-                        ✓ Healthy
-                    </small>
+                    <small>✓ Healthy</small>
 
                 </div>
-
 
                 <a href="Jack.php">
                     View Profile
                 </a>
 
-
             </div>
-
 
         </div>
 
 
-        
-        <!-- Julie -->
 
+        <!-- JULIE -->
 
         <div class="dog-card">
-
 
             <div class="dog-image">
 
                 <img src="julie.jpeg">
 
-                <span>
-                    Available
-                </span>
+                <span>Available</span>
 
             </div>
-
-
 
             <div class="dog-info">
 
@@ -569,49 +512,35 @@ where they belong.
                     Tibetan Mastiff mix • 4 Years
                 </p>
 
-
                 <div class="dog-tags">
 
-                    <small>
-                        ♀ Female
-                    </small>
+                    <small>♀ Female</small>
 
-                    <small>
-                        ♥ Active
-                    </small>
+                    <small>♥ Active</small>
 
                 </div>
-
 
                 <a href="julie.php">
                     View Profile
                 </a>
 
-
             </div>
-
 
         </div>
 
 
-        
-        <!-- Snowy -->
 
+        <!-- SNOWY -->
 
         <div class="dog-card">
-
 
             <div class="dog-image">
 
                 <img src="snowy.jpeg">
 
-                <span>
-                    Available
-                </span>
+                <span>Available</span>
 
             </div>
-
-
 
             <div class="dog-info">
 
@@ -621,49 +550,35 @@ where they belong.
                     Border Collie • 4 Years
                 </p>
 
-
                 <div class="dog-tags">
 
-                    <small>
-                        ♀ Female
-                    </small>
+                    <small>♀ Female</small>
 
-                    <small>
-                        ♥ Curious
-                    </small>
+                    <small>♥ Curious</small>
 
                 </div>
-
 
                 <a href="snowy.php">
                     View Profile
                 </a>
 
-
             </div>
-
 
         </div>
 
 
-        
-        <!-- Simba -->
 
+        <!-- SIMBA -->
 
         <div class="dog-card">
-
 
             <div class="dog-image">
 
                 <img src="simba.jpeg">
 
-                <span>
-                    Available
-                </span>
+                <span>Available</span>
 
             </div>
-
-
 
             <div class="dog-info">
 
@@ -673,50 +588,35 @@ where they belong.
                     Sighthound • 4.5 Years
                 </p>
 
-
                 <div class="dog-tags">
 
-                    <small>
-                        ♂ Male
-                    </small>
+                    <small>♂ Male</small>
 
-                    <small>
-                        ♥ Smart
-                    </small>
+                    <small>♥ Smart</small>
 
                 </div>
-
 
                 <a href="simba.php">
                     View Profile
                 </a>
 
-
             </div>
-
 
         </div>
 
 
 
-        
-        <!-- Rose -->
-
+        <!-- ROSE -->
 
         <div class="dog-card">
-
 
             <div class="dog-image">
 
                 <img src="rose.jpeg">
 
-                <span>
-                    Available
-                </span>
+                <span>Available</span>
 
             </div>
-
-
 
             <div class="dog-info">
 
@@ -726,50 +626,35 @@ where they belong.
                     Chihuahua mix • 11 weeks
                 </p>
 
-
                 <div class="dog-tags">
 
-                    <small>
-                        ♀ Female
-                    </small>
+                    <small>♀ Female</small>
 
-                    <small>
-                        ♥ Gentle
-                    </small>
+                    <small>♥ Gentle</small>
 
                 </div>
-
 
                 <a href="rose.php">
                     View Profile
                 </a>
 
-
             </div>
-
 
         </div>
 
 
 
-        
-        <!-- Charlie -->
-
+        <!-- CHARLIE -->
 
         <div class="dog-card">
 
-
             <div class="dog-image">
 
-                <img src="charlie.jpeg" alt="Max">
+                <img src="charlie.jpeg">
 
-                <span>
-                    Available
-                </span>
+                <span>Available</span>
 
             </div>
-
-
 
             <div class="dog-info">
 
@@ -779,49 +664,35 @@ where they belong.
                     Labrador Retriever • 1.5 Years
                 </p>
 
-
                 <div class="dog-tags">
 
-                    <small>
-                        ♂ Male
-                    </small>
+                    <small>♂ Male</small>
 
-                    <small>
-                        ♥ Quiet
-                    </small>
+                    <small>♥ Quiet</small>
 
                 </div>
-
 
                 <a href="charlie.php">
                     View Profile
                 </a>
 
-
             </div>
-
 
         </div>
 
 
 
-        <!-- Pepper -->
-
+        <!-- PEPPER -->
 
         <div class="dog-card">
-
 
             <div class="dog-image">
 
                 <img src="pepper.jpeg">
 
-                <span>
-                    Available
-                </span>
+                <span>Available</span>
 
             </div>
-
-
 
             <div class="dog-info">
 
@@ -831,47 +702,35 @@ where they belong.
                     Chihuahua • 9 weeks
                 </p>
 
-
                 <div class="dog-tags">
 
-                    <small>
-                        ♀ Female
-                    </small>
+                    <small>♀ Female</small>
 
-                    <small>
-                        ♥ Loving
-                    </small>
+                    <small>♥ Loving</small>
 
                 </div>
-
 
                 <a href="pepper.php">
                     View Profile
                 </a>
 
-
             </div>
-
 
         </div>
 
-        <!-- Nala -->
 
+
+        <!-- NALA -->
 
         <div class="dog-card">
-
 
             <div class="dog-image">
 
                 <img src="nala.jpeg">
 
-                <span>
-                    Available
-                </span>
+                <span>Available</span>
 
             </div>
-
-
 
             <div class="dog-info">
 
@@ -881,47 +740,35 @@ where they belong.
                     Indie • 5 years
                 </p>
 
-
                 <div class="dog-tags">
 
-                    <small>
-                        ♂ Male
-                    </small>
+                    <small>♂ Male</small>
 
-                    <small>
-                        ♥ Kind
-                    </small>
+                    <small>♥ Kind</small>
 
                 </div>
-
 
                 <a href="nala.php">
                     View Profile
                 </a>
 
-
             </div>
-
 
         </div>
 
-        <!-- Ivy -->
 
+
+        <!-- IVY -->
 
         <div class="dog-card">
-
 
             <div class="dog-image">
 
                 <img src="ivy.jpeg">
 
-                <span>
-                    Available
-                </span>
+                <span>Available</span>
 
             </div>
-
-
 
             <div class="dog-info">
 
@@ -931,147 +778,140 @@ where they belong.
                     Labrador Retriever • 3 years
                 </p>
 
-
                 <div class="dog-tags">
 
-                    <small>
-                        ♀ Female
-                    </small>
+                    <small>♀ Female</small>
 
-                    <small>
-                        ♥ Protective
-                    </small>
+                    <small>♥ Protective</small>
 
                 </div>
-
 
                 <a href="ivy.php">
                     View Profile
                 </a>
 
-
             </div>
-
 
         </div>
 
 
-        <!-- roxy -->
 
+        <!-- ROXY -->
 
         <div class="dog-card">
-
 
             <div class="dog-image">
 
                 <img src="roxy.jpeg">
 
-                <span>
-                    Available
-                </span>
+                <span>Available</span>
 
             </div>
-
-
 
             <div class="dog-info">
 
                 <h3>Roxy</h3>
 
                 <p>
-                     German Shepherd • 3 years
+                    German Shepherd • 3 years
                 </p>
-
 
                 <div class="dog-tags">
 
-                    <small>
-                        ♂ Male
-                    </small>
+                    <small>♂ Male</small>
 
-                    <small>
-                        ♥ Brave
-                    </small>
+                    <small>♥ Brave</small>
 
                 </div>
-
 
                 <a href="roxy.php">
                     View Profile
                 </a>
 
-
             </div>
-
 
         </div>
 
 
-        <!-- ============================================
-             DOGS ADDED BY NGOs (from the database)
-             Generated automatically — nothing above this
-             comment was changed.
-        ============================================ -->
+
+        <!-- =========================================
+             NGO ADDED DOGS
+        ========================================== -->
 
         <?php while ($dog = $db_dogs->fetch_assoc()) { ?>
 
-        <div class="dog-card">
+            <div class="dog-card">
 
-            <div class="dog-image">
+                <div class="dog-image">
 
-                <img src="<?php echo htmlspecialchars($dog['image']); ?>" alt="<?php echo htmlspecialchars($dog['name']); ?>">
+                    <!-- IMPORTANT FIX:
+                         Database contains only filename.
+                         Actual image is inside uploads/animals/
+                    -->
 
-                <span>
-                    <?php echo htmlspecialchars($dog['status']); ?>
-                </span>
+                    <img
+                        src="uploads/animals/<?php echo htmlspecialchars($dog['image']); ?>"
+                        alt="<?php echo htmlspecialchars($dog['name']); ?>"
+                    >
 
-            </div>
-
-            <div class="dog-info">
-
-                <h3><?php echo htmlspecialchars($dog['name']); ?></h3>
-
-                <p>
-                    <?php echo htmlspecialchars($dog['breed']); ?> • <?php echo htmlspecialchars($dog['age']); ?>
-                </p>
-
-                <div class="dog-tags">
-
-                    <small>
-                        📍 <?php echo htmlspecialchars($dog['location']); ?>
-                    </small>
-
-                    <small>
-                        ✓ <?php echo htmlspecialchars($dog['status']); ?>
-                    </small>
+                    <span>
+                        <?php echo htmlspecialchars($dog['status']); ?>
+                    </span>
 
                 </div>
 
-                <a href="pet_details.php?id=<?php echo $dog['id']; ?>">
-                    View Profile
-                </a>
+
+                <div class="dog-info">
+
+                    <h3>
+                        <?php echo htmlspecialchars($dog['name']); ?>
+                    </h3>
+
+                    <p>
+                        <?php echo htmlspecialchars($dog['breed']); ?>
+                        •
+                        <?php echo htmlspecialchars($dog['age']); ?>
+                    </p>
+
+
+                    <div class="dog-tags">
+
+                        <small>
+                            📍 <?php echo htmlspecialchars($dog['location']); ?>
+                        </small>
+
+                        <small>
+                            ✓ <?php echo htmlspecialchars($dog['status']); ?>
+                        </small>
+
+                    </div>
+
+
+                    <a href="pet_details.php?id=<?php echo (int)$dog['id']; ?>">
+                        View Profile
+                    </a>
+
+                </div>
 
             </div>
-
-        </div>
 
         <?php } ?>
 
 
     </div>
 
-
 </section>
-<!-- =====================================================
+
+
+
+<!-- =========================
      FOOTER
-===================================================== -->
+========================= -->
 
 <footer class="footer">
 
     <div class="footer-top">
 
-
-        <!-- PAWCONNECT BRAND -->
 
         <div class="footer-about">
 
@@ -1116,18 +956,11 @@ where they belong.
         </div>
 
 
-
-        <!-- EXPLORE -->
-
         <div class="footer-links">
 
-            <h3>
-                Explore
-            </h3>
+            <h3>Explore</h3>
 
-            <a href="home.php">
-                Home
-            </a>
+            <a href="home.php">Home</a>
 
             <a href="animals.php">
                 Available Animals
@@ -1144,14 +977,9 @@ where they belong.
         </div>
 
 
-
-        <!-- SERVICES -->
-
         <div class="footer-links">
 
-            <h3>
-                Services
-            </h3>
+            <h3>Services</h3>
 
             <a href="care.php">
                 Care After Adoption
@@ -1172,14 +1000,9 @@ where they belong.
         </div>
 
 
-
-        <!-- CONTACT -->
-
         <div class="footer-contact">
 
-            <h3>
-                Contact
-            </h3>
+            <h3>Contact</h3>
 
             <p>
                 <i class="fa-solid fa-location-dot"></i>
@@ -1198,12 +1021,8 @@ where they belong.
 
         </div>
 
-
     </div>
 
-
-
-    <!-- FOOTER BOTTOM -->
 
     <div class="footer-bottom">
 
@@ -1213,7 +1032,6 @@ where they belong.
         </p>
 
     </div>
-
 
 </footer>
 

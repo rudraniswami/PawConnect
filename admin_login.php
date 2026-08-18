@@ -97,6 +97,7 @@ href="admin_login.css">
                 </button>
 
             </form>
+           
 
 
             <p class="secure">
@@ -105,9 +106,12 @@ href="admin_login.css">
                 Secure Administrator Login
 
             </p>
+             <a href="home.php" class="back-home">
+    <i class="fa-solid fa-arrow-left"></i>
+    Back to Home
+</a>
 
         </div>
-
     </div>
 
 </body>

@@ -162,3 +162,27 @@
             }
 
         }
+.back-home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    margin-top: 20px;
+
+    color: #123C2A;
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    transition: 0.3s ease;
+}
+
+.back-home:hover {
+    color: #C6A15B;
+}
+
+.back-home i {
+    font-size: 13px;
+}

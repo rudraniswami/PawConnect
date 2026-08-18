@@ -229,7 +229,7 @@ $result = mysqli_query($conn, $query);
         </div>
 
 
-        <a href="add_animal.php" class="add-btn">
+        <a href="add_animaladmin.php" class="add-btn">
 
             <i class="fa-solid fa-plus"></i>
 

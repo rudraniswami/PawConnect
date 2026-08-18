@@ -181,7 +181,6 @@ if (session_status() === PHP_SESSION_NONE) {
 
 
         <!-- DASHBOARD -->
-
         <a href="<?php
             echo isset($_SESSION['user_id'])
                 ? 'user_dashboard.php'
@@ -192,25 +191,10 @@ if (session_status() === PHP_SESSION_NONE) {
 
     </div>
 
-
-
-<div class="main-nav-action">
-
-        <?php if (isset($_SESSION['user_id'])) { ?>
-
-            <a href="logout.php" class="login-btn">
-                LOGOUT
-            </a>
-
-        <?php } else { ?>
-
-            <a href="login.php" class="login-btn">
-                LOGIN
-            </a>
-
-        <?php } ?>
-
-</div></div>
+<a href="ngo_logout.php" class="login-btn">
+    LOGOUT
+</a>
+</div>
 
 <!-- =====================================================
      DASHBOARD

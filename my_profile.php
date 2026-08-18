@@ -3,26 +3,41 @@
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
-    header("location: login.php");
+
+    header("Location: login.php");
     exit();
+
 }
 
 require_once "db.php";
 
+
 $user_id = $_SESSION['user_id'];
 
+
 $sql = "SELECT * FROM users WHERE id = ?";
+
 $stmt = mysqli_prepare($conn, $sql);
 
-mysqli_stmt_bind_param($stmt, "i", $user_id);
+mysqli_stmt_bind_param(
+    $stmt,
+    "i",
+    $user_id
+);
+
 mysqli_stmt_execute($stmt);
 
 $result = mysqli_stmt_get_result($stmt);
+
 $user = mysqli_fetch_assoc($result);
 
+
 if (!$user) {
+
     die("User not found.");
+
 }
+
 
 $user_name = $user['name'];
 
@@ -35,16 +50,19 @@ $user_name = $user['name'];
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>My Profile - PawConnect</title>
 
     <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <link rel="stylesheet" href="my_profile.css">
+    <link rel="stylesheet"
+          href="my_profile.css">
 
 </head>
+
 
 <body>
 
@@ -53,18 +71,28 @@ $user_name = $user['name'];
 
 <div class="sidebar">
 
+
     <div class="logo">
 
         <div class="logo-icon">
+
             <i class="fa-solid fa-paw"></i>
+
         </div>
 
+
         <div>
+
             <h2>PawConnect</h2>
-            <span>Animal Rescue & Adoption</span>
+
+            <span>
+                Animal Rescue & Adoption
+            </span>
+
         </div>
 
     </div>
+
 
 
     <div class="menu-title">
@@ -72,7 +100,9 @@ $user_name = $user['name'];
     </div>
 
 
-    <a href="user_dashboard.php" class="menu">
+
+    <a href="user_dashboard.php"
+       class="menu">
 
         <i class="fa-solid fa-house"></i>
 
@@ -81,7 +111,9 @@ $user_name = $user['name'];
     </a>
 
 
-    <a href="about.php" class="menu">
+
+    <a href="about.php"
+       class="menu">
 
         <i class="fa-solid fa-circle-info"></i>
 
@@ -90,7 +122,9 @@ $user_name = $user['name'];
     </a>
 
 
-    <a href="adoption_details.php" class="menu">
+
+    <a href="adoption_details.php"
+       class="menu">
 
         <i class="fa-solid fa-heart"></i>
 
@@ -99,7 +133,9 @@ $user_name = $user['name'];
     </a>
 
 
-    <a href="mission.php" class="menu">
+
+    <a href="mission.php"
+       class="menu">
 
         <i class="fa-solid fa-bullseye"></i>
 
@@ -108,7 +144,9 @@ $user_name = $user['name'];
     </a>
 
 
-    <a href="contact.php" class="menu">
+
+    <a href="contact.php"
+       class="menu">
 
         <i class="fa-solid fa-envelope"></i>
 
@@ -117,14 +155,15 @@ $user_name = $user['name'];
     </a>
 
 
+
     <div class="menu-title">
         ACCOUNT
     </div>
 
 
-    <!-- ACTIVE -->
 
-    <a href="my_profile.php" class="menu active">
+    <a href="my_profile.php"
+       class="menu active">
 
         <i class="fa-regular fa-user"></i>
 
@@ -133,7 +172,9 @@ $user_name = $user['name'];
     </a>
 
 
-    <a href="logout.php" class="menu logout">
+
+    <a href="logout.php"
+       class="menu logout">
 
         <i class="fa-solid fa-right-from-bracket"></i>
 
@@ -142,16 +183,20 @@ $user_name = $user['name'];
     </a>
 
 
+
     <div class="sidebar-bottom">
 
         <i class="fa-solid fa-heart"></i>
 
         <p>
+
             Every paw deserves<br>
             a forever home. 🐾
+
         </p>
 
     </div>
+
 
 </div>
 
@@ -162,9 +207,10 @@ $user_name = $user['name'];
 <div class="main">
 
 
-    <!-- TOPBAR -->
+    <!-- ================= TOPBAR ================= -->
 
     <div class="topbar">
+
 
         <div>
 
@@ -179,7 +225,9 @@ $user_name = $user['name'];
         </div>
 
 
+
         <div class="top-right">
+
 
             <div class="notification">
 
@@ -190,7 +238,9 @@ $user_name = $user['name'];
             </div>
 
 
+
             <div class="profile">
+
 
                 <div class="profile-icon">
 
@@ -198,10 +248,15 @@ $user_name = $user['name'];
 
                 </div>
 
+
                 <div>
 
                     <h4>
-                        <?php echo htmlspecialchars($user_name); ?>
+
+                        <?php
+                        echo htmlspecialchars($user_name);
+                        ?>
+
                     </h4>
 
                     <p>
@@ -210,27 +265,39 @@ $user_name = $user['name'];
 
                 </div>
 
+
                 <i class="fa-solid fa-chevron-down arrow"></i>
 
             </div>
 
+
         </div>
 
+
     </div>
+
+
+
+    <!-- ================= SUCCESS MESSAGE ================= -->
 
     <?php if (isset($_GET['success'])): ?>
 
-    <div class="success-message">
-        <i class="fa-solid fa-circle-check"></i>
-        Profile updated successfully!
-    </div>
+        <div class="success-message">
 
-<?php endif; ?>
+            <i class="fa-solid fa-circle-check"></i>
+
+            Profile updated successfully!
+
+        </div>
+
+    <?php endif; ?>
 
 
-    <!-- PROFILE HEADER -->
+
+    <!-- ================= PROFILE HEADER ================= -->
 
     <div class="profile-header">
+
 
         <div class="profile-avatar">
 
@@ -239,46 +306,67 @@ $user_name = $user['name'];
         </div>
 
 
+
         <div class="profile-intro">
 
+
             <span class="profile-tag">
+
                 <i class="fa-solid fa-paw"></i>
+
                 PAWCONNECT MEMBER
+
             </span>
 
+
             <h2>
-                Hello, <?php echo htmlspecialchars($user_name); ?>! 🐾
+
+                Hello,
+                <?php echo htmlspecialchars($user_name); ?>! 🐾
+
             </h2>
 
+
             <p>
+
                 Manage your personal information and keep your PawConnect
                 profile up to date.
+
             </p>
 
+
         </div>
+
 
     </div>
 
 
 
-    <!-- PROFILE CONTENT -->
+    <!-- ================= PROFILE CONTENT ================= -->
 
     <div class="profile-layout">
 
 
-        <!-- PERSONAL INFORMATION -->
+        <!-- ================= PERSONAL INFORMATION ================= -->
 
         <div class="profile-card">
 
+
             <div class="card-heading">
 
+
                 <div class="heading-icon">
+
                     <i class="fa-regular fa-user"></i>
+
                 </div>
+
 
                 <div>
 
-                    <h2>Personal Information</h2>
+                    <h2>
+                        Personal Information
+                    </h2>
 
                     <p>
                         Update your personal details.
@@ -286,10 +374,15 @@ $user_name = $user['name'];
 
                 </div>
 
+
             </div>
 
 
-            <form action="update_profile.php" method="POST">
+
+            <form
+                action="update_profile.php"
+                method="POST"
+            >
 
 
                 <!-- NAME -->
@@ -297,15 +390,22 @@ $user_name = $user['name'];
                 <div class="form-group">
 
                     <label>
+
                         <i class="fa-regular fa-user"></i>
+
                         Name
+
                     </label>
+
 
                     <input
                         type="text"
                         name="name"
-                        value="<?php echo htmlspecialchars($user['name']); ?>"
-                        placeholder="Enter your name" 
+                        value="<?php
+                        echo htmlspecialchars($user['name'] ?? '');
+                        ?>"
+                        placeholder="Enter your name"
+                        required
                     >
 
                 </div>
@@ -317,17 +417,23 @@ $user_name = $user['name'];
                 <div class="form-group">
 
                     <label>
+
                         <i class="fa-regular fa-envelope"></i>
+
                         Email Address
+
                     </label>
 
-                  <input
-                      type="email"
-                      name="email"
-                      value="<?php echo htmlspecialchars($user['email']); ?>"
-                      placeholder="Enter your email address"
-                   >
 
+                    <input
+                        type="email"
+                        name="email"
+                        value="<?php
+                        echo htmlspecialchars($user['email'] ?? '');
+                        ?>"
+                        placeholder="Enter your email address"
+                        required
+                    >
 
                 </div>
 
@@ -338,14 +444,20 @@ $user_name = $user['name'];
                 <div class="form-group">
 
                     <label>
+
                         <i class="fa-solid fa-phone"></i>
+
                         Phone Number
+
                     </label>
+
 
                     <input
                         type="text"
                         name="phone"
-                        value="<?php echo htmlspecialchars($user['phone']); ?>"
+                        value="<?php
+                        echo htmlspecialchars($user['phone'] ?? '');
+                        ?>"
                         placeholder="Enter your phone number"
                         maxlength="10"
                     >
@@ -359,57 +471,77 @@ $user_name = $user['name'];
                 <div class="form-group">
 
                     <label>
+
                         <i class="fa-solid fa-location-dot"></i>
+
                         Address
+
                     </label>
+
 
                     <textarea
                         name="address"
                         rows="3"
-                        placeholder="Enter your address">
-                    <?php echo htmlspecialchars($user['address']); ?>
-                </textarea>
+                        placeholder="Enter your address"
+                    ><?php
+                    echo htmlspecialchars($user['address'] ?? '');
+                    ?></textarea>
 
                 </div>
 
 
 
-                <!-- CITY STATE -->
+                <!-- CITY + STATE -->
 
                 <div class="two-column">
+
 
                     <div class="form-group">
 
                         <label>
+
                             <i class="fa-solid fa-city"></i>
+
                             City
+
                         </label>
+
 
                         <input
                             type="text"
                             name="city"
-                            value="<?php echo htmlspecialchars($user['city']); ?>"
+                            value="<?php
+                            echo htmlspecialchars($user['city'] ?? '');
+                            ?>"
                             placeholder="Enter city"
                         >
 
                     </div>
 
 
+
                     <div class="form-group">
 
                         <label>
+
                             <i class="fa-solid fa-map"></i>
+
                             State
+
                         </label>
+
 
                         <input
                             type="text"
                             name="state"
-                            value="<?php echo htmlspecialchars($user['state']); ?>"
+                            value="<?php
+                            echo htmlspecialchars($user['state'] ?? '');
+                            ?>"
                             placeholder="Enter state"
                         >
 
                     </div>
+
 
                 </div>
 
@@ -420,14 +552,20 @@ $user_name = $user['name'];
                 <div class="form-group">
 
                     <label>
+
                         <i class="fa-solid fa-location-crosshairs"></i>
+
                         Pincode
+
                     </label>
+
 
                     <input
                         type="text"
                         name="pincode"
-                        value="<?php echo htmlspecialchars($user['pincode']); ?>"
+                        value="<?php
+                        echo htmlspecialchars($user['pincode'] ?? '');
+                        ?>"
                         placeholder="Enter pincode"
                         maxlength="6"
                     >
@@ -436,20 +574,28 @@ $user_name = $user['name'];
 
 
 
-                <!-- BUTTON -->
+                <!-- BUTTONS -->
 
                 <div class="form-actions">
 
-                    <button type="reset" class="cancel-btn">
+<!-- 
+                    <button
+                        type="reset"
+                        class="cancel-btn"
+                    >
 
                         <i class="fa-solid fa-rotate-left"></i>
 
                         Reset
 
-                    </button>
+                    </button> -->
 
 
-                    <button type="submit" class="save-btn">
+
+                    <button
+                        type="submit"
+                        class="save-btn"
+                    >
 
                         <i class="fa-solid fa-check"></i>
 
@@ -457,16 +603,18 @@ $user_name = $user['name'];
 
                     </button>
 
+
                 </div>
 
 
             </form>
 
+
         </div>
 
 
 
-        <!-- RIGHT CARD -->
+        <!-- ================= RIGHT SIDE ================= -->
 
         <div class="profile-side">
 
@@ -475,60 +623,117 @@ $user_name = $user['name'];
 
             <div class="account-card">
 
+
                 <div class="side-icon">
 
                     <i class="fa-solid fa-shield-heart"></i>
 
                 </div>
 
-                <h2>Your PawConnect Account</h2>
+
+                <h2>
+                    Your PawConnect Account
+                </h2>
+
 
                 <p>
+
                     Your profile helps us connect you with rescued animals
                     and manage your adoption journey.
+
                 </p>
 
+
+
+                <!-- ACCOUNT TYPE -->
 
                 <div class="account-item">
 
                     <i class="fa-solid fa-heart"></i>
 
+
                     <div>
-                        <strong>Pet Lover</strong>
-                        <span>Account Type</span>
+
+                        <strong>
+                            Pet Lover
+                        </strong>
+
+                        <span>
+                            Account Type
+                        </span>
+
                     </div>
 
                 </div>
 
+
+
+                <!-- ACCOUNT STATUS -->
 
                 <div class="account-item">
 
                     <i class="fa-solid fa-paw"></i>
 
+
                     <div>
-                        <strong>Active</strong>
-                        <span>Account Status</span>
+
+                        <strong>
+                            Active
+                        </strong>
+
+                        <span>
+                            Account Status
+                        </span>
+
                     </div>
 
                 </div>
 
-                <!-- member since -->
+
+
+                <!-- MEMBER SINCE -->
+
+                <div class="account-item">
+
+                    <i class="fa-solid fa-calendar"></i>
+
+
+                    <div>
+
+                        <strong>
+
+                            <?php
+
+                            if (!empty($user['created_at'])) {
+
+                                echo date(
+                                    "d M Y",
+                                    strtotime($user['created_at'])
+                                );
+
+                            }
+                            else {
+
+                                echo "Not Available";
+
+                            }
+
+                            ?>
+
+                        </strong>
+
+
+                        <span>
+                            Member Since
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
             </div>
-
-            <div class="account-item">
-
-                <i class="fa-solid fa-calendar"></i>
-
-               <div>
-                <strong>
-            <?php echo date("d M Y", strtotime($user['created_at'])); ?>
-                </strong>
-
-             <span>Member Since</span>
-          </div>
-
-           </div>
-
 
 
 
@@ -536,15 +741,19 @@ $user_name = $user['name'];
 
             <div class="security-card">
 
+
                 <div class="security-icon">
 
                     <i class="fa-solid fa-lock"></i>
 
                 </div>
 
+
                 <div>
 
-                    <h3>Keep your account safe</h3>
+                    <h3>
+                        Keep your account safe
+                    </h3>
 
                     <p>
                         Never share your password with anyone.
@@ -552,34 +761,47 @@ $user_name = $user['name'];
 
                 </div>
 
+
             </div>
 
 
         </div>
 
+
     </div>
 
-    
-    <!-- FOOTER -->
+
+
+    <!-- ================= FOOTER ================= -->
 
     <div class="footer">
 
+
         <p>
-            © 2026 PawConnect. Every paw deserves a forever home. 🐾
+
+            © 2026 PawConnect.
+            Every paw deserves a forever home. 🐾
+
         </p>
+
 
         <div>
 
             <span>Privacy</span>
+
             <span>Terms</span>
+
             <span>Help</span>
 
         </div>
+
 
     </div>
 
 
 </div>
 
+
 </body>
+
 </html>

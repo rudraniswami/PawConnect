@@ -23,16 +23,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows == 1) {
         $ngo = $result->fetch_assoc();
 
-        // Compare typed password with the hashed one saved in the database
+        // Compare typed password with the hashed one saved in database
         if (password_verify($password, $ngo["password"])) {
+
             $_SESSION["ngo_id"]   = $ngo["id"];
             $_SESSION["ngo_name"] = $ngo["name"];
 
             header("Location: ngo_dashboard.php");
             exit();
+
         } else {
             $error = "Incorrect email or password.";
         }
+
     } else {
         $error = "Incorrect email or password.";
     }
@@ -40,16 +43,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 <title>NGO Login - PawConnect</title>
 
- <style>
- /* =====================================================
+<style>
+
+/* =====================================================
    RESET
 ===================================================== */
 
@@ -490,10 +501,14 @@ body {
 
 .error-msg {
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     gap: 8px;
+
+    width: 100%;
 
     background: #fff0f1;
 
@@ -509,7 +524,11 @@ body {
 
     font-size: 15px;
 
-    margin-bottom: 22px;
+    margin: 0 auto 22px auto;
+
+    position: relative;
+
+    box-sizing: border-box;
 }
 
 
@@ -649,6 +668,7 @@ body {
 
     text-decoration: underline;
 }
+
 
 
 /* =====================================================
@@ -853,13 +873,19 @@ body {
     }
 
 }
+
 </style>
+
 </head>
+
 <body>
+
 <?php
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
 ?>
 
 <div class="main-nav">
@@ -1001,36 +1027,82 @@ if (session_status() === PHP_SESSION_NONE) {
 
 </div>
 
+
 <div class="auth-wrapper">
+
     <div class="auth-box">
+
         <h2>NGO Login</h2>
-        <p class="auth-sub">Log in to manage your animals</p>
+
+        <p class="auth-sub">
+            Log in to manage your animals
+        </p>
+
 
         <?php if ($error != "") { ?>
-            <div class="error-msg"><?php echo htmlspecialchars($error); ?></div>
+
+            <div class="error-msg">
+                <i class="fa-solid fa-circle-exclamation"></i>
+
+                <?php echo htmlspecialchars($error); ?>
+            </div>
+
         <?php } ?>
+
 
         <form method="POST" action="ngo_login.php">
 
             <div class="form-group">
+
                 <label>Email</label>
-                <input type="email" name="email" required>
+
+                <input
+                    type="email"
+                    name="email"
+                    required
+                >
+
             </div>
+
 
             <div class="form-group">
+
                 <label>Password</label>
-                <input type="password" name="password" required>
+
+                <input
+                    type="password"
+                    name="password"
+                    required
+                >
+
             </div>
 
-            <button type="submit" class="auth-btn">Login</button>
+
+            <button type="submit" class="auth-btn">
+                Login
+            </button>
 
         </form>
 
+
         <div class="auth-switch">
-            Don't have an account? <a href="ngo_register.php">Register your NGO</a>
+
+            Don't have an account?
+
+            <a href="ngo_register.php">
+                Register your NGO
+            </a>
+
         </div>
+
+
+        
+
+
     </div>
+
 </div>
 
 </body>
+
 </html>
