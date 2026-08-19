@@ -838,64 +838,60 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
              NGO ADDED DOGS
         ========================================== -->
 
-        <?php while ($dog = $db_dogs->fetch_assoc()) { ?>
 
-            <div class="dog-card">
+<?php while ($dog = $db_dogs->fetch_assoc()) { ?>
 
-                <div class="dog-image">
+    <div class="dog-card">
 
-                    <!-- IMPORTANT FIX:
-                         Database contains only filename.
-                         Actual image is inside uploads/animals/
-                    -->
+        <div class="dog-image">
 
-                    <img
-                        src="uploads/animals/<?php echo htmlspecialchars($dog['image']); ?>"
-                        alt="<?php echo htmlspecialchars($dog['name']); ?>"
-                    >
+            <img
+                src="<?php echo htmlspecialchars($dog['image']); ?>"
+                alt="<?php echo htmlspecialchars($dog['name']); ?>"
+            >
 
-                    <span>
-                        <?php echo htmlspecialchars($dog['status']); ?>
-                    </span>
+            <span>
+                <?php echo htmlspecialchars($dog['status']); ?>
+            </span>
 
-                </div>
+        </div>
 
 
-                <div class="dog-info">
+        <div class="dog-info">
 
-                    <h3>
-                        <?php echo htmlspecialchars($dog['name']); ?>
-                    </h3>
+            <h3>
+                <?php echo htmlspecialchars($dog['name']); ?>
+            </h3>
 
-                    <p>
-                        <?php echo htmlspecialchars($dog['breed']); ?>
-                        •
-                        <?php echo htmlspecialchars($dog['age']); ?>
-                    </p>
-
-
-                    <div class="dog-tags">
-
-                        <small>
-                            📍 <?php echo htmlspecialchars($dog['location']); ?>
-                        </small>
-
-                        <small>
-                            ✓ <?php echo htmlspecialchars($dog['status']); ?>
-                        </small>
-
-                    </div>
+            <p>
+                <?php echo htmlspecialchars($dog['breed']); ?>
+                •
+                <?php echo htmlspecialchars($dog['age']); ?>
+            </p>
 
 
-                    <a href="pet_details.php?id=<?php echo (int)$dog['id']; ?>">
-                        View Profile
-                    </a>
+            <div class="dog-tags">
 
-                </div>
+                <small>
+                    📍 <?php echo htmlspecialchars($dog['location']); ?>
+                </small>
+
+                <small>
+                    ✓ <?php echo htmlspecialchars($dog['status']); ?>
+                </small>
 
             </div>
 
-        <?php } ?>
+
+            <a href="pet_details.php?id=<?php echo (int)$dog['id']; ?>">
+                View Profile
+            </a>
+
+        </div>
+
+    </div>
+
+<?php } ?>
 
 
     </div>

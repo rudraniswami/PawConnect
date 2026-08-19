@@ -135,18 +135,16 @@ $approved_requests = $approved_data['total'];
 /* ==========================================
    RESET
 ========================================== */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Times New Roman', Times, serif;
 }
 
-
-body {
-    font-family: Arial, sans-serif;
-    background: #f8f6ef;
-    color: #173c2d;
+body{
+    background:#F8F3E8;
+    color:#123C2A;
 }
 
 
@@ -154,100 +152,67 @@ body {
    SIDEBAR
 ========================================== */
 
-.sidebar {
-
-    position: fixed;
-
-    left: 0;
-    top: 0;
-
-    width: 240px;
-    height: 100vh;
-
-    background: #173c2d;
-
-    padding: 30px 20px;
-
-    color: white;
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:250px;
+    height:100vh;
+    background:#123C2A;
+    padding:25px 18px;
+    box-shadow:4px 0 15px rgba(0,0,0,.12);
 }
 
-
-.sidebar-logo {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    margin-bottom: 45px;
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:10px;
+    margin-bottom:35px;
 }
 
-
-.sidebar-logo img {
-
-    width: 42px;
-    height: 42px;
-
-    border-radius: 50%;
+.logo img{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    object-fit:cover;
 }
 
-
-.sidebar-logo h2 {
-
-    font-size: 20px;
+.logo h2{
+    color:#FFFDF7;
+    font-size:25px;
 }
 
-
-.sidebar p {
-
-    color: #aebdb5;
-
-    font-size: 11px;
-
-    letter-spacing: 2px;
-
-    margin-bottom: 15px;
+.admin-title{
+    color:#C6A15B;
+    font-size:13px;
+    letter-spacing:1px;
+    padding:0 12px;
+    margin-bottom:12px;
 }
 
-
-.sidebar a {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    text-decoration: none;
-
-    color: #dbe3de;
-
-    padding: 13px 15px;
-
-    border-radius: 10px;
-
-    margin-bottom: 7px;
-
-    font-size: 14px;
+.sidebar a{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    text-decoration:none;
+    color:#FFFDF7;
+    padding:14px 15px;
+    margin:6px 0;
+    border-radius:10px;
+    transition:.3s;
 }
-
 
 .sidebar a:hover,
-.sidebar a.active {
-
-    background: rgba(255,255,255,0.12);
-
-    color: white;
+.sidebar a.active{
+    background:#C6A15B;
+    color:#123C2A;
 }
 
-
-.sidebar a i {
-
-    width: 20px;
+.sidebar a i{
+    width:20px;
+    text-align:center;
 }
-
-
 /* ==========================================
    MAIN
 ========================================== */
@@ -729,61 +694,66 @@ tr:hover td {
      SIDEBAR
 ========================================== -->
 
-<aside class="sidebar">
+<div class="sidebar">
 
 
-    <div class="sidebar-logo">
+    <!-- LOGO -->
+
+    <div class="logo">
 
         <img src="logo.jpeg"
-             alt="PawConnect">
+             alt="PawConnect Logo">
 
-        <h2>PawConnect</h2>
+        <h2>
+            PawConnect
+        </h2>
 
     </div>
 
 
-    <p>ADMIN PANEL</p>
+    <div class="admin-title">
+
+        ADMIN PANEL
+
+    </div>
 
 
-    <a href="admin_dashboard.php">
+    <!-- CONTACT -->
 
-        <i class="fa-solid fa-chart-line"></i>
+    <a href="admin_dashboard.php"
+       class="active">
 
-        <span>Dashboard</span>
+
+        Contact Messages
 
     </a>
 
 
-    <a href="adoptions.php"
-       class="active">
+    <!-- FUTURE FEATURES -->
+
+    <a href="manage_animalsadmin.php">
 
         <i class="fa-solid fa-paw"></i>
 
-        <span>Adoption Requests</span>
+        Manage Animals
 
     </a>
 
 
-    <a href="admin_dashboard.php">
+    <a href="adoptions.php" class="admin-btn">
 
-        <i class="fa-solid fa-envelope"></i>
+      <i class="fa-solid fa-heart"></i>
+      
+    View Adoption Requests
+</a>
+<a href="home.php" class="admin-btn">
 
-        <span>Messages</span>
+      <i class="fa-solid fa-home"></i>
+      
+    Home
+</a>
 
-    </a>
-
-
-    <a href="home.php">
-
-        <i class="fa-solid fa-house"></i>
-
-        <span>Visit Website</span>
-
-    </a>
-
-
-</aside>
-
+</div>
 
 
 <!-- ==========================================

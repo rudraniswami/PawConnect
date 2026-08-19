@@ -1,9 +1,73 @@
 <?php
 
+session_start();
 include "db.php";
 
-$query = "SELECT * FROM animals ORDER BY id DESC";
-$result = mysqli_query($conn, $query);
+
+/* =====================================================
+   CHECK NGO LOGIN
+===================================================== */
+
+if (!isset($_SESSION['ngo_id'])) {
+
+    header("Location: ngo_login.php");
+    exit();
+
+}
+
+
+/* =====================================================
+   GET LOGGED-IN NGO ID
+===================================================== */
+
+$ngo_id = (int) $_SESSION['ngo_id'];
+
+
+/* =====================================================
+   GET ONLY THIS NGO'S ANIMALS
+===================================================== */
+
+$query = "
+    SELECT *
+    FROM animals
+    WHERE ngo_id = ?
+    ORDER BY id DESC
+";
+
+
+$stmt = mysqli_prepare($conn, $query);
+
+if (!$stmt) {
+
+    die(
+        "Database error: " .
+        mysqli_error($conn)
+    );
+
+}
+
+
+mysqli_stmt_bind_param(
+    $stmt,
+    "i",
+    $ngo_id
+);
+
+
+mysqli_stmt_execute($stmt);
+
+
+$result = mysqli_stmt_get_result($stmt);
+
+
+if (!$result) {
+
+    die(
+        "Unable to load animals: " .
+        mysqli_error($conn)
+    );
+
+}
 
 ?>
 
@@ -14,13 +78,17 @@ $result = mysqli_query($conn, $query);
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Manage Animals - PawConnect</title>
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
 
     <style>
 
@@ -33,7 +101,7 @@ $result = mysqli_query($conn, $query);
         body {
             font-family: Georgia, serif;
             background: #f7f3e9;
-            color: #173f50;
+            color: #123c2a;
         }
 
         .container {
@@ -51,7 +119,7 @@ $result = mysqli_query($conn, $query);
 
         .heading h1 {
             font-size: 32px;
-            color: #173f50;
+            color: #123c2a;
         }
 
         .heading p {
@@ -62,7 +130,7 @@ $result = mysqli_query($conn, $query);
 
         .add-btn {
             text-decoration: none;
-            background: #173f50;
+            background: #c29946;
             color: white;
             padding: 13px 20px;
             border-radius: 8px;
@@ -70,7 +138,7 @@ $result = mysqli_query($conn, $query);
         }
 
         .add-btn:hover {
-            background: #0f2c39;
+            background: #123c2a;
         }
 
         .table-box {
@@ -83,7 +151,7 @@ $result = mysqli_query($conn, $query);
 
         .table-title {
             font-size: 21px;
-            color: #173f50;
+            color: #123c2a;
             margin-bottom: 18px;
         }
 
@@ -94,7 +162,7 @@ $result = mysqli_query($conn, $query);
         }
 
         th {
-            background: #315b70;
+            background: #123c2a;
             color: white;
             padding: 14px 12px;
             text-align: left;
@@ -136,7 +204,7 @@ $result = mysqli_query($conn, $query);
             padding: 6px 11px;
             border-radius: 15px;
             background: #e8dfc7;
-            color: #315b70;
+            color: #123c2a;
             font-size: 12px;
         }
 
@@ -156,19 +224,19 @@ $result = mysqli_query($conn, $query);
         }
 
         .edit-btn {
-            background: #315b70;
+            background: #123c2a;
         }
 
         .edit-btn:hover {
-            background: #24495c;
+            background: #378161;
         }
 
         .delete-btn {
-            background: #8b5365;
+            background: #c29946;
         }
 
         .delete-btn:hover {
-            background: #713f50;
+            background: #123c2a;
         }
 
         .empty {
@@ -187,12 +255,22 @@ $result = mysqli_query($conn, $query);
             display: inline-block;
             margin-top: 20px;
             text-decoration: none;
-            color: #315b70;
+            color: #123c2a;
             font-size: 14px;
         }
 
         .back:hover {
             text-decoration: underline;
+        }
+
+        @media(max-width: 700px) {
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
         }
 
     </style>
@@ -222,14 +300,19 @@ $result = mysqli_query($conn, $query);
 
             <p>
 
-                Add and manage rescued animals on PawConnect.
+                Add and manage animals rescued by your NGO.
 
             </p>
 
         </div>
 
 
-        <a href="add_animaladmin.php" class="add-btn">
+        <!-- ADD ANIMAL -->
+
+        <a
+            href="add_animal.php"
+            class="add-btn"
+        >
 
             <i class="fa-solid fa-plus"></i>
 
@@ -240,14 +323,13 @@ $result = mysqli_query($conn, $query);
     </div>
 
 
-
     <!-- TABLE -->
 
     <div class="table-box">
 
         <div class="table-title">
 
-            Animal Records
+            Your Animal Records
 
         </div>
 
@@ -288,7 +370,10 @@ $result = mysqli_query($conn, $query);
 
             if (mysqli_num_rows($result) > 0) {
 
-                while ($animal = mysqli_fetch_assoc($result)) {
+                while (
+                    $animal =
+                    mysqli_fetch_assoc($result)
+                ) {
 
             ?>
 
@@ -307,9 +392,18 @@ $result = mysqli_query($conn, $query);
                         ?>
 
                             <img
-                                src="uploads/animals/<?php echo htmlspecialchars($animal['image']); ?>"
+                                src="<?php
+                                    echo htmlspecialchars(
+                                        $animal['image']
+                                    );
+                                ?>"
                                 class="animal-img"
-                                alt="Animal">
+                                alt="<?php
+                                    echo htmlspecialchars(
+                                        $animal['name']
+                                    );
+                                ?>"
+                            >
 
                         <?php
 
@@ -339,7 +433,11 @@ $result = mysqli_query($conn, $query);
                         <strong>
 
                             <?php
-                            echo htmlspecialchars($animal['name']);
+
+                            echo htmlspecialchars(
+                                $animal['name']
+                            );
+
                             ?>
 
                         </strong>
@@ -352,7 +450,11 @@ $result = mysqli_query($conn, $query);
                     <td>
 
                         <?php
-                        echo htmlspecialchars($animal['type']);
+
+                        echo htmlspecialchars(
+                            $animal['type']
+                        );
+
                         ?>
 
                     </td>
@@ -363,7 +465,11 @@ $result = mysqli_query($conn, $query);
                     <td>
 
                         <?php
-                        echo htmlspecialchars($animal['breed']);
+
+                        echo htmlspecialchars(
+                            $animal['breed']
+                        );
+
                         ?>
 
                     </td>
@@ -374,7 +480,11 @@ $result = mysqli_query($conn, $query);
                     <td>
 
                         <?php
-                        echo htmlspecialchars($animal['age']);
+
+                        echo htmlspecialchars(
+                            $animal['age']
+                        );
+
                         ?>
 
                     </td>
@@ -385,7 +495,11 @@ $result = mysqli_query($conn, $query);
                     <td>
 
                         <?php
-                        echo htmlspecialchars($animal['gender']);
+
+                        echo htmlspecialchars(
+                            $animal['gender']
+                        );
+
                         ?>
 
                     </td>
@@ -396,7 +510,11 @@ $result = mysqli_query($conn, $query);
                     <td>
 
                         <?php
-                        echo htmlspecialchars($animal['health_status']);
+
+                        echo htmlspecialchars(
+                            $animal['health_status']
+                        );
+
                         ?>
 
                     </td>
@@ -409,7 +527,11 @@ $result = mysqli_query($conn, $query);
                         <span class="status">
 
                             <?php
-                            echo htmlspecialchars($animal['status']);
+
+                            echo htmlspecialchars(
+                                $animal['status']
+                            );
+
                             ?>
 
                         </span>
@@ -425,9 +547,12 @@ $result = mysqli_query($conn, $query);
                         <!-- EDIT -->
 
                         <a
-                            href="edit_animal.php?id=<?php echo $animal['id']; ?>"
+                            href="edit_animal.php?id=<?php
+                                echo (int)$animal['id'];
+                            ?>"
                             class="edit-btn"
-                            title="Edit Animal">
+                            title="Edit Animal"
+                        >
 
                             <i class="fa-solid fa-pen"></i>
 
@@ -437,10 +562,13 @@ $result = mysqli_query($conn, $query);
                         <!-- DELETE -->
 
                         <a
-                            href="delete_animal.php?id=<?php echo $animal['id']; ?>"
+                            href="delete_animal.php?id=<?php
+                                echo (int)$animal['id'];
+                            ?>"
                             class="delete-btn"
                             title="Delete Animal"
-                            onclick="return confirm('Are you sure you want to delete this animal?');">
+                            onclick="return confirm('Are you sure you want to delete this animal?');"
+                        >
 
                             <i class="fa-solid fa-trash"></i>
 
@@ -464,13 +592,16 @@ $result = mysqli_query($conn, $query);
 
                 <tr>
 
-                    <td colspan="9" class="empty">
+                    <td
+                        colspan="9"
+                        class="empty"
+                    >
 
                         <i class="fa-solid fa-paw"></i>
 
-                        <br>
+                        <br><br>
 
-                        No animals added yet.
+                        No animals have been added by your NGO yet.
 
                     </td>
 
@@ -493,7 +624,10 @@ $result = mysqli_query($conn, $query);
 
     <!-- BACK TO DASHBOARD -->
 
-    <a href="ngo_dashboard.php" class="back">
+    <a
+        href="ngo_dashboard.php"
+        class="back"
+    >
 
         <i class="fa-solid fa-arrow-left"></i>
 

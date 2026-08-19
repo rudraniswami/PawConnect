@@ -300,11 +300,11 @@ body{
 
             <!-- ADD ANOTHER ANIMAL -->
 
-            <a href="addanimal.php" class="animals-btn">
+            <a href="manage_animalsngo.php" class="animals-btn">
 
-                <i class="fa-solid fa-plus"></i>
+                <i class="fa-solid fa-paw"></i>
 
-                Add Another Animal
+                Manage animals
 
             </a>
 

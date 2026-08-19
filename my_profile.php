@@ -9,15 +9,23 @@ if (!isset($_SESSION['user_id'])) {
 
 }
 
-require_once "db.php";
+include "db.php";
 
 
-$user_id = $_SESSION['user_id'];
+$user_id = (int)$_SESSION['user_id'];
 
+
+/* ==========================================
+   GET USER PROFILE
+========================================== */
 
 $sql = "SELECT * FROM users WHERE id = ?";
 
 $stmt = mysqli_prepare($conn, $sql);
+
+if (!$stmt) {
+    die("Database error: " . mysqli_error($conn));
+}
 
 mysqli_stmt_bind_param(
     $stmt,
@@ -31,6 +39,8 @@ $result = mysqli_stmt_get_result($stmt);
 
 $user = mysqli_fetch_assoc($result);
 
+mysqli_stmt_close($stmt);
+
 
 if (!$user) {
 
@@ -40,6 +50,45 @@ if (!$user) {
 
 
 $user_name = $user['name'];
+
+
+/* ==========================================
+   CONTACT REPLIES COUNT
+========================================== */
+
+$reply_count = 0;
+
+$stmt = mysqli_prepare(
+    $conn,
+    "SELECT COUNT(*) AS total
+     FROM contact_messages
+     WHERE user_id = ?
+     AND reply IS NOT NULL
+     AND reply != ''"
+);
+
+if ($stmt) {
+
+    mysqli_stmt_bind_param(
+        $stmt,
+        "i",
+        $user_id
+    );
+
+    mysqli_stmt_execute($stmt);
+
+    $reply_result =
+        mysqli_stmt_get_result($stmt);
+
+    $reply_data =
+        mysqli_fetch_assoc($reply_result);
+
+    $reply_count =
+        (int)($reply_data['total'] ?? 0);
+
+    mysqli_stmt_close($stmt);
+
+}
 
 ?>
 
@@ -56,7 +105,7 @@ $user_name = $user['name'];
     <title>My Profile - PawConnect</title>
 
     <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <link rel="stylesheet"
           href="my_profile.css">
@@ -83,7 +132,9 @@ $user_name = $user['name'];
 
         <div>
 
-            <h2>PawConnect</h2>
+            <h2>
+                PawConnect
+            </h2>
 
             <span>
                 Animal Rescue & Adoption
@@ -106,51 +157,74 @@ $user_name = $user['name'];
 
         <i class="fa-solid fa-house"></i>
 
-        <span>Dashboard</span>
+        <span>
+            Dashboard
+        </span>
 
     </a>
 
 
 
-    <a href="about.php"
+    <a href="home.php"
        class="menu">
 
-        <i class="fa-solid fa-circle-info"></i>
+        <i class="fa-solid fa-home"></i>
 
-        <span>About Us</span>
+        <span>
+            Home
+        </span>
 
     </a>
 
 
 
-    <a href="adoption_details.php"
+    <a href="animals.php"
+       class="menu">
+
+        <i class="fa-solid fa-paw"></i>
+
+        <span>
+            Browse Animals
+        </span>
+
+    </a>
+
+
+
+    <a href="my_requests.php"
        class="menu">
 
         <i class="fa-solid fa-heart"></i>
 
-        <span>Adoption Requests</span>
+        <span>
+            My Adoption Requests
+        </span>
 
     </a>
 
 
 
-    <a href="mission.php"
+    <!-- ================= MY MESSAGES ================= -->
+
+    <a href="my_messages.php"
        class="menu">
 
-        <i class="fa-solid fa-bullseye"></i>
+        <i class="fa-regular fa-message"></i>
 
-        <span>Our Mission</span>
+        <span>
+            My Messages
+        </span>
 
-    </a>
 
+        <?php if ($reply_count > 0) { ?>
 
+            <span class="message-count">
 
-    <a href="contact.php"
-       class="menu">
+                <?php echo $reply_count; ?>
 
-        <i class="fa-solid fa-envelope"></i>
+            </span>
 
-        <span>Contact Us</span>
+        <?php } ?>
 
     </a>
 
@@ -167,7 +241,9 @@ $user_name = $user['name'];
 
         <i class="fa-regular fa-user"></i>
 
-        <span>My Profile</span>
+        <span>
+            My Profile
+        </span>
 
     </a>
 
@@ -178,7 +254,9 @@ $user_name = $user['name'];
 
         <i class="fa-solid fa-right-from-bracket"></i>
 
-        <span>Logout</span>
+        <span>
+            Logout
+        </span>
 
     </a>
 
@@ -191,6 +269,7 @@ $user_name = $user['name'];
         <p>
 
             Every paw deserves<br>
+
             a forever home. 🐾
 
         </p>
@@ -199,6 +278,8 @@ $user_name = $user['name'];
 
 
 </div>
+
+
 
 
 
@@ -229,15 +310,26 @@ $user_name = $user['name'];
         <div class="top-right">
 
 
+            <!-- NOTIFICATION -->
+
             <div class="notification">
 
                 <i class="fa-regular fa-bell"></i>
 
-                <span>2</span>
+
+                <?php if ($reply_count > 0) { ?>
+
+                    <span>
+                        <?php echo $reply_count; ?>
+                    </span>
+
+                <?php } ?>
 
             </div>
 
 
+
+            <!-- PROFILE -->
 
             <div class="profile">
 
@@ -254,10 +346,15 @@ $user_name = $user['name'];
                     <h4>
 
                         <?php
-                        echo htmlspecialchars($user_name);
+
+                        echo htmlspecialchars(
+                            $user_name
+                        );
+
                         ?>
 
                     </h4>
+
 
                     <p>
                         Pet Lover
@@ -402,7 +499,9 @@ $user_name = $user['name'];
                         type="text"
                         name="name"
                         value="<?php
-                        echo htmlspecialchars($user['name'] ?? '');
+                        echo htmlspecialchars(
+                            $user['name'] ?? ''
+                        );
                         ?>"
                         placeholder="Enter your name"
                         required
@@ -429,7 +528,9 @@ $user_name = $user['name'];
                         type="email"
                         name="email"
                         value="<?php
-                        echo htmlspecialchars($user['email'] ?? '');
+                        echo htmlspecialchars(
+                            $user['email'] ?? ''
+                        );
                         ?>"
                         placeholder="Enter your email address"
                         required
@@ -456,7 +557,9 @@ $user_name = $user['name'];
                         type="text"
                         name="phone"
                         value="<?php
-                        echo htmlspecialchars($user['phone'] ?? '');
+                        echo htmlspecialchars(
+                            $user['phone'] ?? ''
+                        );
                         ?>"
                         placeholder="Enter your phone number"
                         maxlength="10"
@@ -484,7 +587,9 @@ $user_name = $user['name'];
                         rows="3"
                         placeholder="Enter your address"
                     ><?php
-                    echo htmlspecialchars($user['address'] ?? '');
+                    echo htmlspecialchars(
+                        $user['address'] ?? ''
+                    );
                     ?></textarea>
 
                 </div>
@@ -511,7 +616,9 @@ $user_name = $user['name'];
                             type="text"
                             name="city"
                             value="<?php
-                            echo htmlspecialchars($user['city'] ?? '');
+                            echo htmlspecialchars(
+                                $user['city'] ?? ''
+                            );
                             ?>"
                             placeholder="Enter city"
                         >
@@ -535,7 +642,9 @@ $user_name = $user['name'];
                             type="text"
                             name="state"
                             value="<?php
-                            echo htmlspecialchars($user['state'] ?? '');
+                            echo htmlspecialchars(
+                                $user['state'] ?? ''
+                            );
                             ?>"
                             placeholder="Enter state"
                         >
@@ -564,7 +673,9 @@ $user_name = $user['name'];
                         type="text"
                         name="pincode"
                         value="<?php
-                        echo htmlspecialchars($user['pincode'] ?? '');
+                        echo htmlspecialchars(
+                            $user['pincode'] ?? ''
+                        );
                         ?>"
                         placeholder="Enter pincode"
                         maxlength="6"
@@ -577,19 +688,6 @@ $user_name = $user['name'];
                 <!-- BUTTONS -->
 
                 <div class="form-actions">
-
-<!-- 
-                    <button
-                        type="reset"
-                        class="cancel-btn"
-                    >
-
-                        <i class="fa-solid fa-rotate-left"></i>
-
-                        Reset
-
-                    </button> -->
-
 
 
                     <button
@@ -708,11 +806,12 @@ $user_name = $user['name'];
 
                                 echo date(
                                     "d M Y",
-                                    strtotime($user['created_at'])
+                                    strtotime(
+                                        $user['created_at']
+                                    )
                                 );
 
-                            }
-                            else {
+                            } else {
 
                                 echo "Not Available";
 

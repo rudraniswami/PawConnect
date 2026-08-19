@@ -34,7 +34,6 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 ?>
-
 <div class="nav">
 
     <!-- LOGO -->
@@ -43,27 +42,23 @@ if (session_status() === PHP_SESSION_NONE) {
         <h2>PawConnect</h2>
     </div>
 
+    <!-- MOBILE MENU TOGGLE -->
+     
 
     <!-- CENTER MENU -->
-      
-
-    <!-- CENTER MENU -->
-
     <div class="menu">
-
 
         <a href="home.php">HOME</a>
 
         <a href="about.php">ABOUT US</a>
 
-      <div class="dropdown">
+        <!-- EXPLORE -->
+        <div class="dropdown">
 
-    <a href="#">
-        EXPLORE
-        <i class="fa-solid fa-chevron-down"></i>
-    </a>
-
-    <div class="dropdown-content">
+            <a href="#">
+                EXPLORE
+                <i class="fa-solid fa-chevron-down"></i>
+            </a>
 
             <div class="dropdown-content">
 
@@ -96,6 +91,7 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
 
         <a href="animals.php">ANIMALS</a>
+
         <a href="<?php
             echo isset($_SESSION['user_id'])
                 ? 'user_dashboard.php'
@@ -106,27 +102,27 @@ if (session_status() === PHP_SESSION_NONE) {
 
     </div>
 
-
     <!-- RIGHT SIDE -->
     <div class="nav-actions">
 
-    <?php if (isset($_SESSION['user_id'])) { ?>
+        <?php if (isset($_SESSION['user_id'])) { ?>
 
-        <a href="logout.php" class="login-btn">
-            LOGOUT
-        </a>
+            <a href="logout.php" class="login-btn">
+                LOGOUT
+            </a>
 
-    <?php } else { ?>
+        <?php } else { ?>
 
-        <a href="login.php" class="login-btn">
-            LOGIN
-        </a>
+            <a href="login.php" class="login-btn">
+                LOGIN
+            </a>
 
-    <?php } ?>
+        <?php } ?>
+
+    </div>
 
 </div>
 
-</div>
 <section class="hero">
     <div class="hero-text">
         <div class="badge">🛡 Trusted by 100+ NGOs & Shelters</div>
