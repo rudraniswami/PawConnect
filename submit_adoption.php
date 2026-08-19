@@ -10,7 +10,8 @@ include "db.php";
 
 if (!isset($_SESSION['user_id'])) {
 
-    die("Please login first.");
+    // die("Please login first.");
+    header("Location:login.php");
 
 }
 

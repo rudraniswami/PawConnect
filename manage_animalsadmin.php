@@ -155,7 +155,7 @@ body {
 
     background: #f7f3e9;
 
-    color: #173f50;
+    color: #123c2a;
 
 }
 
@@ -190,7 +190,7 @@ body {
 
     font-size: 32px;
 
-    color: #173f50;
+    color: #123c2a;
 
 }
 
@@ -261,7 +261,7 @@ body {
 
     background: #e8dfc7;
 
-    color: #315b70;
+    color: #123c2a;
 
     display: flex;
 
@@ -280,7 +280,7 @@ body {
 
     font-weight: bold;
 
-    color: #173f50;
+    color: #123c2a;
 
 }
 
@@ -320,7 +320,7 @@ body {
 
     font-size: 21px;
 
-    color: #173f50;
+    color: #123c2a;
 
     margin-bottom: 18px;
 
@@ -344,7 +344,7 @@ table {
 
 th {
 
-    background: #315b70;
+    background: #123c2a;
 
     color: white;
 
@@ -426,7 +426,7 @@ tr:hover {
 
 .ngo-name {
 
-    color: #315b70;
+    color: #123c2a;
 
     font-weight: bold;
 
@@ -447,7 +447,7 @@ tr:hover {
 
     background: #e8dfc7;
 
-    color: #315b70;
+    color: #123c2a;
 
     font-size: 12px;
 
@@ -502,7 +502,7 @@ tr:hover {
 
 .edit-btn {
 
-    background: #315b70;
+    background: #123c2a;
 
 }
 
@@ -566,7 +566,7 @@ tr:hover {
 
     text-decoration: none;
 
-    color: #315b70;
+    color: #123c2a;
 
     font-size: 14px;
 

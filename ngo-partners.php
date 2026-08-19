@@ -12,27 +12,21 @@ session_start();
 
     <title>NGO Partners | PawConnect</title>
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-          rel="stylesheet">
-
-    <!-- Font Awesome -->
+    <!-- ONLY EXTERNAL STYLESHEET -->
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-    <!-- Page CSS -->
+    <!-- PAGE CSS -->
     <link rel="stylesheet" href="ngopartners.css">
 
 </head>
-
 
 <body>
 
 
 <!-- =====================================================
-     MAIN NAVBAR
+     NAVBAR
 ===================================================== -->
-
 <div class="nav">
 
     <!-- LOGO -->
@@ -41,27 +35,23 @@ session_start();
         <h2>PawConnect</h2>
     </div>
 
+    <!-- MOBILE MENU TOGGLE -->
+     
 
     <!-- CENTER MENU -->
-      
-
-    <!-- CENTER MENU -->
-
     <div class="menu">
-
 
         <a href="home.php">HOME</a>
 
         <a href="about.php">ABOUT US</a>
 
-      <div class="dropdown">
+        <!-- EXPLORE -->
+        <div class="dropdown">
 
-    <a href="#">
-        EXPLORE
-        <i class="fa-solid fa-chevron-down"></i>
-    </a>
-
-    <div class="dropdown-content">
+            <a href="#">
+                EXPLORE
+                <i class="fa-solid fa-chevron-down"></i>
+            </a>
 
             <div class="dropdown-content">
 
@@ -94,6 +84,7 @@ session_start();
         </div>
 
         <a href="animals.php">ANIMALS</a>
+
         <a href="<?php
             echo isset($_SESSION['user_id'])
                 ? 'user_dashboard.php'
@@ -104,89 +95,85 @@ session_start();
 
     </div>
 
-
     <!-- RIGHT SIDE -->
-     <div class="nav-actions">
+    <div class="nav-actions">
 
-    <?php if (isset($_SESSION['user_id'])) { ?>
+        <?php if (isset($_SESSION['user_id'])) { ?>
 
-        <a href="logout.php" class="login-btn">
-            LOGOUT
-        </a>
+            <a href="logout.php" class="login-btn">
+                LOGOUT
+            </a>
 
-    <?php } else { ?>
+        <?php } else { ?>
 
-        <a href="login.php" class="login-btn">
-            LOGIN
-        </a>
+            <a href="login.php" class="login-btn">
+                LOGIN
+            </a>
 
-    <?php } ?>
+        <?php } ?>
 
-</div>
-
+    </div>
 
 </div>
 <!-- =====================================================
-     HERO SECTION
+     HERO
 ===================================================== -->
 
-<section class="ngo-hero">
+<section class="hero">
 
-    <div class="container">
+    <div class="hero-container">
 
-        <div class="row align-items-center g-4">
 
-            <!-- TEXT -->
+        <!-- HERO TEXT -->
 
-            <div class="col-md-5">
+        <div class="hero-text">
 
-                <div class="hero-content">
+            <p class="hero-small">
+                <i class="fa-solid fa-paw"></i>
+                TOGETHER, WE CREATE HOPE
+            </p>
 
-                    <p class="hero-label">
-                        <i class="fa-solid fa-paw"></i>
-                        TOGETHER, WE CREATE HOPE
-                    </p>
 
-                    <h1>
-                        Our NGO
-                        <span>Partners</span>
-                    </h1>
+            <h1>
+                Our NGO
+                <span>Partners</span>
+            </h1>
 
-                    <p class="hero-text">
-                        PawConnect proudly works alongside organizations
-                        dedicated to rescuing, caring for and protecting
-                        animals in need.
-                    </p>
 
-                    <div class="hero-line">
-                        <span></span>
-                        <i class="fa-solid fa-paw"></i>
-                        <span></span>
-                    </div>
+            <p class="hero-description">
 
-                </div>
+                PawConnect proudly works alongside organizations
+                dedicated to rescuing, caring for and protecting
+                animals in need.
+
+            </p>
+
+
+            <div class="hero-decoration">
+
+                <span></span>
+
+                <i class="fa-solid fa-paw"></i>
+
+                <span></span>
 
             </div>
 
+        </div>
 
-            <!-- IMAGE -->
 
-            <div class="col-md-7">
+        <!-- HERO IMAGE -->
 
-                <div class="hero-image">
+        <div class="hero-image">
 
-                    <img src="ngo-hero.jpg"
-                         alt="NGO Volunteers">
+            <img src="ngo-hero.jpg" alt="NGO Volunteers">
 
-                    <div class="hero-image-tag">
 
-                        <i class="fa-solid fa-heart"></i>
+            <div class="hero-image-tag">
 
-                        Making a Difference Together
+                <i class="fa-solid fa-heart"></i>
 
-                    </div>
-
-                </div>
+                Making a Difference Together
 
             </div>
 
@@ -202,16 +189,19 @@ session_start();
      MISSION STRIP
 ===================================================== -->
 
-<section class="container">
+<section class="mission-wrapper">
 
     <div class="mission-strip">
 
+
         <div class="mission-item">
 
-            <i class="fa-solid fa-paw"></i>
+            <div class="mission-icon">
+                <i class="fa-solid fa-paw"></i>
+            </div>
 
             <div>
-                <h5>Rescue</h5>
+                <h4>Rescue</h4>
                 <p>Saving animals in need</p>
             </div>
 
@@ -220,10 +210,12 @@ session_start();
 
         <div class="mission-item">
 
-            <i class="fa-solid fa-kit-medical"></i>
+            <div class="mission-icon">
+                <i class="fa-solid fa-kit-medical"></i>
+            </div>
 
             <div>
-                <h5>Care</h5>
+                <h4>Care</h4>
                 <p>Supporting better health</p>
             </div>
 
@@ -232,10 +224,12 @@ session_start();
 
         <div class="mission-item">
 
-            <i class="fa-solid fa-house"></i>
+            <div class="mission-icon">
+                <i class="fa-solid fa-house"></i>
+            </div>
 
             <div>
-                <h5>Adoption</h5>
+                <h4>Adoption</h4>
                 <p>Finding loving homes</p>
             </div>
 
@@ -244,14 +238,17 @@ session_start();
 
         <div class="mission-item">
 
-            <i class="fa-solid fa-heart"></i>
+            <div class="mission-icon">
+                <i class="fa-solid fa-heart"></i>
+            </div>
 
             <div>
-                <h5>Hope</h5>
+                <h4>Hope</h4>
                 <p>Creating brighter futures</p>
             </div>
 
         </div>
+
 
     </div>
 
@@ -263,15 +260,14 @@ session_start();
      NGO PARTNERS
 ===================================================== -->
 
-<section class="ngo-partners">
+<section class="partners-section">
 
-    <div class="container">
+    <div class="section-container">
 
-        <div class="partners-heading">
 
-            <p>
-                OUR COMMUNITY
-            </p>
+        <div class="section-heading">
+
+            <p>OUR COMMUNITY</p>
 
             <h2>
                 <i class="fa-solid fa-paw"></i>
@@ -285,44 +281,40 @@ session_start();
         </div>
 
 
-        <div class="row g-4">
+
+        <div class="ngo-grid">
 
 
             <!-- NGO 1 -->
 
-            <div class="col-md-6 col-lg-3">
+            <div class="ngo-card">
 
-                <div class="ngo-card">
+                <div class="ngo-image">
 
-                    <div class="ngo-image">
+                    <img src="ngo1.jpg"
+                         alt="Happy Paws Foundation">
 
-                        <img src="ngo1.jpg"
-                             alt="Happy Paws Foundation">
-
-                        <span>
-                            <i class="fa-solid fa-paw"></i>
-                        </span>
-
+                    <div class="ngo-icon">
+                        <i class="fa-solid fa-paw"></i>
                     </div>
 
-                    <div class="ngo-card-body">
+                </div>
 
-                        <h3>
-                            Happy Paws Foundation
-                        </h3>
 
-                        <p class="ngo-location">
-                            <i class="fa-solid fa-location-dot"></i>
-                            Pune, Maharashtra
-                        </p>
+                <div class="ngo-body">
 
-                        <div class="ngo-services">
+                    <h3>Happy Paws Foundation</h3>
 
-                            <span>Rescue</span>
-                            <span>Medical Care</span>
-                            <span>Adoption</span>
+                    <p class="location">
+                        <i class="fa-solid fa-location-dot"></i>
+                        Pune, Maharashtra
+                    </p>
 
-                        </div>
+                    <div class="services">
+
+                        <span>Rescue</span>
+                        <span>Medical Care</span>
+                        <span>Adoption</span>
 
                     </div>
 
@@ -334,39 +326,34 @@ session_start();
 
             <!-- NGO 2 -->
 
-            <div class="col-md-6 col-lg-3">
+            <div class="ngo-card">
 
-                <div class="ngo-card">
+                <div class="ngo-image">
 
-                    <div class="ngo-image">
+                    <img src="ngo2.jpg"
+                         alt="Care Animals Trust">
 
-                        <img src="ngo2.jpg"
-                             alt="Care Animals Trust">
-
-                        <span>
-                            <i class="fa-solid fa-heart"></i>
-                        </span>
-
+                    <div class="ngo-icon">
+                        <i class="fa-solid fa-heart"></i>
                     </div>
 
-                    <div class="ngo-card-body">
+                </div>
 
-                        <h3>
-                            Care Animals Trust
-                        </h3>
 
-                        <p class="ngo-location">
-                            <i class="fa-solid fa-location-dot"></i>
-                            Mumbai, Maharashtra
-                        </p>
+                <div class="ngo-body">
 
-                        <div class="ngo-services">
+                    <h3>Care Animals Trust</h3>
 
-                            <span>Rescue</span>
-                            <span>Treatment</span>
-                            <span>Adoption</span>
+                    <p class="location">
+                        <i class="fa-solid fa-location-dot"></i>
+                        Mumbai, Maharashtra
+                    </p>
 
-                        </div>
+                    <div class="services">
+
+                        <span>Rescue</span>
+                        <span>Treatment</span>
+                        <span>Adoption</span>
 
                     </div>
 
@@ -378,39 +365,34 @@ session_start();
 
             <!-- NGO 3 -->
 
-            <div class="col-md-6 col-lg-3">
+            <div class="ngo-card">
 
-                <div class="ngo-card">
+                <div class="ngo-image">
 
-                    <div class="ngo-image">
+                    <img src="ngo3.jpg"
+                         alt="Paws of Hope NGO">
 
-                        <img src="ngo3.jpg"
-                             alt="Paws of Hope NGO">
-
-                        <span>
-                            <i class="fa-solid fa-house"></i>
-                        </span>
-
+                    <div class="ngo-icon">
+                        <i class="fa-solid fa-house"></i>
                     </div>
 
-                    <div class="ngo-card-body">
+                </div>
 
-                        <h3>
-                            Paws of Hope NGO
-                        </h3>
 
-                        <p class="ngo-location">
-                            <i class="fa-solid fa-location-dot"></i>
-                            Nagpur, Maharashtra
-                        </p>
+                <div class="ngo-body">
 
-                        <div class="ngo-services">
+                    <h3>Paws of Hope NGO</h3>
 
-                            <span>Shelter</span>
-                            <span>Vaccination</span>
-                            <span>Adoption</span>
+                    <p class="location">
+                        <i class="fa-solid fa-location-dot"></i>
+                        Nagpur, Maharashtra
+                    </p>
 
-                        </div>
+                    <div class="services">
+
+                        <span>Shelter</span>
+                        <span>Vaccination</span>
+                        <span>Adoption</span>
 
                     </div>
 
@@ -422,39 +404,34 @@ session_start();
 
             <!-- NGO 4 -->
 
-            <div class="col-md-6 col-lg-3">
+            <div class="ngo-card">
 
-                <div class="ngo-card">
+                <div class="ngo-image">
 
-                    <div class="ngo-image">
+                    <img src="ngo4.jpg"
+                         alt="Second Chance Shelter">
 
-                        <img src="ngo4.jpg"
-                             alt="Second Chance Shelter">
-
-                        <span>
-                            <i class="fa-solid fa-hand-holding-heart"></i>
-                        </span>
-
+                    <div class="ngo-icon">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
                     </div>
 
-                    <div class="ngo-card-body">
+                </div>
 
-                        <h3>
-                            Second Chance Shelter
-                        </h3>
 
-                        <p class="ngo-location">
-                            <i class="fa-solid fa-location-dot"></i>
-                            Nashik, Maharashtra
-                        </p>
+                <div class="ngo-body">
 
-                        <div class="ngo-services">
+                    <h3>Second Chance Shelter</h3>
 
-                            <span>Rescue</span>
-                            <span>Care</span>
-                            <span>Rehabilitation</span>
+                    <p class="location">
+                        <i class="fa-solid fa-location-dot"></i>
+                        Nashik, Maharashtra
+                    </p>
 
-                        </div>
+                    <div class="services">
+
+                        <span>Rescue</span>
+                        <span>Care</span>
+                        <span>Rehabilitation</span>
 
                     </div>
 
@@ -466,39 +443,34 @@ session_start();
 
             <!-- NGO 5 -->
 
-            <div class="col-md-6 col-lg-3">
+            <div class="ngo-card">
 
-                <div class="ngo-card">
+                <div class="ngo-image">
 
-                    <div class="ngo-image">
+                    <img src="ngo5.jpg"
+                         alt="Stray Safe India">
 
-                        <img src="ngo5.jpg"
-                             alt="Stray Safe India">
-
-                        <span>
-                            <i class="fa-solid fa-shield-heart"></i>
-                        </span>
-
+                    <div class="ngo-icon">
+                        <i class="fa-solid fa-shield-heart"></i>
                     </div>
 
-                    <div class="ngo-card-body">
+                </div>
 
-                        <h3>
-                            Stray Safe India
-                        </h3>
 
-                        <p class="ngo-location">
-                            <i class="fa-solid fa-location-dot"></i>
-                            Aurangabad, Maharashtra
-                        </p>
+                <div class="ngo-body">
 
-                        <div class="ngo-services">
+                    <h3>Stray Safe India</h3>
 
-                            <span>Rescue</span>
-                            <span>Sterilization</span>
-                            <span>Adoption</span>
+                    <p class="location">
+                        <i class="fa-solid fa-location-dot"></i>
+                        Aurangabad, Maharashtra
+                    </p>
 
-                        </div>
+                    <div class="services">
+
+                        <span>Rescue</span>
+                        <span>Sterilization</span>
+                        <span>Adoption</span>
 
                     </div>
 
@@ -510,39 +482,34 @@ session_start();
 
             <!-- NGO 6 -->
 
-            <div class="col-md-6 col-lg-3">
+            <div class="ngo-card">
 
-                <div class="ngo-card">
+                <div class="ngo-image">
 
-                    <div class="ngo-image">
+                    <img src="ngo6.jpg"
+                         alt="Voice for Animals">
 
-                        <img src="ngo6.jpg"
-                             alt="Voice for Animals">
-
-                        <span>
-                            <i class="fa-solid fa-volume-high"></i>
-                        </span>
-
+                    <div class="ngo-icon">
+                        <i class="fa-solid fa-volume-high"></i>
                     </div>
 
-                    <div class="ngo-card-body">
+                </div>
 
-                        <h3>
-                            Voice for Animals
-                        </h3>
 
-                        <p class="ngo-location">
-                            <i class="fa-solid fa-location-dot"></i>
-                            Thane, Maharashtra
-                        </p>
+                <div class="ngo-body">
 
-                        <div class="ngo-services">
+                    <h3>Voice for Animals</h3>
 
-                            <span>Rescue</span>
-                            <span>Rehabilitation</span>
-                            <span>Adoption</span>
+                    <p class="location">
+                        <i class="fa-solid fa-location-dot"></i>
+                        Thane, Maharashtra
+                    </p>
 
-                        </div>
+                    <div class="services">
+
+                        <span>Rescue</span>
+                        <span>Rehabilitation</span>
+                        <span>Adoption</span>
 
                     </div>
 
@@ -554,39 +521,34 @@ session_start();
 
             <!-- NGO 7 -->
 
-            <div class="col-md-6 col-lg-3">
+            <div class="ngo-card">
 
-                <div class="ngo-card">
+                <div class="ngo-image">
 
-                    <div class="ngo-image">
+                    <img src="ngo7.jpg"
+                         alt="Animal Care Society">
 
-                        <img src="ngo7.jpg"
-                             alt="Animal Care Society">
-
-                        <span>
-                            <i class="fa-solid fa-user-group"></i>
-                        </span>
-
+                    <div class="ngo-icon">
+                        <i class="fa-solid fa-user-group"></i>
                     </div>
 
-                    <div class="ngo-card-body">
+                </div>
 
-                        <h3>
-                            Animal Care Society
-                        </h3>
 
-                        <p class="ngo-location">
-                            <i class="fa-solid fa-location-dot"></i>
-                            Kolhapur, Maharashtra
-                        </p>
+                <div class="ngo-body">
 
-                        <div class="ngo-services">
+                    <h3>Animal Care Society</h3>
 
-                            <span>Rescue</span>
-                            <span>Medical</span>
-                            <span>Adoption</span>
+                    <p class="location">
+                        <i class="fa-solid fa-location-dot"></i>
+                        Kolhapur, Maharashtra
+                    </p>
 
-                        </div>
+                    <div class="services">
+
+                        <span>Rescue</span>
+                        <span>Medical</span>
+                        <span>Adoption</span>
 
                     </div>
 
@@ -598,39 +560,34 @@ session_start();
 
             <!-- NGO 8 -->
 
-            <div class="col-md-6 col-lg-3">
+            <div class="ngo-card">
 
-                <div class="ngo-card">
+                <div class="ngo-image">
 
-                    <div class="ngo-image">
+                    <img src="ngo8.jpg"
+                         alt="Love Paws Foundation">
 
-                        <img src="ngo8.jpg"
-                             alt="Love Paws Foundation">
-
-                        <span>
-                            <i class="fa-solid fa-heart"></i>
-                        </span>
-
+                    <div class="ngo-icon">
+                        <i class="fa-solid fa-heart"></i>
                     </div>
 
-                    <div class="ngo-card-body">
+                </div>
 
-                        <h3>
-                            Love Paws Foundation
-                        </h3>
 
-                        <p class="ngo-location">
-                            <i class="fa-solid fa-location-dot"></i>
-                            Solapur, Maharashtra
-                        </p>
+                <div class="ngo-body">
 
-                        <div class="ngo-services">
+                    <h3>Love Paws Foundation</h3>
 
-                            <span>Rescue</span>
-                            <span>Care</span>
-                            <span>Adoption</span>
+                    <p class="location">
+                        <i class="fa-solid fa-location-dot"></i>
+                        Solapur, Maharashtra
+                    </p>
 
-                        </div>
+                    <div class="services">
+
+                        <span>Rescue</span>
+                        <span>Care</span>
+                        <span>Adoption</span>
 
                     </div>
 
@@ -651,83 +608,65 @@ session_start();
      IMPACT
 ===================================================== -->
 
-<section class="container">
+<section class="impact-wrapper">
 
     <div class="impact-section">
 
         <div class="impact-heading">
 
-            <p>
-                OUR COLLECTIVE IMPACT
-            </p>
+            <p>OUR COLLECTIVE IMPACT</p>
 
-            <h2>
-                Every Paw Matters
-            </h2>
+            <h2>Every Paw Matters</h2>
 
         </div>
 
 
-        <div class="row text-center">
+        <div class="impact-grid">
 
-            <div class="col-6 col-md-3">
 
-                <div class="impact-item">
+            <div class="impact-item">
 
-                    <i class="fa-solid fa-building"></i>
+                <i class="fa-solid fa-building"></i>
 
-                    <h3>500+</h3>
+                <h3>500+</h3>
 
-                    <p>NGO Partners</p>
-
-                </div>
+                <p>NGO Partners</p>
 
             </div>
 
 
-            <div class="col-6 col-md-3">
+            <div class="impact-item">
 
-                <div class="impact-item">
+                <i class="fa-solid fa-paw"></i>
 
-                    <i class="fa-solid fa-paw"></i>
+                <h3>12,500+</h3>
 
-                    <h3>12,500+</h3>
-
-                    <p>Animals Rescued</p>
-
-                </div>
+                <p>Animals Rescued</p>
 
             </div>
 
 
-            <div class="col-6 col-md-3">
+            <div class="impact-item">
 
-                <div class="impact-item">
+                <i class="fa-solid fa-house"></i>
 
-                    <i class="fa-solid fa-house-heart"></i>
+                <h3>3,200+</h3>
 
-                    <h3>3,200+</h3>
-
-                    <p>Successful Adoptions</p>
-
-                </div>
+                <p>Successful Adoptions</p>
 
             </div>
 
 
-            <div class="col-6 col-md-3">
+            <div class="impact-item">
 
-                <div class="impact-item">
+                <i class="fa-solid fa-map-location-dot"></i>
 
-                    <i class="fa-solid fa-map-location-dot"></i>
+                <h3>28+</h3>
 
-                    <h3>28+</h3>
-
-                    <p>Cities Covered</p>
-
-                </div>
+                <p>Cities Covered</p>
 
             </div>
+
 
         </div>
 
@@ -741,21 +680,24 @@ session_start();
      CTA
 ===================================================== -->
 
-<section class="container">
+<section class="cta-wrapper">
 
     <div class="ngo-cta">
 
-        <div>
+
+        <div class="cta-content">
 
             <p>
                 <i class="fa-solid fa-paw"></i>
                 PAWCONNECT COMMUNITY
             </p>
 
+
             <h2>
                 Together, we can give every animal
                 a second chance.
             </h2>
+
 
             <span>
                 Our NGO partners make this mission possible
@@ -771,10 +713,10 @@ session_start();
 
         </div>
 
+
     </div>
 
 </section>
-
 
 <!-- =====================================================
      FOOTER
@@ -930,5 +872,6 @@ session_start();
 
 
 </footer>
+
 </body>
 </html>
