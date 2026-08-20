@@ -453,7 +453,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
     <!-- Login required before adoption -->
 
-    <a href="adopt.php?pet_id=17">
+    <a href="adopt.php?pet_id=7">
 
         Adopt Jack
 

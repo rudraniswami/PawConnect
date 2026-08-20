@@ -1,6 +1,7 @@
 <?php
 session_start();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +19,6 @@ session_start();
 
 </head>
 
-
 <body>
 
 
@@ -31,15 +31,18 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 ?>
+
 <div class="nav">
 
     <!-- LOGO -->
     <div class="logo">
+
         <img src="logo.jpeg" alt="PawConnect Logo">
+
         <h2>PawConnect</h2>
+
     </div>
 
-     
 
     <!-- CENTER MENU -->
     <div class="menu">
@@ -47,6 +50,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <a href="home.php">HOME</a>
 
         <a href="about.php">ABOUT US</a>
+
 
         <!-- EXPLORE -->
         <div class="dropdown">
@@ -56,37 +60,54 @@ if (session_status() === PHP_SESSION_NONE) {
                 <i class="fa-solid fa-chevron-down"></i>
             </a>
 
+
             <div class="dropdown-content">
 
                 <div class="column">
+
                     <h3>About</h3>
 
                     <a href="about.php">About Us</a>
+
                     <a href="mission.php">Mission</a>
+
                     <a href="contact.php">Contact</a>
+
                 </div>
 
+
                 <div class="column">
+
                     <h3>Adoption</h3>
 
                     <a href="animals.php">Available Animals</a>
+
                     <a href="care.php">Care After Adoption</a>
+
                     <a href="stories.php">Adoption Stories</a>
+
                 </div>
 
+
                 <div class="column">
+
                     <h3>Login</h3>
 
                     <a href="login.php">User Login</a>
+
                     <a href="ngo_login.php">NGO Login</a>
+
                     <a href="admin_login.php">Admin Login</a>
+
                 </div>
 
             </div>
 
         </div>
 
+
         <a href="animals.php">ANIMALS</a>
+
 
         <a href="<?php
             echo isset($_SESSION['user_id'])
@@ -97,6 +118,7 @@ if (session_status() === PHP_SESSION_NONE) {
         </a>
 
     </div>
+
 
     <!-- RIGHT SIDE -->
     <div class="nav-actions">
@@ -117,41 +139,59 @@ if (session_status() === PHP_SESSION_NONE) {
 
     </div>
 
-</div><!-- =====================================================
+</div>
+
+
+
+<!-- =====================================================
      CARE HERO
 ===================================================== -->
 
 <section class="care-hero">
 
-    <img src="carehero.jpeg"
-         alt="Dog relaxing comfortably at home"
-         class="care-hero-image">
+    <img
+        src="carehero.jpeg"
+        alt="Dog relaxing comfortably at home"
+        class="care-hero-image"
+    >
 
     <div class="care-hero-overlay"></div>
+
 
     <div class="care-hero-content">
 
         <span class="care-eyebrow">
+
             <i class="fa-solid fa-paw"></i>
+
             LIFE AFTER ADOPTION
+
         </span>
 
+
         <h1>
+
             Home is where
-            <span>their story continues.</span>
+
+            <span>
+                their story continues.
+            </span>
+
         </h1>
 
+
         <p>
+
             Adoption gives them a home.
             Care, patience and love help them
             truly feel that they belong.
-        </p>
 
-    
+        </p>
 
     </div>
 
 </section>
+
 
 
 <!-- =====================================================
@@ -160,9 +200,13 @@ if (session_status() === PHP_SESSION_NONE) {
 
 <section class="care-story">
 
+
     <div class="story-image">
 
-        <img src="care1.jpeg">
+        <img
+            src="care1.jpeg"
+            alt="Adopted pet"
+        >
 
     </div>
 
@@ -173,22 +217,35 @@ if (session_status() === PHP_SESSION_NONE) {
             AFTER THE ADOPTION
         </span>
 
+
         <h2>
+
             The first few days
-            <span>matter more than you think.</span>
+
+            <span>
+                matter more than you think.
+            </span>
+
         </h2>
 
+
         <p>
+
             For your new companion, everything has changed.
             New smells. New sounds. New people. A new place
             to call home.
+
         </p>
 
+
         <p>
+
             Don't worry about getting everything perfect.
             Give them time, consistency and a safe space.
             Slowly, unfamiliar moments become familiar ones.
+
         </p>
+
 
         <div class="story-quote">
 
@@ -206,11 +263,13 @@ if (session_status() === PHP_SESSION_NONE) {
 </section>
 
 
+
 <!-- =====================================================
      CARE GUIDE
 ===================================================== -->
 
 <section class="care-guide" id="care-guide">
+
 
     <div class="care-heading">
 
@@ -218,17 +277,27 @@ if (session_status() === PHP_SESSION_NONE) {
             THE ESSENTIALS
         </span>
 
+
         <h2>
+
             Four simple things
-            <span>make a big difference.</span>
+
+            <span>
+                make a big difference.
+            </span>
+
         </h2>
 
+
         <p>
+
             You don't need to be a perfect pet parent.
             Start with the basics and let your bond grow naturally.
+
         </p>
 
     </div>
+
 
 
     <div class="care-feature-grid">
@@ -240,23 +309,34 @@ if (session_status() === PHP_SESSION_NONE) {
 
             <div class="feature-image">
 
-                <img src="care2.jpeg">
+                <img
+                    src="care2.jpeg"
+                    alt="Pet resting safely"
+                >
 
             </div>
 
+
             <div class="feature-content">
 
-                <span>01</span>
+                <span>
+                    01
+                </span>
+
 
                 <h3>
                     Give them a safe space.
                 </h3>
 
+
                 <p>
+
                     Create one quiet corner where your pet can
                     retreat whenever they need rest or a little
                     peace.
+
                 </p>
+
 
                 <div class="feature-tip">
 
@@ -272,27 +352,39 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
 
 
+
         <!-- ROUTINE -->
 
         <div class="care-feature">
 
             <div class="feature-icon">
+
                 <i class="fa-solid fa-clock"></i>
+
             </div>
 
-            <span class="feature-number">02</span>
+
+            <span class="feature-number">
+                02
+            </span>
+
 
             <h3>
                 Build a routine.
             </h3>
 
+
             <p>
+
                 Regular meals, walks, playtime and sleep
                 help your companion understand that
                 their new world is safe.
+
             </p>
 
+
             <div class="feature-line"></div>
+
 
             <small>
                 Consistency creates comfort.
@@ -301,33 +393,46 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
 
 
+
         <!-- HEALTH -->
 
         <div class="care-feature">
 
             <div class="feature-icon">
+
                 <i class="fa-solid fa-heart-pulse"></i>
+
             </div>
 
-            <span class="feature-number">03</span>
+
+            <span class="feature-number">
+                03
+            </span>
+
 
             <h3>
                 Keep an eye on their health.
             </h3>
 
+
             <p>
+
                 Stay updated with vaccinations,
                 checkups, nutrition and any changes
                 in behaviour.
+
             </p>
 
+
             <div class="feature-line"></div>
+
 
             <small>
                 Prevention is part of love.
             </small>
 
         </div>
+
 
 
         <!-- PATIENCE -->
@@ -340,18 +445,25 @@ if (session_status() === PHP_SESSION_NONE) {
 
             </div>
 
+
             <div>
 
-                <span class="feature-number">04</span>
+                <span class="feature-number">
+                    04
+                </span>
+
 
                 <h3>
                     Let trust happen naturally.
                 </h3>
 
+
                 <p>
+
                     Some pets run towards you immediately.
                     Others need more time. Don't force the bond.
                     Be patient, be present and let them come to you.
+
                 </p>
 
             </div>
@@ -363,11 +475,13 @@ if (session_status() === PHP_SESSION_NONE) {
 </section>
 
 
+
 <!-- =====================================================
      30 DAY JOURNEY
 ===================================================== -->
 
 <section class="journey-section">
+
 
     <div class="journey-intro">
 
@@ -375,18 +489,28 @@ if (session_status() === PHP_SESSION_NONE) {
             YOUR FIRST 30 DAYS
         </span>
 
+
         <h2>
+
             From unfamiliar
-            <span>to family.</span>
+
+            <span>
+                to family.
+            </span>
+
         </h2>
 
+
         <p>
+
             Every pet settles differently. Here's a gentle
             guide to help you understand what those first
             few weeks can look like.
+
         </p>
 
     </div>
+
 
 
     <div class="journey-wrapper">
@@ -398,27 +522,38 @@ if (session_status() === PHP_SESSION_NONE) {
                 01
             </div>
 
+
             <div class="journey-icon">
+
                 <i class="fa-solid fa-house"></i>
+
             </div>
+
 
             <div class="journey-text">
 
-                <span>WEEK ONE</span>
+                <span>
+                    WEEK ONE
+                </span>
+
 
                 <h3>
                     Let them settle.
                 </h3>
 
+
                 <p>
+
                     Keep things calm and predictable.
                     Give them space to understand
                     their new surroundings.
+
                 </p>
 
             </div>
 
         </div>
+
 
 
         <div class="journey-step">
@@ -427,26 +562,37 @@ if (session_status() === PHP_SESSION_NONE) {
                 02
             </div>
 
+
             <div class="journey-icon">
+
                 <i class="fa-solid fa-bowl-food"></i>
+
             </div>
+
 
             <div class="journey-text">
 
-                <span>WEEK TWO</span>
+                <span>
+                    WEEK TWO
+                </span>
+
 
                 <h3>
                     Find your rhythm.
                 </h3>
 
+
                 <p>
+
                     Establish regular meals, walks,
                     playtime and quiet moments together.
+
                 </p>
 
             </div>
 
         </div>
+
 
 
         <div class="journey-step">
@@ -455,26 +601,37 @@ if (session_status() === PHP_SESSION_NONE) {
                 03
             </div>
 
+
             <div class="journey-icon">
+
                 <i class="fa-solid fa-paw"></i>
+
             </div>
+
 
             <div class="journey-text">
 
-                <span>WEEK THREE</span>
+                <span>
+                    WEEK THREE
+                </span>
+
 
                 <h3>
                     Build confidence.
                 </h3>
 
+
                 <p>
+
                     Introduce new experiences slowly
                     while helping them feel secure.
+
                 </p>
 
             </div>
 
         </div>
+
 
 
         <div class="journey-step">
@@ -483,21 +640,31 @@ if (session_status() === PHP_SESSION_NONE) {
                 04
             </div>
 
+
             <div class="journey-icon">
+
                 <i class="fa-solid fa-heart"></i>
+
             </div>
+
 
             <div class="journey-text">
 
-                <span>WEEK FOUR</span>
+                <span>
+                    WEEK FOUR
+                </span>
+
 
                 <h3>
                     Feel like family.
                 </h3>
 
+
                 <p>
+
                     By now, little routines begin
                     turning into memories.
+
                 </p>
 
             </div>
@@ -509,16 +676,20 @@ if (session_status() === PHP_SESSION_NONE) {
 </section>
 
 
+
 <!-- =====================================================
      PAWCONNECT CARE COMPANION
 ===================================================== -->
 
 <section class="care-companion">
 
+
     <div class="companion-image">
 
-        <img src="care3.jpeg"
-             alt="Happy adopted pet with family">
+        <img
+            src="care3.jpeg"
+            alt="Happy adopted pet with family"
+        >
 
     </div>
 
@@ -529,54 +700,72 @@ if (session_status() === PHP_SESSION_NONE) {
             PAWCONNECT CARE COMPANION
         </span>
 
+
         <h2>
+
             Adoption doesn't
-            <span>end at “Adopted”.</span>
+
+            <span>
+                end at “Adopted”.
+            </span>
+
         </h2>
 
+
         <p>
+
             Your responsibility continues long after
             your pet walks through the door.
             Keep track of the little things that help
             them live a happy, healthy life.
+
         </p>
 
 
         <div class="companion-list">
 
+
             <div>
+
                 <i class="fa-solid fa-syringe"></i>
 
                 <span>
                     Vaccination reminders
                 </span>
+
             </div>
 
 
             <div>
+
                 <i class="fa-solid fa-calendar-check"></i>
 
                 <span>
                     Health check-up tracking
                 </span>
+
             </div>
 
 
             <div>
+
                 <i class="fa-solid fa-bowl-food"></i>
 
                 <span>
                     Feeding & routine guidance
                 </span>
+
             </div>
 
 
             <div>
+
                 <i class="fa-solid fa-scissors"></i>
 
                 <span>
                     Grooming & hygiene reminders
                 </span>
+
             </div>
 
         </div>
@@ -586,47 +775,130 @@ if (session_status() === PHP_SESSION_NONE) {
 </section>
 
 
+
 <!-- =====================================================
-     SUPPORT CTA
+     PAWCONNECT CARE SUPPORT
 ===================================================== -->
 
 <section class="care-final">
 
-    <div class="care-final-paw">
 
-        <i class="fa-solid fa-paw"></i>
+    <div class="care-final-inner">
+
+
+        <div class="care-final-icon">
+
+            <i class="fa-solid fa-paw"></i>
+
+        </div>
+
+
+
+        <div class="care-final-content">
+
+            <span class="care-final-label">
+                PAWCONNECT CARE SUPPORT
+            </span>
+
+
+            <h2>
+
+                Adopted today.
+
+                <em>
+                    Supported every day.
+                </em>
+
+            </h2>
+
+
+            <p>
+
+                Your journey with your new companion doesn't end
+                after adoption. If you need guidance about
+                vaccination, nutrition, hygiene or everyday care,
+                PawConnect is here to help.
+
+            </p>
+
+
+            <div class="care-support-row">
+
+
+                <div>
+
+                    <i class="fa-solid fa-syringe"></i>
+
+                    <span>
+                        Vaccination
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <i class="fa-solid fa-bowl-food"></i>
+
+                    <span>
+                        Nutrition
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <i class="fa-solid fa-heart-pulse"></i>
+
+                    <span>
+                        Health
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <i class="fa-solid fa-paw"></i>
+
+                    <span>
+                        Daily Care
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="care-final-action">
+
+            <span>
+                Need guidance?
+            </span>
+
+
+            <a
+                href="contact.php"
+                class="care-final-btn"
+            >
+
+                Contact PawConnect
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
 
     </div>
-
-
-    <div class="care-final-content">
-
-        <span>
-            ALWAYS HERE FOR YOU
-        </span>
-
-        <h2>
-            Because bringing them home
-            is only the beginning.
-        </h2>
-
-        <p>
-            Have a question about caring for your new companion?
-            We're here to help you make their new life a happy one.
-        </p>
-
-    </div>
-
-
-    <a href="contact.php" class="care-final-btn">
-
-        Get in touch
-
-        <i class="fa-solid fa-arrow-right"></i>
-
-    </a>
 
 </section>
+
 
 
 <!-- =====================================================
@@ -635,6 +907,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 <footer class="footer">
 
+
     <div class="footer-top">
 
 
@@ -642,10 +915,13 @@ if (session_status() === PHP_SESSION_NONE) {
 
         <div class="footer-about">
 
+
             <div class="footer-logo">
 
-                <img src="logo.jpeg"
-                     alt="PawConnect Logo">
+                <img
+                    src="logo.jpeg"
+                    alt="PawConnect Logo"
+                >
 
                 <h2>
                     PawConnect
@@ -655,8 +931,10 @@ if (session_status() === PHP_SESSION_NONE) {
 
 
             <p>
+
                 Connecting rescued animals with loving families,
                 trusted shelters and compassionate hearts across India.
+
             </p>
 
 
@@ -666,13 +944,16 @@ if (session_status() === PHP_SESSION_NONE) {
                     <i class="fa-brands fa-facebook-f"></i>
                 </a>
 
+
                 <a href="#" aria-label="Instagram">
                     <i class="fa-brands fa-instagram"></i>
                 </a>
 
+
                 <a href="#" aria-label="X">
                     <i class="fa-brands fa-x-twitter"></i>
                 </a>
+
 
                 <a href="#" aria-label="LinkedIn">
                     <i class="fa-brands fa-linkedin-in"></i>
@@ -692,17 +973,21 @@ if (session_status() === PHP_SESSION_NONE) {
                 Explore
             </h3>
 
+
             <a href="home.php">
                 Home
             </a>
+
 
             <a href="animals.php">
                 Available Animals
             </a>
 
+
             <a href="about.php">
                 About us
             </a>
+
 
             <a href="stories.php">
                 Adoption Stories
@@ -720,17 +1005,21 @@ if (session_status() === PHP_SESSION_NONE) {
                 Services
             </h3>
 
+
             <a href="care.php">
                 Care After Adoption
             </a>
+
 
             <a href="petcare.php">
                 Pet Care
             </a>
 
+
             <a href="ngo-partners.php">
                 NGO Partners
             </a>
+
 
             <a href="mission.php">
                 Our Mission
@@ -748,23 +1037,34 @@ if (session_status() === PHP_SESSION_NONE) {
                 Contact
             </h3>
 
+
             <p>
+
                 <i class="fa-solid fa-location-dot"></i>
+
                 Pune, Maharashtra
+
             </p>
 
+
             <p>
+
                 <i class="fa-solid fa-phone"></i>
+
                 +91 98765 43210
+
             </p>
 
+
             <p>
+
                 <i class="fa-solid fa-envelope"></i>
+
                 hello@pawconnect.in
+
             </p>
 
         </div>
-
 
     </div>
 
@@ -775,12 +1075,13 @@ if (session_status() === PHP_SESSION_NONE) {
     <div class="footer-bottom">
 
         <p>
+
             © 2026 PawConnect • Connecting every paw with care,
             compassion & a place to belong.
+
         </p>
 
     </div>
-
 
 </footer>
 
