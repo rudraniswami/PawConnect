@@ -104,7 +104,7 @@ if (isset($_POST['update_animal'])) {
 
             alert('Animal updated successfully!');
 
-            window.location='manage_animals.php';
+            window.location='manage_animalsadmin.php';
 
         </script>";
 
