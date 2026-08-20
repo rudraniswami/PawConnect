@@ -38,7 +38,7 @@ if (mysqli_query($conn, $delete)) {
         }
     }
 
-    header("Location: manage_animals.php");
+    header("Location: manage_animalsngo.php");
     exit();
 
 } else {
