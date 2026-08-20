@@ -536,8 +536,8 @@ if (session_status() === PHP_SESSION_NONE) {
                 Available Animals
             </a>
 
-            <a href="adopt.php">
-                Adoption
+            <a href="about.php">
+                About us
             </a>
 
             <a href="stories.php">

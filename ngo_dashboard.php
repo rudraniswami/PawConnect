@@ -376,7 +376,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
         <!-- VIEW ANIMALS -->
 
-        <a href="animals.php" class="action-card">
+        <a href="manage_animalsngo.php" class="action-card">
 
             <div class="action-icon">
 
@@ -387,11 +387,11 @@ if (session_status() === PHP_SESSION_NONE) {
             <div>
 
                 <h3>
-                    View Animals
+                    Manage Animals
                 </h3>
 
                 <p>
-                    Explore animals listed on PawConnect.
+                    Explore animals listed by you.
                 </p>
 
             </div>
@@ -712,8 +712,8 @@ if (session_status() === PHP_SESSION_NONE) {
                 Available Animals
             </a>
 
-            <a href="adopt.php">
-                Adoption
+            <a href="about.php">
+                About us
             </a>
 
             <a href="stories.php">

@@ -181,23 +181,11 @@ html, body{
 
     background-size:cover;
     background-position:center;
+/* 
+    opacity:1; */
+    
 
-    opacity:0;
-    transform:translateY(30px);
-
-    animation:heroIn 1s ease-out 4.2s forwards;
-}
-
-@keyframes heroIn{
-    from{
-        opacity:0;
-        transform:translateY(30px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+    
 }
 
 .hero-text{

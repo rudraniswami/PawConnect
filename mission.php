@@ -979,8 +979,8 @@ chance and a forever home.
                 Available Animals
             </a>
 
-            <a href="adopt.php">
-                Adoption
+            <a href="about.php">
+                About us
             </a>
 
             <a href="stories.php">
