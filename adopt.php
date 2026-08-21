@@ -488,7 +488,7 @@ if (session_status() === PHP_SESSION_NONE) {
             <div class="input-group">
 
                 <label>
-                    Do you own your home?
+                    Do you have secure area for the pet?
                 </label>
 
                 <select name="owns_home"
