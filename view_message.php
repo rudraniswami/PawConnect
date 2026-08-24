@@ -84,7 +84,6 @@ if ($result->num_rows == 0) {
 $message = $result->fetch_assoc();
 
 $stmt->close();
-
 ?>
 
 <!DOCTYPE html>

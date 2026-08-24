@@ -12,9 +12,9 @@ include "db.php";
 $user_id = intval($_SESSION['user_id']);
 
 
-/* ==========================================
-   STATS - THIS USER'S ADOPTION REQUESTS
-========================================== */
+
+//    STATS - THIS USER'S ADOPTION REQUESTS
+
 
 $stmt = $conn->prepare(
     "SELECT COUNT(*) AS total
@@ -24,12 +24,12 @@ $stmt = $conn->prepare(
 
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
-
 $my_requests_total =
-    $stmt->get_result()->fetch_assoc()['total'];
+$stmt->get_result()->fetch_assoc()['total'];
 
 
 /* PENDING */
+
 
 $stmt = $conn->prepare(
     "SELECT COUNT(*) AS total
@@ -61,9 +61,8 @@ $my_requests_approved =
     $stmt->get_result()->fetch_assoc()['total'];
 
 
-/* ==========================================
-   COMPLETED ADOPTION
-========================================== */
+//    COMPLETED ADOPTION
+
 
 $stmt = $conn->prepare(
     "SELECT
@@ -99,9 +98,9 @@ $completed_adoption =
     $completed_result->fetch_assoc();
 
 
-/* ==========================================
-   SITE-WIDE ANIMAL COUNTS
-========================================== */
+
+//    SITE-WIDE ANIMAL COUNTS
+
 
 $animals_count_result =
     $conn->query(
@@ -129,9 +128,8 @@ $animals_helped =
     $total_animals + $total_pets;
 
 
-/* ==========================================
-   CONTACT REPLIES
-========================================== */
+//    CONTACT REPLIES
+
 
 $stmt = $conn->prepare(
     "SELECT COUNT(*) AS total
@@ -148,9 +146,7 @@ $reply_count =
     $stmt->get_result()->fetch_assoc()['total'];
 
 
-/* ==========================================
-   LATEST ADMIN REPLY
-========================================== */
+//    LATEST ADMIN REPLY
 
 $stmt = $conn->prepare(
     "SELECT
@@ -180,9 +176,9 @@ $latest_reply =
     $reply_result->fetch_assoc();
 
 
-/* ==========================================
-   RECENT ADOPTION ACTIVITY
-========================================== */
+
+//    RECENT ADOPTION ACTIVITY
+
 
 $sql = "
 SELECT
@@ -218,9 +214,9 @@ $recent_result =
     $stmt->get_result();
 
 
-/* ==========================================
-   TIME AGO
-========================================== */
+
+//    TIME AGO
+
 
 function time_ago($datetime)
 {
@@ -276,10 +272,10 @@ function time_ago($datetime)
     return $days . " days ago";
 
 }
-/* ==========================================
-   COMPLETED ADOPTION
-   GET THIS USER'S LATEST COMPLETED ADOPTION
-========================================== */
+
+//    COMPLETED ADOPTION
+//    GET THIS USER'S LATEST COMPLETED ADOPTION
+
 
 $completed_adoption = null;
 

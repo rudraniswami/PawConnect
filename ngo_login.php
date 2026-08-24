@@ -1010,7 +1010,6 @@ if (session_status() === PHP_SESSION_NONE) {
         ?>">
             DASHBOARD
         </a>
-
     </div>
 
 

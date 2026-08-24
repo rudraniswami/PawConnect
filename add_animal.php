@@ -18,15 +18,15 @@ if (!isset($_SESSION['ngo_id'])) {
 $ngo_id = (int) $_SESSION['ngo_id'];
 
 
-/* =====================================================
-   ADD ANIMAL
-===================================================== */
+
+//    ADD ANIMAL
+
 
 if (isset($_POST['add_animal'])) {
 
-    /* =================================================
-       GET FORM DATA
-    ================================================= */
+    
+    //    GET FORM DATA
+    
 
     $name = trim($_POST['name'] ?? '');
     $type = trim($_POST['type'] ?? '');
@@ -39,9 +39,9 @@ if (isset($_POST['add_animal'])) {
     $status = trim($_POST['adoption_status'] ?? 'Available');
 
 
-    /* =================================================
-       VALIDATION
-    ================================================= */
+   
+    //    VALIDATION
+    
 
     if ($name === '') {
         die("Animal name is required.");
@@ -92,9 +92,9 @@ if (isset($_POST['add_animal'])) {
     }
 
 
-    /* =================================================
-       CHECK IMAGE
-    ================================================= */
+    
+    //    CHECK IMAGE
+    
 
     if (!isset($_FILES['image'])) {
         die("Please select an image.");
@@ -106,9 +106,9 @@ if (isset($_POST['add_animal'])) {
     }
 
 
-    /* =================================================
-       MAXIMUM IMAGE SIZE = 5 MB
-    ================================================= */
+   
+    //    MAXIMUM IMAGE SIZE = 5 MB
+    
 
     $max_size = 5 * 1024 * 1024;
 
@@ -120,9 +120,9 @@ if (isset($_POST['add_animal'])) {
     $temp_image = $_FILES['image']['tmp_name'];
 
 
-    /* =================================================
-       CHECK REAL IMAGE TYPE
-    ================================================= */
+    
+    //    CHECK REAL IMAGE TYPE
+    
 
     $finfo = finfo_open(FILEINFO_MIME_TYPE);
 
@@ -161,9 +161,9 @@ if (isset($_POST['add_animal'])) {
     }
 
 
-    /* =================================================
-       VERIFY THAT IT IS ACTUALLY AN IMAGE
-    ================================================= */
+    
+    //    VERIFY THAT IT IS ACTUALLY AN IMAGE
+    
 
     if (@getimagesize($temp_image) === false) {
 
@@ -173,18 +173,18 @@ if (isset($_POST['add_animal'])) {
     }
 
 
-    /* =================================================
-       IMAGE WILL BE STORED IN SAME FOLDER
-       AS THIS PHP FILE
-    ================================================= */
+   
+    //    IMAGE WILL BE STORED IN SAME FOLDER
+    //    AS THIS PHP FILE
+    
 
     $extension =
         $allowed_image_types[$file_type];
 
 
-    /* =================================================
-       CREATE UNIQUE IMAGE NAME
-    ================================================= */
+    
+    //    CREATE UNIQUE IMAGE NAME
+   
 
     $image =
         bin2hex(random_bytes(16))
@@ -202,9 +202,8 @@ if (isset($_POST['add_animal'])) {
     $image_path = __DIR__ . "/" . $image;
 
 
-    /* =================================================
-       MOVE UPLOADED IMAGE
-    ================================================= */
+    
+    //    MOVE UPLOADED IMAGE
 
     if (!move_uploaded_file(
         $temp_image,
@@ -217,9 +216,9 @@ if (isset($_POST['add_animal'])) {
     }
 
 
-    /* =================================================
-       INSERT ANIMAL INTO DATABASE
-    ================================================= */
+    
+    //    INSERT ANIMAL INTO DATABASE
+    
 
     $query = "
 
@@ -264,9 +263,9 @@ if (isset($_POST['add_animal'])) {
     );
 
 
-    /* =================================================
-       CHECK QUERY
-    ================================================= */
+    
+    //    CHECK QUERY
+   
 
     if (!$stmt) {
 
@@ -280,9 +279,9 @@ if (isset($_POST['add_animal'])) {
     }
 
 
-    /* =================================================
-       BIND PARAMETERS
-    ================================================= */
+    
+    //    BIND PARAMETERS
+    
 
     mysqli_stmt_bind_param(
 
@@ -305,9 +304,9 @@ if (isset($_POST['add_animal'])) {
     );
 
 
-    /* =================================================
-       EXECUTE
-    ================================================= */
+    
+    //    EXECUTE
+    
 
     if (mysqli_stmt_execute($stmt)) {
 

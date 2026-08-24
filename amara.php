@@ -22,9 +22,9 @@ session_start();
 <body>
 
 
-<!-- =====================================================
-     NAVBAR
-===================================================== -->
+
+     <!-- NAVBAR -->
+
 <?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
