@@ -69,9 +69,9 @@ $image = $animal['image'];
 mysqli_stmt_close($check);
 
 
-/* ================================
-   DELETE ANIMAL
-================================ */
+
+//    DELETE ANIMAL
+
 
 $delete = mysqli_prepare(
     $conn,
@@ -104,9 +104,8 @@ if (!mysqli_stmt_execute($delete)) {
 mysqli_stmt_close($delete);
 
 
-/* ================================
-   DELETE IMAGE
-================================ */
+//    DELETE IMAGE
+
 
 if (!empty($image)) {
 
@@ -118,9 +117,9 @@ if (!empty($image)) {
 }
 
 
-/* ================================
-   RETURN TO ADMIN PAGE
-================================ */
+
+//    RETURN TO ADMIN PAGE
+
 
 header(
     "Location: manage_animalsadmin.php"
